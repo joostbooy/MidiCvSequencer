@@ -74,7 +74,7 @@ public:
 	void init() {
 		set_cv_mode(CC);
 		set_gate_mode(GATE);
-		set_forward_port(0);
+		set_forward_port(MidiPort::MIDI_UART_1);
 		set_forward_channel(-1);
 	}
 
@@ -147,10 +147,12 @@ public:
 	void load(FileReader &fileReader) {
 		fileReader.read(cv_mode_);
 		fileReader.read(gate_mode_);
-		fileReader.read(forward_port_);
 
 		if (fileReader.version() < 1) {
-			fileReader.skip(1);
+			fileReader.skip(2);
+		} else {
+			fileReader.read(forward_port_);
+			fileReader.read(forward_channel_);
 		}
 	}
 
