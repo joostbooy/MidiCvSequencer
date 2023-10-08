@@ -2,7 +2,7 @@
 <img src="Sequencer_faceplate.png"/></a>
 
 ## Features
-- 16 tracks
+- 16 Midi tracks
 - 4 track types
 	* Note track
 	* Chord track
@@ -46,3 +46,4 @@
 This work is licensed under a [MIT License](https://opensource.org/licenses/MIT).
 
 <img src="Sequencer_main_board.png"/></a>
+# MidiCvSequencer
