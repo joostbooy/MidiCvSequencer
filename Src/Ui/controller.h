@@ -96,8 +96,8 @@ public:
 
 
 	void init();
-	void on_turn(uint8_t id);
-	void on_click(uint8_t id, bool state);
+	void on_encoder(uint8_t id);
+	void on_button(uint8_t id, bool state);
 	bool is_pressed(uint8_t id);
 
 	uint8_t curr_touched_encoder() {

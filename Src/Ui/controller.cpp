@@ -10,14 +10,14 @@ void Controller::init() {
 	}
 }
 
-void Controller::on_turn(uint8_t id) {
+void Controller::on_encoder(uint8_t id) {
 	if (id != curr_touched_encoder_) {
 		prev_touched_encoder_ = curr_touched_encoder_;
 		curr_touched_encoder_ = id;
 	}
 }
 
-void Controller::on_click(uint8_t id, bool state) {
+void Controller::on_button(uint8_t id, bool state) {
 	uint8_t index = id / 32;
 	uint32_t mask = 1 << (id & 31);
 	pressed[index] &= ~(mask);
