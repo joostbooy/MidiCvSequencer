@@ -132,7 +132,7 @@ public:
 
 private:
 	static const uint8_t kMaxTracks = 16;
-	static const uint8_t kMaxNameLength = 16;
+	static const uint8_t kMaxNameLength = 8;
 
 	struct List {
 		uint8_t size_;
