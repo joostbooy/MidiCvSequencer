@@ -1,9 +1,9 @@
-#ifndef TrackItem_h
-#define TrackItem_h
+#ifndef SerialItem_h
+#define SerialItem_h
 
 #include "serial.h"
 
-class TrackItem {
+class SerialItem {
 
 public:
 	const int min_;

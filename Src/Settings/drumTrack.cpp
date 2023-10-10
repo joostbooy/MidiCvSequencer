@@ -14,7 +14,7 @@ SerialMask DrumTrack::step_mask_[NUM_STEP_ITEMS] = {
 };
 
 // step items
-TrackItem DrumTrack::step_item_[NUM_STEP_ITEMS] = {
+SerialItem DrumTrack::step_item_[NUM_STEP_ITEMS] = {
 	[TRIGGER] = {
 		.min_ = 0,
 		.max_ = 1,
@@ -83,7 +83,7 @@ SerialMask DrumTrack::track_mask_[NUM_TRACK_ITEMS] = {
 };
 
 // track items
-TrackItem DrumTrack::track_item_[NUM_TRACK_ITEMS] = {
+SerialItem DrumTrack::track_item_[NUM_TRACK_ITEMS] = {
 	[DRUM_NOTE_1] = {
 		.min_ = 0,
 		.max_ = 127,

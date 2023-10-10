@@ -14,7 +14,7 @@ SerialMask NoteTrack::step_mask_[NUM_STEP_ITEMS] = {
 };
 
 // step items
-TrackItem NoteTrack::step_item_[NUM_STEP_ITEMS] = {
+SerialItem NoteTrack::step_item_[NUM_STEP_ITEMS] = {
 	[TRIGGER] = {
 		.min_ = 0,
 		.max_ = 1,
@@ -79,7 +79,7 @@ SerialMask NoteTrack::track_mask_[NUM_TRACK_ITEMS] = {
 };
 
 // track items
-TrackItem NoteTrack::track_item_[NUM_TRACK_ITEMS] = {
+SerialItem NoteTrack::track_item_[NUM_TRACK_ITEMS] = {
 	[USE_SCALE] = {
 		.min_ = 0,
 		.max_ = 1,

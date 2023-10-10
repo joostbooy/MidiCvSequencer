@@ -20,7 +20,7 @@ SerialMask ChordTrack::step_mask_[NUM_STEP_ITEMS] = {
 };
 
 // step items
-TrackItem ChordTrack::step_item_[NUM_STEP_ITEMS] = {
+SerialItem ChordTrack::step_item_[NUM_STEP_ITEMS] = {
 	[TRIGGER] = {
 		.min_ = 0,
 		.max_ = 1,
@@ -135,7 +135,7 @@ SerialMask ChordTrack::track_mask_[NUM_TRACK_ITEMS] = {
 };
 
 // track items
-TrackItem ChordTrack::track_item_[NUM_TRACK_ITEMS] = {
+SerialItem ChordTrack::track_item_[NUM_TRACK_ITEMS] = {
 	[CHORD_OCT_OFFSET] = {
 		.min_ = 1,
 		.max_ = 8,

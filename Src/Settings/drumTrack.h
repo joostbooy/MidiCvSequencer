@@ -2,7 +2,7 @@
 #define DrumTrack_h
 
 #include "baseTrack.h"
-#include "trackItem.h"
+#include "serialItem.h"
 
 class DrumTrack : public BaseTrack {
 
@@ -77,11 +77,11 @@ public:
 		}
 	}
 
-	TrackItem &item(StepItem item) {
+	SerialItem &item(StepItem item) {
 		return step_item_[item];
 	}
 
-	TrackItem &item(Item item) {
+	SerialItem &item(Item item) {
 		return track_item_[item];
 	}
 
@@ -166,9 +166,9 @@ public:
 
 private:
 	static SerialMask step_mask_[NUM_STEP_ITEMS];
-	static TrackItem step_item_[NUM_STEP_ITEMS];
+	static SerialItem step_item_[NUM_STEP_ITEMS];
 	static SerialMask track_mask_[NUM_TRACK_ITEMS];
-	static TrackItem track_item_[NUM_TRACK_ITEMS];
+	static SerialItem track_item_[NUM_TRACK_ITEMS];
 
 	void clear_step(int8_t pattern_index, int step_index) {
 		for (int i = 0; i < NUM_STEP_ITEMS; ++i) {

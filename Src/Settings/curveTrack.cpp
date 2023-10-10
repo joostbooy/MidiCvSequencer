@@ -11,7 +11,7 @@ SerialMask CurveTrack::step_mask_[NUM_STEP_ITEMS] = {
 };
 
 // step items
-TrackItem CurveTrack::step_item_[NUM_STEP_ITEMS] = {
+SerialItem CurveTrack::step_item_[NUM_STEP_ITEMS] = {
 	[TRIGGER] = {
 		.min_ = 0,
 		.max_ = 1,
@@ -57,7 +57,7 @@ SerialMask CurveTrack::track_mask_[NUM_TRACK_ITEMS] = {
 };
 
 // track items
-TrackItem CurveTrack::track_item_[NUM_TRACK_ITEMS] = {
+SerialItem CurveTrack::track_item_[NUM_TRACK_ITEMS] = {
 	[CC_NUMBER] = {
 		.min_ = 0,
 		.max_ = 127,
