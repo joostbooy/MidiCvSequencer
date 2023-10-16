@@ -42,18 +42,6 @@ tables.append('uint32_t ' + name)
 tables.append(values.astype(int))
 
 '''____________________
-	EXP
-________________________'''
-
-#name = 'exp'
-#stepsize = 1.0 / 255.0
-#i = numpy.arange(0.0, 1.0 + stepsize, stepsize)
-#values = numpy.power(i, 4)
-
-#tables.append('float ' + name)
-#tables.append(values.astype(float))
-
-'''____________________
     MIDI NOTE SCALES
     (10 octaves per scale)
 ________________________'''
