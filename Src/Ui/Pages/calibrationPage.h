@@ -37,15 +37,15 @@ namespace CalibrationPage {
 	}
 
 	void enter() {
-		engine.add_request_wait(Engine::STOP);
-
 		ListPage::set_clear_callback(&clear_settings);
 		ListPage::set_list(&calibrationList);
 		ListPage::enter();
+		engine.cvOutputEngine.start_calibration();
 	}
 
 	void exit() {
 		ListPage::exit();
+		engine.cvOutputEngine.stop_calibration();
 	}
 
 	void onEncoder(uint8_t id, int inc) {

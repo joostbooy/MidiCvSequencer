@@ -23,7 +23,6 @@ public:
 	// should result in -5V
 	void set_min(int value) {
 		min_ = clip(0, max_, value);
-		dac.set(0, min_);
 	}
 
 	int max() {
@@ -33,7 +32,6 @@ public:
 	// should result in +5V
 	void set_max(int value) {
 		max_ = clip(min_, 65535, value);
-		dac.set(0, max_);
 	}
 
 	uint16_t read(int note) {

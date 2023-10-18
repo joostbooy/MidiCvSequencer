@@ -14,6 +14,8 @@ public:
 	void init() {
 		reset();
 
+		calibrating_ = false;
+
 		for (int i = 0; i < MidiEvent::NUM_SOURCES; ++i) {
 			vel_value[i] = 0;
 			cc_value[i] = 0;
@@ -41,6 +43,14 @@ public:
 
 	void start() {
 		is_running_ = true;
+	}
+
+	void start_calibration() {
+		calibrating_ = true;
+	}
+
+	void stop_calibration() {
+		calibrating_ = false;
 	}
 
 	void tick() {
@@ -117,7 +127,14 @@ public:
 		trigger_flags = 0;
 	}
 
+
 	void send() {
+		// overwrite dac values if calibrating
+		if (calibrating_) {
+			dac.set(0, settings.voltPerOctave.min());
+			dac.set(1, settings.voltPerOctave.max());
+		}
+
 		dac.write();
 		gateIO.write_output();
 	}
@@ -168,9 +185,9 @@ public:
 
 	void write_bend(MidiEvent::Event &event, int value_16_bit = -1) {
 		if (value_16_bit >= 0) {
-		//	bend_value[event.source] = value_16_bit;
+			//	bend_value[event.source] = value_16_bit;
 		} else {
-		//	bend_value[event.source] = event.data[0] << 9;
+			//	bend_value[event.source] = event.data[0] << 9;
 		}
 	}
 
@@ -194,6 +211,7 @@ public:
 
 private:
 	bool is_running_;
+	bool calibrating_;
 
 	uint32_t trigger_flags;
 	bool legato[MidiEvent::NUM_SOURCES];
