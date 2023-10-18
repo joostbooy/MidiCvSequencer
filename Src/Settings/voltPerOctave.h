@@ -16,12 +16,6 @@ public:
 		calibrate();
 	}
 
-	void update_dac() {
-		dac.set(0, min_);
-		dac.set(1, max_);
-		dac.write();
-	}
-
 	int min() {
 		return min_;
 	}
@@ -30,7 +24,6 @@ public:
 	void set_min(int value) {
 		min_ = clip(0, max_, value);
 		dac.set(0, min_);
-		dac.write(0);
 	}
 
 	int max() {
@@ -40,8 +33,7 @@ public:
 	// should result in +5V
 	void set_max(int value) {
 		max_ = clip(min_, 65535, value);
-		dac.set(1, max_);
-		dac.write(1);
+		dac.set(0, max_);
 	}
 
 	uint16_t read(int note) {
