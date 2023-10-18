@@ -74,11 +74,16 @@ namespace CalibrationPage {
 			pages.open(Pages::CONFIRMATION_PAGE);
 			break;
 		case LOAD:
-			if (settings.load_calibration()) {
-				painters.message.show("CALIBRATION LOADED");
-			} else {
-				painters.message.show("FAILED");
-			}
+			ConfirmationPage::set("OVERWRITE SETTINGS ?", [](uint8_t option) {
+				if (option == ConfirmationPage::CONFIRM) {
+					if (settings.load_calibration()) {
+						painters.message.show("CALIBRATION LOADED");
+					} else {
+						painters.message.show("FAILED");
+					}
+				}
+			});
+			pages.open(Pages::CONFIRMATION_PAGE);
 			break;
 		case CLOSE:
 			pages.close(Pages::CALIBRATION_PAGE);
