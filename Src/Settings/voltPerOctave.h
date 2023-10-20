@@ -12,8 +12,6 @@ public:
 	void init() {
 		min_ = 0;
 		max_ = 65535;
-
-		calibrate();
 	}
 
 	int min() {
@@ -35,37 +33,36 @@ public:
 	}
 
 	uint16_t read(int note) {
-		return table_[clip(0, kTableSize - 1, note)];
+		return volt_to_value(note_to_volt(note));
 	}
 
-	void calibrate() {
-		int offset = min_;
-		int range = max_ - min_;
-		float inc = 1.0f / (kTableSize - 1);
+	float note_to_volt(int note) {
+		note = clip(0, kMaxNotes, note);
+		return (note - 60) * (1.f / 12.f);
+	}
 
-		for (int i = 0; i < kTableSize; ++i) {
-			table_[i] = offset + (range * i * inc);
-		}
+	uint16_t volt_to_value(float volts) {
+		//volts = clip(-5.f, 5.f, volts);
+		float x = (1.f / kMaxOctaves) * (volts + 5.f);
+		return Dsp::cross_fade(max_, min_, x);
 	}
 
 	void save(FileWriter &fileWriter) {
 		fileWriter.write(min_);
 		fileWriter.write(max_);
-		calibrate();
 	}
 
 	void load(FileReader &fileReader) {
 		fileReader.read(min_);
 		fileReader.read(max_);
-		calibrate();
 	}
 
 private:
 	static const int kMaxOctaves = 10;
-	static const int kTableSize = kMaxOctaves * 12;
-	uint16_t table_[kTableSize];
+	static const int kMaxNotes = kMaxOctaves * 12;
 	uint16_t min_ = 0;
 	uint16_t max_ = 65535;
+
 };
 
 #endif
