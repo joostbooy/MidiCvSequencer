@@ -55,9 +55,6 @@ private:
 	volatile uint8_t dummy;
 
 	void writeDac(uint8_t command, uint8_t address, uint16_t data, uint8_t function) {
-		// Shift data by one bit for DAC8568A
-		//data <<= 1;
-
 		uint8_t b1 = command;
 		uint8_t b2 = (address << 4) | (data >> 12);
 		uint8_t b3 = data >> 4;
@@ -66,19 +63,16 @@ private:
 		// sync_pin LOW
 		GPIOA->BSRR = GPIO_PIN_4 << 16;
 		asm("NOP");
-		//micros.delay(1);
 
 		spi_write(b1);
 		spi_write(b2);
 		spi_write(b3);
 		spi_write(b4);
 		asm("NOP");
-		//micros.delay(1);
 
 		// sync_pin HIGH
 		GPIOA->BSRR = GPIO_PIN_4;
 		asm("NOP");
-		//micros.delay(1);
 	}
 
 	void reset() {

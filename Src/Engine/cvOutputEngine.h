@@ -140,6 +140,7 @@ public:
 	}
 
 	float current_value(uint8_t channel) {
+		//return settings.voltPerOctave.value_to_volt(dac.value(channel));
 		return (1.f / 65535.0f) * dac.value(channel);
 	}
 
@@ -177,18 +178,18 @@ public:
 
 	void write_cc(MidiEvent::Event &event, int value_16_bit = -1) {
 		if (value_16_bit >= 0) {
-			cc_value[event.source] = value_16_bit;
+			cc_value[event.source] = settings.voltPerOctave.bi_cv_to_value(value_16_bit);
 		} else {
-			cc_value[event.source] = event.data[1] << 9;
+			cc_value[event.source] = settings.voltPerOctave.bi_cv_to_value(event.data[1] << 9);
 		}
 	}
 
 	void write_bend(MidiEvent::Event &event, int value_16_bit = -1) {
-		if (value_16_bit >= 0) {
-			//	bend_value[event.source] = value_16_bit;
-		} else {
-			//	bend_value[event.source] = event.data[0] << 9;
-		}
+	//	if (value_16_bit >= 0) {
+	//		bend_value[event.source] = settings.voltPerOctave.bi_cv_to_value(value_16_bit);
+	//	} else {
+	//		bend_value[event.source] = settings.voltPerOctave.bi_cv_to_value(event.data[1] << 9);
+	//	}
 	}
 
 	void write_note_off(MidiEvent::Event &event) {
@@ -227,16 +228,16 @@ private:
 
 
 	void set_vel(uint8_t source, uint8_t value) {
-		vel_value[source] = value << 9;
+		vel_value[source] = settings.voltPerOctave.bi_cv_to_value(value << 9);
 	}
 
 	void set_cc(uint8_t source, uint8_t value) {
-		cc_value[source] = value << 9;
+		cc_value[source] = settings.voltPerOctave.bi_cv_to_value(value << 9);
 	}
 
 	void set_note(uint8_t source, uint8_t value) {
 		last_note_value[source] = note_value[source];
-		note_value[source] = settings.voltPerOctave.read(value);
+		note_value[source] = settings.voltPerOctave.note_to_value(value);
 	}
 
 	void set_trigger(uint8_t source) {

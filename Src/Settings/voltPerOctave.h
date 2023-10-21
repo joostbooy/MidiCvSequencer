@@ -32,21 +32,23 @@ public:
 		max_ = clip(min_, 65535, value);
 	}
 
-	uint16_t read(int note) {
-		return volt_to_value(note_to_volt(note));
+	// methods
+	uint16_t bi_cv_to_value(uint16_t value) {
+		float volt = value_to_bi_volt(value);
+		return volt_to_value(volt);
 	}
 
-	float note_to_volt(int note) {
-		note = clip(0, kMaxNotes, note);
-		return (note - 60) * (1.f / 12.f);
+	uint16_t uni_cv_to_value(uint16_t value) {
+		float volt = value_to_uni_volt(value);
+		return volt_to_value(volt);
 	}
 
-	uint16_t volt_to_value(float volts) {
-		//volts = clip(-5.f, 5.f, volts);
-		float x = (1.f / kMaxOctaves) * (volts + 5.f);
-		return Dsp::cross_fade(max_, min_, x);
+	uint16_t note_to_value(int note) {
+		float volt = note_to_volt(note);
+		return volt_to_value(volt);
 	}
 
+	// storage
 	void save(FileWriter &fileWriter) {
 		fileWriter.write(min_);
 		fileWriter.write(max_);
@@ -63,6 +65,25 @@ private:
 	uint16_t min_ = 0;
 	uint16_t max_ = 65535;
 
+	float note_to_volt(int note) {
+		note = clip(0, kMaxNotes, note);
+		return (note - 60) * (1.f / 12.f);
+	}
+
+	float value_to_bi_volt(uint16_t value) {
+		float x = (1.f / 65535.f) * value;
+		return Dsp::cross_fade(-5.f, 5.f, x);
+	}
+
+	float value_to_uni_volt(uint16_t value) {
+		float x = (1.f / 65535.f) * value;
+		return Dsp::cross_fade(0.f, 5.f, x);
+	}
+
+	uint16_t volt_to_value(float volts) {
+		float x = (1.f / kMaxOctaves) * (volts + 5.f);
+		return Dsp::cross_fade(max_, min_, x);
+	}
 };
 
 #endif
