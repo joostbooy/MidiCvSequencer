@@ -22,26 +22,11 @@ namespace HardwarePage {
 
 	enum FooterOptions {
 		TEST_LEDS,
-		TEST_MIDI,
 		CLOSE,
 		NUM_FOOTER_OPTIONS
 	}footer_option;
 
-	const char* const footer_text[NUM_FOOTER_OPTIONS] = { "TEST LEDS", "TEST MIDI", "CLOSE" };
-
-
-
-	void send_midi_c4_channel_1(int port, bool state) {
-		MidiEvent::Event e;
-
-		e.source = 0;
-		e.port = port;
-		e.message = state ? MidiEvent::NOTE_ON : MidiEvent::NOTE_OFF;
-		e.data[0] = 60;
-		e.data[1] = state ? 100 : 0;
-
-		engine.midiOutputEngine.send_event(e, false);
-	}
+	const char* const footer_text[NUM_FOOTER_OPTIONS] = { "TEST LEDS", "CLOSE" };
 
 	const char* controller_to_text(uint8_t id) {
 		switch (id)
@@ -161,12 +146,6 @@ namespace HardwarePage {
 			if (state) {
 				++led_color %= 4;
 			}
-			break;
-		case TEST_MIDI:
-			if (state) {
-				++midi_port %= MidiPort::NUM_PORTS;
-			}
-			send_midi_c4_channel_1(midi_port, state);
 			break;
 		case CLOSE:
 			if (state) {
