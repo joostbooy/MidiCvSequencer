@@ -40,7 +40,20 @@ public:
 
 		while (midi_que.readable()) {
 			e = midi_que.read();
-			outputEngine_->send_event(e);
+			switch (MidiEvent::get_type(&e))
+			{
+			case MidiEvent::NOTE_ON:
+				outputEngine_->send_note_on(e);
+				break;
+			case MidiEvent::NOTE_OFF:
+				outputEngine_->send_note_off(e);
+				break;
+			case MidiEvent::CONTROLLER_CHANGE:
+				outputEngine_->send_cc(e);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 

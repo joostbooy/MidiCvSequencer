@@ -140,40 +140,11 @@ public:
 	}
 
 	float current_value(uint8_t channel) {
-		//return settings.voltPerOctave.value_to_volt(dac.value(channel));
 		return (1.f / 65535.0f) * dac.value(channel);
 	}
 
 	bool current_gate(uint8_t channel) {
 		return gateIO.read_output(channel);
-	}
-
-	void write_event(MidiEvent::Event &event, uint16_t value_16_bit = 0) {
-		uint8_t source = event.source;
-		uint8_t type = event.message & 0xF0;
-
-		if (type == MidiEvent::NOTE_OFF) {
-			if (note_count[source] > 0) {
-				--note_count[source];
-			}
-			return;
-		}
-
-		if (type == MidiEvent::CONTROLLER_CHANGE) {
-			set_cc(source, value_16_bit);
-			return;
-		}
-
-		if (type == MidiEvent::NOTE_ON) {
-			slide_phase[source] = 0.0f;
-
-			legato[source] = note_count[source] > 0;
-			++note_count[source];
-
-			set_trigger(source);
-			set_note(source, event.data[0]);
-			set_vel(source, event.data[1]);
-		}
 	}
 
 	void write_cc(MidiEvent::Event &event, int value_16_bit = -1) {

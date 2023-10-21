@@ -75,12 +75,12 @@ public:
 
 	void send_cc_event(uint16_t cc_value) {
 		event.data[1] = cc_value >> 9;
-		outputEngine_->send_cc_event(event, cc_value);
+		outputEngine_->send_cc(event, cc_value);
 	}
 
 	void send_bend_event(uint16_t bend_value) {
 		MidiEvent::set_14bit_data(&event, bend_value >> 2);
-		outputEngine_->send_bend_event(event, bend_value);
+		outputEngine_->send_bend(event, bend_value);
 	}
 
 	void send_note_event(uint32_t when, uint32_t length) {
