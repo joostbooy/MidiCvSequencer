@@ -29,9 +29,10 @@ public:
 		trigger_flags = 0;
 
 		for (int i = 0; i < MidiEvent::NUM_SOURCES; ++i) {
-			legato[i] = 0;
-			slide_phase[i] = 0.f;
+			legato_flag[i] = 0;
 			note_count[i] = 0;
+			slide_phase[i] = 0.f;
+			bend_value[i] = 0.f;
 			last_note_value[i] = note_value[i];
 		}
 
@@ -112,7 +113,7 @@ public:
 				dac.set(i, cc_value[source]);
 				break;
 			case CvOutput::NOTE:
-				if (cvOut.slide_mode() == CvOutput::ON || (cvOut.slide_mode() == CvOutput::LEGATO && legato[source] == true)) {
+				if (cvOut.slide_mode() == CvOutput::ON || (cvOut.slide_mode() == CvOutput::LEGATO && legato_flag[source] == true)) {
 					dac.set(i, next_slide_value(source, cvOut.slide_speed()));
 				} else {
 					dac.set(i, note_value[source]);
@@ -156,11 +157,11 @@ public:
 	}
 
 	void write_bend(MidiEvent::Event &event, int value_16_bit = -1) {
-	//	if (value_16_bit >= 0) {
-	//		bend_value[event.source] = settings.voltPerOctave.bi_cv_to_value(value_16_bit);
-	//	} else {
-	//		bend_value[event.source] = settings.voltPerOctave.bi_cv_to_value(event.data[1] << 9);
-	//	}
+		if (value_16_bit >= 0) {
+			bend_value[event.source] = (1.f / 65535.f) * value_16_bit;
+		} else {
+			bend_value[event.source] = (1.f / 16383.f) * MidiEvent::get_14bit_data(&event);
+		}
 	}
 
 	void write_note_off(MidiEvent::Event &event) {
@@ -172,13 +173,20 @@ public:
 	void write_note_on(MidiEvent::Event &event) {
 		uint8_t source = event.source;
 
-		slide_phase[source] = 0.0f;
-		legato[source] = note_count[source] > 0;
+		// update note count
+		legato_flag[source] = note_count[source] > 0;
 		++note_count[source];
 
-		set_trigger(source);
-		set_note(source, event.data[0]);
-		set_vel(source, event.data[1]);
+		// reset slide
+		slide_phase[source] = 0.0f;
+
+		// set trigger
+		trigger_flags |= (1 << source);
+
+		// set note & vel
+		last_note_value[source] = note_value[source];
+		note_value[source] = settings.voltPerOctave.note_to_value(event.data[0]);
+		vel_value[source] = settings.voltPerOctave.bi_cv_to_value(event.data[1]);
 	}
 
 private:
@@ -186,8 +194,10 @@ private:
 	bool calibrating_;
 
 	uint32_t trigger_flags;
-	bool legato[MidiEvent::NUM_SOURCES];
+
+	bool legato_flag[MidiEvent::NUM_SOURCES];
 	float slide_phase[MidiEvent::NUM_SOURCES];
+	float bend_value[MidiEvent::NUM_SOURCES];
 	uint16_t note_count[MidiEvent::NUM_SOURCES];
 	uint16_t cc_value[MidiEvent::NUM_SOURCES];
 	uint16_t vel_value[MidiEvent::NUM_SOURCES];
@@ -197,25 +207,7 @@ private:
 	ClockEngine clock[CvOutput::NUM_PORTS];
 	uint32_t clock_ticks[CvOutput::NUM_PORTS];
 
-
-	void set_vel(uint8_t source, uint8_t value) {
-		vel_value[source] = settings.voltPerOctave.bi_cv_to_value(value << 9);
-	}
-
-	void set_cc(uint8_t source, uint8_t value) {
-		cc_value[source] = settings.voltPerOctave.bi_cv_to_value(value << 9);
-	}
-
-	void set_note(uint8_t source, uint8_t value) {
-		last_note_value[source] = note_value[source];
-		note_value[source] = settings.voltPerOctave.note_to_value(value);
-	}
-
-	void set_trigger(uint8_t source) {
-		trigger_flags |= (1 << source);
-	}
-
-	uint16_t next_slide_value(uint8_t source, uint8_t speed) {
+	inline uint16_t next_slide_value(uint8_t source, uint8_t speed) {
 		uint16_t value = Dsp::cross_fade(last_note_value[source], note_value[source], slide_phase[source]);
 
 		slide_phase[source] += ClockEngine::step_duration_reciprocal(speed);
@@ -226,6 +218,14 @@ private:
 		return value;
 	}
 
+	inline uint16_t apply_bend(uint8_t source, uint16_t pitch) {
+		const uint16_t whole_note = settings.voltPerOctave.note_to_value(0) - settings.voltPerOctave.note_to_value(2);
+
+		uint16_t low = clip_min(0, pitch - whole_note);
+		uint16_t high = clip_max(65535, pitch + whole_note);
+
+		return Dsp::cross_fade(low, high, bend_value[source]);
+	}
 };
 
 #endif
