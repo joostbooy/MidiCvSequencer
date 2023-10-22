@@ -211,7 +211,6 @@ void Engine::update() {
 		}
 
 		midiInputEngine.tick();
-		//cvInputEngine.tick();
 		midiOutputEngine.tick();
 		cvOutputEngine.tick();
 	}
