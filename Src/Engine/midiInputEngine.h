@@ -51,6 +51,9 @@ public:
 			case MidiEvent::CONTROLLER_CHANGE:
 				outputEngine_->send_cc(e);
 				break;
+			case MidiEvent::PITCH_BEND:
+				outputEngine_->send_bend(e);
+				break;
 			default:
 				break;
 			}
