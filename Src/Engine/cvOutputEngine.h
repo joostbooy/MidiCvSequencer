@@ -150,9 +150,9 @@ public:
 
 	void write_cc(MidiEvent::Event &event, int value_16_bit = -1) {
 		if (value_16_bit >= 0) {
-			cc_value[event.source] = settings.voltPerOctave.bi_cv_to_value(value_16_bit);
+			cc_value[event.source] = settings.voltPerOctave.cv_to_value(value_16_bit);
 		} else {
-			cc_value[event.source] = settings.voltPerOctave.bi_cv_to_value(event.data[1] << 9);
+			cc_value[event.source] = settings.voltPerOctave.cv_to_value(event.data[1] << 9);
 		}
 	}
 
@@ -186,7 +186,7 @@ public:
 		// set note & vel
 		last_note_value[source] = note_value[source];
 		note_value[source] = settings.voltPerOctave.note_to_value(event.data[0]);
-		vel_value[source] = settings.voltPerOctave.bi_cv_to_value(event.data[1]);
+		vel_value[source] = settings.voltPerOctave.cv_to_value(event.data[1]);
 	}
 
 private:
@@ -219,7 +219,7 @@ private:
 	}
 
 	inline uint16_t apply_bend(uint8_t source, uint16_t pitch) {
-		const uint16_t whole_note = settings.voltPerOctave.note_to_value(0) - settings.voltPerOctave.note_to_value(2);
+		const uint16_t whole_note = settings.voltPerOctave.note_to_value(2) - settings.voltPerOctave.note_to_value(0);
 
 		uint16_t low = clip_min(0, pitch - whole_note);
 		uint16_t high = clip_max(65535, pitch + whole_note);

@@ -33,13 +33,8 @@ public:
 	}
 
 	// methods
-	uint16_t bi_cv_to_value(uint16_t value) {
-		float volt = value_to_bi_volt(value);
-		return volt_to_value(volt);
-	}
-
-	uint16_t uni_cv_to_value(uint16_t value) {
-		float volt = value_to_uni_volt(value);
+	uint16_t cv_to_value(uint16_t value) {
+		float volt = cv_to_volt(value);
 		return volt_to_value(volt);
 	}
 
@@ -70,14 +65,9 @@ private:
 		return (note - 60) * (1.f / 12.f);
 	}
 
-	float value_to_bi_volt(uint16_t value) {
+	float cv_to_volt(uint16_t value) {
 		float x = (1.f / 65535.f) * value;
 		return Dsp::cross_fade(-5.f, 5.f, x);
-	}
-
-	float value_to_uni_volt(uint16_t value) {
-		float x = (1.f / 65535.f) * value;
-		return Dsp::cross_fade(0.f, 5.f, x);
 	}
 
 	uint16_t volt_to_value(float volts) {
