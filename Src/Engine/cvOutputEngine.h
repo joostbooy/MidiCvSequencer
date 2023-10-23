@@ -218,13 +218,14 @@ private:
 		return value;
 	}
 
+	// unimplemented for now, needs testing
 	inline uint16_t apply_bend(uint8_t source, uint16_t pitch) {
 		const uint16_t whole_note = settings.voltPerOctave.note_to_value(2) - settings.voltPerOctave.note_to_value(0);
 
 		uint16_t low = clip_min(0, pitch - whole_note);
 		uint16_t high = clip_max(65535, pitch + whole_note);
 
-		return Dsp::cross_fade(low, high, bend_value[source]);
+		return Dsp::cross_fade(low, pitch, high, bend_value[source]);
 	}
 };
 
