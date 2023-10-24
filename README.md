@@ -21,7 +21,6 @@
 ## Specs
 - Cortex-M4 ARM 168mHz (STM32F4)
 - 16 bit DAC
-- 12 bit ADC
 - +/-5V CV in & out
 - 7V gate out
 - 9/12V DC power
