@@ -30,19 +30,26 @@ public:
 	}
 
 	bool add_note(uint8_t key, MidiEvent::Event &event) {
-		if (size_ >= kMax || find_key(key) >= 0) {
+		if (size_ >= kMax || key_to_slot(key) >= 0) {
 			return false;
 		}
 
-		entry[size_].key = key;
-		entry[size_].event = event;
+		int i = size_;
+
+		while (i > 0 && entry[i - 1].key >= key) {
+			entry[i] = entry[i - 1];
+			--i;
+		}
+
+		entry[i].key = key;
+		entry[i].event = event;
 		++size_;
 
 		return true;
 	}
 
 	bool remove_note(uint8_t key, MidiEvent::Event &dest) {
-		int8_t slot = find_key(key);
+		int8_t slot = key_to_slot(key);
 
 		if (slot < 0) {
 			return false;
@@ -73,7 +80,7 @@ private:
 		--size_;
 	}
 
-	int8_t find_key(uint8_t key) {
+	int8_t key_to_slot(uint8_t key) {
 		int8_t slot = -1;
 		for (int i = 0; i < size_; ++i) {
 			if (entry[i].key == key) {
@@ -83,7 +90,6 @@ private:
 		}
 		return slot;
 	}
-
 };
 
 #endif
