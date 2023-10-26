@@ -42,9 +42,9 @@ SerialItem CurveTrack::step_item_[NUM_STEP_ITEMS] = {
 	},
 	[SKEW] = {
 		.min_ = 0,
-		.max_ = 9,
-		.inc_shifted_ = 2,
-		.init_value_ = 4,
+		.max_ = 3,
+		.inc_shifted_ = 1,
+		.init_value_ = 0,
 		.mask_ = step_mask_[SKEW]
 	},
 };
