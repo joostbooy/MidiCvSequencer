@@ -166,8 +166,8 @@ namespace StepEditPage {
 			painters.leds.set_shift(Matrix::GREEN);
 
 			if (stepEditor.num_selected_steps() > 0) {
-				painters.leds.set_step_button(stepEditor.original_step(0), Matrix::ORANGE);
-				painters.leds.set_step_button(stepEditor.selected_step(0), Matrix::RED);
+				painters.leds.set_step_encoder(stepEditor.original_step(0), Matrix::ORANGE);
+				painters.leds.set_step_encoder(stepEditor.selected_step(0), Matrix::RED);
 			}
 			break;
 		case StepEditor::GROUPED_SHIFT:
@@ -187,7 +187,7 @@ namespace StepEditPage {
 
 				// make we sure we paint over the original steps
 				for (int i = 0; i < stepEditor.num_selected_steps(); ++i) {
-					painters.leds.set_step_button(stepEditor.selected_step(i), Matrix::RED);
+					painters.leds.set_step_encoder(stepEditor.selected_step(i), Matrix::RED);
 				}
 			}
 			break;
