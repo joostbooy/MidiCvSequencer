@@ -157,6 +157,8 @@ public:
 			set_solo(Matrix::GREEN);
 			break;
 		case StepEditor::GROUPED_EDIT:
+			set_group(Matrix::GREEN);
+
 			for (int i = 0; i < 16; ++i) {
 				if (track.step_is_grouped(i)) {
 					set_step_button(i, Matrix::ORANGE);
@@ -164,12 +166,17 @@ public:
 			}
 			break;
 		case StepEditor::SHIFT:
+			set_shift(Matrix::GREEN);
+
 			if (stepEditor.num_selected_steps() > 0) {
 				set_step_encoder(stepEditor.original_step(0), Matrix::ORANGE);
 				set_step_encoder(stepEditor.selected_step(0), Matrix::RED);
 			}
 			break;
 		case StepEditor::GROUPED_SHIFT:
+			set_group(Matrix::GREEN);
+			set_shift(Matrix::GREEN);
+
 			if (stepEditor.num_selected_steps() == 0) {
 				for (int i = 0; i < 16; ++i) {
 					if (track.step_is_grouped(i)) {
@@ -178,9 +185,10 @@ public:
 				}
 			} else {
 				for (int i = 0; i < stepEditor.num_selected_steps(); ++i) {
-					set_step_encoder(stepEditor.original_step(i), Matrix::ORANGE);
+					set_step_button(stepEditor.original_step(i), Matrix::ORANGE);
 				}
-				//  make sure we overwrite original steps
+
+				// make we sure we paint over the original steps
 				for (int i = 0; i < stepEditor.num_selected_steps(); ++i) {
 					set_step_encoder(stepEditor.selected_step(i), Matrix::RED);
 				}
@@ -243,8 +251,6 @@ private:
 		{ .x = 0, .y = 5 },	// cv
 		{ .x = 1, .y = 5 },	// system
 	};
-
-
 };
 
 #endif

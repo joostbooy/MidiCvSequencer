@@ -147,53 +147,7 @@ namespace StepEditPage {
 		}
 
 		// step mode
-		switch (stepEditor.mode())
-		{
-		case StepEditor::AUDITION:
-			painters.leds.set_shift(Matrix::GREEN);
-			painters.leds.set_solo(Matrix::GREEN);
-			break;
-		case StepEditor::GROUPED_EDIT:
-			painters.leds.set_group(Matrix::GREEN);
-
-			for (int i = 0; i < 16; ++i) {
-				if (track.step_is_grouped(i)) {
-					painters.leds.set_step_button(i, Matrix::ORANGE);
-				}
-			}
-			break;
-		case StepEditor::SHIFT:
-			painters.leds.set_shift(Matrix::GREEN);
-
-			if (stepEditor.num_selected_steps() > 0) {
-				painters.leds.set_step_encoder(stepEditor.original_step(0), Matrix::ORANGE);
-				painters.leds.set_step_encoder(stepEditor.selected_step(0), Matrix::RED);
-			}
-			break;
-		case StepEditor::GROUPED_SHIFT:
-			painters.leds.set_group(Matrix::GREEN);
-			painters.leds.set_shift(Matrix::GREEN);
-
-			if (stepEditor.num_selected_steps() == 0) {
-				for (int i = 0; i < 16; ++i) {
-					if (track.step_is_grouped(i)) {
-						painters.leds.set_step_button(i, Matrix::ORANGE);
-					}
-				}
-			} else {
-				for (int i = 0; i < stepEditor.num_selected_steps(); ++i) {
-					painters.leds.set_step_button(stepEditor.original_step(i), Matrix::ORANGE);
-				}
-
-				// make we sure we paint over the original steps
-				for (int i = 0; i < stepEditor.num_selected_steps(); ++i) {
-					painters.leds.set_step_encoder(stepEditor.selected_step(i), Matrix::RED);
-				}
-			}
-			break;
-		default:
-			break;
-		}
+		painters.leds.paint_step_mode(stepEditor, track);
 	}
 
 	void msTick(uint16_t ticks) {
