@@ -166,8 +166,8 @@ namespace DiskUtilPage {
 
 	// Bottom to top
 	void drawDisplay() {
-		canvas.set_font(Font::LARGE);
-		
+		canvas.set_font(Font::SMALL);
+
 		painters.window.shadow(window, 4);
 
 		// list
