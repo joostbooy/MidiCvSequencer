@@ -76,7 +76,8 @@ namespace CurvePatternPage {
 	}
 
 	void drawDisplay() {
-		draw_steps();
+		//draw_steps();
+		painters.curve.draw(settings.selected_curve_track(), settings.selected_pattern());
 	}
 
 	const uint16_t targetFps() {
