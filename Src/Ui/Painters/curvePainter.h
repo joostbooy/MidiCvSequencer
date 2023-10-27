@@ -8,33 +8,27 @@ class CurvePainter {
 
 public:
 
-	void draw(CurveTrack &track, int pattern) {
-		const int step_w = box_w / 16;
-		const float inc = 1.f / step_w;
+	void reset(int value) {
+		curr_value = (1.f / 127.f) * value;;
+	}
 
-		//reset
-		if (pattern == 0) {
-			curr_value = track.read(CurveTrack::INIT_CC_VALUE);
-		} else {
-			curr_value = (1.f / 127.f) * track.read_step(pattern - 1, 15, CurveTrack::CC_VALUE);
+	void draw_step(int step, bool trigger, int value, int shape, const char *text) {
+		float value_ = (1.f / 127.f) * value;
+		float shape_ = (1.f / 8.f) * shape;
+
+		last_value = curr_value;
+		if (trigger) {
+			curr_value = value_;
 		}
 
-		for (int step = 0; step < 16; ++step) {
-
-			last_value = curr_value;
-			if (track.read_step(pattern, step, CurveTrack::TRIGGER)) {
-				curr_value = (1.f / 127.f) * track.read_step(pattern, step, CurveTrack::CC_VALUE);
-			}
-
-			float shape = (1.f / 8.f) * track.read_step(pattern, step, CurveTrack::SHAPE);
-
-			for (int i = 0; i < step_w; ++i) {
-				int x = i + (step * step_w);
-				float phase = Curve::bend(i * inc, shape);
-				float sample = Dsp::cross_fade(last_value, curr_value, phase);
-				draw_sample(x, sample);
-			}
+		for (int i = 0; i < step_w; ++i) {
+			int x = i + (step * step_w);
+			float phase = Curve::bend(i * (1.f / step_w), shape_);
+			float sample = Dsp::cross_fade(last_value, curr_value, phase);
+			draw_sample(x, sample);
 		}
+
+		canvas.draw_text((step * step_w), box_y, step_w, 64, text, Canvas::CENTER, Canvas::BOTTOM);
 	}
 
 private:
@@ -47,6 +41,7 @@ private:
 	static const int box_y = 12;
 	static const int box_h = 40;
 	static const int box_w = 256;
+	static const int step_w = box_w / 16;
 
 	void draw_sample(int x, float sample) {
 		int y, h;
@@ -69,6 +64,5 @@ private:
 		last_y = curr_y;
 	}
 };
-
 
 #endif
