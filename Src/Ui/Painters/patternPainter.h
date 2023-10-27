@@ -8,7 +8,7 @@ class PatternPainter {
 public:
 
 	void init() {
-		
+
 	}
 
 	void draw_step(int step, int min, int max, bool trigger, int value, const char* text) {
