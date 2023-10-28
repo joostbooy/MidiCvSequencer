@@ -17,10 +17,11 @@ namespace CurvePatternPage {
 
 
 	//variables
-	void draw_step_view(int pattern, int item) {
+	void draw_curve_view(size_t pattern, size_t item) {
 		CurveTrack &track = settings.selected_curve_track();
 
-		// reset
+		// init
+		painters.curve.draw_background();
 		painters.curve.reset(track.read(CurveTrack::INIT_CC_VALUE));
 
 		// draw steps
@@ -33,12 +34,20 @@ namespace CurvePatternPage {
 			bool trigger = track.read_step(pattern, i, CurveTrack::TRIGGER);
 			painters.curve.draw_step(i, trigger, cc_value, shape, CurveTrack::step_value_text(item_, value));
 		}
+
+		// draw position
+		int index = settings.selected_track_index();
+		if (engine.trackEngine.state(index).pattern_index() == pattern) {
+			int step = engine.trackEngine.state(index).step_index();
+			float phase = engine.trackEngine.step_fraction(index);
+			painters.curve.draw_position(step, phase);
+		}
 	}
 
 	void draw_steps() {
 		int pattern = settings.selected_pattern();
 		int item = settings.selected_step_item();
-		draw_step_view(pattern, item);
+		draw_curve_view(pattern, item);
 	}
 
 	void init() {
@@ -62,15 +71,7 @@ namespace CurvePatternPage {
 	}
 
 	void drawLeds() {
-		//	Matrix::LedColor color;
 
-		//	int pattern = settings.selected_pattern();
-		//	CurveTrack &track = settings.selected_curve_track();
-
-		//	for (int i = 0; i < 16; ++i) {
-		//		color = track.read_step(pattern, i, CurveTrack::TRIGGER) ? Matrix::GREEN : Matrix::BLACK;
-		//		painters.leds.set_step_button(i, color);
-		//	}
 	}
 
 	void msTick(uint16_t ticks) {

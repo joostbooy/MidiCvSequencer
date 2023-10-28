@@ -12,6 +12,23 @@ public:
 		curr_value = (1.f / 127.f) * value;;
 	}
 
+	void draw_position(int step, float phase) {
+		int x = box_x + (step * step_w) + (phase * step_w);
+		canvas.vertical_line(x, box_y, box_h, Canvas::DARK_GRAY);
+	}
+
+	void draw_background() {
+		for (int i = 0; i < 16; ++i) {
+			if (i % 2) {
+				int x = step_w * i;
+				canvas.fill(x, box_y, step_w, box_h, Canvas::LIGHT_GRAY);
+			}
+		}
+
+		const int y = box_y + (box_h / 2);
+		canvas.horizontal_line(box_x, y, box_w, Canvas::GRAY);
+	}
+
 	void draw_step(int step, bool trigger, int value, int shape, const char *text) {
 		float value_ = (1.f / 127.f) * value;
 		float shape_ = (1.f / 8.f) * shape;

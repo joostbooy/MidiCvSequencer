@@ -13,10 +13,6 @@ class TrackEngine {
 
 public:
 
-	TrackState &state(uint8_t index) {
-		return track_state[index];
-	}
-
 	void init(MidiOutputEngine *outputEngine) {
 		for (int i = 0; i < kMaxTracks; ++i) {
 			track_state[i].init(i, outputEngine);
@@ -28,6 +24,11 @@ public:
 		}
 
 		reset();
+	}
+
+
+	TrackState &state(uint8_t index) {
+		return track_state[index];
 	}
 
 	void reset() {
@@ -96,7 +97,6 @@ public:
 
 	void stop_audition() {
 		if (audition.is_playing) {
-			//reset();
 			ticks = 0;
 			tick_count = 0;
 			reset(audition.track);
@@ -108,8 +108,8 @@ public:
 		return tick_count;
 	}
 
-	float step_fraction(uint8_t track) {
-		uint32_t length = state(track).clock.step_duration();
+	float step_fraction(uint8_t index) {
+		uint32_t length = state(index).clock.step_duration();
 		return float(tick_count % length) / length;
 	}
 
