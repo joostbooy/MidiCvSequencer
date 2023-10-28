@@ -9,8 +9,10 @@ class CurveTrack : public BaseTrack {
 public:
 
 	enum Item {
+		INIT_VALUE,
 		CC_NUMBER,
-		INIT_CC_VALUE,
+		SEND_CC,
+		SEND_BEND,
 		NUM_TRACK_ITEMS
 	};
 

@@ -49,15 +49,23 @@ SerialItem CurveTrack::step_item_[NUM_STEP_ITEMS] = {
 	},
 };
 
-
 // track masks
 SerialMask CurveTrack::track_mask_[NUM_TRACK_ITEMS] = {
-	[CC_NUMBER]		= { .reg = 0, .bits = 7, .shifts = 0 },
-	[INIT_CC_VALUE]	= { .reg = 0, .bits = 7, .shifts = 7 },
+	[INIT_VALUE]	= { .reg = 0, .bits = 7, .shifts = 0 },
+	[CC_NUMBER]		= { .reg = 0, .bits = 7, .shifts = 7 },
+	[SEND_CC]		= { .reg = 0, .bits = 1, .shifts = 14 },
+	[SEND_BEND]		= { .reg = 0, .bits = 1, .shifts = 15 },
 };
 
 // track items
 SerialItem CurveTrack::track_item_[NUM_TRACK_ITEMS] = {
+	[INIT_VALUE] = {
+		.min_ = 0,
+		.max_ = 127,
+		.inc_shifted_ = 10,
+		.init_value_ = 63,
+		.mask_ = track_mask_[INIT_VALUE]
+	},
 	[CC_NUMBER] = {
 		.min_ = 0,
 		.max_ = 127,
@@ -65,11 +73,18 @@ SerialItem CurveTrack::track_item_[NUM_TRACK_ITEMS] = {
 		.init_value_ = 0,
 		.mask_ = track_mask_[CC_NUMBER]
 	},
-	[INIT_CC_VALUE] = {
+	[SEND_CC] = {
 		.min_ = 0,
-		.max_ = 127,
-		.inc_shifted_ = 10,
-		.init_value_ = 63,
-		.mask_ = track_mask_[INIT_CC_VALUE]
+		.max_ = 1,
+		.inc_shifted_ = 0,
+		.init_value_ = 1,
+		.mask_ = track_mask_[SEND_CC]
+	},
+	[SEND_BEND] = {
+		.min_ = 0,
+		.max_ = 1,
+		.inc_shifted_ = 0,
+		.init_value_ = 0,
+		.mask_ = track_mask_[SEND_BEND]
 	},
 };

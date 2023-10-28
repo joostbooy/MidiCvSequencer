@@ -17,7 +17,7 @@ public:
 	}
 
 	void reset() {
-		int init_value = curveTrack_->read(CurveTrack::INIT_CC_VALUE);
+		int init_value = curveTrack_->read(CurveTrack::INIT_VALUE);
 
 		curr_value = init_value << 9;
 		last_value = curr_value;
@@ -60,7 +60,13 @@ public:
 
 	void send_step() {
 		if (settings.song.track_is_audible(track_index_)) {
-			trackState_->send_cc_event(curr_value);
+			if (curveTrack_->read(CurveTrack::SEND_CC)) {
+				send_as_cc();
+			}
+
+			if (curveTrack_->read(CurveTrack::SEND_BEND)) {
+				send_as_bend();
+			}
 		}
 	}
 
@@ -70,7 +76,8 @@ public:
 		event.tie = false;
 		event.port = curveTrack_->port();
 		event.message = MidiEvent::CONTROLLER_CHANGE | curveTrack_->channel();
-		event.data[0] = curveTrack_->read(CurveTrack::CC_NUMBER);
+
+		cc_number = curveTrack_->read(CurveTrack::CC_NUMBER);
 
 		last_value = curr_value;
 		target_value = get_step_value(pattern, step, CurveTrack::CC_VALUE);
@@ -93,6 +100,7 @@ private:
 	int curr_value;
 
 	uint8_t track_index_;
+	uint8_t cc_number;
 
 	inline int get_step_value(uint8_t pattern, uint8_t step, CurveTrack::StepItem item) {
 		if (curveTrack_->pattern.random_is_enabled(pattern, item, step)) {
@@ -107,6 +115,18 @@ private:
 		uint8_t step_trigger = curveTrack_->read_step(pattern, step, CurveTrack::TRIGGER);
 		uint8_t probability = get_step_value(pattern, step, CurveTrack::PROBABILITY);
 		return step_trigger && (probability >= Rng::u16(1, 6));
+	}
+
+	inline void send_as_bend() {
+		trackState_->event.message &= ~(0xF0);
+		trackState_->event.message |= MidiEvent::PITCH_BEND;
+		trackState_->send_bend_event(curr_value);
+	}
+
+	inline void send_as_cc() {
+		trackState_->event.message &= ~(0xF0);
+		trackState_->event.message |= MidiEvent::CONTROLLER_CHANGE;
+		trackState_->send_cc_event(cc_number, curr_value);
 	}
 
 };

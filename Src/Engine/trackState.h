@@ -73,7 +73,8 @@ public:
 		return false;
 	}
 
-	void send_cc_event(uint16_t cc_value) {
+	void send_cc_event(uint8_t cc_number, uint16_t cc_value) {
+		event.data[0] = cc_number;
 		event.data[1] = cc_value >> 9;
 		outputEngine_->send_cc(event, cc_value);
 	}
@@ -88,12 +89,8 @@ public:
 	}
 
 	void clear() {
-		if (settings.song.track(track_index_).type() == Track::CURVE_TRACK) {
-			send_cc_event(0);
-			send_bend_event(65535 / 2);
-		} else {
-			outputEngine_->send_tied_note_off(event.source);
-		}
+		send_bend_event(32768);
+		outputEngine_->send_tied_note_off(event.source);
 	}
 
 private:

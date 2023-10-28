@@ -22,7 +22,7 @@ namespace CurvePatternPage {
 
 		// init
 		painters.curve.draw_background();
-		painters.curve.reset(track.read(CurveTrack::INIT_CC_VALUE));
+		painters.curve.reset(track.read(CurveTrack::INIT_VALUE));
 
 		// draw steps
 		CurveTrack::StepItem item_ = CurveTrack::StepItem(item);
