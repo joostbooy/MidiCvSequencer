@@ -36,12 +36,12 @@ namespace CurvePatternPage {
 		}
 
 		// draw position
-		int index = settings.selected_track_index();
-		if (engine.trackEngine.state(index).pattern_index() == pattern) {
-			int step = engine.trackEngine.state(index).step_index();
-			float phase = engine.trackEngine.step_fraction(index);
-			painters.curve.draw_position(step, phase);
-		}
+		//	int index = settings.selected_track_index();
+		//	if (engine.trackEngine.state(index).pattern_index() == pattern) {
+		//		int step = engine.trackEngine.state(index).step_index();
+		//		float phase = engine.trackEngine.step_fraction(index);
+		//		painters.curve.draw_position(step, phase);
+		//	}
 	}
 
 	void draw_steps() {
