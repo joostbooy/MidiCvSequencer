@@ -75,7 +75,7 @@ public:
 
 		event.tie = false;
 		event.port = curveTrack_->port();
-		event.message = MidiEvent::CONTROLLER_CHANGE | curveTrack_->channel();
+		event.message = curveTrack_->channel();
 
 		cc_number = curveTrack_->read(CurveTrack::CC_NUMBER);
 
