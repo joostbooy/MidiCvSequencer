@@ -218,7 +218,7 @@ private:
 		return value;
 	}
 
-	// unimplemented for now, needs testing
+	// unimplemented for now, might be to taxing
 	inline uint16_t apply_bend(uint8_t source, uint16_t pitch) {
 		const uint16_t whole_note = settings.voltPerOctave.note_to_value(2) - settings.voltPerOctave.note_to_value(0);
 
