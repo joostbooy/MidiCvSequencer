@@ -89,8 +89,11 @@ public:
 	}
 
 	void clear() {
-		send_bend_event(32768);
-		outputEngine_->send_tied_note_off(event.source);
+		if (track_->type() == Track::CURVE_TRACK) {
+			send_bend_event(65535 / 2);
+		} else {
+			outputEngine_->send_tied_note_off(event.source);
+		}
 	}
 
 private:
