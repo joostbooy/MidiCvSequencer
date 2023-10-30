@@ -2,6 +2,7 @@
 #define PianoRollPainter_h
 
 #include "window.h"
+#include "windowPainter.h"
 #include "canvas.h"
 
 class NotePainter {
@@ -9,12 +10,13 @@ class NotePainter {
 public:
 
 	void init() {
-		window_.set_row_items_total(128);
-		window_.set_coll_items_total(17);
+		window.set_row_items_total(128);
+		window.set_coll_items_total(17);
+		scroll_bar_frames = 0;
 	}
 
 	void set_last_touched_note(int note) {
-		window_.scroll_to_row(note);
+		window.scroll_to_row(note);
 	}
 
 	void set_step_duration(int step_duration) {
@@ -22,33 +24,20 @@ public:
 		w_scale = float(cell_w / step_duration);
 	}
 
-	Window &window() {
-		return window_;
-	}
-
-	void draw_background() {
-		// notes
-		for (int i = window_.row().first; i <= window_.row().last; ++i) {
-			int y = window_.cell(0, i).y;
-			int w =  window_.cell(0, i).w;
-			int h = window_.cell(0, i).h;
-
-			canvas.fill(0, y, canvas.width(), h, i & 1 ? Canvas::BLACK : Canvas::DARK_GRAY);
-			canvas.fill(0, y, w, h, Canvas::WHITE);
-			canvas.draw_text(2, y, UiText::note_text(i), Canvas::BLACK);
+	void draw_scrollbar() {
+		if (last_top_row != window.row().first) {
+			last_top_row =  window.row().first;
+			scroll_bar_frames = 32;
 		}
 
-		// step lines
-		for (int i = 1; i < 17; ++i) {
-			int x = window_.cell(i, 0).x - 1;
-			canvas.vertical_line(x, window_.y, window_.height, Canvas::WHITE);
+		if (scroll_bar_frames > 0) {
+			--scroll_bar_frames;
+			WindowPainter::vertical_scrollbar(window);
 		}
 	}
 
-	void draw_note(int step, int note, int velo, int delay, int length) {
-		Window::Cell cell;
-
-		cell = window_.cell(step + 1, note);
+	void draw_note(int step, int random, int note, int velo, int delay, int length) {
+		cell = window.cell(step + 1, note);
 
 		int y = cell.y + 1;
 		int h = cell.h - 2;
@@ -58,19 +47,42 @@ public:
 			w = 1;
 		}
 
-		if (note >= window_.row().first && note <= window_.row().last) {
+		// note
+		if (note_is_visible(note)) {
 			canvas.box(x, y, w, h, Canvas::LIGHT_GRAY, Canvas::GRAY);
+			if (random) {
+				draw_tiny_question_mark(x, y, w, h);
+			}
 		}
 
-		// velocity
+		// velocity (always show)
 		h = (cell.h / 128.0f) * velo + 1;
-		y = (window_.y + window_.height) + (cell.h - h) + 1;
+		y = (window.y + window.height) + (cell.h - h) + 1;
 		canvas.vertical_line(x, y, h, Canvas::GRAY);
+	}
+
+	void draw_background() {
+		// notes
+		for (int i = window.row().first; i <= window.row().last; ++i) {
+			int y = window.cell(0, i).y;
+			int w =  window.cell(0, i).w;
+			int h = window.cell(0, i).h;
+
+			canvas.fill(0, y, canvas.width(), h, i & 1 ? Canvas::BLACK : Canvas::DARK_GRAY);
+			canvas.fill(0, y, w, h, Canvas::WHITE);
+			canvas.draw_text(2, y, UiText::note_text(i), Canvas::BLACK);
+		}
+
+		// step lines
+		for (int i = 1; i < 17; ++i) {
+			int x = window.cell(i, 0).x - 1;
+			canvas.vertical_line(x, window.y, window.height, Canvas::WHITE);
+		}
 	}
 
 private:
 
-	Window window_ = {
+	Window window = {
 		.x = 0,
 		.y = 8,
 		.width = 255,
@@ -80,6 +92,22 @@ private:
 	};
 
 	float w_scale;
+	int last_top_row;
+	int scroll_bar_frames;
+
+	Window::Cell cell;
+
+	bool note_is_visible(int note) {
+		return note >= window.row().first && note <= window.row().last;
+	}
+
+	void draw_tiny_question_mark(int x, int y, int w, int h) {
+		canvas.get_xy_allignment(&x, &y, w, h, 2, 4, Canvas::CENTER, Canvas::CENTER);
+		canvas.draw_pixel(x, y, Canvas::BLACK);
+		canvas.draw_pixel(x + 1, y, Canvas::BLACK);
+		canvas.draw_pixel(x + 1, y + 1, Canvas::BLACK);
+		canvas.draw_pixel(x + 1, y + 3, Canvas::BLACK);
+	}
 };
 
 #endif

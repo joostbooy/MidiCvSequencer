@@ -72,7 +72,7 @@ namespace TopPage {
 	}
 
 	void init() {
-		//painters.init();
+		painters.init();
 		canvas.set_font(Font::SMALL);
 	}
 

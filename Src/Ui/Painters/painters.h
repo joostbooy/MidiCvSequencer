@@ -2,6 +2,7 @@
 #define Painters_h
 
 #include "ledPainter.h"
+#include "notePainter.h"
 #include "curvePainter.h"
 #include "messagePainter.h"
 #include "windowPainter.h"
@@ -14,6 +15,7 @@ public:
 	void init();
 
 	LedPainter leds;
+	NotePainter note;
 	CurvePainter curve;
 	WindowPainter window;
 	MessagePainter message;
