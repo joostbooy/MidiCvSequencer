@@ -43,6 +43,7 @@ namespace StepEditPage {
 		bool shift = controller.is_pressed(Controller::SHIFT_BUTTON);
 		bool group = controller.is_pressed(Controller::GROUP_BUTTON);
 		bool solo = controller.is_pressed(Controller::SOLO_BUTTON);
+		bool mute = controller.is_pressed(Controller::MUTE_BUTTON);
 
 		switch (stepEditor.mode())
 		{
@@ -70,6 +71,12 @@ namespace StepEditPage {
 
 			if (group) {
 				stepEditor.set_mode(StepEditor::GROUPED_SHIFT);
+				return true;
+			}
+
+			if (mute) {
+				stepEditor.reset();
+				pages.open(Pages::PATTERN_RANDOM_PAGE);
 				return true;
 			}
 			break;
