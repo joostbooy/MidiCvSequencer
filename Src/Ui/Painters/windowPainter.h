@@ -11,7 +11,7 @@ class WindowPainter {
 public:
 
 	// Window
-	static void outline(Window &w, Canvas::Color frame_clr, Canvas::Color fill_clr) {
+	static void fill(Window &w, Canvas::Color frame_clr, Canvas::Color fill_clr) {
 		canvas.box(w.x, w.y, w.width, w.height, frame_clr, fill_clr);
 	}
 

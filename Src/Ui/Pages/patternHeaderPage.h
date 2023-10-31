@@ -35,7 +35,6 @@ namespace PatternHeaderPage {
 		STEP_ITEM,
 		FOLLOW_PATTERN,
 		ADD_PATTERN,
-		RANDOM,
 
 		NUM_ITEMS
 	};
@@ -72,7 +71,6 @@ namespace PatternHeaderPage {
 		case STEP_ITEM:			return step_item_text(track.type(), settings.selected_step_item());
 		case FOLLOW_PATTERN:	return UiText::str.write("FOLLOW ", settings.follow_pattern() ? "ON" : "OFF");
 		case ADD_PATTERN:		return "ADD";
-		case RANDOM:			return "RND";
 		default:
 			return nullptr;
 		}
@@ -147,17 +145,13 @@ namespace PatternHeaderPage {
 	void onButton(uint8_t id, uint8_t state) {
 		follow_ticks = 0;
 
-		if (id == Controller::MENU_ENC_PUSH && state >= 1) {
+		if ((id == Controller::MENU_ENC_PUSH || id == Controller::EDIT_BUTTON) && state >= 1) {
 			mode = (mode == SELECT) ? EDIT : SELECT;
 
 			switch (selected_item)
 			{
 			case ADD_PATTERN:
 				PatternEditPage::add_pattern();
-				mode = SELECT;
-				break;
-			case RANDOM:
-				pages.open(Pages::PATTERN_RANDOM_PAGE);
 				mode = SELECT;
 				break;
 			default:
@@ -201,7 +195,7 @@ namespace PatternHeaderPage {
 		// draw list
 		canvas.set_font(Font::SMALL);
 
-		painters.window.outline(window, Canvas::BLACK, Canvas::WHITE);
+		painters.window.fill(window, Canvas::BLACK, Canvas::WHITE);
 
 		for (int i = window.coll().first; i <= window.coll().last; ++i) {
 			Canvas::Color color = (selected_item == i) ? Canvas::BLACK : Canvas::LIGHT_GRAY;

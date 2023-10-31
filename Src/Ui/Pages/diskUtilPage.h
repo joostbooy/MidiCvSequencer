@@ -174,7 +174,7 @@ namespace DiskUtilPage {
 		Canvas::Color color;
 
 		painters.window.shadow(window, 5);
-		painters.window.outline(window, Canvas::BLACK, Canvas::WHITE);
+		painters.window.fill(window, Canvas::BLACK, Canvas::WHITE);
 
 		for (int i = window.row().first; i <= window.row().last; ++i) {
 			color = (cursor == i) ? Canvas::BLACK : Canvas::LIGHT_GRAY;

@@ -78,7 +78,7 @@ namespace PageSelectionPage {
 		canvas.draw_text(window.x, window.y - 9, window.width, 10, chapter.name(), Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
 
 		// list
-		painters.window.outline(window, Canvas::BLACK, Canvas::WHITE);
+		painters.window.fill(window, Canvas::BLACK, Canvas::WHITE);
 
 		for (int i = window.coll().first; i <= window.coll().last; ++i) {
 			Canvas::Color color = i == chapter.curr_page() ? Canvas::BLACK : Canvas::LIGHT_GRAY;

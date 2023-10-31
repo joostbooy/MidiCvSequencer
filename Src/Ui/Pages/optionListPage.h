@@ -119,7 +119,7 @@ namespace OptionListPage {
 		canvas.draw_text(window.x, window.y - 9, window.width, 10, message_.read(), Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
 
 		// list
-		painters.window.outline(window, Canvas::BLACK, Canvas::WHITE);
+		painters.window.fill(window, Canvas::BLACK, Canvas::WHITE);
 
 		for (int i = window.row().first; i <= window.row().last; ++i) {
 			Canvas::Color color = i == cursor ? Canvas::BLACK : Canvas::LIGHT_GRAY;
