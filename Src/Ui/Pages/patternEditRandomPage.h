@@ -184,8 +184,9 @@ namespace PatternEditRandomPage {
 
 
 	void drawDisplay() {
-		painters.window.shadow(window, 4);
-		painters.window.fill(window, Canvas::WHITE, Canvas::WHITE);
+		canvas.fill(window.x + 4, window.y + 4, window.width, window.height, Canvas::SUBTRACTED);
+		canvas.fill(window.x - 2, window.y - 2, window.width + 4, window.height + 4, Canvas::BLACK);
+		canvas.box(window.x, window.y, window.width, window.height, Canvas::WHITE, Canvas::WHITE);
 	}
 
 	const uint16_t targetFps() {
