@@ -37,6 +37,7 @@ public:
 	}
 
 	void draw_note(int step, int random, int note, int velo, int delay, int length) {
+		note = 127 - note; // row 0 is highest note
 		cell = window.cell(step + 1, note);
 
 		int y = cell.y + 1;
@@ -62,7 +63,7 @@ public:
 	}
 
 	void draw_background() {
-		// notes
+		// notes (row 0 = note 127)
 		for (int i = window.row().first; i <= window.row().last; ++i) {
 			int y = window.cell(0, i).y;
 			int w =  window.cell(0, i).w;
@@ -70,7 +71,7 @@ public:
 
 			canvas.fill(0, y, canvas.width(), h, i & 1 ? Canvas::BLACK : Canvas::DARK_GRAY);
 			canvas.fill(0, y, w, h, Canvas::WHITE);
-			canvas.draw_text(2, y, UiText::note_text(i), Canvas::BLACK);
+			canvas.draw_text(2, y, UiText::note_text(127 - i), Canvas::BLACK);
 		}
 
 		// step lines
