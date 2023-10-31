@@ -73,7 +73,6 @@ namespace PageSelectionPage {
 		canvas.set_font(Font::SMALL);
 
 		// title
-		canvas.set_font(Font::SMALL);
 		canvas.fill(window.x, window.y - 8, window.width, 10, Canvas::BLACK);
 		canvas.horizontal_line(window.x + 1, window.y - 9, window.width - 2, Canvas::BLACK);
 		canvas.draw_text(window.x, window.y - 9, window.width, 10, chapter.name(), Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
