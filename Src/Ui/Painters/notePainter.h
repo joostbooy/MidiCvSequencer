@@ -16,7 +16,7 @@ public:
 	}
 
 	void set_last_touched_note(int note) {
-		window.scroll_to_row(note);
+		window.scroll_to_row(127 - note);
 	}
 
 	void set_step_duration(int step_duration) {
