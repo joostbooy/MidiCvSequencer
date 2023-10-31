@@ -48,17 +48,17 @@ namespace PatternEditRandomPage {
 	}
 
 	void draw_name(const char* name) {
-		painters.window.text(window, name, Canvas::CENTER, Canvas::TOP, Canvas::WHITE);
+		painters.window.text(window, name, Canvas::CENTER, Canvas::TOP, Canvas::BLACK);
 	}
 
 	void draw_min(const char* min) {
-		painters.window.text(window.cell(0, 1), "MIN", Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
-		painters.window.text(window.cell(0, 2), min, Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
+		painters.window.text(window.cell(0, 1), "MIN", Canvas::CENTER, Canvas::CENTER, Canvas::BLACK);
+		painters.window.text(window.cell(0, 2), min, Canvas::CENTER, Canvas::CENTER, Canvas::BLACK);
 	}
 
 	void draw_max(const char* max) {
-		painters.window.text(window.cell(1, 1), "MAX", Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
-		painters.window.text(window.cell(1, 2), max, Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
+		painters.window.text(window.cell(1, 1), "MAX", Canvas::CENTER, Canvas::CENTER, Canvas::BLACK);
+		painters.window.text(window.cell(1, 2), max, Canvas::CENTER, Canvas::CENTER, Canvas::BLACK);
 	}
 
 	void edit_random_min(int inc, bool pressed) {
@@ -184,7 +184,7 @@ namespace PatternEditRandomPage {
 
 	void drawDisplay() {
 		painters.window.shadow(window, 4);
-		painters.window.outline(window, Canvas::BLACK, Canvas::BLACK);
+		painters.window.outline(window, Canvas::WHITE, Canvas::WHITE);
 	}
 
 	const uint16_t targetFps() {
