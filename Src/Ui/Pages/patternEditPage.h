@@ -131,7 +131,9 @@ namespace PatternEditPage {
 			switch (id)
 			{
 			case Controller::MUTE_BUTTON:
-				settings.song.set_track_mute(track_index, !settings.song.track_is_muted(track_index));
+				if (controller.is_pressed(Controller::SHIFT_BUTTON) == false) {
+					settings.song.set_track_mute(track_index, !settings.song.track_is_muted(track_index));
+				}
 				break;
 			case Controller::SOLO_BUTTON:
 				if (controller.is_pressed(Controller::SHIFT_BUTTON) == false) {
