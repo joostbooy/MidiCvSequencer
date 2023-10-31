@@ -31,19 +31,7 @@ namespace NotePatternPage {
 
 		return value;
 	}
-/*
-	bool step_is_randomised(int step) {
-		NoteTrack &track = settings.selected_note_track();
-		int pattern_index = settings.selected_pattern();
 
-		for (int i = 1; i < NoteTrack::NUM_STEP_ITEMS; ++i) {
-			if (track.pattern.random_is_enabled(pattern_index, NoteTrack::StepItem(i), step)) {
-				return true;
-			}
-		}
-		return false;
-	}
-*/
 	bool step_is_randomised(int step) {
 		NoteTrack &track = settings.selected_note_track();
 		int pattern_index = settings.selected_pattern();
