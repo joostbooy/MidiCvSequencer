@@ -22,11 +22,6 @@ namespace PatternEditRandomPage {
 		MAX = 2
 	};
 
-	enum ButtonFunctions {
-		CLOSE,
-		NUM_BUTTON_OPTIONS
-	};
-
 	const int w = 100;
 	const int h = 32;
 
@@ -38,8 +33,6 @@ namespace PatternEditRandomPage {
 		.collumns = 2,
 		.rows = 3,
 	};
-
-	const char* const footer_text[NUM_BUTTON_OPTIONS] = { "CLOSE" };
 
 
 	void init() {
@@ -178,16 +171,7 @@ namespace PatternEditRandomPage {
 	}
 
 	void onButton(uint8_t id, uint8_t state) {
-		switch (controller.button_to_function(id))
-		{
-		case CLOSE:
-			if (state) {
-				pages.close(Pages::PATTERN_RANDOM_PAGE);
-			}
-			break;
-		default:
-			break;
-		}
+
 	}
 
 	void drawLeds() {
@@ -200,8 +184,7 @@ namespace PatternEditRandomPage {
 
 	void drawDisplay() {
 		painters.window.shadow(window, 4);
-		painters.window.outline(window, Canvas::WHITE, Canvas::BLACK);
-		painters.window.draw_footer(footer_text, NUM_BUTTON_OPTIONS);
+		painters.window.outline(window, Canvas::BLACK, Canvas::BLACK);
 	}
 
 	const uint16_t targetFps() {

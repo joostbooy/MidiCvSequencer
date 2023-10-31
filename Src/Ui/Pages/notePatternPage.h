@@ -31,7 +31,7 @@ namespace NotePatternPage {
 
 		return value;
 	}
-
+/*
 	bool step_is_randomised(int step) {
 		NoteTrack &track = settings.selected_note_track();
 		int pattern_index = settings.selected_pattern();
@@ -42,6 +42,14 @@ namespace NotePatternPage {
 			}
 		}
 		return false;
+	}
+*/
+	bool step_is_randomised(int step) {
+		NoteTrack &track = settings.selected_note_track();
+		int pattern_index = settings.selected_pattern();
+		int item = settings.selected_step_item();
+
+		return track.pattern.random_is_enabled(pattern_index, NoteTrack::StepItem(item), step);
 	}
 
 	void draw_steps() {

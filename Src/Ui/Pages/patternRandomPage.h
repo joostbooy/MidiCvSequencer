@@ -101,6 +101,14 @@ namespace PatternRandomPage {
 	void onButton(uint8_t id, uint8_t state) {
 		PatternHeaderPage::onButton(id, state);
 
+		bool shift = controller.is_pressed(Controller::SHIFT_BUTTON);
+		bool mute = controller.is_pressed(Controller::MUTE_BUTTON);
+
+		if ((!shift) || (!mute)) {
+			pages.close(Pages::PATTERN_RANDOM_PAGE);
+			return;
+		}
+
 		switch (settings.selected_track().type())
 		{
 		case Track::NOTE_TRACK:
