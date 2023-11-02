@@ -26,7 +26,7 @@ public:
 		}
 	}
 
-	uint8_t interval() {
+	uint32_t interval() {
 		return interval_;
 	}
 
