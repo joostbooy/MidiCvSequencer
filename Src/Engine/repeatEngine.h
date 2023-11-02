@@ -68,7 +68,7 @@ private:
 
 		float phase = 0.f;
 		float inc = reciprocal(repeats);
-		float spread_ = reciprocal(7) * spread;
+		float spread_ = reciprocal(6) * spread;
 
 		for (int i = 0; i < repeats; ++i) {
 			uint32_t repeat_length = gate_length * Curve::bend(phase += inc, spread_);

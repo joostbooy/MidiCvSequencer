@@ -59,7 +59,7 @@ SerialItem DrumTrack::step_item_[NUM_STEP_ITEMS] = {
 	},
 	[REPEAT_SPREAD] = {
 		.min_ = 0,
-		.max_ = 7,
+		.max_ = 6,
 		.inc_shifted_ = 2,
 		.init_value_ = 3,
 		.mask_ = step_mask_[REPEAT_SPREAD]
