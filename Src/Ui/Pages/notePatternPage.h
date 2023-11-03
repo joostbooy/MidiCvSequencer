@@ -2,6 +2,7 @@
 #define NotePatternPage_h
 
 #include "topPage.h"
+#include "noteTrackPainter.h"
 
 namespace NotePatternPage {
 	//Declarations
@@ -18,6 +19,7 @@ namespace NotePatternPage {
 
 	//variables
 	int last_touched_note;
+	NoteTrackPainter noteTrackPainter;
 
 	int read_step(int step, int item) {
 		NoteTrack &track = settings.selected_note_track();
@@ -65,25 +67,10 @@ namespace NotePatternPage {
 
 	}
 
-	void draw_notes() {
-		int speed = settings.selected_note_track().clock_speed();
-
-		painters.note.set_step_duration(ClockEngine::step_duration(speed));
-		painters.note.set_last_touched_note(last_touched_note);
-		painters.note.draw_background();
-
-		for (int i = 0; i < 16; ++i) {
-			if (read_step(i, NoteTrack::TRIGGER)) {
-				int note = read_step(i, NoteTrack::NOTE);
-				int velo = read_step(i, NoteTrack::VELOCITY);
-				int delay = ClockEngine::gate_duration(speed, read_step(i, NoteTrack::DELAY));
-				int length = ClockEngine::gate_duration(speed, read_step(i, NoteTrack::GATE_LENGTH));
-				int random = step_is_randomised(i);
-				painters.note.draw_note(i, random, note, velo, delay, length);
-			}
-		}
-
-		painters.note.draw_scrollbar();
+	void draw_notes() {	
+		noteTrackPainter.set_last_touched_note(last_touched_note);
+		noteTrackPainter.set_track_index(settings.selected_track_index());
+		noteTrackPainter.draw_pattern(settings.selected_pattern());
 	}
 
 	void init() {
