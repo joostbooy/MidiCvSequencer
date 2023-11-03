@@ -43,7 +43,7 @@ namespace PatternHeaderPage {
 		.x = 0,
 		.y = 0,
 		.width = canvas.width(),
-		.height = 12,
+		.height = 8,
 		.collumns = NUM_ITEMS,
 		.rows = 1,
 	};
