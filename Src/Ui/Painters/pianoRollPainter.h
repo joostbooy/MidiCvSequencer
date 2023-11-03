@@ -38,6 +38,8 @@ public:
 	}
 
 	static void draw_background() {
+		clear_notes();
+
 		// notes
 		for (int i = window.row().first; i <= window.row().last; ++i) {
 			int y = window.cell(0, i).y;
@@ -56,12 +58,13 @@ public:
 		}
 	}
 
-	static void draw_note(int step, int note, int velo, int delay, int length) {
+	static void draw_note(int step, MidiEvent::Event &e, int delay, int length) {
 		// row 0 is highest note
-		note = 127 - note;
+		int note = 127 - e.data[0];
+		int velo = e.data[1];
 		cell = window.cell(step + 1, note);
 
-		//note_on(note);
+		note_on(e, 0, 0);
 
 		int y = cell.y + 1;
 		int h = cell.h - 2;
@@ -98,21 +101,19 @@ private:
 	static constexpr float wf = 255.f / 17.f;
 
 	static void clear_notes() {
-		last_top_row = 0;
-
 		for (int i = 0; i < (128 / 32); ++i) {
 			notes[i] = 0;
 		}
 	}
 
 	static void note_on(MidiEvent::Event &e, int delay, int length) {
-		uint8_t note = e.data[0];
+		uint8_t note = 127 - e.data[0];
 		uint32_t reg = note / 32;
 		uint32_t bit = note % 32;
 		notes[reg] |= (1 << bit);
 
-		draw_note(note, delay, length, Canvas::LIGHT_GRAY);
-		draw_velocity(e.data[1], delay);
+		//draw_note(note, delay, length, Canvas::LIGHT_GRAY);
+		//draw_velocity(e.data[1], delay);
 	}
 
 	static void note_off(MidiEvent::Event &e) {
