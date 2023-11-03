@@ -65,7 +65,6 @@ private:
 		int when = chordTrackEngine.when();
 		int length = chordTrackEngine.length();
 		PianoRollPainter::draw_note(step, e, when + curr_tick, length);
-		//PianoRollPainter::draw_note(step, e.data[0], e.data[1], when + curr_tick, length);
 	}
 };
 
