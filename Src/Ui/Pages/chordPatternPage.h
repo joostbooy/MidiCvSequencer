@@ -2,6 +2,7 @@
 #define ChordPatternPage_h
 
 #include "topPage.h"
+#include "chordTrackPainter.h"
 
 namespace ChordPatternPage {
 	//Declarations
@@ -17,6 +18,25 @@ namespace ChordPatternPage {
 
 
 	//variables
+	Chord chord;
+	ChordTrackPainter chordTrackPainter;
+	int last_touched_note;
+
+	int read_step(int step, int item) {
+		ChordTrack &track = settings.selected_chord_track();
+		int pattern = settings.selected_pattern();
+		return track.read_step(pattern, step, ChordTrack::StepItem(item));
+	}
+
+	void build_chord(int step) {
+		int type = read_step(step, ChordTrack::CHORD_TYPE);
+		int variation = read_step(step, ChordTrack::CHORD_VARIATION);
+		int inversion = read_step(step, ChordTrack::CHORD_INVERSION);
+		int root_shift = read_step(step, ChordTrack::CHORD_ROOT_SHIFT);
+
+		chord.build(type, root_shift, variation, inversion);
+	}
+
 	void draw_step_view(int pattern, int item) {
 		ChordTrack &track = settings.selected_chord_track();
 
@@ -39,24 +59,51 @@ namespace ChordPatternPage {
 		draw_step_view(pattern, item);
 	}
 
+	void draw_notes() {
+		chordTrackPainter.set_last_touched_note(last_touched_note);
+		chordTrackPainter.set_track_index(settings.selected_track_index());
+		chordTrackPainter.draw_pattern(settings.selected_pattern());
+	}
+
 	void init() {
 
 	}
 
 	void enter() {
+		for (int i = 0; i < 16; ++i) {
+			if (read_step(i, NoteTrack::TRIGGER)) {
+				build_chord(i);
+				last_touched_note = chord.note(0);
+				return;
+			}
+		}
 
+		last_touched_note = 60;
 	}
 
 	void exit() {
 
 	}
 
-	void onEncoder(uint8_t id, int inc) {
+	void on_step_control(int step) {
+		if (read_step(step, ChordTrack::TRIGGER)) {
+			build_chord(step);
+			last_touched_note = chord.note(0);
+		}
+	}
 
+	void onEncoder(uint8_t id, int inc) {
+		int step = controller.encoder_to_step(id);
+		if (step >= 0) {
+			on_step_control(step);
+		}
 	}
 
 	void onButton(uint8_t id, uint8_t state) {
-
+		int step = controller.button_to_step(id);
+		if (step >= 0) {
+			on_step_control(step);
+		}
 	}
 
 	void drawLeds() {
@@ -65,10 +112,10 @@ namespace ChordPatternPage {
 		//int pattern = settings.selected_pattern();
 		//ChordTrack &track = settings.selected_chord_track();
 
-	//	for (int i = 0; i < 16; ++i) {
-	//		color = track.read_step(pattern, i, ChordTrack::TRIGGER) ? Matrix::GREEN : Matrix::BLACK;
-	//		painters.leds.set_step_button(i, color);
-	//	}
+		//	for (int i = 0; i < 16; ++i) {
+		//		color = track.read_step(pattern, i, ChordTrack::TRIGGER) ? Matrix::GREEN : Matrix::BLACK;
+		//		painters.leds.set_step_button(i, color);
+		//	}
 	}
 
 	void msTick(uint16_t ticks) {
@@ -76,7 +123,7 @@ namespace ChordPatternPage {
 	}
 
 	void drawDisplay() {
-		draw_steps();
+		draw_notes();
 	}
 
 	const uint16_t targetFps() {

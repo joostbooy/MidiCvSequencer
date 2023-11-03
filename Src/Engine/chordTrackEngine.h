@@ -46,10 +46,12 @@ public:
 		}
 	}
 
-	void tick_step() {
+	bool tick_step(bool send_midi = true) {
 		if (arpeggiator.enabled() && arpeggiatorEngine.tick()) {
-			send_arpeggiator_note();
+			send_arpeggiator_note(send_midi);
+			return true;
 		}
+		return false;
 	}
 
 	void process_step(uint8_t pattern, uint8_t step) {
@@ -65,8 +67,8 @@ public:
 		event.message = MidiEvent::NOTE_ON | chordTrack_->channel();
 		event.data[1] = velocity;
 
-		when = trackState_->clock.gate_duration(delay);
-		length = trackState_->clock.gate_duration(gate_length);
+		when_ = trackState_->clock.gate_duration(delay);
+		length_ = trackState_->clock.gate_duration(gate_length);
 
 		// chord
 		uint8_t type = get_step_value(pattern, step, ChordTrack::CHORD_TYPE);
@@ -102,14 +104,22 @@ public:
 		arpeggiatorEngine.reset();
 	}
 
+	uint32_t when() {
+		return when_;
+	}
+
+	uint32_t length() {
+		return length_;
+	}
+
 private:
 
 	ChordTrack *chordTrack_;
 	TrackState *trackState_;
 
 	uint8_t track_index_;
-	uint32_t length;
-	uint32_t when;
+	uint32_t length_;
+	uint32_t when_;
 
 	uint8_t oct_offset;
 
@@ -137,16 +147,18 @@ private:
 		if (settings.song.track_is_audible(track_index_)) {
 			for (int i = 0; i < chord.size(); ++i) {
 				trackState_->event.data[0] = chord.note(i) + oct_offset;
-				trackState_->send_note_event(when, length);
+				trackState_->send_note_event(when_, length_);
 			}
 		}
 	}
 
-	inline void send_arpeggiator_note() {
+	inline void send_arpeggiator_note(bool send_midi = true) {
 		if (settings.song.track_is_audible(track_index_)) {
 			trackState_->event.data[0] = arpeggiatorEngine.note() + oct_offset;
 			trackState_->event.data[1] = arpeggiatorEngine.velocity();
-			trackState_->send_note_event(when, arpeggiatorEngine.gate_length());
+			if (send_midi) {
+				trackState_->send_note_event(when_, arpeggiatorEngine.gate_length());
+			}
 		}
 	}
 
