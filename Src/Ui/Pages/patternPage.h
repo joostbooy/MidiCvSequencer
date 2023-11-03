@@ -12,6 +12,9 @@
 #include "curvePatternPage.h"
 #include "drumPatternPage.h"
 
+#include "pianoRollPainter.h"
+
+
 namespace PatternPage {
 	//Declarations
 	void init();
@@ -34,6 +37,8 @@ namespace PatternPage {
 		ChordPatternPage::init();
 		CurvePatternPage::init();
 		DrumPatternPage::init();
+
+		PianoRollPainter::init();
 	}
 
 	void enter() {
