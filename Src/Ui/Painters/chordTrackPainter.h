@@ -33,12 +33,10 @@ public:
 
 		for (int step = 0; step < 16; ++step) {
 			if (track->read_step(index, step, ChordTrack::TRIGGER)) {
-
 				chordTrackEngine.process_step(index, step);
 				if (chordTrackEngine.arpeggiator_enabled() == false) {
 					draw_chord(step);
 				}
-
 			}
 
 			if (chordTrackEngine.arpeggiator_enabled()) {
@@ -75,7 +73,7 @@ private:
 
 	void draw_chord(int step) {
 		for (int i = 0; i < chordTrackEngine.chord().size(); ++i) {
-			trackState.event.data[0] = chordTrackEngine.chord().note(i);
+			trackState.event.data[0] = chordTrackEngine.chord().note(i) + chordTrackEngine.oct_offset();
 			draw_step(step, 0);
 		}
 	}

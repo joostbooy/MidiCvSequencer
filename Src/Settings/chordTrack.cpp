@@ -137,7 +137,7 @@ SerialMask ChordTrack::track_mask_[NUM_TRACK_ITEMS] = {
 // track items
 SerialItem ChordTrack::track_item_[NUM_TRACK_ITEMS] = {
 	[CHORD_OCT_OFFSET] = {
-		.min_ = 1,
+		.min_ = 0,
 		.max_ = 8,
 		.inc_shifted_ = 1,
 		.init_value_ = 4,

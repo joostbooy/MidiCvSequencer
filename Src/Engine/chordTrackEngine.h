@@ -36,6 +36,10 @@ public:
 		return length_;
 	}
 
+	uint8_t oct_offset() {
+		return oct_offset_;
+	}
+
 	bool arpeggiator_enabled() {
 		return arpeggiator.enabled();
 	}
@@ -74,7 +78,7 @@ public:
 		uint8_t delay = get_step_value(pattern, step, ChordTrack::DELAY);
 		uint8_t velocity = get_step_value(pattern, step, ChordTrack::VELOCITY);
 		uint8_t gate_length = get_step_value(pattern, step, ChordTrack::GATE_LENGTH);
-		//oct_offset = chordTrack_->read(ChordTrack::CHORD_OCT_OFFSET);
+		oct_offset_ = 12 * chordTrack_->read(ChordTrack::CHORD_OCT_OFFSET);
 
 		MidiEvent::Event &event = trackState_->event;
 
@@ -129,7 +133,7 @@ private:
 	uint32_t length_;
 	uint32_t when_;
 
-	//uint8_t oct_offset;
+	uint8_t oct_offset_;
 
 	Chord chord_;
 	Arpeggiator arpeggiator;
@@ -156,14 +160,14 @@ private:
 	inline void send_chord() {
 		if (settings.song.track_is_audible(track_index_)) {
 			for (int i = 0; i < chord_.size(); ++i) {
-				trackState_->event.data[0] = chord_.note(i);
+				trackState_->event.data[0] = chord_.note(i) + oct_offset_;
 				trackState_->send_note_event(when_, length_);
 			}
 		}
 	}
 
 	inline void send_arpeggiator_note(const bool send_midi) {
-		trackState_->event.data[0] = arpeggiatorEngine.note();
+		trackState_->event.data[0] = arpeggiatorEngine.note() + oct_offset_;
 		trackState_->event.data[1] = arpeggiatorEngine.velocity();
 		length_ = arpeggiatorEngine.gate_length();
 
