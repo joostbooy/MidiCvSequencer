@@ -40,10 +40,10 @@ public:
 		switch (trigger_mode_)
 		{
 		case XOOX:	return 0x9;
-		case XOXX:	return 0xB;
-		case XXOO:	return 0xC;
-		case XXOX:	return 0xD;
-		case XXXO:	return 0xE;
+		case XOXX:	return 0xD;
+		case XXOO:	return 0x3;
+		case XXOX:	return 0xB;
+		case XXXO:	return 0x7;
 		case XXXX:	return 0xF;
 		default:	break;
 		}
