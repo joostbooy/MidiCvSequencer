@@ -19,6 +19,8 @@ namespace ChordPatternPage {
 
 	//variables
 	Chord chord;
+	int oct_offset;
+	int last_touched_note;
 	ChordTrackPainter chordTrackPainter;
 
 	int read_step(int step, int item) {
@@ -32,6 +34,8 @@ namespace ChordPatternPage {
 		int variation = read_step(step, ChordTrack::CHORD_VARIATION);
 		int inversion = read_step(step, ChordTrack::CHORD_INVERSION);
 		int root_shift = read_step(step, ChordTrack::CHORD_ROOT_SHIFT);
+
+		oct_offset = 12 * settings.selected_chord_track().read(ChordTrack::CHORD_OCT_OFFSET);
 
 		chord.build(type, root_shift, variation, inversion);
 	}
@@ -59,7 +63,7 @@ namespace ChordPatternPage {
 	}
 
 	void draw_notes() {
-		chordTrackPainter.set_last_touched_chord(chord);
+		chordTrackPainter.set_last_touched_note(last_touched_note);
 		chordTrackPainter.set_track_index(settings.selected_track_index());
 		chordTrackPainter.draw_pattern(settings.selected_pattern());
 	}
@@ -72,11 +76,12 @@ namespace ChordPatternPage {
 		for (int i = 0; i < 16; ++i) {
 			if (read_step(i, NoteTrack::TRIGGER)) {
 				build_step_chord(i);
+				last_touched_note = chord.note(0);
 				return;
 			}
 		}
 
-		chord.build(0, 0, 0, 0);
+		last_touched_note = 60;
 	}
 
 	void exit() {
@@ -86,6 +91,7 @@ namespace ChordPatternPage {
 	void on_step_control(int step) {
 		if (read_step(step, ChordTrack::TRIGGER)) {
 			build_step_chord(step);
+			last_touched_note = chord.note(0) + oct_offset;
 		}
 	}
 
@@ -93,6 +99,12 @@ namespace ChordPatternPage {
 		int step = controller.encoder_to_step(id);
 		if (step >= 0) {
 			on_step_control(step);
+			return;
+		}
+
+		bool shift = controller.is_pressed(Controller::SHIFT_BUTTON);
+		if (id == Controller::Y_ENC && shift == true) {
+			last_touched_note = clip (0, 127, last_touched_note + inc);
 		}
 	}
 

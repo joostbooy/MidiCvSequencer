@@ -67,7 +67,7 @@ namespace NotePatternPage {
 
 	}
 
-	void draw_notes() {	
+	void draw_notes() {
 		noteTrackPainter.set_last_touched_note(last_touched_note);
 		noteTrackPainter.set_track_index(settings.selected_track_index());
 		noteTrackPainter.draw_pattern(settings.selected_pattern());
@@ -102,6 +102,12 @@ namespace NotePatternPage {
 		int step = controller.encoder_to_step(id);
 		if (step >= 0) {
 			on_step_control(step);
+			return;
+		}
+
+		bool shift = controller.is_pressed(Controller::SHIFT_BUTTON);
+		if (id == Controller::Y_ENC && shift == true) {
+			last_touched_note = clip (0, 127, last_touched_note + inc);
 		}
 	}
 

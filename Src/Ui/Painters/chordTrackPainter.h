@@ -18,9 +18,8 @@ public:
 		track = &settings.song.track(index).chord;
 	}
 
-	void set_last_touched_chord(Chord &chord) {
-		//PianoRollPainter::set_last_touched_note(127);
-		PianoRollPainter::set_last_touched_note(chord.note(0));
+	void set_last_touched_note(int note) {
+		PianoRollPainter::set_last_touched_note(note);
 	}
 
 	void draw_pattern(int index) {
