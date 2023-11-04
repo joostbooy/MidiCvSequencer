@@ -28,6 +28,14 @@ public:
 		arpeggiatorEngine.reset();
 	}
 
+	uint32_t when() {
+		return when_;
+	}
+
+	uint32_t length() {
+		return length_;
+	}
+
 	void tick() {
 		if (trackState_->tick()) {
 			uint8_t pattern = trackState_->pattern_index();

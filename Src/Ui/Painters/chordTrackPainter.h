@@ -61,10 +61,9 @@ private:
 	}
 
 	void draw_step(int step, int curr_tick) {
-		MidiEvent::Event e = trackState.event;
-		int when = trackState.when();
-		int length = trackState.length();
-		PianoRollPainter::draw_note(step, e, when + curr_tick, length);
+		uint32_t x = curr_tick + chordTrackEngine.when();
+		uint32_t w = chordTrackEngine.length();
+		PianoRollPainter::draw_note(step, trackState.event, x, w);
 	}
 };
 
