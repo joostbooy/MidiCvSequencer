@@ -85,6 +85,14 @@ public:
 		canvas.vertical_line(x, y, h, Canvas::GRAY);
 	}
 
+	void draw_tiny_question_mark(int x, int y, int w, int h) {
+		canvas.get_xy_allignment(&x, &y, w, h, 2, 4, Canvas::CENTER, Canvas::CENTER);
+		canvas.draw_pixel(x, y, Canvas::BLACK);
+		canvas.draw_pixel(x + 1, y, Canvas::BLACK);
+		canvas.draw_pixel(x + 1, y + 1, Canvas::BLACK);
+		canvas.draw_pixel(x + 1, y + 3, Canvas::BLACK);
+	}
+
 private:
 
 	static Window window;
@@ -158,19 +166,12 @@ private:
 
 		for (int note = 0; note < 128; ++note) {
 			if (note_is_active(note)) {
-				int y = h / note;
+				int y = (h / note) + window.y;
 				canvas.fill(x, y, w, 1, Canvas::WHITE);
 			}
 		}
 	}
 
-	void draw_tiny_question_mark(int x, int y, int w, int h) {
-		canvas.get_xy_allignment(&x, &y, w, h, 2, 4, Canvas::CENTER, Canvas::CENTER);
-		canvas.draw_pixel(x, y, Canvas::BLACK);
-		canvas.draw_pixel(x + 1, y, Canvas::BLACK);
-		canvas.draw_pixel(x + 1, y + 1, Canvas::BLACK);
-		canvas.draw_pixel(x + 1, y + 3, Canvas::BLACK);
-	}
 };
 
 #endif

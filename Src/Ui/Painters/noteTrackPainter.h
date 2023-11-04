@@ -29,11 +29,10 @@ public:
 		set_speed(track->clock_speed());
 
 		const bool send_midi = false;
-		const bool allow_random = false;
 
 		for (int step = 0; step < 16; ++step) {
 			if (track->read_step(index, step, NoteTrack::TRIGGER)) {
-				noteTrackEngine.process_step(index, step, allow_random);
+				noteTrackEngine.process_step(index, step);
 				draw_step(step, 0);
 			}
 
@@ -51,7 +50,7 @@ private:
 
 	NoteTrack *track;
 	TrackState trackState;
-	NoteTrackEngine noteTrackEngine;
+	NoteTrackEngine<false>noteTrackEngine;
 
 	int step_duration;
 
@@ -62,9 +61,7 @@ private:
 	}
 
 	void draw_step(int step, int curr_tick) {
-		int when = noteTrackEngine.when();
-		int length = noteTrackEngine.length();
-		PianoRollPainter::draw_note(step, trackState.event, when + curr_tick, length);
+		PianoRollPainter::draw_note(step, trackState.event, trackState.when() + curr_tick, trackState.length());
 	}
 };
 

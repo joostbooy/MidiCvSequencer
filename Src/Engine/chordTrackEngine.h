@@ -8,7 +8,7 @@
 #include "arpeggiator.h"
 #include "arpeggiatorEngine.h"
 
-//template<const bool allow_randomization>
+template<const bool allow_randomization>
 class ChordTrackEngine {
 
 public:
@@ -46,9 +46,9 @@ public:
 		}
 	}
 
-	bool tick_step(bool send_midi = true) {
+	bool tick_step() {
 		if (arpeggiator.enabled() && arpeggiatorEngine.tick()) {
-			send_arpeggiator_note(send_midi);
+			send_arpeggiator_note();
 			return true;
 		}
 		return false;
@@ -104,14 +104,6 @@ public:
 		arpeggiatorEngine.reset();
 	}
 
-	uint32_t when() {
-		return when_;
-	}
-
-	uint32_t length() {
-		return length_;
-	}
-
 private:
 
 	ChordTrack *chordTrack_;
@@ -129,10 +121,12 @@ private:
 
 
 	inline int get_step_value(uint8_t pattern, uint8_t step, ChordTrack::StepItem item) {
-		if (chordTrack_->pattern.random_is_enabled(pattern, item, step)) {
-			int min = chordTrack_->read_random_min(pattern, item);
-			int max = chordTrack_->read_random_max(pattern, item);
-			return Rng::u16(min, max);
+		if (allow_randomization) {
+			if (chordTrack_->pattern.random_is_enabled(pattern, item, step)) {
+				int min = chordTrack_->read_random_min(pattern, item);
+				int max = chordTrack_->read_random_max(pattern, item);
+				return Rng::u16(min, max);
+			}
 		}
 		return chordTrack_->read_step(pattern, step, item);
 	}
@@ -152,13 +146,11 @@ private:
 		}
 	}
 
-	inline void send_arpeggiator_note(bool send_midi = true) {
+	inline void send_arpeggiator_note() {
 		if (settings.song.track_is_audible(track_index_)) {
 			trackState_->event.data[0] = arpeggiatorEngine.note() + oct_offset;
 			trackState_->event.data[1] = arpeggiatorEngine.velocity();
-			if (send_midi) {
-				trackState_->send_note_event(when_, arpeggiatorEngine.gate_length());
-			}
+			trackState_->send_note_event(when_, arpeggiatorEngine.gate_length());
 		}
 	}
 

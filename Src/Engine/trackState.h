@@ -39,6 +39,14 @@ public:
 		return step_index_;
 	}
 
+	inline uint32_t when() {
+		return when_;
+	}
+
+	inline uint32_t length() {
+		return length_;
+	}
+
 	void reset() {
 		delay_ = 0;
 		pattern_index_ = 0;
@@ -85,6 +93,8 @@ public:
 	}
 
 	void send_note_event(uint32_t when, uint32_t length) {
+		when_ = when;
+		length_ = length;
 		outputEngine_->schedule_note(event, delay_ + when, length);
 	}
 
@@ -104,6 +114,8 @@ private:
 	uint8_t pattern_index_ = 0;
 	uint8_t step_index_ = 0;
 	uint32_t delay_;
+	uint32_t when_;
+	uint32_t length_;
 };
 
 #endif

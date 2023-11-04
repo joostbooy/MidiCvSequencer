@@ -6,6 +6,7 @@
 #include "rng.h"
 #include "dsp.h"
 
+template<const bool allow_randomization>
 class CurveTrackEngine {
 
 public:
@@ -103,10 +104,12 @@ private:
 	uint8_t cc_number;
 
 	inline int get_step_value(uint8_t pattern, uint8_t step, CurveTrack::StepItem item) {
-		if (curveTrack_->pattern.random_is_enabled(pattern, item, step)) {
-			int min = curveTrack_->read_random_min(pattern, item);
-			int max = curveTrack_->read_random_max(pattern, item);
-			return Rng::u16(min, max);
+		if (allow_randomization) {
+			if (curveTrack_->pattern.random_is_enabled(pattern, item, step)) {
+				int min = curveTrack_->read_random_min(pattern, item);
+				int max = curveTrack_->read_random_max(pattern, item);
+				return Rng::u16(min, max);
+			}
 		}
 		return curveTrack_->read_step(pattern, step, item);
 	}

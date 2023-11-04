@@ -4,6 +4,7 @@
 #include "trackState.h"
 #include "rng.h"
 
+template<const bool allow_randomization>
 class DrumTrackEngine {
 
 public:
@@ -92,10 +93,12 @@ private:
 	}
 
 	inline int get_step_value(uint8_t pattern, uint8_t step, DrumTrack::StepItem item) {
-		if (drumTrack_->pattern.random_is_enabled(pattern, item, step)) {
-			int min = drumTrack_->read_random_min(pattern, item);
-			int max = drumTrack_->read_random_max(pattern, item);
-			return Rng::u16(min, max);
+		if (allow_randomization) {
+			if (drumTrack_->pattern.random_is_enabled(pattern, item, step)) {
+				int min = drumTrack_->read_random_min(pattern, item);
+				int max = drumTrack_->read_random_max(pattern, item);
+				return Rng::u16(min, max);
+			}
 		}
 		return drumTrack_->read_step(pattern, step, item);
 	}

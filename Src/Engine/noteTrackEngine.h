@@ -5,7 +5,7 @@
 #include "trackState.h"
 #include "rng.h"
 
-//template<const bool allow_randomization>
+template<const bool allow_randomization>
 class NoteTrackEngine {
 
 public:
@@ -50,13 +50,13 @@ public:
 		}
 	}
 
-	void process_step(uint8_t pattern, uint8_t step, bool allow_random = true) {
-		uint8_t note = get_step_value(pattern, step, NoteTrack::NOTE, allow_random);
-		uint8_t velocity = get_step_value(pattern, step, NoteTrack::VELOCITY, allow_random);
-		uint8_t delay = get_step_value(pattern, step, NoteTrack::DELAY, allow_random);
-		uint8_t gate_length = get_step_value(pattern, step, NoteTrack::GATE_LENGTH, allow_random);
-		uint8_t repeats = get_step_value(pattern, step, NoteTrack::NUM_REPEATS, allow_random);
-		uint8_t spread = get_step_value(pattern, step, NoteTrack::REPEAT_SPREAD, allow_random);
+	void process_step(uint8_t pattern, uint8_t step) {
+		uint8_t note = get_step_value(pattern, step, NoteTrack::NOTE);
+		uint8_t velocity = get_step_value(pattern, step, NoteTrack::VELOCITY);
+		uint8_t delay = get_step_value(pattern, step, NoteTrack::DELAY);
+		uint8_t gate_length = get_step_value(pattern, step, NoteTrack::GATE_LENGTH);
+		uint8_t repeats = get_step_value(pattern, step, NoteTrack::NUM_REPEATS);
+		uint8_t spread = get_step_value(pattern, step, NoteTrack::REPEAT_SPREAD);
 
 		if (noteTrack_->read(NoteTrack::USE_SCALE)) {
 			note = settings.song.scale.read_map(note);
@@ -79,14 +79,6 @@ public:
 		}
 	}
 
-	uint32_t length() {
-		return length_;
-	}
-
-	uint32_t when() {
-		return when_;
-	}
-
 private:
 
 	NoteTrack *noteTrack_;
@@ -97,8 +89,8 @@ private:
 	uint32_t length_;
 	uint32_t when_;
 
-	inline int get_step_value(uint8_t pattern, uint8_t step, NoteTrack::StepItem item, bool allow_random) {
-		if (allow_random) {
+	inline int get_step_value(uint8_t pattern, uint8_t step, NoteTrack::StepItem item) {
+		if (allow_randomization) {
 			if (noteTrack_->pattern.random_is_enabled(pattern, item, step)) {
 				int min = noteTrack_->read_random_min(pattern, item);
 				int max = noteTrack_->read_random_max(pattern, item);
@@ -109,13 +101,9 @@ private:
 	}
 
 	inline bool step_triggered(uint8_t pattern, uint8_t step) {
-		//if (allow_randomization) {
 		uint8_t step_trigger = noteTrack_->read_step(pattern, step, NoteTrack::TRIGGER);
-		uint8_t probability = get_step_value(pattern, step, NoteTrack::PROBABILITY, true);
+		uint8_t probability = get_step_value(pattern, step, NoteTrack::PROBABILITY);
 		return step_trigger && (probability >= Rng::u16(1, 6));
-		//}
-
-		//return noteTrack_->read_step(pattern, step, NoteTrack::TRIGGER);
 	}
 
 };

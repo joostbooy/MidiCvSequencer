@@ -126,10 +126,10 @@ private:
 
 	Audition audition;
 	TrackState track_state[kMaxTracks];
-	NoteTrackEngine note_track[kMaxTracks];
-	ChordTrackEngine chord_track[kMaxTracks];
-	DrumTrackEngine drum_track[kMaxTracks];
-	CurveTrackEngine curve_track[kMaxTracks];
+	NoteTrackEngine<true>note_track[kMaxTracks];
+	ChordTrackEngine<true>chord_track[kMaxTracks];
+	DrumTrackEngine<true>drum_track[kMaxTracks];
+	CurveTrackEngine<true>curve_track[kMaxTracks];
 
 	void tick(uint8_t);
 	void reset(uint8_t);

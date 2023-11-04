@@ -28,7 +28,7 @@ public:
 		chordTrackEngine.reset();
 		set_speed(track->clock_speed());
 
-		const bool send_midi = false;
+	//	const bool send_midi = false;
 
 		for (int step = 0; step < 16; ++step) {
 			if (track->read_step(index, step, ChordTrack::TRIGGER)) {
@@ -37,7 +37,7 @@ public:
 			}
 
 			for (int i = 0; i < step_duration; ++i) {
-				if (chordTrackEngine.tick_step(send_midi)) {
+				if (chordTrackEngine.tick_step()) {
 					draw_step(step, i);
 				}
 			}
@@ -50,7 +50,7 @@ private:
 
 	ChordTrack *track;
 	TrackState trackState;
-	ChordTrackEngine chordTrackEngine;
+	ChordTrackEngine<false>chordTrackEngine;
 
 	int step_duration;
 
@@ -62,8 +62,8 @@ private:
 
 	void draw_step(int step, int curr_tick) {
 		MidiEvent::Event e = trackState.event;
-		int when = chordTrackEngine.when();
-		int length = chordTrackEngine.length();
+		int when = trackState.when();
+		int length = trackState.length();
 		PianoRollPainter::draw_note(step, e, when + curr_tick, length);
 	}
 };
