@@ -18,8 +18,9 @@ public:
 		track = &settings.song.track(index).chord;
 	}
 
-	void set_last_touched_note(int note) {
-		PianoRollPainter::set_last_touched_note(note);
+	void set_last_touched_chord(Chord &chord) {
+		//PianoRollPainter::set_last_touched_note(127);
+		PianoRollPainter::set_last_touched_note(chord.note(0));
 	}
 
 	void draw_pattern(int index) {
@@ -28,17 +29,23 @@ public:
 		chordTrackEngine.reset();
 		set_speed(track->clock_speed());
 
-	//	const bool send_midi = false;
+		const bool send_midi = false;
 
 		for (int step = 0; step < 16; ++step) {
 			if (track->read_step(index, step, ChordTrack::TRIGGER)) {
+
 				chordTrackEngine.process_step(index, step);
-				draw_step(step, 0);
+				if (chordTrackEngine.arpeggiator_enabled() == false) {
+					draw_chord(step);
+				}
+
 			}
 
-			for (int i = 0; i < step_duration; ++i) {
-				if (chordTrackEngine.tick_step()) {
-					draw_step(step, i);
+			if (chordTrackEngine.arpeggiator_enabled()) {
+				for (int i = 0; i < step_duration; ++i) {
+					if (chordTrackEngine.tick_step(send_midi)) {
+						draw_step(step, i);
+					}
 				}
 			}
 		}
@@ -64,6 +71,13 @@ private:
 		uint32_t x = curr_tick + chordTrackEngine.when();
 		uint32_t w = chordTrackEngine.length();
 		PianoRollPainter::draw_note(step, trackState.event, x, w);
+	}
+
+	void draw_chord(int step) {
+		for (int i = 0; i < chordTrackEngine.chord().size(); ++i) {
+			trackState.event.data[0] = chordTrackEngine.chord().note(i);
+			draw_step(step, 0);
+		}
 	}
 };
 

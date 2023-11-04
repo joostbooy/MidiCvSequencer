@@ -20,7 +20,6 @@ namespace ChordPatternPage {
 	//variables
 	Chord chord;
 	ChordTrackPainter chordTrackPainter;
-	int last_touched_note;
 
 	int read_step(int step, int item) {
 		ChordTrack &track = settings.selected_chord_track();
@@ -28,7 +27,7 @@ namespace ChordPatternPage {
 		return track.read_step(pattern, step, ChordTrack::StepItem(item));
 	}
 
-	void build_chord(int step) {
+	void build_step_chord(int step) {
 		int type = read_step(step, ChordTrack::CHORD_TYPE);
 		int variation = read_step(step, ChordTrack::CHORD_VARIATION);
 		int inversion = read_step(step, ChordTrack::CHORD_INVERSION);
@@ -60,7 +59,7 @@ namespace ChordPatternPage {
 	}
 
 	void draw_notes() {
-		chordTrackPainter.set_last_touched_note(last_touched_note);
+		chordTrackPainter.set_last_touched_chord(chord);
 		chordTrackPainter.set_track_index(settings.selected_track_index());
 		chordTrackPainter.draw_pattern(settings.selected_pattern());
 	}
@@ -72,13 +71,12 @@ namespace ChordPatternPage {
 	void enter() {
 		for (int i = 0; i < 16; ++i) {
 			if (read_step(i, NoteTrack::TRIGGER)) {
-				build_chord(i);
-				last_touched_note = chord.note(0);
+				build_step_chord(i);
 				return;
 			}
 		}
 
-		last_touched_note = 60;
+		chord.build(0, 0, 0, 0);
 	}
 
 	void exit() {
@@ -87,8 +85,7 @@ namespace ChordPatternPage {
 
 	void on_step_control(int step) {
 		if (read_step(step, ChordTrack::TRIGGER)) {
-			build_chord(step);
-			last_touched_note = chord.note(0);
+			build_step_chord(step);
 		}
 	}
 
@@ -107,15 +104,7 @@ namespace ChordPatternPage {
 	}
 
 	void drawLeds() {
-		//Matrix::LedColor color;
 
-		//int pattern = settings.selected_pattern();
-		//ChordTrack &track = settings.selected_chord_track();
-
-		//	for (int i = 0; i < 16; ++i) {
-		//		color = track.read_step(pattern, i, ChordTrack::TRIGGER) ? Matrix::GREEN : Matrix::BLACK;
-		//		painters.leds.set_step_button(i, color);
-		//	}
 	}
 
 	void msTick(uint16_t ticks) {

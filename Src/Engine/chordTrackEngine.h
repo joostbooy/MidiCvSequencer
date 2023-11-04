@@ -36,6 +36,14 @@ public:
 		return length_;
 	}
 
+	bool arpeggiator_enabled() {
+		return arpeggiator.enabled();
+	}
+
+	Chord &chord() {
+		return chord_;
+	}
+
 	void tick() {
 		if (trackState_->tick()) {
 			uint8_t pattern = trackState_->pattern_index();
@@ -54,9 +62,9 @@ public:
 		}
 	}
 
-	bool tick_step() {
+	bool tick_step(const bool send_midi = true) {
 		if (arpeggiator.enabled() && arpeggiatorEngine.tick()) {
-			send_arpeggiator_note();
+			send_arpeggiator_note(send_midi);
 			return true;
 		}
 		return false;
@@ -66,7 +74,7 @@ public:
 		uint8_t delay = get_step_value(pattern, step, ChordTrack::DELAY);
 		uint8_t velocity = get_step_value(pattern, step, ChordTrack::VELOCITY);
 		uint8_t gate_length = get_step_value(pattern, step, ChordTrack::GATE_LENGTH);
-		oct_offset = chordTrack_->read(ChordTrack::CHORD_OCT_OFFSET);
+		//oct_offset = chordTrack_->read(ChordTrack::CHORD_OCT_OFFSET);
 
 		MidiEvent::Event &event = trackState_->event;
 
@@ -78,13 +86,13 @@ public:
 		when_ = trackState_->clock.gate_duration(delay);
 		length_ = trackState_->clock.gate_duration(gate_length);
 
-		// chord
+		// chord_
 		uint8_t type = get_step_value(pattern, step, ChordTrack::CHORD_TYPE);
 		uint8_t variation = get_step_value(pattern, step, ChordTrack::CHORD_VARIATION);
 		uint8_t inversion = get_step_value(pattern, step, ChordTrack::CHORD_INVERSION);
 		uint8_t root_shift = get_step_value(pattern, step, ChordTrack::CHORD_ROOT_SHIFT);
 
-		chord.build(type, root_shift, variation, inversion);
+		chord_.build(type, root_shift, variation, inversion);
 
 		// arpeggiator
 		uint8_t arp_trigger = get_step_value(pattern, step, ChordTrack::ARP_TRIGGER);
@@ -105,8 +113,8 @@ public:
 		arpeggiatorEngine.set_gate_length(gate_length);
 
 		arpeggiatorEngine.clear_notes();
-		for (int i = 0; i < chord.size(); ++i) {
-			arpeggiatorEngine.set_note(chord.note(i));
+		for (int i = 0; i < chord_.size(); ++i) {
+			arpeggiatorEngine.set_note(chord_.note(i));
 		}
 
 		arpeggiatorEngine.reset();
@@ -121,9 +129,9 @@ private:
 	uint32_t length_;
 	uint32_t when_;
 
-	uint8_t oct_offset;
+	//uint8_t oct_offset;
 
-	Chord chord;
+	Chord chord_;
 	Arpeggiator arpeggiator;
 	ArpeggiatorEngine arpeggiatorEngine;
 
@@ -147,18 +155,20 @@ private:
 
 	inline void send_chord() {
 		if (settings.song.track_is_audible(track_index_)) {
-			for (int i = 0; i < chord.size(); ++i) {
-				trackState_->event.data[0] = chord.note(i) + oct_offset;
+			for (int i = 0; i < chord_.size(); ++i) {
+				trackState_->event.data[0] = chord_.note(i);
 				trackState_->send_note_event(when_, length_);
 			}
 		}
 	}
 
-	inline void send_arpeggiator_note() {
-		if (settings.song.track_is_audible(track_index_)) {
-			trackState_->event.data[0] = arpeggiatorEngine.note() + oct_offset;
-			trackState_->event.data[1] = arpeggiatorEngine.velocity();
-			trackState_->send_note_event(when_, arpeggiatorEngine.gate_length());
+	inline void send_arpeggiator_note(const bool send_midi) {
+		trackState_->event.data[0] = arpeggiatorEngine.note();
+		trackState_->event.data[1] = arpeggiatorEngine.velocity();
+		length_ = arpeggiatorEngine.gate_length();
+
+		if (send_midi && settings.song.track_is_audible(track_index_)) {
+			trackState_->send_note_event(when_, length_);
 		}
 	}
 
