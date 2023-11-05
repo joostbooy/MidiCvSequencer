@@ -19,6 +19,19 @@ public:
 		window.scroll_to_row(127 - note);
 	}
 
+	static void scroll_y(int inc) {
+		int row;
+
+		if (inc > 0) {
+			row = window.row().first;
+		} else {
+			row = window.row().last;
+		}
+
+		row = clip(0, 127, row + inc);
+		window.scroll_to_row(row);
+	}
+
 	static void set_step_duration(int step_duration) {
 		float cell_width = window.cell(0, 0).w;
 		w_scale = float(cell_width / step_duration);

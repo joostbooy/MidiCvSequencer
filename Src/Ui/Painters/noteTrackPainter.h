@@ -22,6 +22,10 @@ public:
 		PianoRollPainter::set_last_touched_note(note);
 	}
 
+	void scroll_y(int inc) {
+		PianoRollPainter::scroll_y(inc);
+	}
+
 	void draw_pattern(int index) {
 		PianoRollPainter::draw_background();
 

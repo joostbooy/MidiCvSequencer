@@ -18,7 +18,6 @@ namespace NotePatternPage {
 
 
 	//variables
-	int last_touched_note;
 	NoteTrackPainter noteTrackPainter;
 
 	int read_step(int step, int item) {
@@ -68,7 +67,6 @@ namespace NotePatternPage {
 	}
 
 	void draw_notes() {
-		noteTrackPainter.set_last_touched_note(last_touched_note);
 		noteTrackPainter.set_track_index(settings.selected_track_index());
 		noteTrackPainter.draw_pattern(settings.selected_pattern());
 	}
@@ -78,14 +76,15 @@ namespace NotePatternPage {
 	}
 
 	void enter() {
+		int note = 60;
+
 		for (int i = 0; i < 16; ++i) {
 			if (read_step(i, NoteTrack::TRIGGER)) {
-				last_touched_note = read_step(i, NoteTrack::NOTE);
-				return;
+				note = read_step(i, NoteTrack::NOTE);
+				break;
 			}
 		}
-
-		last_touched_note = 60;
+		noteTrackPainter.set_last_touched_note(note);
 	}
 
 	void exit() {
@@ -94,7 +93,8 @@ namespace NotePatternPage {
 
 	void on_step_control(int step) {
 		if (read_step(step, NoteTrack::TRIGGER)) {
-			last_touched_note = read_step(step, NoteTrack::NOTE);
+			int note = read_step(step, NoteTrack::NOTE);
+			noteTrackPainter.set_last_touched_note(note);
 		}
 	}
 
@@ -107,7 +107,7 @@ namespace NotePatternPage {
 
 		bool shift = controller.is_pressed(Controller::SHIFT_BUTTON);
 		if (id == Controller::Y_ENC && shift == true) {
-			last_touched_note = clip (0, 127, last_touched_note + inc);
+			noteTrackPainter.scroll_y(inc);
 		}
 	}
 
