@@ -22,6 +22,10 @@ public:
 		PianoRollPainter::set_last_touched_note(note);
 	}
 
+	void set_last_touched_step(int step) {
+		last_touched_step = step;
+	}
+
 	void scroll_y(int inc) {
 		PianoRollPainter::scroll_y(inc);
 	}
@@ -47,8 +51,15 @@ public:
 			}
 		}
 
+		// draw last touched step 
+		int item = settings.selected_step_item();
+		int value = track->read_step(index, last_touched_step, NoteTrack::StepItem(item));
+		const char *text = NoteTrack::step_value_text(NoteTrack::StepItem(item), value);
+		PianoRollPainter::draw_step_value(last_touched_step, value, text);
+
 		PianoRollPainter::draw_scrollbar();
 	}
+
 
 private:
 
@@ -57,6 +68,7 @@ private:
 	NoteTrackEngine<false>noteTrackEngine;
 
 	int step_duration;
+	int last_touched_step;
 
 	void set_speed(int speed) {
 		trackState.clock.set_speed(speed);
@@ -69,7 +81,6 @@ private:
 		uint32_t w = noteTrackEngine.length();
 		PianoRollPainter::draw_note(step, trackState.event, x, w);
 	}
-
 };
 
 #endif

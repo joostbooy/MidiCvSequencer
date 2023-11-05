@@ -95,6 +95,7 @@ namespace NotePatternPage {
 		if (read_step(step, NoteTrack::TRIGGER)) {
 			int note = read_step(step, NoteTrack::NOTE);
 			noteTrackPainter.set_last_touched_note(note);
+			noteTrackPainter.set_last_touched_step(step);
 		}
 	}
 

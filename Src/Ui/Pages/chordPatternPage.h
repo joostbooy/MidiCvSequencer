@@ -37,6 +37,7 @@ namespace ChordPatternPage {
 		chord.build(type, root_shift, variation, inversion);
 
 		chordTrackPainter.set_last_touched_note(chord.note(0) + oct_offset);
+		chordTrackPainter.set_last_touched_step(step);
 	}
 
 	void draw_step_view(int pattern, int item) {

@@ -45,6 +45,26 @@ public:
 		}
 	}
 
+	// draws over velocity
+	static void draw_step_value(int step, int value, const char *text) {
+		if (value != last_step_value) {
+			last_step_value = value;
+			step_value_frames = 32;
+		}
+
+		if (step_value_frames > 0) {
+			--step_value_frames;
+
+			int coll = step + 1;
+			int w = window.cell(coll, 0).w;
+			int h = window.cell(coll, 0).h;
+			int x = window.cell(coll, 0).x;
+			int y = (window.y + window.height) + h + 1;
+			canvas.fill(x, y, w, h, Canvas::WHITE);
+			canvas.draw_text(x, y, w, h, text, Canvas::CENTER, Canvas::BOTTOM);
+		}
+	}
+
 	static void draw_background() {
 		// clear note preview
 		for (int i = 0; i < (128 / 32); ++i) {
@@ -111,6 +131,8 @@ private:
 
 	static int last_top_row;
 	static int scroll_bar_frames;
+	static int last_step_value;
+	static int step_value_frames;
 
 	static float wf;
 	static uint32_t notes[128 / 32];
