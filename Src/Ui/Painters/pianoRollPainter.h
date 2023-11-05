@@ -23,9 +23,9 @@ public:
 		int row;
 
 		if (inc > 0) {
-			row = window.row().first;
-		} else {
 			row = window.row().last;
+		} else {
+			row = window.row().first;
 		}
 
 		row = clip(0, 127, row + inc);
@@ -132,9 +132,6 @@ private:
 		uint32_t reg = note / 32;
 		uint32_t bit = note % 32;
 		notes[reg] |= (1 << bit);
-
-		//draw_note(note, delay, length, Canvas::LIGHT_GRAY);
-		//draw_velocity(e.data[1], delay);
 	}
 
 	static bool note_is_visible(uint8_t note) {
@@ -145,22 +142,6 @@ private:
 		uint32_t reg = note / 32;
 		uint32_t bit = note % 32;
 		return notes[reg] & (1 << bit);
-	}
-
-	static void draw_note(uint8_t note, int delay, int length, Canvas::Color color) {
-		if (note_is_visible(note)) {
-			int x = note_x;
-			int y = window.cell(0, note).y + 1;
-			int h = window.cell(0, note).h - 2;
-			canvas.box(x + (delay * wf), y, length * wf, h, Canvas::LIGHT_GRAY, color);
-		}
-	}
-
-	static void draw_velocity(uint8_t velocity, int delay) {
-		int x = note_x;
-		int h = (window.cell(0, 0).h / 128.f) * velocity + 1;
-		int y = (window.y + window.height) + (cell.h - h) + 1;
-		canvas.vertical_line(x + (delay * wf), y, h, Canvas::GRAY);
 	}
 
 	static void draw_preview() {
