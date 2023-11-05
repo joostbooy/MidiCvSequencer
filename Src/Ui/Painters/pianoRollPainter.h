@@ -20,21 +20,16 @@ public:
 	}
 
 	static void scroll_y(int inc) {
-		int row;
-
 		if (inc > 0) {
-			row = window.row().last;
+			window.scroll_to_row(window.row().first + 1);
 		} else {
-			row = window.row().first;
+			window.scroll_to_row(window.row().last - 1);
 		}
-
-		row = clip(0, 127, row + inc);
-		window.scroll_to_row(row);
 	}
 
 	static void set_step_duration(int step_duration) {
 		float cell_width = window.cell(0, 0).w;
-		w_scale = float(cell_width / step_duration);
+		wf = float(cell_width / step_duration);
 	}
 
 	static void draw_scrollbar() {
@@ -46,14 +41,17 @@ public:
 		if (scroll_bar_frames > 0) {
 			--scroll_bar_frames;
 			WindowPainter::vertical_scrollbar(window);
-			draw_preview();
+			draw_note_preview();
 		}
 	}
 
 	static void draw_background() {
-		clear_notes();
+		// clear note preview
+		for (int i = 0; i < (128 / 32); ++i) {
+			notes[i] = 0;
+		}
 
-		// notes
+		// draw notes
 		for (int i = window.row().first; i <= window.row().last; ++i) {
 			int y = window.cell(0, i).y;
 			int w =  window.cell(0, i).w;
@@ -64,7 +62,7 @@ public:
 			canvas.draw_text(2, y, UiText::note_text(127 - i), Canvas::BLACK);
 		}
 
-		// step lines
+		// draw step lines
 		for (int i = 1; i < 17; ++i) {
 			int x = window.cell(i, 0).x - 1;
 			canvas.vertical_line(x, window.y, window.height, Canvas::WHITE);
@@ -77,12 +75,12 @@ public:
 		int velo = e.data[1];
 		cell = window.cell(step + 1, note);
 
-		note_on(e, 0, 0);
+		note_on(note);
 
 		int y = cell.y + 1;
 		int h = cell.h - 2;
-		int x = std::ceil(float(w_scale * delay) + cell.x);
-		int w = std::ceil(float(w_scale * length));
+		int x = std::ceil(float(wf * delay) + cell.x);
+		int w = std::ceil(float(wf * length));
 		if (w < 1) {
 			w = 1;
 		}
@@ -114,25 +112,9 @@ private:
 	static int last_top_row;
 	static int scroll_bar_frames;
 
-	static float w_scale;
-
-
-	static int note_x;
+	static float wf;
 	static uint32_t notes[128 / 32];
-	static constexpr float wf = 255.f / 17.f;
 
-	static void clear_notes() {
-		for (int i = 0; i < (128 / 32); ++i) {
-			notes[i] = 0;
-		}
-	}
-
-	static void note_on(MidiEvent::Event &e, int delay, int length) {
-		uint8_t note = 127 - e.data[0];
-		uint32_t reg = note / 32;
-		uint32_t bit = note % 32;
-		notes[reg] |= (1 << bit);
-	}
 
 	static bool note_is_visible(uint8_t note) {
 		return note >= window.row().first && note <= window.row().last;
@@ -144,7 +126,13 @@ private:
 		return notes[reg] & (1 << bit);
 	}
 
-	static void draw_preview() {
+	static void note_on(uint8_t note) {
+		uint32_t reg = note / 32;
+		uint32_t bit = note % 32;
+		notes[reg] |= (1 << bit);
+	}
+
+	static void draw_note_preview() {
 		const int w = 4;
 		const int x = window.width - 10;
 		const int h = window.height;
@@ -159,7 +147,6 @@ private:
 			}
 		}
 	}
-
 };
 
 #endif

@@ -10,10 +10,10 @@ Window PianoRollPainter::window = {
 };
 
 Window::Cell PianoRollPainter::cell;
+
+float PianoRollPainter::wf;
+
 int PianoRollPainter::last_top_row;
 int PianoRollPainter::scroll_bar_frames;
-float PianoRollPainter::w_scale;
 
-
- int PianoRollPainter::note_x = 0;
- uint32_t PianoRollPainter::notes[128 / 32];
+uint32_t PianoRollPainter::notes[128 / 32];
