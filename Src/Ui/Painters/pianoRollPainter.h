@@ -46,7 +46,7 @@ public:
 		if (scroll_bar_frames > 0) {
 			--scroll_bar_frames;
 			WindowPainter::vertical_scrollbar(window);
-			//draw_preview();
+			draw_preview();
 		}
 	}
 
@@ -137,13 +137,6 @@ private:
 		//draw_velocity(e.data[1], delay);
 	}
 
-	static void note_off(MidiEvent::Event &e) {
-		uint8_t note = e.data[0];
-		uint32_t reg = note / 32;
-		uint32_t bit = note % 32;
-		notes[reg] &= ~(1 << bit);
-	}
-
 	static bool note_is_visible(uint8_t note) {
 		return note >= window.row().first && note <= window.row().last;
 	}
@@ -174,13 +167,14 @@ private:
 		const int w = 4;
 		const int x = window.width - 10;
 		const int h = window.height;
+		const int y = window.y;
 
-		canvas.fill(x, 0, w, h, Canvas::BLACK);
+		canvas.fill(x, y, w, h, Canvas::BLACK);
 
 		for (int note = 0; note < 128; ++note) {
 			if (note_is_active(note)) {
-				int y = (h / note) + window.y;
-				canvas.fill(x, y, w, 1, Canvas::WHITE);
+				int note_y = (1.f / 127.f) * note * h;
+				canvas.fill(x, note_y + y, w, 1, Canvas::WHITE);
 			}
 		}
 	}
