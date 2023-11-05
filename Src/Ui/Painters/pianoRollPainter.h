@@ -59,7 +59,7 @@ public:
 			int w = window.cell(coll, 0).w;
 			int h = window.cell(coll, 0).h;
 			int x = window.cell(coll, 0).x;
-			int y = (window.y + window.height) + h + 1;
+			int y = (window.y + window.height);
 			canvas.fill(x, y, w, h, Canvas::WHITE);
 			canvas.draw_text(x, y, w, h, text, Canvas::CENTER, Canvas::BOTTOM);
 		}
