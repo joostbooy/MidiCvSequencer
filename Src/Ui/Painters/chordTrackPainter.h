@@ -31,7 +31,7 @@ public:
 	}
 
 	void draw_pattern(int index) {
-		PianoRollPainter::draw_background();
+		PianoRollPainter::reset();
 
 		chordTrackEngine.reset();
 		set_speed(track->clock_speed());

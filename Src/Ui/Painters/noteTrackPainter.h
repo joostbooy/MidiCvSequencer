@@ -31,7 +31,7 @@ public:
 	}
 
 	void draw_pattern(int index) {
-		PianoRollPainter::draw_background();
+		PianoRollPainter::reset();
 
 		noteTrackEngine.reset();
 		set_speed(track->clock_speed());
@@ -51,7 +51,7 @@ public:
 			}
 		}
 
-		// draw last touched step 
+		// draw last touched step
 		int item = settings.selected_step_item();
 		int value = track->read_step(index, last_touched_step, NoteTrack::StepItem(item));
 		const char *text = NoteTrack::step_value_text(NoteTrack::StepItem(item), value);
