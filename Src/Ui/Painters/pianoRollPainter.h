@@ -40,8 +40,7 @@ public:
 
 		if (scroll_bar_frames > 0) {
 			--scroll_bar_frames;
-			WindowPainter::vertical_scrollbar(window);
-			draw_note_preview();
+			draw_scroll_bar();
 		}
 	}
 
@@ -59,13 +58,13 @@ public:
 			int w = window.cell(coll, 0).w;
 			int h = window.cell(coll, 0).h;
 			int x = window.cell(coll, 0).x;
-			int y = (window.y + window.height);
+			int y = (window.y + window.height) + 1;
 			canvas.fill(x, y, w, h, Canvas::WHITE);
 			canvas.draw_text(x, y, w, h, text, Canvas::CENTER, Canvas::BOTTOM);
 		}
 	}
 
-	static void draw_background() {
+	static void reset() {
 		// clear note preview
 		for (int i = 0; i < (128 / 32); ++i) {
 			notes[i] = 0;
@@ -154,21 +153,25 @@ private:
 		notes[reg] |= (1 << bit);
 	}
 
-	static void draw_note_preview() {
-		const int w = 4;
-		const int x = window.width - 10;
+	static void draw_scroll_bar() {
+		const int w = 6;
+		const int x = window.width - w;
 		const int h = window.height;
-		const int y = window.y;
+		const int y = window.y + 1;
 
-		canvas.fill(x, y, w, h, Canvas::BLACK);
+		int y1 = (1.f / 127.f) * window.row().first * h;
+		int y2 = (1.f / 127.f) * window.row().last * h;
+		canvas.fill(x, y, w , h, Canvas::WHITE);
+		canvas.fill(x - 2, y + y1, w + 2, y2 - y1, Canvas::BLACK);
 
 		for (int note = 0; note < 128; ++note) {
 			if (note_is_active(note)) {
 				int note_y = (1.f / 127.f) * note * h;
-				canvas.fill(x, note_y + y, w, 1, Canvas::WHITE);
+				canvas.fill(x + 1, note_y + y, w - 2, 1, Canvas::GRAY);
 			}
 		}
 	}
+
 };
 
 #endif
