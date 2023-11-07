@@ -23,7 +23,7 @@ public:
 		if (inc > 0) {
 			window.scroll_to_row(window.row().last + inc);
 		} else {
-			window.scroll_to_row(window.row().first - inc);
+			window.scroll_to_row(window.row().first + inc);
 		}
 	}
 
