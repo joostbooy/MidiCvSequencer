@@ -6,7 +6,6 @@
 #include "trackState.h"
 #include "canvas.h"
 #include "windowPainter.h"
-
 #include "pianoRollPainter.h"
 
 class ChordTrackPainter {
@@ -98,7 +97,7 @@ private:
 			draw_step(step, 0);
 		}
 	}
-	
+
 };
 
 #endif

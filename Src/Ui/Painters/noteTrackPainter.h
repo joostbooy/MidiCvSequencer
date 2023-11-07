@@ -6,7 +6,6 @@
 #include "trackState.h"
 #include "canvas.h"
 #include "windowPainter.h"
-
 #include "pianoRollPainter.h"
 
 class NoteTrackPainter {
