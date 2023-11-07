@@ -21,9 +21,9 @@ public:
 
 	static void scroll_y(int inc) {
 		if (inc > 0) {
-			window.scroll_to_row(window.row().last + 1);
+			window.scroll_to_row(window.row().last + inc);
 		} else {
-			window.scroll_to_row(window.row().first - 1);
+			window.scroll_to_row(window.row().first - inc);
 		}
 	}
 

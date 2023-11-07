@@ -107,8 +107,10 @@ namespace NotePatternPage {
 		}
 
 		bool shift = controller.is_pressed(Controller::SHIFT_BUTTON);
+		bool pressed = controller.is_pressed(Controller::Y_ENC_PUSH);
+
 		if (id == Controller::Y_ENC && shift == true) {
-			noteTrackPainter.scroll_y(inc);
+			noteTrackPainter.scroll_y(pressed ? inc * 10 : inc);
 		}
 	}
 
