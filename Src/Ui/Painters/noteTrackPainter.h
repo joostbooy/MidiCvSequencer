@@ -36,6 +36,7 @@ public:
 		noteTrackEngine.reset();
 		set_speed(track->clock_speed());
 
+
 		const bool send_midi = false;
 
 		for (int step = 0; step < 16; ++step) {
@@ -50,6 +51,7 @@ public:
 				}
 			}
 		}
+
 
 		// draw last touched step
 		int item = settings.selected_step_item();
@@ -79,8 +81,16 @@ private:
 	void draw_step(int step, int curr_tick) {
 		uint32_t x = curr_tick + noteTrackEngine.when();
 		uint32_t w = noteTrackEngine.length();
-		PianoRollPainter::draw_note(step, trackState.event, x, w);
+		bool is_random = step_is_random(step);
+		PianoRollPainter::draw_note(step, trackState.event, x, w, is_random);
 	}
+
+	bool step_is_random(int step) {
+		int item = settings.selected_step_item();
+		int pattern_ = settings.selected_pattern();
+		return track->pattern.random_is_enabled(pattern_, item, step);
+	}
+
 };
 
 #endif

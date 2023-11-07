@@ -88,7 +88,7 @@ public:
 		}
 	}
 
-	static void draw_note(int step, MidiEvent::Event &e, int delay, int length) {
+	static void draw_note(int step, MidiEvent::Event &e, int delay, int length, bool is_random) {
 		// row 0 is highest note
 		int note = 127 - e.data[0];
 		int velo = e.data[1];
@@ -107,6 +107,9 @@ public:
 		// note
 		if (note_is_visible(note)) {
 			canvas.box(x, y, w, h, Canvas::LIGHT_GRAY, Canvas::GRAY);
+			if (is_random) {
+				draw_tiny_question_mark(x, y, w, h);
+			}
 		}
 
 		// velocity (always show)
@@ -115,13 +118,6 @@ public:
 		canvas.vertical_line(x, y, h, Canvas::GRAY);
 	}
 
-	void draw_tiny_question_mark(int x, int y, int w, int h) {
-		canvas.get_xy_allignment(&x, &y, w, h, 2, 4, Canvas::CENTER, Canvas::CENTER);
-		canvas.draw_pixel(x, y, Canvas::BLACK);
-		canvas.draw_pixel(x + 1, y, Canvas::BLACK);
-		canvas.draw_pixel(x + 1, y + 1, Canvas::BLACK);
-		canvas.draw_pixel(x + 1, y + 3, Canvas::BLACK);
-	}
 
 private:
 
@@ -170,6 +166,14 @@ private:
 				canvas.fill(x + 1, note_y + y, w - 2, 1, Canvas::GRAY);
 			}
 		}
+	}
+
+	static void draw_tiny_question_mark(int x, int y, int w, int h) {
+		canvas.get_xy_allignment(&x, &y, w, h, 2, 4, Canvas::CENTER, Canvas::CENTER);
+		canvas.draw_pixel(x, y, Canvas::BLACK);
+		canvas.draw_pixel(x + 1, y, Canvas::BLACK);
+		canvas.draw_pixel(x + 1, y + 1, Canvas::BLACK);
+		canvas.draw_pixel(x + 1, y + 3, Canvas::BLACK);
 	}
 
 };

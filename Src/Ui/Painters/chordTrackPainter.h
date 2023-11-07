@@ -82,7 +82,14 @@ private:
 	void draw_step(int step, int curr_tick) {
 		uint32_t x = curr_tick + chordTrackEngine.when();
 		uint32_t w = chordTrackEngine.length();
-		PianoRollPainter::draw_note(step, trackState.event, x, w);
+		bool is_random = step_is_random(step);
+		PianoRollPainter::draw_note(step, trackState.event, x, w, is_random);
+	}
+
+	bool step_is_random(int step) {
+		int item = settings.selected_step_item();
+		int pattern_ = settings.selected_pattern();
+		return track->pattern.random_is_enabled(pattern_, item, step);
 	}
 
 	void draw_chord(int step) {
@@ -91,6 +98,7 @@ private:
 			draw_step(step, 0);
 		}
 	}
+	
 };
 
 #endif
