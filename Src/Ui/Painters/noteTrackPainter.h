@@ -35,7 +35,6 @@ public:
 		noteTrackEngine.reset();
 		set_speed(track->clock_speed());
 
-
 		const bool send_midi = false;
 
 		for (int step = 0; step < 16; ++step) {
@@ -50,7 +49,6 @@ public:
 				}
 			}
 		}
-
 
 		// draw last touched step
 		int item = settings.selected_step_item();
