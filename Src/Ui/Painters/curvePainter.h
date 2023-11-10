@@ -18,6 +18,7 @@ public:
 	}
 
 	void draw_background() {
+		// steps
 		for (int i = 0; i < 16; ++i) {
 			if (i % 2) {
 				int x = step_w * i;
@@ -25,6 +26,7 @@ public:
 			}
 		}
 
+		// center
 		const int y = box_y + (box_h / 2);
 		canvas.horizontal_line(box_x, y, box_w, Canvas::GRAY);
 	}
