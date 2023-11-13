@@ -17,6 +17,7 @@ public:
 
 	static void set_last_touched_note(int note) {
 		window.scroll_to_row(127 - note);
+		//window.scroll_to_row(note);
 	}
 
 	static void scroll_y(int inc) {
@@ -70,34 +71,42 @@ public:
 			notes[i] = 0;
 		}
 
-		// draw notes
-		for (int i = window.row().first; i <= window.row().last; ++i) {
-			int y = window.cell(0, i).y;
-			int w =  window.cell(0, i).w;
-			int h = window.cell(0, i).h;
+		// background color
+		canvas.fill(window.x, window.y, window.width, window.height, Canvas::BLACK);
 
-			canvas.fill(0, y, canvas.width(), h, i & 1 ? Canvas::BLACK : Canvas::DARK_GRAY);
-			canvas.fill(0, y, w, h, Canvas::WHITE);
-			canvas.draw_text(2, y, UiText::note_text(127 - i), Canvas::BLACK);
+		// step lines
+		for (int i = 2; i < 17; ++i) {
+			int x = window.cell(i, 0).x - 1;
+			canvas.vertical_line(x, window.y, window.height, Canvas::GRAY);
 		}
 
-		// draw step lines
-		for (int i = 1; i < 17; ++i) {
-			int x = window.cell(i, 0).x - 1;
-			canvas.vertical_line(x, window.y, window.height, Canvas::WHITE);
+		// note rows & keys
+		canvas.vertical_line(window.coll_width - 1, window.y, window.height, Canvas::WHITE);
+
+		for (int i = window.row().first; i <= window.row().last; ++i) {
+			int note = 127 - i;
+
+			if (is_black_key(note)) {
+				int y = window.cell(0, i).y;
+				int w = window.cell(0, i).w;
+				canvas.fill(window.coll_width, y, window.width, window.row_height, Canvas::DARK_GRAY);
+				canvas.fill(0, y - 1, w / 2, 6, Canvas::WHITE);
+			} else if ((note % 12) == 0) {
+				WindowPainter::text(window.cell(0, i), UiText::note_text(note), Canvas::RIGHT, Canvas::CENTER, Canvas::LIGHT_GRAY);
+			}
 		}
 	}
 
 	static void draw_note(int step, MidiEvent::Event &e, int delay, int length, bool is_random) {
 		// row 0 is highest note
-		int note = 127 - e.data[0];
+		int note = 127 -e.data[0];
 		int velo = e.data[1];
 		cell = window.cell(step + 1, note);
 
 		note_on(note);
 
-		int y = cell.y + 1;
-		int h = cell.h - 2;
+		int y = cell.y;
+		int h = cell.h - 1;
 		int x = std::ceil(float(wf * delay) + cell.x);
 		int w = std::ceil(float(wf * length));
 		if (w < 1) {
@@ -106,6 +115,7 @@ public:
 
 		// note
 		if (note_is_visible(note)) {
+			canvas.fill(x, y + 1, w, h, Canvas::LIGHT_GRAY);
 			canvas.box(x, y, w, h, Canvas::LIGHT_GRAY, Canvas::GRAY);
 			if (is_random) {
 				draw_tiny_question_mark(x, y, w, h);
@@ -132,6 +142,11 @@ private:
 	static float wf;
 	static uint32_t notes[128 / 32];
 
+	static bool is_black_key_[12];
+
+	static bool is_black_key(int key) {
+		return is_black_key_[key % 12];
+	}
 
 	static bool note_is_visible(uint8_t note) {
 		return note >= window.row().first && note <= window.row().last;
