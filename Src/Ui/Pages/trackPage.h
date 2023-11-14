@@ -42,7 +42,7 @@ namespace TrackPage {
 		[Track::CURVE_TRACK]	= "CURVE",
 	};
 
-	void create_callback(uint8_t option, bool confirmed) {
+	void track_create_callback(uint8_t option, bool confirmed) {
 		int index = settings.selected_track_index();
 
 		if (confirmed) {
@@ -185,7 +185,7 @@ namespace TrackPage {
 		switch (controller.button_to_function(id))
 		{
 		case SET_TYPE:
-			OptionListPage::set(create_text, NUM_CREATE_OPTIONS, "SET TYPE", create_callback);
+			OptionListPage::set(create_text, NUM_CREATE_OPTIONS, "SET TYPE", track_create_callback);
 			pages.open(Pages::OPTION_LIST_PAGE);
 			break;
 		case EDIT_LABEL:
