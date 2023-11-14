@@ -50,12 +50,7 @@ public:
 			}
 		}
 
-		// draw last touched step
-		int item = settings.selected_step_item();
-		int value = track->read_step(index, last_touched_step, NoteTrack::StepItem(item));
-		const char *text = NoteTrack::step_value_text(NoteTrack::StepItem(item), value);
-		PianoRollPainter::draw_step_value(last_touched_step, value, text);
-
+		draw_last_touched_step(index);
 		PianoRollPainter::draw_scrollbar();
 	}
 
@@ -86,6 +81,18 @@ private:
 		int item = settings.selected_step_item();
 		int pattern_ = settings.selected_pattern();
 		return track->pattern.random_is_enabled(pattern_, item, step);
+	}
+
+	void draw_last_touched_step(int pattern_index) {
+		int item = settings.selected_step_item();
+		int value = track->read_step(pattern_index, last_touched_step, NoteTrack::StepItem(item));
+
+		if ((item == NoteTrack::NOTE) && track->read(NoteTrack::USE_SCALE)) {
+			value = settings.song.scale.read_map(value);
+		}
+
+		const char *text = NoteTrack::step_value_text(NoteTrack::StepItem(item), value);
+		PianoRollPainter::draw_step_value(last_touched_step, value, text);
 	}
 
 };

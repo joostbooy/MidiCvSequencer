@@ -17,7 +17,6 @@ public:
 
 	static void set_last_touched_note(int note) {
 		window.scroll_to_row(127 - note);
-		//window.scroll_to_row(note);
 	}
 
 	static void scroll_y(int inc) {
@@ -99,7 +98,7 @@ public:
 
 	static void draw_note(int step, MidiEvent::Event &e, int delay, int length, bool is_random) {
 		// row 0 is highest note
-		int note = 127 -e.data[0];
+		int note = 127 - e.data[0];
 		int velo = e.data[1];
 		cell = window.cell(step + 1, note);
 
@@ -115,8 +114,8 @@ public:
 
 		// note
 		if (note_is_visible(note)) {
-			canvas.fill(x, y + 1, w, h, Canvas::LIGHT_GRAY);
 			canvas.box(x, y, w, h, Canvas::LIGHT_GRAY, Canvas::GRAY);
+			canvas.horizontal_line(x, y + 1, w, Canvas::LIGHT_GRAY);
 			if (is_random) {
 				draw_tiny_question_mark(x, y, w, h);
 			}
@@ -127,7 +126,6 @@ public:
 		y = (window.y + window.height) + (cell.h - h) + 1;
 		canvas.vertical_line(x, y, h, Canvas::GRAY);
 	}
-
 
 private:
 
