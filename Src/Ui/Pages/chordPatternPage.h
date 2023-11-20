@@ -36,7 +36,7 @@ namespace ChordPatternPage {
 
 		chord.build(type, root_shift, variation, inversion);
 
-		chordTrackPainter.set_last_touched_note(chord.note(0) + oct_offset);
+		chordTrackPainter.set_last_touched_chord(chord, oct_offset);
 		chordTrackPainter.set_last_touched_step(step);
 	}
 
@@ -72,6 +72,8 @@ namespace ChordPatternPage {
 	}
 
 	void enter() {
+		chordTrackPainter.reset();
+		
 		for (int i = 0; i < 16; ++i) {
 			if (read_step(i, NoteTrack::TRIGGER)) {
 				build_step_chord(i);

@@ -15,6 +15,14 @@ public:
 		scroll_bar_frames = 0;
 	}
 
+	static int top_note() {
+		return 127 - window.row().first;
+	}
+
+	static int bottom_note() {
+		return 127 - window.row().last;
+	}
+
 	static void set_last_touched_note(int note) {
 		window.scroll_to_row(127 - note);
 	}
@@ -115,7 +123,7 @@ public:
 		// note
 		if (note_is_visible(note)) {
 			canvas.box(x, y, w, h, Canvas::LIGHT_GRAY, Canvas::GRAY);
-			canvas.horizontal_line(x, y + 1, w, Canvas::LIGHT_GRAY);
+			canvas.horizontal_line(x, y + h, w, Canvas::LIGHT_GRAY);
 			if (is_random) {
 				draw_tiny_question_mark(x, y, w, h);
 			}
@@ -165,11 +173,12 @@ private:
 	static void draw_scroll_bar() {
 		const int w = 6;
 		const int x = window.width - w;
-		const int h = window.height;
+		const int h = window.height - 2;
 		const int y = window.y + 1;
 
 		int y1 = (1.f / 127.f) * window.row().first * h;
 		int y2 = (1.f / 127.f) * window.row().last * h;
+		canvas.fill(x - 1, y - 1, w + 2, h + 2, Canvas::BLACK);
 		canvas.fill(x, y, w , h, Canvas::WHITE);
 		canvas.fill(x - 2, y + y1, w + 2, y2 - y1, Canvas::BLACK);
 

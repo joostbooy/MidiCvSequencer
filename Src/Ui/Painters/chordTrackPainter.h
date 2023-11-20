@@ -17,8 +17,23 @@ public:
 		track = &settings.song.track(index).chord;
 	}
 
-	void set_last_touched_note(int note) {
-		PianoRollPainter::set_last_touched_note(note);
+	void reset() {
+		last_bottom = -1;
+		last_top = -1;
+	}
+
+	void set_last_touched_chord(Chord &chord, int oct_offset) {
+		int bottom = chord.note(0) + oct_offset;
+		int top = chord.note(chord.size() - 1) + oct_offset;
+
+		if (last_bottom != bottom && bottom < PianoRollPainter::bottom_note()) {
+			PianoRollPainter::set_last_touched_note(bottom);
+		} else if (last_top != top && top > PianoRollPainter::top_note()) {
+			PianoRollPainter::set_last_touched_note(top);
+		}
+
+		last_bottom = bottom;
+		last_top = top;
 	}
 
 	void set_last_touched_step(int step) {
@@ -71,6 +86,8 @@ private:
 
 	int step_duration;
 	int last_touched_step;
+	int last_top;
+	int last_bottom;
 
 	void set_speed(int speed) {
 		trackState.clock.set_speed(speed);
