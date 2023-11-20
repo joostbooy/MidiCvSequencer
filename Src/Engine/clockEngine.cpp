@@ -51,31 +51,3 @@ const float ClockEngine::step_duration_reciprocal_[NUM_SIGNATURES] = {
 	1.f / step_duration_[16],	// 1/32
 	1.f / step_duration_[17],	// 1/32T
 };
-
-/*
-const uint32_t ClockEngine::step_duration_phase_inc_[NUM_SIGNATURES] = {
-	(1 << 32) / step_duration_[0],	// 1/1.
-	(1 << 32) / step_duration_[1],	// 1/1
-	(1 << 32) / step_duration_[2],	// 1/1T
-
-	(1 << 32) / step_duration_[3],	// 1/2.
-	(1 << 32) / step_duration_[4],	// 1/2
-	(1 << 32) / step_duration_[5],	// 1/2T
-
-	(1 << 32) / step_duration_[6],	// 1/4.
-	(1 << 32) / step_duration_[7],	// 1/4
-	(1 << 32) / step_duration_[8],	// 1/4T
-
-	(1 << 32) / step_duration_[9],	// 1/8.
-	(1 << 32) / step_duration_[10],	// 1/8
-	(1 << 32) / step_duration_[11],	// 1/8T
-
-	(1 << 32) / step_duration_[12],	// 1/16.
-	(1 << 32) / step_duration_[13],	// 1/16
-	(1 << 32) / step_duration_[14],	// 1/16T
-
-	(1 << 32) / step_duration_[15],	// 1/32.
-	(1 << 32) / step_duration_[16],	// 1/32
-	(1 << 32) / step_duration_[17],	// 1/32T
-};
-*/
