@@ -38,7 +38,7 @@ public:
 		case PROBABILITY:	return "PROBABILITY";
 		case VELOCITY:		return "VELOCITY";
 		case GATE_LENGTH:	return "GATE LENGTH";
-		case NUM_REPEATS:	return "NUM REPEATS";
+		case NUM_REPEATS:	return "REPEATS";
 		case REPEAT_SPREAD:	return "REPEAT SPREAD";
 		case DELAY:			return "DELAY";
 		default:
@@ -47,17 +47,17 @@ public:
 		return nullptr;
 	}
 
-	static const char* step_value_text(StepItem item, int data) {
+	static const char* step_value_text(StepItem item, int value) {
 		switch (item)
 		{
-		case TRIGGER:		return UiText::bool_to_on_off(data);
-		case DRUM_NOTE:		return UiText::unsigned_int_to_text(data);
-		case PROBABILITY:	return UiText::percentage_text(data, 9);
-		case VELOCITY:		return UiText::unsigned_int_to_text(data);
-		case GATE_LENGTH:	return ClockEngine::gate_duration_text(data);
-		case NUM_REPEATS:	return RepeatEngine::repeat_text(data);
-		case REPEAT_SPREAD:	return UiText::unsigned_int_to_text(data);
-		case DELAY:			return ClockEngine::gate_duration_text(data);
+		case TRIGGER:		return UiText::bool_to_on_off(value);
+		case DRUM_NOTE:		return UiText::unsigned_int_to_text(value);
+		case PROBABILITY:	return UiText::percentage_text(value, 7);
+		case VELOCITY:		return UiText::unsigned_int_to_text(value);
+		case GATE_LENGTH:	return ClockEngine::gate_duration_text(value);
+		case NUM_REPEATS:	return RepeatEngine::repeat_text(value);
+		case REPEAT_SPREAD:	return UiText::signed_int_to_text(value - 3);
+		case DELAY:			return ClockEngine::gate_duration_text(value);
 		default:
 			break;
 		}
