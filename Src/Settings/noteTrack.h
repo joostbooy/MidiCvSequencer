@@ -57,7 +57,7 @@ public:
 		case VELOCITY:		return UiText::unsigned_int_to_text(value);
 		case GATE_LENGTH:	return ClockEngine::gate_duration_text(value);
 		case NUM_REPEATS:	return RepeatEngine::repeat_text(value);
-		case REPEAT_SPREAD:	return UiText::unsigned_int_to_text(value);
+		case REPEAT_SPREAD:	return UiText::signed_int_to_text(value - 3);
 		case DELAY:			return ClockEngine::gate_duration_text(value);
 		case PROBABILITY:	return UiText::percentage_text(value, 7);
 		default:
