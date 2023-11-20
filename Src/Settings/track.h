@@ -32,16 +32,18 @@ public:
 		return index_;
 	}
 
-	//const char* name() {
-	//	return UiText::str.write("T", index_ + 1, "-", BaseTrack::type_text(), "-", BaseTrack::label());
-	//}
-
 	const char* name() {
 		UiText::str.write("T", index_ + 1, "-", BaseTrack::type_text());
 		if (*BaseTrack::label() != '\0') {
 			UiText::str.append("-");
 			UiText::str.append(BaseTrack::label());
 		}
+		return UiText::str.read();
+	}
+
+	const char* name_small() {
+		UiText::str.write("T", index_ + 1, " ", BaseTrack::label());
+		UiText::str.truncate(6);
 		return UiText::str.read();
 	}
 
