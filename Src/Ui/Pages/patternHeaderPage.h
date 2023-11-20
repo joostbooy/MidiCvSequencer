@@ -43,7 +43,7 @@ namespace PatternHeaderPage {
 		.x = 0,
 		.y = 0,
 		.width = canvas.width(),
-		.height = 8,
+		.height = 7,
 		.collumns = NUM_ITEMS,
 		.rows = 1,
 	};
@@ -197,7 +197,7 @@ namespace PatternHeaderPage {
 		// draw list
 		canvas.set_font(Font::SMALL);
 
-		painters.window.fill(window, Canvas::BLACK, Canvas::WHITE);
+		painters.window.fill(window, Canvas::WHITE, Canvas::WHITE);
 
 		for (int i = window.coll().first; i <= window.coll().last; ++i) {
 			Canvas::Color color = (selected_item == i) ? Canvas::BLACK : Canvas::LIGHT_GRAY;
