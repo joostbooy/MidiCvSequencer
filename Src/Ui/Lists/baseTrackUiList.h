@@ -15,6 +15,8 @@ public:
 		CLOCK_MODE,
 		CLOCK_SPEED,
 		DELAY,
+		SWING,
+		HUMANISE,
 		MUTE,
 		SOLO,
 
@@ -34,6 +36,8 @@ public:
 		case CLOCK_MODE:	return "CLOCK MODE";
 		case CLOCK_SPEED:	return "CLOCK SPEED";
 		case DELAY:			return "DELAY";
+		case SWING:			return "SWING";
+		case HUMANISE:		return "HUMANISE";
 		case MUTE:			return "MUTE";
 		case SOLO:			return "SOLO";
 		default:			return nullptr;
@@ -52,6 +56,8 @@ public:
 		case CLOCK_MODE:	return track.clock_mode_text();
 		case CLOCK_SPEED:	return track.clock_speed_text();
 		case DELAY:			return track.delay_text();
+		case SWING:			return track.swing_text();
+		case HUMANISE:		return track.humanise_text();
 		case MUTE:			return settings.song.mute_text(track.index());
 		case SOLO:			return settings.song.solo_text(track.index());
 		default:			return nullptr;
@@ -84,6 +90,12 @@ public:
 			break;
 		case DELAY:
 			track.set_delay(track.delay() + inc);
+			break;
+		case SWING:
+			track.set_swing(track.swing() + inc);
+			break;
+		case HUMANISE:
+			track.set_humanise(track.humanise() + inc);
 			break;
 		case MUTE:
 			settings.song.set_track_mute(track.index(), inc > 0);

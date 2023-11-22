@@ -18,6 +18,8 @@ public:
 	uint8_t clock_mode_;
 	uint8_t clock_speed_;
 	uint8_t delay_;
+	uint8_t swing_;
+	uint8_t humanise_;
 	uint32_t serial_[2];
 	uint16_t grouped_steps_;
 	char label_[kMaxLabelLength];

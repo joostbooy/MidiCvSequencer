@@ -146,6 +146,32 @@ public:
 		return ClockEngine::gate_duration_text(delay());
 	}
 
+	// swing
+	uint8_t swing() {
+		return data_->swing_;
+	}
+
+	void set_swing(int value) {
+		data_->swing_ = clip(0, 7, value);
+	}
+
+	const char* swing_text() {
+		return UiText::percentage_text(swing() , 8);
+	}
+
+	// humanise
+	uint8_t humanise() {
+		return data_->humanise_;
+	}
+
+	void set_humanise(int value) {
+		data_->humanise_ = clip(0, 7, value);
+	}
+
+	const char* humanise_text() {
+		return UiText::percentage_text(humanise(), 7);
+	}
+
 	// label
 	const char* label() {
 		return data_->label_;
@@ -178,6 +204,8 @@ public:
 		set_port(0);
 		set_channel(0);
 		set_delay(0);
+		set_swing(0);
+		set_humanise(0);
 		*grouped_steps() = 0xFFFF;
 		set_clock_mode(PositionEngine::FORWARD);
 		set_clock_speed(ClockEngine::WHOLE_16TH);

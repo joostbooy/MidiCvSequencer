@@ -66,7 +66,10 @@ public:
 			step_index_ = position.update_step(ticks);
 
 			// update track delay
-			delay_ = clock.gate_duration(track_->delay());
+			delay_ = clock.swing(track_->swing());
+			delay_ += clock.humanise(track_->humanise());
+			delay_ += clock.gate_duration(track_->delay());
+
 			return true;
 		}
 

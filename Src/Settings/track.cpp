@@ -10,6 +10,8 @@ void Track::save(FileWriter &fileWriter) {
 	fileWriter.write(data.clock_mode_);
 	fileWriter.write(data.clock_speed_);
 	fileWriter.write(data.delay_);
+	fileWriter.write(data.swing_);
+	fileWriter.write(data.humanise_);
 	fileWriter.write(data.serial_[0]);
 	fileWriter.write(data.serial_[1]);
 
@@ -27,6 +29,8 @@ void Track::load(FileReader &fileReader) {
 	fileReader.read(data.clock_mode_);
 	fileReader.read(data.clock_speed_);
 	fileReader.read(data.delay_);
+	fileReader.read(data.swing_);
+	fileReader.read(data.humanise_);
 	fileReader.read(data.serial_[0]);
 	fileReader.read(data.serial_[1]);
 

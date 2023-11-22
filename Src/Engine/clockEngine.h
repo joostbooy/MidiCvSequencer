@@ -4,6 +4,7 @@
 #include "lookupTables.h"
 #include "stringBuilder.h"
 #include "uiText.h"
+#include "rng.h"
 
 class ClockEngine {
 
@@ -101,6 +102,19 @@ public:
 		}
 
 		return triggered_;
+	}
+
+
+	inline uint32_t humanise(int amount) {
+		return Rng::reciprocal() * amount * (step_duration() / 8);
+	}
+
+	inline uint32_t swing(int amount) {
+		if (ticks_passed_ & 1) {
+			return amount * (step_duration() / 8);
+		} else {
+			return 0;
+		}
 	}
 
 	inline bool triggered() {
