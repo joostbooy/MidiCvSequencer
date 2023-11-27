@@ -152,11 +152,11 @@ public:
 	}
 
 	void set_swing(int value) {
-		data_->swing_ = clip(0, 7, value);
+		data_->swing_ = clip(1, 15, value);
 	}
 
 	const char* swing_text() {
-		return UiText::percentage_text(swing() , 8);
+		return UiText::signed_int_to_text(swing() - 8);
 	}
 
 	// humanise
@@ -204,7 +204,7 @@ public:
 		set_port(0);
 		set_channel(0);
 		set_delay(0);
-		set_swing(0);
+		set_swing(8);
 		set_humanise(0);
 		*grouped_steps() = 0xFFFF;
 		set_clock_mode(PositionEngine::FORWARD);

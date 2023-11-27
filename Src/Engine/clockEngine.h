@@ -110,11 +110,12 @@ public:
 	}
 
 	inline uint32_t swing(int amount) {
-		if (ticks_passed_ & 1) {
-			return amount * (step_duration() / 8);
-		} else {
-			return 0;
+		if (amount < 8) {
+			return (ticks_passed_ & 1) == 0 ? (8 - amount) * (step_duration() / 8) : 0;
+		} else if (amount > 8) {
+			return (ticks_passed_ & 1) == 1 ? (amount - 8) * (step_duration() / 8) : 0;
 		}
+		return 0;
 	}
 
 	inline bool triggered() {
