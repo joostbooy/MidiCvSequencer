@@ -92,7 +92,7 @@ bool Settings::load(const char* new_path) {
 
 bool Settings::save_calibration() {
 	fileWriter.start(&disk.file, "0:/SETTINGS.CAL", current_version());
-	voltPerOctave.save(fileWriter);
+	calibration.save(fileWriter);
 	fileWriter.stop();
 
 	return fileWriter.write_ok();
@@ -100,13 +100,13 @@ bool Settings::save_calibration() {
 
 bool Settings::load_calibration() {
 	fileReader.start(&disk.file, "0:/SETTINGS.CAL");
-	voltPerOctave.load(fileReader);
+	calibration.load(fileReader);
 	fileReader.stop();
 
 	if (fileReader.read_ok())  {
 		calibration_loaded_ = true;
 	} else {
-		voltPerOctave.init();
+		calibration.init();
 		calibration_loaded_ = false;
 	}
 

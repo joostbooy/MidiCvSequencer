@@ -6,7 +6,7 @@
 #include "cvOutput.h"
 #include "midiEvent.h"
 #include "clockEngine.h"
-#include "voltPerOctave.h"
+#include "calibration.h"
 
 class CvOutputEngine {
 
@@ -132,8 +132,8 @@ public:
 	void send() {
 		// overwrite dac values if calibrating
 		if (calibrating_) {
-			dac.set(0, settings.voltPerOctave.min());
-			dac.set(1, settings.voltPerOctave.max());
+			dac.set(0, settings.calibration.min());
+			dac.set(1, settings.calibration.max());
 		}
 
 		dac.write();
@@ -150,9 +150,9 @@ public:
 
 	void write_cc(MidiEvent::Event &event, int value_16_bit = -1) {
 		if (value_16_bit >= 0) {
-			cc_value[event.source] = settings.voltPerOctave.cv_to_value(value_16_bit);
+			cc_value[event.source] = settings.calibration.cv_to_value(value_16_bit);
 		} else {
-			cc_value[event.source] = settings.voltPerOctave.cv_to_value(event.data[1] << 9);
+			cc_value[event.source] = settings.calibration.cv_to_value(event.data[1] << 9);
 		}
 	}
 
@@ -185,8 +185,8 @@ public:
 
 		// set note & vel
 		last_note_value[source] = note_value[source];
-		note_value[source] = settings.voltPerOctave.note_to_value(event.data[0]);
-		vel_value[source] = settings.voltPerOctave.cv_to_value(event.data[1]);
+		note_value[source] = settings.calibration.note_to_value(event.data[0]);
+		vel_value[source] = settings.calibration.cv_to_value(event.data[1]);
 	}
 
 private:
@@ -220,7 +220,7 @@ private:
 
 	// unimplemented for now, might be to taxing
 	inline uint16_t apply_bend(uint8_t source, uint16_t pitch) {
-		const uint16_t whole_note = settings.voltPerOctave.note_to_value(2) - settings.voltPerOctave.note_to_value(0);
+		const uint16_t whole_note = settings.calibration.note_to_value(2) - settings.calibration.note_to_value(0);
 
 		uint16_t low = clip_min(0, pitch - whole_note);
 		uint16_t high = clip_max(65535, pitch + whole_note);

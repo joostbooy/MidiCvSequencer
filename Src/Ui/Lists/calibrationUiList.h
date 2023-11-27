@@ -33,8 +33,8 @@ public:
 	const char* value_text(int item) override {
 		switch (item)
 		{
-		case PLUS_5V:	return UiText::str.write(settings.voltPerOctave.min());
-		case MIN_5V:	return UiText::str.write(settings.voltPerOctave.max());
+		case PLUS_5V:	return UiText::str.write(settings.calibration.min());
+		case MIN_5V:	return UiText::str.write(settings.calibration.max());
 		default:
 			return nullptr;
 		}
@@ -44,10 +44,10 @@ public:
 		switch (item)
 		{
 		case PLUS_5V:
-			settings.voltPerOctave.set_min(settings.voltPerOctave.min() + (shifted ? inc * 50 : inc));
+			settings.calibration.set_min(settings.calibration.min() + (shifted ? inc * 50 : inc));
 			break;
 		case MIN_5V:
-			settings.voltPerOctave.set_max(settings.voltPerOctave.max() + (shifted ? inc * 50 : inc));
+			settings.calibration.set_max(settings.calibration.max() + (shifted ? inc * 50 : inc));
 			break;
 		default:
 			break;

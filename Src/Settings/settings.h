@@ -7,7 +7,7 @@
 #include "cvInput.h"
 #include "midiInput.h"
 #include "midiOutput.h"
-#include "voltPerOctave.h"
+#include "calibration.h"
 
 class Settings {
 
@@ -22,7 +22,8 @@ public:
 	}
 
 	Song song;
-	VoltPerOctave voltPerOctave;
+
+	Calibration calibration;
 
 	MidiInput &midiInput(int port) {
 		return midiInput_[port];

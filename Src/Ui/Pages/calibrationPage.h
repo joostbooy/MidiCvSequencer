@@ -29,7 +29,7 @@ namespace CalibrationPage {
 	const char* const footer_text[NUM_FOOTER_OPTIONS] = { "SAVE", "LOAD", "CLOSE" };
 
 	void clear_settings() {
-		settings.voltPerOctave.init();
+		settings.calibration.init();
 	}
 
 	void init() {
