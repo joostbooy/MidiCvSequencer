@@ -13,8 +13,9 @@ public:
 		return ADC1->SR & ADC_SR_EOC;
 	}
 
+	// circuit is inverted
 	inline uint16_t read() {
-		return ADC1->DR;
+		return 4095 - ADC1->DR;
 	}
 
 	inline uint8_t curr_channel(){
