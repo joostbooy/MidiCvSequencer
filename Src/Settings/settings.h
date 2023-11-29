@@ -139,28 +139,6 @@ public:
 		selected_step_item_ = clip(0, num_items - 1, step_item);
 	}
 
-	// selection
-	int read_selected_pattern(int step, int item) {
-		switch (selected_track().type())
-		{
-		case Track::NOTE_TRACK:
-			return selected_note_track().read_step(selected_pattern(), step, NoteTrack::StepItem(item));
-		case Track::CHORD_TRACK:
-			return selected_chord_track().read_step(selected_pattern(), step, ChordTrack::StepItem(item));
-		case Track::DRUM_TRACK:
-			return selected_drum_track().read_step(selected_pattern(), step, DrumTrack::StepItem(item));
-		case Track::CURVE_TRACK:
-			return selected_curve_track().read_step(selected_pattern(), step, CurveTrack::StepItem(item));
-		default:
-			break;
-		}
-		return 0;
-	}
-
-	int read_selected_step_item(int step) {
-		return read_selected_pattern(step, selected_step_item());
-	}
-
 	// save & load
 	bool save();
 	bool save(const char* new_path);
