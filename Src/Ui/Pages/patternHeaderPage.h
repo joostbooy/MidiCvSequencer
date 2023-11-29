@@ -18,9 +18,9 @@ namespace PatternHeaderPage {
 	const uint16_t targetFps();
 
 	//variables
-	int follow_ticks;
+	int follow_timeOut;
 	int selected_item;
-	const int delay_ticks = 2000;
+	const int timeOutMax = 2000;
 
 
 	enum Mode {
@@ -103,7 +103,7 @@ namespace PatternHeaderPage {
 
 	void enter() {
 		mode = SELECT;
-		follow_ticks = 0;
+		follow_timeOut = 0;
 		selected_item = 0;
 		window.scroll_to_collumn(selected_item);
 	}
@@ -113,7 +113,7 @@ namespace PatternHeaderPage {
 	}
 
 	void onEncoder(uint8_t id, int inc) {
-		follow_ticks = 0;
+		follow_timeOut = 0;
 
 		bool shift = controller.is_pressed(Controller::SHIFT_BUTTON);
 
@@ -145,7 +145,7 @@ namespace PatternHeaderPage {
 	}
 
 	void onButton(uint8_t id, uint8_t state) {
-		follow_ticks = 0;
+		follow_timeOut = 0;
 
 		if ((id == Controller::MENU_ENC_PUSH || id == Controller::EDIT_BUTTON) && state >= 1) {
 			mode = (mode == SELECT) ? EDIT : SELECT;
@@ -167,30 +167,29 @@ namespace PatternHeaderPage {
 	}
 
 	void msTick(uint16_t ticks) {
-		follow_ticks += ticks;
-		if (follow_ticks >= delay_ticks) {
-			follow_ticks = delay_ticks;
+		follow_timeOut += ticks;
+		if (follow_timeOut >= timeOutMax) {
+			follow_timeOut = timeOutMax;
 		}
 	}
 
 	void refresh_follow() {
-		// disabled
+		// follow disabled
 		if (settings.follow_pattern() == false || (engine.state() != Engine::RUNNING)) {
 			return;
 		}
 
-		// time out
-		if (follow_ticks < delay_ticks) {
-			int frame = (1.0f / delay_ticks) * follow_ticks * 9;
-			canvas.draw_bitmap(246, 10, Bitmap::TIMER, frame);
+		// timeout follow
+		if (follow_timeOut < timeOutMax) {
+			int frame = (1.0f / timeOutMax) * follow_timeOut * 9;
+			canvas.draw_bitmap(246, 0, Bitmap::TIMER, frame);
 			return;
 		}
 
-		// refresh
+		// refresh pattern
 		int track_index = settings.selected_track_index();
 		int pattern_index = engine.trackEngine.state(track_index).pattern_index();
 		settings.select_pattern(pattern_index);
-
 	}
 
 	void drawDisplay() {
