@@ -52,15 +52,18 @@ namespace CurveRandomPage {
 	void drawLeds() {
 		PatternEditRandomPage::drawLeds();
 
+		Matrix::LedColor color;
+
 		int item = settings.selected_step_item();
 		int pattern = settings.selected_pattern();
-		auto &track = settings.selected_chord_track();
+		auto &track = settings.selected_curve_track();
 
 		for (int i = 0; i < 16; ++i) {
 			if (track.pattern.random_is_enabled(pattern, CurveTrack::StepItem(item), i)) {
 				painters.leds.set_step_button(i, Matrix::GREEN);
 			} else {
-				painters.leds.set_step_button(i, Matrix::BLACK);
+				color = track.read_step(pattern, i, CurveTrack::TRIGGER) ? Matrix::ORANGE : Matrix::BLACK;
+				painters.leds.set_step_button(i, color);
 			}
 		}
 	}

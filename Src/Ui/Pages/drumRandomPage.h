@@ -52,6 +52,8 @@ namespace DrumRandomPage {
 	void drawLeds() {
 		PatternEditRandomPage::drawLeds();
 
+		Matrix::LedColor color;
+
 		int item = settings.selected_step_item();
 		int pattern = settings.selected_pattern();
 		auto &track = settings.selected_drum_track();
@@ -60,10 +62,12 @@ namespace DrumRandomPage {
 			if (track.pattern.random_is_enabled(pattern, DrumTrack::StepItem(item), i)) {
 				painters.leds.set_step_button(i, Matrix::GREEN);
 			} else {
-				painters.leds.set_step_button(i, Matrix::BLACK);
+				color = track.read_step(pattern, i, DrumTrack::TRIGGER) ? Matrix::ORANGE : Matrix::BLACK;
+				painters.leds.set_step_button(i, color);
 			}
 		}
 	}
+
 
 	void msTick(uint16_t ticks) {
 		PatternEditRandomPage::msTick(ticks);

@@ -52,6 +52,8 @@ namespace NoteRandomPage {
 	void drawLeds() {
 		PatternEditRandomPage::drawLeds();
 
+		Matrix::LedColor color;
+
 		int item = settings.selected_step_item();
 		int pattern = settings.selected_pattern();
 		auto &track = settings.selected_note_track();
@@ -60,7 +62,8 @@ namespace NoteRandomPage {
 			if (track.pattern.random_is_enabled(pattern, NoteTrack::StepItem(item), i)) {
 				painters.leds.set_step_button(i, Matrix::GREEN);
 			} else {
-				painters.leds.set_step_button(i, Matrix::BLACK);
+				color = track.read_step(pattern, i, NoteTrack::TRIGGER) ? Matrix::ORANGE : Matrix::BLACK;
+				painters.leds.set_step_button(i, color);
 			}
 		}
 	}
