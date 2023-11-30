@@ -54,6 +54,10 @@ public:
 		gate_length_ = clockEngine.gate_duration(gate_length);
 	}
 
+	uint32_t swing() {
+		return clockEngine.swing(arpeggiator_->swing());
+	}
+
 	uint8_t note() {
 		if (arpeggiator_->note_mode() == Arpeggiator::OFF) {
 			return notes_[0];

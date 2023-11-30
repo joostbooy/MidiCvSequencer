@@ -105,6 +105,7 @@ public:
 		set_note_mode(OFF);
 		set_velocity_mode(OFF);
 		set_gate_mode(OFF);
+		set_swing(8);
 		set_speed(ClockEngine::WHOLE_16TH);
 	}
 
@@ -122,6 +123,19 @@ public:
 
 	const char* speed_text() {
 		return ClockEngine::speed_text(speed());
+	}
+
+	// speed
+	uint8_t swing() {
+		return swing_;
+	}
+
+	void set_swing(int value, bool boundary_check = 1) {
+		swing_ = boundary_check ? clip(0, 15, value) : value;
+	}
+
+	const char* swing_text() {
+		return ClockEngine::swing_text(speed());
 	}
 
 	// offset
@@ -220,6 +234,7 @@ public:
 		fileReader.read(trigger_mode_);
 		fileReader.read(gate_length_);
 		fileReader.read(speed_);
+		fileReader.read(swing_);
 		fileReader.read(note_mode_);
 		fileReader.read(gate_mode_);
 		fileReader.read(velocity_mode_);
@@ -230,6 +245,7 @@ public:
 		fileWriter.write(trigger_mode_);
 		fileWriter.write(gate_length_);
 		fileWriter.write(speed_);
+		fileWriter.write(swing_);
 		fileWriter.write(note_mode_);
 		fileWriter.write(gate_mode_);
 		fileWriter.write(velocity_mode_);
@@ -240,6 +256,7 @@ private:
 	uint8_t trigger_mode_;
 	uint8_t gate_length_;
 	uint8_t speed_;
+	uint8_t swing_;
 	uint8_t note_mode_;
 	uint8_t gate_mode_;
 	uint8_t velocity_mode_;
