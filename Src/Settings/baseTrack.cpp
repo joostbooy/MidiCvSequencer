@@ -1,6 +1,6 @@
 #include "baseTrack.h"
 
-char BaseTrack::text_buff[TrackData::kMaxLabelLength];
+StringBuilderBase<TrackData::kMaxLabelLength>BaseTrack::str;
 
 
 void BaseTrack::clear_pattern_list() {

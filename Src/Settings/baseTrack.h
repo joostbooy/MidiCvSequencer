@@ -255,23 +255,22 @@ public:
 	}
 
 	const char* generate_pattern_label() {
-		int highest = 0;
-		for (int i = 0; i < num_patterns(); ++i) {
-			int pattern_index = max_patterns() - 1 - read_pattern_list(i);
-			if (pattern_index > highest) {
-				highest = pattern_index;
-			}
-		}
+		int value = read_pattern_list(num_patterns() - 1);
+		int len = 1 + (value / 26);
+		char c = 'A' + (value % 26);
 
-		itoa(highest + 1, text_buff, 10);
-		return &text_buff[0];
+		str.clear();
+		for (int i = 0; i < len; ++i) {
+			str.append(c);
+		}
+		return str.read();
 	}
 
 private:
 	TrackData *data_;
 	TrackData::List* pattern_list;
 	TrackData::List* pattern_pool;
-	static char text_buff[TrackData::kMaxLabelLength];
+	static StringBuilderBase<TrackData::kMaxLabelLength>str;
 
 	void clear_pattern_list();
 	int append_pattern_list();
