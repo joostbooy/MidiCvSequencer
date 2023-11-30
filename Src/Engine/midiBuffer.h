@@ -77,7 +77,7 @@ private:
 	uint8_t last_message;
 
 
-	void force_write_out(MidiEvent::Event *event, const int size) {
+	void force_write_out(MidiEvent::Event *event, const size_t size) {
 		while (out_que.available_size() < size);
 
 		if (size == 3) {
