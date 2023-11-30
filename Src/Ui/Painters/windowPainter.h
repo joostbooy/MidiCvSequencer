@@ -101,8 +101,8 @@ public:
 		// draw pattern memory
 		int total = settings.song.max_patterns();
 		int free = settings.song.available_patterns();
-		str.write("MEM ", UiText::percentage_text(total - free, total));
-		canvas.draw_text(200, 1, str.read(), Canvas::BLACK);
+		str.write("FREE RAM ", UiText::percentage_text(free, total));
+		canvas.draw_text(0, 0, canvas.width(), 9, str.read(), Canvas::RIGHT, Canvas::CENTER, Canvas::BLACK);
 	}
 
 
