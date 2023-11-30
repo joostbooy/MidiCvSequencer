@@ -156,7 +156,7 @@ public:
 	}
 
 	const char* swing_text() {
-		return UiText::signed_int_to_text(swing() - 8);
+		return ClockEngine::swing_text(swing());
 	}
 
 	// humanise

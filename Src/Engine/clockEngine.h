@@ -153,6 +153,10 @@ public:
 		return (whole_step * (index / 4)) + (quarter_step * (index % 4));
 	}
 
+	static const char* swing_text(int value) {
+		return UiText::str.write(value - 8);
+	}
+
 	static const char* gate_duration_text(uint8_t value) {
 		if (value < 64) {
 			int steps = value / 4;
