@@ -27,6 +27,8 @@ namespace SavePage {
 		} else {
 			painters.message.show("FAILED !");
 		}
+
+		ui.clear_que();
 	}
 
 	void init() {
