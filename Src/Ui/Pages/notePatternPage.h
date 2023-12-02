@@ -2,7 +2,7 @@
 #define NotePatternPage_h
 
 #include "topPage.h"
-#include "noteTrackPainter.h"
+#include "pianoRollPainter.h"
 
 namespace NotePatternPage {
 	//Declarations
@@ -18,7 +18,10 @@ namespace NotePatternPage {
 
 
 	//variables
-	NoteTrackPainter noteTrackPainter;
+	int last_touched_step;
+	TrackState trackState;
+	NoteTrackEngine<false>noteTrackEngine;
+
 
 	int read_step(int step, int item) {
 		NoteTrack &track = settings.selected_note_track();
@@ -38,41 +41,16 @@ namespace NotePatternPage {
 		int pattern_index = settings.selected_pattern();
 		int item = settings.selected_step_item();
 
+		if (item == NoteTrack::PROBABILITY) {
+			if (read_step(step, NoteTrack::PROBABILITY) < 7) {
+				return true;
+			}
+		}
 		return track.pattern.random_is_enabled(pattern_index, NoteTrack::StepItem(item), step);
 	}
 
-	void draw_steps() {
-		canvas.set_font(Font::SMALL);
-
-		NoteTrack &track = settings.selected_note_track();
-		int pattern = settings.selected_pattern();
-
-		NoteTrack::StepItem item_ = NoteTrack::StepItem(settings.selected_step_item());
-		int min = track.item(item_).min();
-		int max = track.item(item_).max();
-
-		for (int i = 0; i < TrackData::kMaxStepsPerPattern; ++i) {
-			int value = track.read_step(pattern, i, item_);
-			bool fill = track.read_step(pattern, i, NoteTrack::TRIGGER);
-
-			if (item_ == NoteTrack::NOTE && track.read(NoteTrack::USE_SCALE) == true) {
-				value = settings.song.scale.read_map(value);
-			}
-
-			painters.pattern.draw_step(i, min, max, fill, value, NoteTrack::step_value_text(item_, value));
-		}
-
-		painters.pattern.draw_separators();
-
-	}
-
-	void draw_notes() {
-		noteTrackPainter.set_track_index(settings.selected_track_index());
-		noteTrackPainter.draw_pattern(settings.selected_pattern());
-	}
-
 	void init() {
-
+		
 	}
 
 	void enter() {
@@ -84,7 +62,7 @@ namespace NotePatternPage {
 				break;
 			}
 		}
-		noteTrackPainter.set_last_touched_note(note);
+		PianoRollPainter::set_last_touched_note(note);
 	}
 
 	void exit() {
@@ -94,8 +72,8 @@ namespace NotePatternPage {
 	void on_step_control(int step) {
 		if (read_step(step, NoteTrack::TRIGGER)) {
 			int note = read_step(step, NoteTrack::NOTE);
-			noteTrackPainter.set_last_touched_note(note);
-			noteTrackPainter.set_last_touched_step(step);
+			PianoRollPainter::set_last_touched_note(note);
+			last_touched_step = step;
 		}
 	}
 
@@ -110,7 +88,7 @@ namespace NotePatternPage {
 		bool pressed = controller.is_pressed(Controller::Y_ENC_PUSH);
 
 		if (id == Controller::Y_ENC && shift == true) {
-			noteTrackPainter.scroll_y(pressed ? inc * 10 : inc);
+			PianoRollPainter::scroll_y(pressed ? inc * 10 : inc);
 		}
 	}
 
@@ -129,9 +107,56 @@ namespace NotePatternPage {
 
 	}
 
+	void draw_step(int step, int curr_tick) {
+		uint32_t x = curr_tick + noteTrackEngine.when();
+		uint32_t w = noteTrackEngine.length();
+		bool is_random = step_is_randomised(step);
+		PianoRollPainter::draw_note(step, trackState.event, x, w, is_random);
+	}
+
+	void draw_last_touched_step(int pattern_index) {
+		auto &track = settings.selected_note_track();
+		int item = settings.selected_step_item();
+		int value = track.read_step(pattern_index, last_touched_step, NoteTrack::StepItem(item));
+
+		if ((item == NoteTrack::NOTE) && track.read(NoteTrack::USE_SCALE)) {
+			value = settings.song.scale.read_map(value);
+		}
+
+		const char *text = NoteTrack::step_value_text(NoteTrack::StepItem(item), value);
+		PianoRollPainter::draw_step_value(last_touched_step, value, text);
+	}
+
 	void drawDisplay() {
-		//draw_steps();
-		draw_notes();
+		auto track = settings.selected_note_track();
+		int trk_index = settings.selected_track_index();
+		int pat_index = settings.selected_pattern();
+		int step_duration = ClockEngine::step_duration(track.clock_speed());
+
+		trackState.init(trk_index, nullptr);	// Fix me! : dont pass a nullptr, make it safe
+		noteTrackEngine.init(trk_index, &trackState);
+		noteTrackEngine.reset();
+
+		PianoRollPainter::set_step_duration(step_duration);
+		PianoRollPainter::reset();
+
+		const bool send_midi = false;
+
+		for (int step = 0; step < 16; ++step) {
+			if (track.read_step(pat_index, step, NoteTrack::TRIGGER)) {
+				noteTrackEngine.process_step(pat_index, step);
+				draw_step(step, 0);
+			}
+
+			for (int i = 0; i < step_duration; ++i) {
+				if (noteTrackEngine.tick_step(send_midi)) {
+					draw_step(step, i);
+				}
+			}
+		}
+
+		draw_last_touched_step(pat_index);
+		PianoRollPainter::draw_scrollbar();
 	}
 
 	const uint16_t targetFps() {
