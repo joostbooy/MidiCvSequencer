@@ -282,8 +282,8 @@ namespace TextInputPage {
 		canvas.set_font(Font::SMALL);
 
 		//draw message
-		canvas.fill(75, 0, 100, 10, Canvas::WHITE);
-		canvas.draw_text(75, 0, 100, 10, message.read(), Canvas::CENTER, Canvas::CENTER);
+		canvas.fill(0, 0, canvas.width(), 10, Canvas::BLACK);
+		canvas.draw_text(0, 0, canvas.width(), 10, message.read(), Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
 
 		//draw char buffer
 		canvas.fill(box_x, 14, box_w, 11, Canvas::DARK_GRAY);
