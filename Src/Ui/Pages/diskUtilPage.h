@@ -157,7 +157,7 @@ namespace DiskUtilPage {
 	}
 
 	void drawLeds() {
-		painters.leds.footer_buttons(NUM_OPTIONS);
+
 	}
 
 	void msTick(uint16_t ticks) {
@@ -166,23 +166,20 @@ namespace DiskUtilPage {
 
 	// Bottom to top
 	void drawDisplay() {
+		// title
 		canvas.set_font(Font::SMALL);
-
-		painters.window.shadow(window, 4);
+		canvas.fill(window.x, window.y - 8, window.width, 10, Canvas::BLACK);
+		canvas.horizontal_line(window.x + 1, window.y - 9, window.width - 2, Canvas::BLACK);
+		canvas.draw_text(window.x, window.y - 9, window.width, 10, "EDIT", Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
 
 		// list
-		Canvas::Color color;
-
-		painters.window.shadow(window, 5);
 		painters.window.fill(window, Canvas::BLACK, Canvas::WHITE);
 
 		for (int i = window.row().first; i <= window.row().last; ++i) {
-			color = (cursor == i) ? Canvas::BLACK : Canvas::LIGHT_GRAY;
+			Canvas::Color color = i == cursor ? Canvas::BLACK : Canvas::LIGHT_GRAY;
 			painters.window.text(window.cell(0, i), option_text[i], Canvas::LEFT, Canvas::CENTER, color);
 		}
-
 		painters.window.vertical_scrollbar(window);
-
 	}
 
 	const uint16_t targetFps() {
