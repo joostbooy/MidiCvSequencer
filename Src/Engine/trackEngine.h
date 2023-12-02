@@ -33,7 +33,7 @@ public:
 
 	void reset() {
 		ticks = 0;
-		tick_count = 0;
+		processed_ticks = 0;
 		suspended = false;
 		audition.is_playing = false;
 
@@ -56,10 +56,8 @@ public:
 			return;
 		}
 
-		tick_count += ticks;
-
-		while (ticks) {
-			--ticks;
+		while (processed_ticks != ticks) {
+			++processed_ticks;
 			for (int i = 0; i < kMaxTracks; ++i) {
 				tick(i);
 			}
@@ -68,7 +66,7 @@ public:
 
 	void start_audition(uint8_t track, uint8_t pattern, uint8_t step) {
 		ticks = 0;
-		tick_count = 0;
+		processed_ticks = 0;
 
 		stop_audition();
 
@@ -86,10 +84,8 @@ public:
 				return;
 			}
 
-			tick_count += ticks;
-
-			while (ticks) {
-				--ticks;
+			while (processed_ticks != ticks) {
+				++processed_ticks;
 				tick_step(audition.track);
 			}
 		}
@@ -97,27 +93,22 @@ public:
 
 	void stop_audition() {
 		if (audition.is_playing) {
-			ticks = 0;
-			tick_count = 0;
-			reset(audition.track);
-			audition.is_playing = false;
+			reset();
 		}
-	}
-
-	uint32_t curr_tick() {
-		return tick_count;
 	}
 
 	float step_fraction(uint8_t index) {
 		uint32_t length = state(index).clock.step_duration();
-		return float(tick_count % length) / length;
+		uint32_t tick = processed_ticks % length;
+		return static_cast<float>(tick / length);
 	}
 
 private:
 	static const int kMaxTracks = settings.song.max_tracks();
-	bool suspended;
-	uint32_t ticks;
-	uint32_t tick_count;
+
+	volatile bool suspended;
+	volatile uint32_t ticks;
+	volatile uint32_t processed_ticks;
 
 	struct Audition {
 		uint8_t track;
