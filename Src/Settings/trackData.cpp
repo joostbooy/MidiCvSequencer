@@ -7,6 +7,6 @@ void TrackData::init() {
 	pattern_pool_.size_ = kMaxPatterns;
 
 	for (int i = 0; i < kMaxPatterns; ++i) {
-		pattern_pool_.entry_[i] = i;
+		pattern_pool_.entry_[i] = kMaxPatterns - 1 - i;
 	}
 }

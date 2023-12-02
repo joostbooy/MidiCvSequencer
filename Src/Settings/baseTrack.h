@@ -259,18 +259,20 @@ public:
 		int len = 1 + (value / 26);
 		char c = 'A' + (value % 26);
 
-		str.clear();
 		for (int i = 0; i < len; ++i) {
-			str.append(c);
+			text[i] = c;
 		}
-		return str.read();
+		text[len + 1] = '\0';
+
+		return text;
 	}
 
+	
 private:
 	TrackData *data_;
 	TrackData::List* pattern_list;
 	TrackData::List* pattern_pool;
-	static StringBuilderBase<TrackData::kMaxLabelLength>str;
+	static char text[TrackData::kMaxLabelLength];
 
 	void clear_pattern_list();
 	int append_pattern_list();

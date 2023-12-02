@@ -1,7 +1,6 @@
 #include "baseTrack.h"
 
-StringBuilderBase<TrackData::kMaxLabelLength>BaseTrack::str;
-
+char BaseTrack::text[TrackData::kMaxLabelLength];
 
 void BaseTrack::clear_pattern_list() {
 	int pool_index;
