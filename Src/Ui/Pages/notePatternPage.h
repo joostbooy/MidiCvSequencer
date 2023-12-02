@@ -50,7 +50,7 @@ namespace NotePatternPage {
 	}
 
 	void init() {
-		
+
 	}
 
 	void enter() {
@@ -133,7 +133,7 @@ namespace NotePatternPage {
 		int pat_index = settings.selected_pattern();
 		int step_duration = ClockEngine::step_duration(track.clock_speed());
 
-		trackState.init(trk_index, nullptr);	// Fix me! : dont pass a nullptr, make it safe
+		trackState.clock.set_speed(track.clock_speed());
 		noteTrackEngine.init(trk_index, &trackState);
 		noteTrackEngine.reset();
 
