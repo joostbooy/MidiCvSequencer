@@ -60,9 +60,9 @@ namespace NoteRandomPage {
 
 		for (int i = 0; i < 16; ++i) {
 			if (track.pattern.random_is_enabled(pattern, NoteTrack::StepItem(item), i)) {
-				painters.leds.set_step_button(i, Matrix::GREEN);
+				painters.leds.set_step_button(i, Matrix::ORANGE);
 			} else {
-				color = track.read_step(pattern, i, NoteTrack::TRIGGER) ? Matrix::ORANGE : Matrix::BLACK;
+				color = track.read_step(pattern, i, NoteTrack::TRIGGER) ? Matrix::GREEN : Matrix::BLACK;
 				painters.leds.set_step_button(i, color);
 			}
 		}
