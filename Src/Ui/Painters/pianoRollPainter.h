@@ -72,6 +72,12 @@ public:
 		}
 	}
 
+	static void draw_position(int step, float phase) {
+		int w =  window.coll_width;
+		int x = w + (step * w) + (phase * w);
+		canvas.vertical_line(x, window.y, window.height, Canvas::DARK_GRAY);
+	}
+
 	static void reset() {
 		// clear note preview
 		for (int i = 0; i < (128 / 32); ++i) {
