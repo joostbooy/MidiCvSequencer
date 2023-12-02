@@ -279,12 +279,11 @@ namespace TextInputPage {
 	// Bottom to top
 	void drawDisplay() {
 		canvas.buffer.clear();
-		painters.window.draw_header();
-
 		canvas.set_font(Font::SMALL);
 
 		//draw message
-		canvas.draw_text(0, 0, canvas.width(), 10, message.read(), Canvas::CENTER, Canvas::CENTER);
+		canvas.fill(75, 0, 100, 10, Canvas::WHITE);
+		canvas.draw_text(75, 0, 100, 10, message.read(), Canvas::CENTER, Canvas::CENTER);
 
 		//draw char buffer
 		canvas.fill(box_x, 14, box_w, 11, Canvas::DARK_GRAY);
