@@ -44,6 +44,8 @@ public:
 	bool tick_step(bool send_midi = true) {
 		if (repeats_->tick()) {
 			length_ = repeats_->interval();
+			trackState_->event.data[1] = repeats_->velocity();
+
 			if (send_midi) {
 				send_step();
 			}
@@ -65,10 +67,12 @@ public:
 		uint8_t gate_length = get_step_value(pattern, step, NoteTrack::GATE_LENGTH);
 		uint8_t repeats = get_step_value(pattern, step, NoteTrack::NUM_REPEATS);
 		uint8_t spread = get_step_value(pattern, step, NoteTrack::REPEAT_SPREAD);
+		uint8_t repeat_velocity = get_step_value(pattern, step, NoteTrack::REPEAT_VELOCITY);
 
 		if (noteTrack_->read(NoteTrack::USE_SCALE)) {
 			note = settings.song.scale.read_map(note);
 		}
+
 
 		MidiEvent::Event &event = trackState_->event;
 
@@ -81,9 +85,12 @@ public:
 		when_ = trackState_->clock.gate_duration(delay);
 		length_ = trackState_->clock.gate_duration(gate_length);
 
-		repeats_->process(repeats, length_, spread);
+		// repeats
+		repeats_->process(repeats, length_, spread, velocity, repeat_velocity);
+		
 		if (repeats_->next_interval()) {
 			length_ = repeats_->interval();
+			event.data[1] = repeats_->velocity();
 		}
 	}
 

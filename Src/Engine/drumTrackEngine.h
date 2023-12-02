@@ -44,6 +44,8 @@ public:
 	bool tick_step(bool send_midi = true) {
 		if (repeats_->tick()) {
 			length_ = repeats_->interval();
+			trackState_->event.data[1] = repeats_->velocity();
+
 			if (send_midi) {
 				send_step();
 			}
@@ -59,28 +61,30 @@ public:
 	}
 
 	void process_step(uint8_t pattern, uint8_t step) {
-		uint8_t drum_note = get_step_value(pattern, step, DrumTrack::DRUM_NOTE);
+		uint8_t note = get_step_value(pattern, step, DrumTrack::DRUM_NOTE);
 		uint8_t velocity = get_step_value(pattern, step, DrumTrack::VELOCITY);
 		uint8_t delay = get_step_value(pattern, step, DrumTrack::DELAY);
 		uint8_t gate_length = get_step_value(pattern, step, DrumTrack::GATE_LENGTH);
 		uint8_t repeats = get_step_value(pattern, step, DrumTrack::NUM_REPEATS);
 		uint8_t spread = get_step_value(pattern, step, DrumTrack::REPEAT_SPREAD);
-
+		uint8_t repeat_velocity = get_step_value(pattern, step, DrumTrack::REPEAT_VELOCITY);
 
 		MidiEvent::Event &event = trackState_->event;
 
 		event.port = drumTrack_->port();
 		event.tie = gate_length >= 64;
 		event.message = MidiEvent::NOTE_ON | drumTrack_->channel();
-		event.data[0] = read_drum_note(drum_note);
+		event.data[0] = read_drum_note(note);
 		event.data[1] = velocity;
 
 		when_ = trackState_->clock.gate_duration(delay);
 		length_ = trackState_->clock.gate_duration(gate_length);
 
-		repeats_->process(repeats, length_, spread);
+		// repeats	
+		repeats_->process(repeats, length_, spread, velocity, repeat_velocity);
 		if (repeats_->next_interval()) {
 			length_ = repeats_->interval();
+			event.data[1] = repeats_->velocity();
 		}
 	}
 
@@ -123,6 +127,7 @@ private:
 		uint8_t probability = get_step_value(pattern, step, DrumTrack::PROBABILITY);
 		return step_trigger && (probability >= Rng::u16(1, 6));
 	}
+
 };
 
 #endif

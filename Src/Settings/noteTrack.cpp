@@ -3,14 +3,15 @@
 
 // step masks
 SerialMask NoteTrack::step_mask_[NUM_STEP_ITEMS] = {
-	[TRIGGER]		= { .reg = 0, .bits = 1, .shifts = 0 },
-	[NOTE]			= { .reg = 0, .bits = 7, .shifts = 1 },
-	[VELOCITY]		= { .reg = 0, .bits = 7, .shifts = 8 },
-	[GATE_LENGTH]	= { .reg = 0, .bits = 7, .shifts = 15 },
-	[NUM_REPEATS]	= { .reg = 0, .bits = 4, .shifts = 22 },
-	[REPEAT_SPREAD]	= { .reg = 0, .bits = 3, .shifts = 26 },
-	[DELAY]			= { .reg = 0, .bits = 2, .shifts = 29 },
-	[PROBABILITY]	= { .reg = 1, .bits = 3, .shifts = 0 },
+	[TRIGGER]			= { .reg = 0, .bits = 1, .shifts = 0 },
+	[NOTE]				= { .reg = 0, .bits = 7, .shifts = 1 },
+	[VELOCITY]			= { .reg = 0, .bits = 7, .shifts = 8 },
+	[GATE_LENGTH]		= { .reg = 0, .bits = 7, .shifts = 15 },
+	[NUM_REPEATS]		= { .reg = 0, .bits = 4, .shifts = 22 },
+	[REPEAT_SPREAD]		= { .reg = 0, .bits = 3, .shifts = 26 },
+	[REPEAT_VELOCITY]	= { .reg = 0, .bits = 2, .shifts = 29 },
+	[DELAY]				= { .reg = 1, .bits = 2, .shifts = 0 },
+	[PROBABILITY]		= { .reg = 1, .bits = 3, .shifts = 2 },
 };
 
 // step items
@@ -56,6 +57,13 @@ SerialItem NoteTrack::step_item_[NUM_STEP_ITEMS] = {
 		.inc_shifted_ = 2,
 		.init_value_ = 3,
 		.mask_ = step_mask_[REPEAT_SPREAD]
+	},
+	[REPEAT_VELOCITY] = {
+		.min_ = 0,
+		.max_ = 2,
+		.inc_shifted_ = 1,
+		.init_value_ = 0,
+		.mask_ = step_mask_[REPEAT_VELOCITY]
 	},
 	[DELAY] = {
 		.min_ = 0,

@@ -8,14 +8,52 @@ class RepeatEngine {
 
 public:
 
+	enum VelocityMode {
+		OFF,
+		UP,
+		DOWN
+	};
+
+	static const char* velocity_mode_text(uint8_t mode) {
+		switch (mode)
+		{
+		case OFF:	return " ";
+		case UP:	return ">";
+		case DOWN:	return "<";
+		default:	return nullptr;
+			break;
+		}
+	}
+
+	static const char* spread_text(int spread) {
+		return UiText::str.write(spread - 3);
+	}
+
+	static const char* repeat_text(uint8_t repeats) {
+		if (repeats < 7) {
+			return UiText::str.write("/", 7 - repeats + 1);
+		} else if (repeats > 7) {
+			return UiText::str.write("X", 1 + repeats - 7);
+		}
+		return "0";
+	}
+
+
 	void reset() {
 		index_ = 0;
 		interval_ = 0;
 		num_repeats_ = 0;
+
+		velocity_mode_ = OFF;
+		velocity_value_ = 0;
 	}
 
-	void process(uint8_t repeats, uint32_t gate_length, uint8_t spread) {
+
+	void process(uint8_t repeats, uint32_t gate_length, uint8_t spread, uint8_t vel, uint8_t vel_mode) {
 		reset();
+
+		velocity_value_ = vel;
+		velocity_mode_ = vel_mode;
 
 		if (repeats < 7) {
 			int repeats_ = 7 - repeats + 1;
@@ -30,6 +68,10 @@ public:
 		return interval_;
 	}
 
+	uint8_t velocity() {
+		return velocity_;
+	}
+
 	bool tick() {
 		if (interval_ > 0) {
 			--interval_;
@@ -41,23 +83,19 @@ public:
 	bool next_interval() {
 		if (index_ < num_repeats_) {
 			interval_ = table_[index_++];
+			velocity_ = next_velocity();
 			return true;
 		}
 		return false;
 	}
 
-	static const char* repeat_text(uint8_t repeats) {
-		if (repeats < 7) {
-			return UiText::str.write("/", 7 - repeats + 1);
-		} else if (repeats > 7) {
-			return UiText::str.write("X", 1 + repeats - 7);
-		}
-		return "0";
-	}
-
 private:
+
 	uint8_t num_repeats_;
 	uint8_t index_;
+	uint8_t velocity_;
+	uint8_t velocity_value_;
+	uint8_t velocity_mode_;
 	uint32_t interval_;
 	uint32_t table_[8];
 	Reciprocal<16>reciprocal;
@@ -84,6 +122,16 @@ private:
 
 		num_repeats_ = index;
 	}
+
+	uint8_t next_velocity() {
+		if (velocity_mode_ == UP) {
+			return velocity_value_ * reciprocal(num_repeats_) * index_;
+		} else if (velocity_mode_ == DOWN) {
+			return velocity_value_ * reciprocal(num_repeats_) * (num_repeats_ - (index_ - 1));
+		}
+		return velocity_value_;
+	}
+
 };
 
 #endif

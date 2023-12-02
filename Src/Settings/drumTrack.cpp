@@ -3,14 +3,15 @@
 
 // step masks
 SerialMask DrumTrack::step_mask_[NUM_STEP_ITEMS] = {
-	[TRIGGER]		= { .reg = 0, .bits = 1, .shifts = 0 },
-	[DRUM_NOTE]		= { .reg = 0, .bits = 3, .shifts = 1 },
-	[PROBABILITY]	= { .reg = 0, .bits = 3, .shifts = 4 },
-	[VELOCITY]		= { .reg = 0, .bits = 7, .shifts = 7 },
-	[GATE_LENGTH]	= { .reg = 0, .bits = 7, .shifts = 14 },
-	[NUM_REPEATS]	= { .reg = 0, .bits = 4, .shifts = 21 },
-	[REPEAT_SPREAD]	= { .reg = 0, .bits = 3, .shifts = 25 },
-	[DELAY]			= { .reg = 0, .bits = 3, .shifts = 28 },
+	[TRIGGER]			= { .reg = 0, .bits = 1, .shifts = 0 },
+	[DRUM_NOTE]			= { .reg = 0, .bits = 3, .shifts = 1 },
+	[PROBABILITY]		= { .reg = 0, .bits = 3, .shifts = 4 },
+	[VELOCITY]			= { .reg = 0, .bits = 7, .shifts = 7 },
+	[GATE_LENGTH]		= { .reg = 0, .bits = 7, .shifts = 14 },
+	[NUM_REPEATS]		= { .reg = 0, .bits = 4, .shifts = 21 },
+	[REPEAT_SPREAD]		= { .reg = 0, .bits = 3, .shifts = 25 },
+	[REPEAT_VELOCITY]	= { .reg = 0, .bits = 2, .shifts = 28 },
+	[DELAY]				= { .reg = 1, .bits = 3, .shifts = 0 },
 };
 
 // step items
@@ -63,6 +64,13 @@ SerialItem DrumTrack::step_item_[NUM_STEP_ITEMS] = {
 		.inc_shifted_ = 2,
 		.init_value_ = 3,
 		.mask_ = step_mask_[REPEAT_SPREAD]
+	},
+	[REPEAT_VELOCITY] = {
+		.min_ = 0,
+		.max_ = 2,
+		.inc_shifted_ = 1,
+		.init_value_ = 0,
+		.mask_ = step_mask_[REPEAT_VELOCITY]
 	},
 	[DELAY] = {
 		.min_ = 0,

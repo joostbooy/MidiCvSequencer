@@ -24,6 +24,7 @@ public:
 		GATE_LENGTH,
 		NUM_REPEATS,
 		REPEAT_SPREAD,
+		REPEAT_VELOCITY,
 		DELAY,
 		NUM_STEP_ITEMS
 	};
@@ -33,14 +34,15 @@ public:
 	static const char* step_item_text(StepItem item) {
 		switch (item)
 		{
-		case TRIGGER:		return "TRIGGER";
-		case DRUM_NOTE:		return "DRUM NOTE";
-		case PROBABILITY:	return "PROBABILITY";
-		case VELOCITY:		return "VELOCITY";
-		case GATE_LENGTH:	return "GATE LENGTH";
-		case NUM_REPEATS:	return "REPEATS";
-		case REPEAT_SPREAD:	return "REPEAT SPREAD";
-		case DELAY:			return "DELAY";
+		case TRIGGER:			return "TRIGGER";
+		case DRUM_NOTE:			return "DRUM NOTE";
+		case PROBABILITY:		return "PROBABILITY";
+		case VELOCITY:			return "VELOCITY";
+		case GATE_LENGTH:		return "GATE LENGTH";
+		case NUM_REPEATS:		return "REPEATS";
+		case REPEAT_SPREAD:		return "REPEAT SPREAD";
+		case REPEAT_VELOCITY:	return "REPEAT VELOCITY";
+		case DELAY:				return "DELAY";
 		default:
 			break;
 		}
@@ -50,14 +52,15 @@ public:
 	static const char* step_value_text(StepItem item, int value) {
 		switch (item)
 		{
-		case TRIGGER:		return UiText::bool_to_on_off(value);
-		case DRUM_NOTE:		return UiText::unsigned_int_to_text(value);
-		case PROBABILITY:	return UiText::percentage_text(value, 7);
-		case VELOCITY:		return UiText::unsigned_int_to_text(value);
-		case GATE_LENGTH:	return ClockEngine::gate_duration_text(value);
-		case NUM_REPEATS:	return RepeatEngine::repeat_text(value);
-		case REPEAT_SPREAD:	return UiText::signed_int_to_text(value - 3);
-		case DELAY:			return ClockEngine::gate_duration_text(value);
+		case TRIGGER:			return UiText::bool_to_on_off(value);
+		case DRUM_NOTE:			return UiText::unsigned_int_to_text(value);
+		case PROBABILITY:		return UiText::percentage_text(value, 7);
+		case VELOCITY:			return UiText::unsigned_int_to_text(value);
+		case GATE_LENGTH:		return ClockEngine::gate_duration_text(value);
+		case NUM_REPEATS:		return RepeatEngine::repeat_text(value);
+		case REPEAT_SPREAD:		return RepeatEngine::spread_text(value);
+		case REPEAT_VELOCITY:	return RepeatEngine::velocity_mode_text(value);
+		case DELAY:				return ClockEngine::gate_duration_text(value);
 		default:
 			break;
 		}
