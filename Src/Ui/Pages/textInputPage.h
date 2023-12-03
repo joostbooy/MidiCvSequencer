@@ -259,15 +259,15 @@ namespace TextInputPage {
 
 	void drawLeds() {
 		if (text_copy.read()) {
-			painters.leds.set_paste(Matrix::GREEN);
-			painters.leds.set_copy(Matrix::ORANGE);
+			LedPainter::set_paste(Matrix::GREEN);
+			LedPainter::set_copy(Matrix::ORANGE);
 		} else {
-			painters.leds.set_copy(Matrix::GREEN);
+			LedPainter::set_copy(Matrix::GREEN);
 		}
 
-		painters.leds.set_clear(Matrix::GREEN);
-		painters.leds.footer_encoders(Matrix::ORANGE, Matrix::BLACK, Matrix::BLACK, Matrix::ORANGE);
-		painters.leds.footer_buttons(Matrix::GREEN, Matrix::RED, Matrix::ORANGE, Matrix::ORANGE);
+		LedPainter::set_clear(Matrix::GREEN);
+		LedPainter::footer_encoders(Matrix::ORANGE, Matrix::BLACK, Matrix::BLACK, Matrix::ORANGE);
+		LedPainter::footer_buttons(Matrix::GREEN, Matrix::RED, Matrix::ORANGE, Matrix::ORANGE);
 	}
 
 	void msTick(uint16_t inc) {

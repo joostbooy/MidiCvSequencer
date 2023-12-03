@@ -131,8 +131,8 @@ namespace CheckListPage {
 	}
 
 	void drawLeds() {
-		painters.leds.footer_encoders(4);
-		painters.leds.footer_buttons(NUM_FOOTER_OPTIONS);
+		LedPainter::footer_encoders(4);
+		LedPainter::footer_buttons(NUM_FOOTER_OPTIONS);
 	}
 
 	void msTick(uint16_t ticks) {

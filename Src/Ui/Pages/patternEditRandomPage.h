@@ -175,7 +175,7 @@ namespace PatternEditRandomPage {
 	}
 
 	void drawLeds() {
-		painters.leds.footer_encoders(Matrix::BLACK, Matrix::GREEN, Matrix::GREEN, Matrix::BLACK);
+		LedPainter::footer_encoders(Matrix::BLACK, Matrix::GREEN, Matrix::GREEN, Matrix::BLACK);
 	}
 
 	void msTick(uint16_t ticks) {

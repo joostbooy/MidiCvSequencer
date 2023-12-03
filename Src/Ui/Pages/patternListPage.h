@@ -128,8 +128,8 @@ namespace PatternListPage {
 	}
 
 	void drawLeds() {
-		painters.leds.set_delete(Matrix::GREEN);
-		painters.leds.footer_buttons(NUM_FOOTER_OPTIONS);
+		LedPainter::set_delete(Matrix::GREEN);
+		LedPainter::footer_buttons(NUM_FOOTER_OPTIONS);
 	}
 
 	void msTick(uint16_t ticks) {

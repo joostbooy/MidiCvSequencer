@@ -149,12 +149,12 @@ namespace StepEditPage {
 
 		if (item >= 0) {
 			for (int i = 0; i < 16; ++i) {
-				painters.leds.set_step_button(i, stepEditor.read(i, item) ? Matrix::GREEN : Matrix::BLACK);
+				LedPainter::set_step_button(i, stepEditor.read(i, item) ? Matrix::GREEN : Matrix::BLACK);
 			}
 		}
 
 		// step mode
-		painters.leds.paint_step_mode(stepEditor, track);
+		LedPainter::paint_step_mode(stepEditor, track);
 	}
 
 	void msTick(uint16_t ticks) {

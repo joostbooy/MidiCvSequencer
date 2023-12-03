@@ -104,7 +104,7 @@ namespace ListPage {
 
 	void drawLeds() {
 		if (callback_) {
-			painters.leds.set_clear(Matrix::GREEN);
+			LedPainter::set_clear(Matrix::GREEN);
 		}
 	}
 

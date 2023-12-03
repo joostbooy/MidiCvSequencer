@@ -8,6 +8,7 @@
 
 #include "painters.h"
 #include "windowPainter.h"
+#include "ledPainter.h"
 
 #include "listPage.h"
 #include "pageSelectionPage.h"
@@ -121,28 +122,28 @@ namespace TopPage {
 		switch (engine.state())
 		{
 		case Engine::STOPPED:
-			painters.leds.set_play(Matrix::BLACK);
-			painters.leds.set_stop(Matrix::RED);
+			LedPainter::set_play(Matrix::BLACK);
+			LedPainter::set_stop(Matrix::RED);
 			break;
 		case Engine::PAUSED:
-			painters.leds.set_play(Matrix::ORANGE);
-			painters.leds.set_stop(Matrix::BLACK);
+			LedPainter::set_play(Matrix::ORANGE);
+			LedPainter::set_stop(Matrix::BLACK);
 			break;
 		case Engine::RUNNING:
-			painters.leds.set_play(Matrix::GREEN);
-			painters.leds.set_stop(Matrix::BLACK);
+			LedPainter::set_play(Matrix::GREEN);
+			LedPainter::set_stop(Matrix::BLACK);
 			break;
 		default:
 			break;
 		}
 
 		if (settings.has_valid_path()) {
-			painters.leds.set_save(Matrix::GREEN);
+			LedPainter::set_save(Matrix::GREEN);
 		}
 
-		painters.leds.set_edit(controller.is_pressed(Controller::EDIT_BUTTON) ? Matrix::RED : Matrix::BLACK);
-		painters.leds.set_shift(controller.is_pressed(Controller::SHIFT_BUTTON) ? Matrix::RED : Matrix::BLACK);
-		painters.leds.paint_chapters(chapter);
+		LedPainter::set_edit(controller.is_pressed(Controller::EDIT_BUTTON) ? Matrix::RED : Matrix::BLACK);
+		LedPainter::set_shift(controller.is_pressed(Controller::SHIFT_BUTTON) ? Matrix::RED : Matrix::BLACK);
+		LedPainter::paint_chapters(chapter);
 	}
 
 	void msTick(uint16_t ticks) {

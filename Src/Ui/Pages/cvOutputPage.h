@@ -67,7 +67,7 @@ namespace CvOutputPage {
 
 	void drawLeds() {
 		ListPage::drawLeds();
-		painters.leds.footer_buttons(NUM_FOOTER_OPTIONS);
+		LedPainter::footer_buttons(NUM_FOOTER_OPTIONS);
 	}
 
 	void msTick(uint16_t ticks) {

@@ -144,7 +144,7 @@ namespace PatternPage {
 
 		// step position
 		if (pattern == settings.selected_pattern()) {
-			painters.leds.set_clock_position(step);
+			LedPainter::set_clock_position(step);
 		}
 
 		PatternHeaderPage::drawLeds();

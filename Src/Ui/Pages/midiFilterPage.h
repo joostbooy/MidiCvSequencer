@@ -118,8 +118,8 @@ namespace MidiFilterPage {
 	}
 
 	void drawLeds() {
-		painters.leds.footer_encoders(4);
-		painters.leds.footer_buttons(Matrix::GREEN, Matrix::RED, Matrix::ORANGE, Matrix::ORANGE);
+		LedPainter::footer_encoders(4);
+		LedPainter::footer_buttons(Matrix::GREEN, Matrix::RED, Matrix::ORANGE, Matrix::ORANGE);
 	}
 
 	void msTick(uint16_t ticks) {

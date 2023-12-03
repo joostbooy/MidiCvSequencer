@@ -133,8 +133,8 @@ namespace MonitorPage {
 	}
 
 	void drawLeds() {
-		painters.leds.set_clear(Matrix::GREEN);
-		painters.leds.footer_buttons(NUM_FOOTER_OPTIONS);
+		LedPainter::set_clear(Matrix::GREEN);
+		LedPainter::footer_buttons(NUM_FOOTER_OPTIONS);
 	}
 
 	void msTick(uint16_t ticks) {

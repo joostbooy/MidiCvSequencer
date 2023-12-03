@@ -75,7 +75,7 @@ namespace SystemPage {
 	}
 
 	void drawLeds() {
-		painters.leds.footer_buttons(NUM_OPTIONS);
+		LedPainter::footer_buttons(NUM_OPTIONS);
 	}
 
 	void msTick(uint16_t ticks) {

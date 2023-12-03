@@ -192,31 +192,31 @@ namespace PatternEditPage {
 
 		// copy
 		if (clipboard.has_pattern()) {
-			painters.leds.set_copy(Matrix::ORANGE);
+			LedPainter::set_copy(Matrix::ORANGE);
 		} else {
-			painters.leds.set_copy(Matrix::GREEN);
+			LedPainter::set_copy(Matrix::GREEN);
 		}
 
 		// paste
 		if (clipboard.pattern_pasteable(track)) {
-			painters.leds.set_paste(Matrix::GREEN);
+			LedPainter::set_paste(Matrix::GREEN);
 		}
 
 		// mute
 		if (settings.song.track_is_muted(track.index())) {
-			painters.leds.set_mute(Matrix::RED);
+			LedPainter::set_mute(Matrix::RED);
 		}
 
 		// solo
 		if (settings.song.track_is_solod(track.index())) {
-			painters.leds.set_solo(Matrix::RED);
+			LedPainter::set_solo(Matrix::RED);
 		}
 
 		// clear / delete
-		painters.leds.set_clear(Matrix::GREEN);
+		LedPainter::set_clear(Matrix::GREEN);
 
 		if (settings.selected_track().num_patterns() > 1) {
-			painters.leds.set_delete(Matrix::GREEN);
+			LedPainter::set_delete(Matrix::GREEN);
 		}
 	}
 

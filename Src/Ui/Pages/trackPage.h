@@ -202,16 +202,16 @@ namespace TrackPage {
 
 	void drawLeds() {
 		ListPage::drawLeds();
-		painters.leds.set_step_encoder(settings.selected_track_index(), Matrix::GREEN);
-		painters.leds.footer_buttons(NUM_FOOTER_OPTIONS);
+		LedPainter::set_step_encoder(settings.selected_track_index(), Matrix::GREEN);
+		LedPainter::footer_buttons(NUM_FOOTER_OPTIONS);
 
 		int index = settings.selected_track().index();
 		if (settings.song.track_is_muted(index)) {
-			painters.leds.set_mute(Matrix::GREEN);
+			LedPainter::set_mute(Matrix::GREEN);
 		}
 
 		if (settings.song.track_is_solod(index)) {
-			painters.leds.set_solo(Matrix::GREEN);
+			LedPainter::set_solo(Matrix::GREEN);
 		}
 	}
 
