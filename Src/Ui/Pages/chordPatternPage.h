@@ -2,7 +2,7 @@
 #define ChordPatternPage_h
 
 #include "topPage.h"
-#include "chordTrackPainter.h"
+#include "chordTrackEngine.h"
 
 namespace ChordPatternPage {
 	//Declarations
@@ -19,12 +19,34 @@ namespace ChordPatternPage {
 
 	//variables
 	Chord chord;
-	ChordTrackPainter chordTrackPainter;
+	ChordTrack *track;
+	TrackState trackState;
+	ChordTrackEngine<false>chordTrackEngine;
+
+	int step_duration;
+	int last_touched_step;
+	int last_top;
+	int last_bottom;
+
 
 	int read_step(int step, int item) {
 		ChordTrack &track = settings.selected_chord_track();
 		int pattern = settings.selected_pattern();
 		return track.read_step(pattern, step, ChordTrack::StepItem(item));
+	}
+
+	void set_last_touched_chord(Chord &chord, int oct_offset) {
+		int bottom = chord.note(0) + oct_offset;
+		int top = chord.note(chord.size() - 1) + oct_offset;
+
+		if (last_bottom != bottom && bottom < PianoRollPainter::bottom_note()) {
+			PianoRollPainter::set_last_touched_note(bottom);
+		} else if (last_top != top && top > PianoRollPainter::top_note()) {
+			PianoRollPainter::set_last_touched_note(top);
+		}
+
+		last_bottom = bottom;
+		last_top = top;
 	}
 
 	void build_step_chord(int step) {
@@ -36,46 +58,21 @@ namespace ChordPatternPage {
 
 		chord.build(type, root_shift, variation, inversion);
 
-		chordTrackPainter.set_last_touched_chord(chord, oct_offset);
-		chordTrackPainter.set_last_touched_step(step);
+		set_last_touched_chord(chord, oct_offset);
+		last_touched_step = step;
 	}
 
-	void draw_step_view(int pattern, int item) {
-		ChordTrack &track = settings.selected_chord_track();
-
-		ChordTrack::StepItem item_ = ChordTrack::StepItem(item);
-		int min = track.item(item_).min();
-		int max = track.item(item_).max();
-
-		for (int i = 0; i < TrackData::kMaxStepsPerPattern; ++i) {
-			int value = track.read_step(pattern, i, item_);
-			bool fill = track.read_step(pattern, i, ChordTrack::TRIGGER);
-			painters.pattern.draw_step(i, min, max, fill, value, ChordTrack::step_value_text(item_, value));
-		}
-
-		painters.pattern.draw_separators();
-	}
-
-	void draw_steps() {
-		int pattern = settings.selected_pattern();
-		int item = settings.selected_step_item();
-		draw_step_view(pattern, item);
-	}
-
-	void draw_notes() {
-		chordTrackPainter.set_track_index(settings.selected_track_index());
-		chordTrackPainter.draw_pattern(settings.selected_pattern());
-	}
 
 	void init() {
 
 	}
 
 	void enter() {
-		chordTrackPainter.reset();
-		
+		last_bottom = -1;
+		last_top = -1;
+
 		for (int i = 0; i < 16; ++i) {
-			if (read_step(i, NoteTrack::TRIGGER)) {
+			if (read_step(i, ChordTrack::TRIGGER)) {
 				build_step_chord(i);
 				return;
 			}
@@ -103,7 +100,7 @@ namespace ChordPatternPage {
 		bool pressed = controller.is_pressed(Controller::Y_ENC_PUSH);
 
 		if (id == Controller::Y_ENC && shift == true) {
-			chordTrackPainter.scroll_y(pressed ? inc * 10 : inc);
+			PianoRollPainter::scroll_y(pressed ? inc * 10 : inc);
 		}
 	}
 
@@ -122,8 +119,69 @@ namespace ChordPatternPage {
 
 	}
 
+	bool step_is_random(int step) {
+		auto track = settings.selected_chord_track();
+		int item = settings.selected_step_item();
+		int pattern_ = settings.selected_pattern();
+		return track.pattern.random_is_enabled(pattern_, item, step);
+	}
+
+	void draw_step(int step, int curr_tick) {
+		uint32_t x = curr_tick + chordTrackEngine.when();
+		uint32_t w = chordTrackEngine.length();
+		bool is_random = step_is_random(step);
+		PianoRollPainter::draw_note(step, trackState.event, x, w, is_random);
+	}
+
+	void draw_chord(int step) {
+		for (int i = 0; i < chordTrackEngine.chord().size(); ++i) {
+			trackState.event.data[0] = chordTrackEngine.chord().note(i) + chordTrackEngine.oct_offset();
+			draw_step(step, 0);
+		}
+	}
+
+	void draw_last_touched_step(int pattern_index) {
+		auto track = settings.selected_chord_track();
+		int item = settings.selected_step_item();
+		int value = track.read_step(pattern_index, last_touched_step, ChordTrack::StepItem(item));
+		const char *text = ChordTrack::step_value_text(ChordTrack::StepItem(item), value);
+		PianoRollPainter::draw_step_value(last_touched_step, value, text);
+	}
+
 	void drawDisplay() {
-		draw_notes();
+		auto track = settings.selected_chord_track();
+		int trk_index = settings.selected_track_index();
+		int pat_index = settings.selected_pattern();
+		int step_duration = ClockEngine::step_duration(track.clock_speed());
+
+		trackState.clock.set_speed(track.clock_speed());
+		chordTrackEngine.init(trk_index, &trackState);
+		chordTrackEngine.reset();
+
+		PianoRollPainter::set_step_duration(step_duration);
+		PianoRollPainter::reset();
+
+		const bool send_midi = false;
+
+		for (int step = 0; step < 16; ++step) {
+			if (track.read_step(pat_index, step, ChordTrack::TRIGGER)) {
+				chordTrackEngine.process_step(pat_index, step);
+				if (chordTrackEngine.arpeggiator_enabled() == false) {
+					draw_chord(step);
+				}
+			}
+
+			if (chordTrackEngine.arpeggiator_enabled()) {
+				for (int i = 0; i < step_duration; ++i) {
+					if (chordTrackEngine.tick_step(send_midi)) {
+						draw_step(step, i);
+					}
+				}
+			}
+		}
+
+		draw_last_touched_step(pat_index);
+		PianoRollPainter::draw_scrollbar();
 	}
 
 	const uint16_t targetFps() {
