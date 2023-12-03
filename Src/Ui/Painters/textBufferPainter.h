@@ -1,14 +1,15 @@
 #ifndef TextBufferPainter_h
 #define TextBufferPainter_h
 
-#include "StringBuilder.h"
+#include "canvas.h"
 #include "window.h"
+#include "StringBuilder.h"
 
 class TextBufferPainter {
 
 public:
 
-	void clear() {
+	static void clear() {
 		entries = 0;
 		top_row = 0;
 		for (int i = 0; i < kMaxRows; ++i) {
@@ -16,7 +17,7 @@ public:
 		}
 	}
 
-	void write(const char* text_) {
+	static void write(const char* text_) {
 		text[entries % kMaxRows].write(text_);
 
 		++entries;
@@ -25,7 +26,7 @@ public:
 		}
 	}
 
-	void draw() {
+	static void draw() {
 		canvas.set_font(Font::SMALL);
 
 		for (int i = 0; i < kMaxRows; ++i) {
@@ -37,21 +38,14 @@ public:
 
 private:
 
-	int entries = 0;
-	int top_row = 0;
+	static int entries;
+	static int top_row;
 	static const int kMaxRows = 6;
-	StringBuilderBase<32>text[kMaxRows];
 
-	Window window = {
-		.x = 0,
-		.y = 12,
-		.width = canvas.width(),
-		.height = canvas.height() - 24,
-		.collumns = 1,
-		.rows = kMaxRows,
-	};
+	static Window window;
+	static Window::Cell cell;
 
-	Window::Cell cell;
+	static StringBuilderBase<32>text[kMaxRows];
 };
 
 #endif

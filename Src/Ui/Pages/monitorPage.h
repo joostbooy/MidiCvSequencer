@@ -58,12 +58,12 @@ namespace MonitorPage {
 
 		if (value != cv_value) {
 			cv_value = value;
-			painters.text_buffer.write(str.read());
+			TextBufferPainter::write(str.read());
 		}
 
 		if (gate != gate_value) {
 			gate_value = gate;
-			painters.text_buffer.write(str.write("GATE ", gate));
+			TextBufferPainter::write(str.write("GATE ", gate));
 		}
 	}
 
@@ -78,7 +78,7 @@ namespace MonitorPage {
 		str.append(" ");
 		str.append(UiText::midi_data_text(event, 1));
 
-		painters.text_buffer.write(str.read());
+		TextBufferPainter::write(str.read());
 	}
 
 	void init() {
@@ -89,7 +89,7 @@ namespace MonitorPage {
 	}
 
 	void enter() {
-		painters.text_buffer.clear();
+		TextBufferPainter::clear();
 	}
 
 	void exit() {
@@ -106,14 +106,14 @@ namespace MonitorPage {
 		}
 
 		if (id == Controller::CLEAR_BUTTON) {
-			painters.text_buffer.clear();
+			TextBufferPainter::clear();
 			return;
 		}
 
 		switch (controller.button_to_function(id))
 		{
 		case CLEAR:
-			painters.text_buffer.clear();
+			TextBufferPainter::clear();
 			break;
 		case FILTER:
 			if (type_ == MIDI_IN) {
@@ -178,7 +178,7 @@ namespace MonitorPage {
 			break;
 		}
 
-		painters.text_buffer.draw();
+		TextBufferPainter::draw();
 		WindowPainter::draw_footer(is_running ? footer_text_running : footer_text_stopped, NUM_FOOTER_OPTIONS);
 	}
 

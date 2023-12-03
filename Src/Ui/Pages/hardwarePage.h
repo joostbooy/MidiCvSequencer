@@ -116,7 +116,7 @@ namespace HardwarePage {
 	}
 
 	void enter() {
-		painters.text_buffer.clear();
+		TextBufferPainter::clear();
 	}
 
 	void exit() {
@@ -128,7 +128,7 @@ namespace HardwarePage {
 		if (str.length() > 0) {
 			str.append(" ");
 			str.append(inc);
-			painters.text_buffer.write(str.read());
+			TextBufferPainter::write(str.read());
 		}
 	}
 
@@ -137,7 +137,7 @@ namespace HardwarePage {
 		if (str.length() > 0) {
 			str.append(" ");
 			str.append(state);
-			painters.text_buffer.write(str.read());
+			TextBufferPainter::write(str.read());
 		}
 
 		switch (controller.button_to_function(id))
@@ -176,7 +176,7 @@ namespace HardwarePage {
 	void drawDisplay() {
 		canvas.buffer.clear();
 		WindowPainter::draw_header();
-		painters.text_buffer.draw();
+		TextBufferPainter::draw();
 		WindowPainter::draw_footer(footer_text, NUM_FOOTER_OPTIONS);
 	}
 

@@ -9,6 +9,8 @@
 #include "painters.h"
 #include "windowPainter.h"
 #include "ledPainter.h"
+#include "textBufferPainter.h"
+#include "messagePainter.h"
 
 #include "listPage.h"
 #include "pageSelectionPage.h"
