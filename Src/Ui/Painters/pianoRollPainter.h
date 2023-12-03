@@ -13,6 +13,7 @@ public:
 		window.set_row_items_total(128);
 		window.set_coll_items_total(17);
 		scroll_bar_frames = 0;
+		step_value_frames = 0;
 	}
 
 	static int top_note() {
