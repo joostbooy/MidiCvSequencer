@@ -6,7 +6,6 @@
 #include "controller.h"
 #include "engine.h"
 
-#include "painters.h"
 #include "windowPainter.h"
 #include "ledPainter.h"
 #include "textBufferPainter.h"
@@ -43,9 +42,9 @@ namespace TopPage {
 
 	void on_save_button() {
 		if (settings.save()) {
-			painters.message.show("SETTINGS SAVED");
+			MessagePainter::show("SETTINGS SAVED");
 		} else {
-			painters.message.show("SAVE FAILED !");
+			MessagePainter::show("SAVE FAILED !");
 		}
 		ui.clear_que();
 	}
@@ -78,7 +77,6 @@ namespace TopPage {
 	}
 
 	void init() {
-		painters.init();
 		canvas.set_font(Font::SMALL);
 	}
 
@@ -154,8 +152,8 @@ namespace TopPage {
 
 	// Bottom to top
 	void drawDisplay() {
-		painters.message.tick(pages.targetFps());
-		painters.message.draw();
+		MessagePainter::tick(pages.targetFps());
+		MessagePainter::draw();
 	}
 
 	const uint16_t targetFps() {

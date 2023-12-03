@@ -63,10 +63,10 @@ namespace DiskRetryPage {
 			if (disk.mounted()) {
 				disk.reset();
 				pages.close(Pages::DISK_RETRY_PAGE);	// close page before calling refresh_dir_callback() !
-				painters.message.show("CARD DETECTED");
+				MessagePainter::show("CARD DETECTED");
 				refresh_dir_callback();
 			} else {
-				painters.message.show(DiskUtils::result_text(disk.last_result()));
+				MessagePainter::show(DiskUtils::result_text(disk.last_result()));
 			}
 			break;
 		default:

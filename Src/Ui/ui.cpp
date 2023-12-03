@@ -5,7 +5,6 @@
 #include "matrix.h"
 #include "disk.h"
 #include "canvas.h"
-#include "painters.h"
 #include "engine.h"
 
 Ui ui;

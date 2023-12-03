@@ -52,7 +52,7 @@ namespace TrackPage {
 			if (settings.song.create_track(index, option)) {
 				settings.select_pattern(0);
 				settings.select_step_item(0);
-				painters.message.show("TRACK CREATED");
+				MessagePainter::show("TRACK CREATED");
 			}
 
 			engine.resume();
@@ -100,7 +100,7 @@ namespace TrackPage {
 
 		engine.resume();
 
-		painters.message.show("TRACK CLEARED");
+		MessagePainter::show("TRACK CLEARED");
 	}
 
 	UiList *selected_list() {

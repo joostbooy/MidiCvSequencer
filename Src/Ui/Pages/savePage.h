@@ -23,9 +23,9 @@ namespace SavePage {
 
 		if (settings.save(TopPage::str.read())) {
 			DiskNavigatorPage::refresh_dir();
-			painters.message.show("SETTINGS SAVED");
+			MessagePainter::show("SETTINGS SAVED");
 		} else {
-			painters.message.show("FAILED !");
+			MessagePainter::show("FAILED !");
 		}
 
 		ui.clear_que();

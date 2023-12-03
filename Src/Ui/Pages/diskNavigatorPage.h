@@ -3,7 +3,6 @@
 
 #include "pages.h"
 #include "canvas.h"
-#include "painters.h"
 #include "stringBuilder.h"
 #include "textInputPage.h"
 #include "diskUtilPage.h"

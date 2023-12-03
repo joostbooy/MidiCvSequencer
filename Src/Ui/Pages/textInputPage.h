@@ -208,14 +208,14 @@ namespace TextInputPage {
 		if (id == Controller::COPY_BUTTON) {
 			if (char_stack.size() > 1) {
 				text_copy.write(char_stack.pointer());
-				painters.message.show("TEXT COPIED");
+				MessagePainter::show("TEXT COPIED");
 			}
 			return;
 		}
 
 		if ((id == Controller::PASTE_BUTTON) && text_copy.read()) {
 			write_to_buffer(const_cast<char*>(text_copy.read()), dest_max_);
-			painters.message.show("TEXT PASTED");
+			MessagePainter::show("TEXT PASTED");
 			return;
 		}
 
@@ -226,12 +226,12 @@ namespace TextInputPage {
 			break;
 		case FINISH:
 			if (text_is_empty()) {
-				painters.message.show("TEXT CANNOT BE EMPTY !");
+				MessagePainter::show("TEXT CANNOT BE EMPTY !");
 				return;
 			}
 
 			if (name_excists()) {
-				painters.message.show("NAME ALREADY EXCISTS !");
+				MessagePainter::show("NAME ALREADY EXCISTS !");
 				return;
 			}
 

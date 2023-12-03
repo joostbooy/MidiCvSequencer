@@ -8,7 +8,7 @@ class MessagePainter {
 
 public:
 
-	inline void show(const char* text_, uint16_t duration_ms_ = 1200) {
+	static void show(const char* text_, uint16_t duration_ms_ = 1200) {
 		str.write(text_);
 		w = font.string_width(str.read()) + 20;
 		x = (canvas.width() - w) / 2;
@@ -17,20 +17,20 @@ public:
 		duration_ms = duration_ms_;
 	}
 
-	inline void show_error(const char* text_, uint16_t duration_ms_ = 1200) {
+	static void show_error(const char* text_, uint16_t duration_ms_ = 1200) {
 		show(text_, duration_ms_);
 		is_error = true;
 	}
 
-	inline void hide() {
+	static void hide() {
 		is_visible = false;
 	}
 
-	inline bool visible(){
+	static bool visible(){
 		return is_visible;
 	}
 
-	inline void draw() {
+	static void draw() {
 		if (is_visible) {
 			canvas.set_font(Font::SMALL);
 			canvas.fill(x + 4, y + 4, w, h, Canvas::SUBTRACTED);
@@ -44,7 +44,7 @@ public:
 		}
 	}
 
-	inline void tick(uint16_t ticks) {
+	static void tick(uint16_t ticks) {
 		if (duration_ms >= ticks){
 			duration_ms -= ticks;
 		} else {
@@ -54,16 +54,16 @@ public:
 	}
 
 private:
-	bool is_error;
-	bool is_visible;
-	uint16_t duration_ms = 0;
-	uint16_t interval_;
-	StringBuilderBase<32>str;
+	static bool is_error;
+	static bool is_visible;
+	static uint16_t duration_ms;;
+	static uint16_t interval_;
+	static StringBuilderBase<32>str;
 
-	uint16_t x = 0;
-	uint16_t y = 16;
-	uint16_t w = 0;
-	uint16_t h = 32;
+	static uint16_t x;
+	static uint16_t y;
+	static uint16_t w;
+	static uint16_t h;
 };
 
 #endif

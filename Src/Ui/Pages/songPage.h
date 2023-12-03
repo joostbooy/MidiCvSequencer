@@ -64,7 +64,7 @@ namespace SongPage {
 			ConfirmationPage::set("CREATE NEW SONG ?", [](uint8_t option) {
 				if (option == ConfirmationPage::CONFIRM) {
 					settings.init();
-					painters.message.show("NEW SONG CREATED");
+					MessagePainter::show("NEW SONG CREATED");
 				}
 			});
 			pages.open(Pages::CONFIRMATION_PAGE);
@@ -78,7 +78,7 @@ namespace SongPage {
 				 settings.song.set_track_mute(i, false);
 				 settings.song.set_track_solo(i, false);
 			}
-			painters.message.show("ALL TRACKS UNMUTED");
+			MessagePainter::show("ALL TRACKS UNMUTED");
 			break;
 		default:
 			break;

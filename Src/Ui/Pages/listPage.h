@@ -85,7 +85,7 @@ namespace ListPage {
 
 	//	if (id == Controller::COPY_BUTTON && value >= 1 && copy_callback_ != nullptr) {
 	//		if (copy_callback_()) {
-			//	painters.message.show("SETTINGS COPIED");
+			//	MessagePainter::show("SETTINGS COPIED");
 			//}
 	//		return;
 	//	}

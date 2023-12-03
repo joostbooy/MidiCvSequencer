@@ -4,7 +4,6 @@
 #include "pages.h"
 #include "canvas.h"
 #include "diskUtils.h"
-#include "painters.h"
 #include "stringBuilder.h"
 #include "textInputPage.h"
 #include "disk.h"
@@ -93,9 +92,9 @@ namespace DiskUtilPage {
 	void delete_entry_callback(uint8_t option) {
 		if (option == ConfirmationPage::CONFIRM) {
 			if (disk.dir.remove(entry->name.read())) {
-				painters.message.show(entry->is_dir ? "FOLDER DELETED" : "FILE DELETED");
+				MessagePainter::show(entry->is_dir ? "FOLDER DELETED" : "FILE DELETED");
 			} else {
-				painters.message.show("FAILED");
+				MessagePainter::show("FAILED");
 			}
 			refresh_dir_callback();
 			pages.close(Pages::DISK_UTIL_PAGE);
@@ -105,10 +104,10 @@ namespace DiskUtilPage {
 	void add_folder_callback(bool confirmed) {
 		if (confirmed) {
 			if (disk.dir.make(TopPage::str.read())) {
-				painters.message.show("FOLDER CREATED");
+				MessagePainter::show("FOLDER CREATED");
 				refresh_dir_callback();
 			} else {
-				painters.message.show("FAILED !");
+				MessagePainter::show("FAILED !");
 			}
 		}
 		pages.close(Pages::DISK_UTIL_PAGE);
@@ -117,10 +116,10 @@ namespace DiskUtilPage {
 	void rename_entry_callback(bool confirmed) {
 		if (confirmed) {
 			if (disk.entry.rename(entry->name.read(), TopPage::str.read())) {
-				painters.message.show("RENAMED");
+				MessagePainter::show("RENAMED");
 				refresh_dir_callback();
 			} else {
-				painters.message.show("FAILED !");
+				MessagePainter::show("FAILED !");
 			}
 		}
 		pages.close(Pages::DISK_UTIL_PAGE);

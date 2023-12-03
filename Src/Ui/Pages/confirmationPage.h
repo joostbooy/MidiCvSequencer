@@ -2,9 +2,9 @@
 #define ConfirmationPage_h
 
 #include "ui.h"
-#include "painters.h"
 #include "controller.h"
 #include "pages.h"
+
 namespace ConfirmationPage {
 
 	//Declarations

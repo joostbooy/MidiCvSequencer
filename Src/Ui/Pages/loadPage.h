@@ -27,10 +27,10 @@ namespace LoadPage {
 		TopPage::str.write(DiskNavigatorPage::curr_path(), "/", DiskNavigatorPage::curr_entry_name());
 
 		if (settings.load(TopPage::str.read())) {
-			painters.message.show("SETTINGS LOADED");
+			MessagePainter::show("SETTINGS LOADED");
 			chapter.open(Chapter::SONG);
 		} else {
-			painters.message.show("FAILED !");
+			MessagePainter::show("FAILED !");
 		}
 
 		ui.clear_que();

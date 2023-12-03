@@ -23,7 +23,7 @@ namespace PatternEditPage {
 		auto& track = settings.selected_track();
 
 		if (settings.song.available_patterns() == 0) {
-			painters.message.show("FAILED! MEMORY FULL");
+			MessagePainter::show("FAILED! MEMORY FULL");
 			return;
 		}
 
@@ -50,7 +50,7 @@ namespace PatternEditPage {
 		engine.resume();
 
 		settings.select_pattern(track.num_patterns() - 1);
-		painters.message.show("PATTERN ADDED");
+		MessagePainter::show("PATTERN ADDED");
 	}
 
 	void clear_pattern(int pattern) {
@@ -78,7 +78,7 @@ namespace PatternEditPage {
 
 		engine.resume();
 
-		painters.message.show("PATTERN CLEARED");
+		MessagePainter::show("PATTERN CLEARED");
 	}
 
 	void remove_pattern(int pattern) {
@@ -90,7 +90,7 @@ namespace PatternEditPage {
 			clear_pattern(pattern);
 		} else if (track.remove_pattern(pattern)) {
 			settings.select_pattern(pattern - 1);
-			painters.message.show("PATTERN REMOVED");
+			MessagePainter::show("PATTERN REMOVED");
 		}
 
 		engine.resume();
@@ -142,7 +142,7 @@ namespace PatternEditPage {
 				break;
 			case Controller::COPY_BUTTON:
 				if (clipboard.copy_pattern(track, pattern)) {
-					painters.message.show("PATTERN COPIED");
+					MessagePainter::show("PATTERN COPIED");
 				}
 				break;
 			case Controller::PASTE_BUTTON:

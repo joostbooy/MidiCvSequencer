@@ -65,9 +65,9 @@ namespace CalibrationPage {
 			ConfirmationPage::set("OVERWRITE SETTINGS ?", [](uint8_t option) {
 				if (option == ConfirmationPage::CONFIRM) {
 					if (settings.save_calibration()) {
-						painters.message.show("CALIBRATION SAVED");
+						MessagePainter::show("CALIBRATION SAVED");
 					} else {
-						painters.message.show("FAILED");
+						MessagePainter::show("FAILED");
 					}
 				}
 			});
@@ -77,9 +77,9 @@ namespace CalibrationPage {
 			ConfirmationPage::set("OVERWRITE SETTINGS ?", [](uint8_t option) {
 				if (option == ConfirmationPage::CONFIRM) {
 					if (settings.load_calibration()) {
-						painters.message.show("CALIBRATION LOADED");
+						MessagePainter::show("CALIBRATION LOADED");
 					} else {
-						painters.message.show("FAILED");
+						MessagePainter::show("FAILED");
 					}
 				}
 			});
