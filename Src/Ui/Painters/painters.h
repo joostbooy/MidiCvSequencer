@@ -2,7 +2,6 @@
 #define Painters_h
 
 #include "ledPainter.h"
-#include "curvePainter.h"
 #include "messagePainter.h"
 #include "windowPainter.h"
 #include "patternPainter.h"
@@ -14,7 +13,6 @@ public:
 	void init();
 
 	LedPainter leds;
-	CurvePainter curve;
 	WindowPainter window;
 	MessagePainter message;
 	PatternPainter pattern;
