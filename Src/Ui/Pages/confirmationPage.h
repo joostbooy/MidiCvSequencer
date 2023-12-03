@@ -88,7 +88,7 @@ namespace ConfirmationPage {
 		canvas.frame(x + 4, y + 4, w - 8, h - 8, Canvas::WHITE);
 		canvas.draw_text(x, y, w, h, message_.read(), Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
 
-		painters.window.draw_footer(option_text, NUM_OPTIONS);
+		WindowPainter::draw_footer(option_text, NUM_OPTIONS);
 	}
 
 	const uint16_t targetFps() {

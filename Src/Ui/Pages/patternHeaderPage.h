@@ -196,15 +196,15 @@ namespace PatternHeaderPage {
 		// draw list
 		canvas.set_font(Font::SMALL);
 
-		painters.window.fill(window, Canvas::WHITE, Canvas::WHITE);
+		WindowPainter::fill(window, Canvas::WHITE, Canvas::WHITE);
 
 		for (int i = window.coll().first; i <= window.coll().last; ++i) {
 			Canvas::Color color = (selected_item == i) ? Canvas::BLACK : Canvas::LIGHT_GRAY;
-			painters.window.text(window.cell(i, 0), item_text(i), Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(i, 0), item_text(i), Canvas::LEFT, Canvas::CENTER, color);
 		}
 
 		if (mode == EDIT) {
-			painters.window.highlight(window.cell(selected_item, 0));
+			WindowPainter::highlight(window.cell(selected_item, 0));
 		}
 
 		refresh_follow();

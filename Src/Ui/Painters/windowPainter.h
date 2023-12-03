@@ -56,7 +56,7 @@ public:
 		canvas.draw_bitmap(cell.x, cell.y, cell.w, cell.h, id, x, y);
 	}
 
-	void highlight(Window::Cell& cell) {
+	static void highlight(Window::Cell& cell) {
 		canvas.fill(cell.x, cell.y, cell.w, cell.h, Canvas::INVERTED);
 	}
 

@@ -87,7 +87,7 @@ namespace DiskRetryPage {
 		canvas.set_font(Font::SMALL);
 		canvas.fill(0, 12, 256, 56, Canvas::WHITE);
 		canvas.draw_text(0, 12, 256, 56, "NO CARD FOUND", Canvas::CENTER, Canvas::CENTER);
-		painters.window.draw_footer(footer_text, NUM_OPTIONS);
+		WindowPainter::draw_footer(footer_text, NUM_OPTIONS);
 	}
 
 	const uint16_t targetFps() {

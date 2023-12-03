@@ -3,9 +3,12 @@
 
 #include "pages.h"
 #include "canvas.h"
-#include "painters.h"
 #include "controller.h"
 #include "engine.h"
+
+#include "painters.h"
+#include "windowPainter.h"
+
 #include "listPage.h"
 #include "pageSelectionPage.h"
 #include "confirmationPage.h"

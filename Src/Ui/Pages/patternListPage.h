@@ -139,7 +139,7 @@ namespace PatternListPage {
 	// Bottom to top
 	void drawDisplay() {
 		canvas.buffer.clear();
-		painters.window.draw_header();
+		WindowPainter::draw_header();
 
 		Canvas::Color color;
 		canvas.set_font(Font::SMALL);
@@ -148,18 +148,18 @@ namespace PatternListPage {
 			color = (index == i) ? Canvas::BLACK : Canvas::LIGHT_GRAY;
 			const char *a = TopPage::str.write(i + 1);
 			const char *b = settings.selected_track().pattern.label(i);
-			painters.window.text(window.cell(0, i), a, Canvas::LEFT, Canvas::CENTER, color);
-			painters.window.text(window.cell(1, i), b, Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(0, i), a, Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(1, i), b, Canvas::LEFT, Canvas::CENTER, color);
 		}
 
 		if (moving) {
-			painters.window.highlight(window.cell(1, index));
-			painters.window.draw_footer(footer_text_move, NUM_FOOTER_OPTIONS);
+			WindowPainter::highlight(window.cell(1, index));
+			WindowPainter::draw_footer(footer_text_move, NUM_FOOTER_OPTIONS);
 		} else {
-			painters.window.draw_footer(footer_text_release, NUM_FOOTER_OPTIONS);
+			WindowPainter::draw_footer(footer_text_release, NUM_FOOTER_OPTIONS);
 		}
 
-		painters.window.vertical_scrollbar(window);
+		WindowPainter::vertical_scrollbar(window);
 	}
 
 	const uint16_t targetFps() {

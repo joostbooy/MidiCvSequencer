@@ -134,20 +134,20 @@ namespace MidiFilterPage {
 		const char* glyph;
 		Canvas::Color color;
 
-		painters.window.shadow(window, 5);
-		painters.window.fill(window, Canvas::BLACK, Canvas::WHITE);
+		WindowPainter::shadow(window, 5);
+		WindowPainter::fill(window, Canvas::BLACK, Canvas::WHITE);
 
 		for (int i = window.row().first; i <= window.row().last; ++i) {
 			color = (cursor == i) ? Canvas::BLACK : Canvas::LIGHT_GRAY;
 			glyph = list_buffer[i] ? font.glyph(Font::CHECKMARK) : " ";
-			painters.window.text(window.cell(0, i), MidiFilter::messageTypeText(i), Canvas::LEFT, Canvas::CENTER, color);
-			painters.window.text(window.cell(1, i), glyph, Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(0, i), MidiFilter::messageTypeText(i), Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(1, i), glyph, Canvas::LEFT, Canvas::CENTER, color);
 		}
 
-		painters.window.vertical_scrollbar(window);
+		WindowPainter::vertical_scrollbar(window);
 
 		// footer
-		painters.window.draw_footer(footer_text, NUM_FOOTER_OPTIONS);
+		WindowPainter::draw_footer(footer_text, NUM_FOOTER_OPTIONS);
 	}
 
 	const uint16_t targetFps() {

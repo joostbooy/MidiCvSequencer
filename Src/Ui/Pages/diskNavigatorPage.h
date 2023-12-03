@@ -205,7 +205,7 @@ namespace DiskNavigatorPage {
 
 	// Bottom to top
 	void drawDisplay() {
-		painters.window.draw_header();
+		WindowPainter::draw_header();
 
 		canvas.set_font(Font::SMALL);
 
@@ -218,21 +218,21 @@ namespace DiskNavigatorPage {
 
 			if (e->is_dir) {
 				TopPage::str.write("/", e->name.read());
-				painters.window.text(window.cell(0, i), TopPage::str.read(), Canvas::LEFT, Canvas::CENTER);
+				WindowPainter::text(window.cell(0, i), TopPage::str.read(), Canvas::LEFT, Canvas::CENTER);
 			} else {
-				painters.window.text(window.cell(0, i), e->name.read(), Canvas::LEFT, Canvas::CENTER);
-				painters.window.text(window.cell(1, i), UiText::bytes_to_mem_size_text(e->size), Canvas::LEFT, Canvas::CENTER);
+				WindowPainter::text(window.cell(0, i), e->name.read(), Canvas::LEFT, Canvas::CENTER);
+				WindowPainter::text(window.cell(1, i), UiText::bytes_to_mem_size_text(e->size), Canvas::LEFT, Canvas::CENTER);
 			}
 
 			if (i == cursor && disk.entry.list_size() > 0) {
-				painters.window.highlight(window.cell(0, cursor));
+				WindowPainter::highlight(window.cell(0, cursor));
 			}
 		}
 
-		painters.window.vertical_scrollbar(window);
+		WindowPainter::vertical_scrollbar(window);
 
 		// draw footer
-		painters.window.draw_footer(option_text, NUM_OPTIONS);
+		WindowPainter::draw_footer(option_text, NUM_OPTIONS);
 
 	}
 

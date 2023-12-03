@@ -179,7 +179,7 @@ namespace MonitorPage {
 		}
 
 		painters.text_buffer.draw();
-		painters.window.draw_footer(is_running ? footer_text_running : footer_text_stopped, NUM_FOOTER_OPTIONS);
+		WindowPainter::draw_footer(is_running ? footer_text_running : footer_text_stopped, NUM_FOOTER_OPTIONS);
 	}
 
 	const uint16_t targetFps() {

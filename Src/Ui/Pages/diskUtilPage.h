@@ -173,13 +173,13 @@ namespace DiskUtilPage {
 		canvas.draw_text(window.x, window.y - 9, window.width, 10, "EDIT", Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
 
 		// list
-		painters.window.fill(window, Canvas::BLACK, Canvas::WHITE);
+		WindowPainter::fill(window, Canvas::BLACK, Canvas::WHITE);
 
 		for (int i = window.row().first; i <= window.row().last; ++i) {
 			Canvas::Color color = i == cursor ? Canvas::BLACK : Canvas::LIGHT_GRAY;
-			painters.window.text(window.cell(0, i), option_text[i], Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(0, i), option_text[i], Canvas::LEFT, Canvas::CENTER, color);
 		}
-		painters.window.vertical_scrollbar(window);
+		WindowPainter::vertical_scrollbar(window);
 	}
 
 	const uint16_t targetFps() {

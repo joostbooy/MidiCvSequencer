@@ -175,9 +175,9 @@ namespace HardwarePage {
 	// Bottom to top
 	void drawDisplay() {
 		canvas.buffer.clear();
-		painters.window.draw_header();
+		WindowPainter::draw_header();
 		painters.text_buffer.draw();
-		painters.window.draw_footer(footer_text, NUM_FOOTER_OPTIONS);
+		WindowPainter::draw_footer(footer_text, NUM_FOOTER_OPTIONS);
 	}
 
 	const uint16_t targetFps() {

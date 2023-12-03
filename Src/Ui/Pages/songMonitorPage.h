@@ -60,7 +60,7 @@ namespace SongMonitorPage {
 
 	// Bottom to top
 	void drawDisplay() {
-		painters.window.draw_header();
+		WindowPainter::draw_header();
 
 		canvas.set_font(Font::SMALL);
 
@@ -74,14 +74,14 @@ namespace SongMonitorPage {
 			source = MidiEvent::serialise_source(MidiEvent::TRACK, i);
 			event = engine.midiOutputEngine.curr_event(source);
 
-			painters.window.text(window.cell(0, i), settings.song.track(i).name(), Canvas::LEFT, Canvas::CENTER, color);
-			painters.window.text(window.cell(1, i), UiText::midi_channel_text(event), Canvas::LEFT, Canvas::CENTER, color);
-			painters.window.text(window.cell(2, i), UiText::midi_message_text(event), Canvas::LEFT, Canvas::CENTER, color);
-			painters.window.text(window.cell(3, i), UiText::midi_data_text(event, 0), Canvas::LEFT, Canvas::CENTER, color);
-			painters.window.text(window.cell(4, i), UiText::midi_data_text(event, 1), Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(0, i), settings.song.track(i).name(), Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(1, i), UiText::midi_channel_text(event), Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(2, i), UiText::midi_message_text(event), Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(3, i), UiText::midi_data_text(event, 0), Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(4, i), UiText::midi_data_text(event, 1), Canvas::LEFT, Canvas::CENTER, color);
 		}
 
-		painters.window.vertical_scrollbar(window);
+		WindowPainter::vertical_scrollbar(window);
 	}
 
 	const uint16_t targetFps() {

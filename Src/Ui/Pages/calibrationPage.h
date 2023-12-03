@@ -106,7 +106,7 @@ namespace CalibrationPage {
 	void drawDisplay() {
 		canvas.buffer.clear();
 		ListPage::drawDisplay();
-		painters.window.draw_footer(footer_text, NUM_FOOTER_OPTIONS);
+		WindowPainter::draw_footer(footer_text, NUM_FOOTER_OPTIONS);
 	}
 
 	const uint16_t targetFps() {

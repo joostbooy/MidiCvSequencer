@@ -83,33 +83,33 @@ namespace SystemPage {
 	}
 
 	void drawDisplay() {
-		painters.window.draw_header();
+		WindowPainter::draw_header();
 
 		canvas.set_font(Font::SMALL);
 
 		// firmware version
-		painters.window.text(window.cell(0, 0), "FIRMWARE", Canvas::LEFT, Canvas::CENTER);
-		painters.window.text(window.cell(1, 0), settings.current_version_text(), Canvas::LEFT, Canvas::CENTER);
+		WindowPainter::text(window.cell(0, 0), "FIRMWARE", Canvas::LEFT, Canvas::CENTER);
+		WindowPainter::text(window.cell(1, 0), settings.current_version_text(), Canvas::LEFT, Canvas::CENTER);
 
 		// sd card total
-		painters.window.text(window.cell(0, 1), "SD CARD TOTAL", Canvas::LEFT, Canvas::CENTER);
-		painters.window.text(window.cell(1, 1), UiText::bytes_to_mem_size_text(sd_size_total * 512), Canvas::LEFT, Canvas::CENTER);
+		WindowPainter::text(window.cell(0, 1), "SD CARD TOTAL", Canvas::LEFT, Canvas::CENTER);
+		WindowPainter::text(window.cell(1, 1), UiText::bytes_to_mem_size_text(sd_size_total * 512), Canvas::LEFT, Canvas::CENTER);
 
 		// sd card free
-		painters.window.text(window.cell(0, 2), "SD CARD FREE", Canvas::LEFT, Canvas::CENTER);
-		painters.window.text(window.cell(1, 2), UiText::bytes_to_mem_size_text(sd_size_free * 512), Canvas::LEFT, Canvas::CENTER);
+		WindowPainter::text(window.cell(0, 2), "SD CARD FREE", Canvas::LEFT, Canvas::CENTER);
+		WindowPainter::text(window.cell(1, 2), UiText::bytes_to_mem_size_text(sd_size_free * 512), Canvas::LEFT, Canvas::CENTER);
 
 		// settings path
-		painters.window.text(window.cell(0, 3), "PATH", Canvas::LEFT, Canvas::CENTER);
-		painters.window.text(window.cell(1, 3), settings.read_path(), Canvas::LEFT, Canvas::CENTER);
+		WindowPainter::text(window.cell(0, 3), "PATH", Canvas::LEFT, Canvas::CENTER);
+		WindowPainter::text(window.cell(1, 3), settings.read_path(), Canvas::LEFT, Canvas::CENTER);
 
 		// pattern memory
 		int total = settings.song.max_patterns();
 		int free = settings.song.available_patterns();
-		painters.window.text(window.cell(0, 4), "PATTERNS USED", Canvas::LEFT, Canvas::CENTER);
-		painters.window.text(window.cell(1, 4), TopPage::str.write(free, "/", total), Canvas::LEFT, Canvas::CENTER);
+		WindowPainter::text(window.cell(0, 4), "PATTERNS USED", Canvas::LEFT, Canvas::CENTER);
+		WindowPainter::text(window.cell(1, 4), TopPage::str.write(free, "/", total), Canvas::LEFT, Canvas::CENTER);
 
-		painters.window.draw_footer(footer_text, NUM_OPTIONS);
+		WindowPainter::draw_footer(footer_text, NUM_OPTIONS);
 	}
 
 	const uint16_t targetFps() {

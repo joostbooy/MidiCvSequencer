@@ -114,7 +114,7 @@ namespace ListPage {
 
 	// Bottom to top
 	void drawDisplay() {
-		painters.window.draw_header();
+		WindowPainter::draw_header();
 
 		Canvas::Color color;
 		canvas.set_font(Font::SMALL);
@@ -122,15 +122,15 @@ namespace ListPage {
 
 		for (int i = window.row().first; i <= window.row().last; ++i) {
 			color = (item == i) ? Canvas::BLACK : Canvas::LIGHT_GRAY;
-			painters.window.text(window.cell(0, i), list_->item_text(i), Canvas::LEFT, Canvas::CENTER, color);
-			painters.window.text(window.cell(1, i), list_->value_text(i), Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(0, i), list_->item_text(i), Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(1, i), list_->value_text(i), Canvas::LEFT, Canvas::CENTER, color);
 		}
 
 		if (list_->mode() == UiList::EDIT) {
-			painters.window.highlight(window.cell(1, item));
+			WindowPainter::highlight(window.cell(1, item));
 		}
 
-		painters.window.vertical_scrollbar(window);
+		WindowPainter::vertical_scrollbar(window);
 
 	}
 

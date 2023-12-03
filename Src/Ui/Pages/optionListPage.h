@@ -110,7 +110,7 @@ namespace OptionListPage {
 	// Bottom to top
 	void drawDisplay() {
 		// header
-		painters.window.draw_header();
+		WindowPainter::draw_header();
 
 		// title
 		canvas.set_font(Font::SMALL);
@@ -119,16 +119,16 @@ namespace OptionListPage {
 		canvas.draw_text(window.x, window.y - 9, window.width, 10, message_.read(), Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
 
 		// list
-		painters.window.fill(window, Canvas::BLACK, Canvas::WHITE);
+		WindowPainter::fill(window, Canvas::BLACK, Canvas::WHITE);
 
 		for (int i = window.row().first; i <= window.row().last; ++i) {
 			Canvas::Color color = i == cursor ? Canvas::BLACK : Canvas::LIGHT_GRAY;
-			painters.window.text(window.cell(0, i), option_text_[i], Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(0, i), option_text_[i], Canvas::LEFT, Canvas::CENTER, color);
 		}
-		painters.window.vertical_scrollbar(window);
+		WindowPainter::vertical_scrollbar(window);
 
 		// footer
-		painters.window.draw_footer(footer_text, NUM_FOOTER_OPTIONS);
+		WindowPainter::draw_footer(footer_text, NUM_FOOTER_OPTIONS);
 	}
 
 	const uint16_t targetFps() {
