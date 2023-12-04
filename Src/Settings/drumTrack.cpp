@@ -69,7 +69,7 @@ SerialItem DrumTrack::step_item_[NUM_STEP_ITEMS] = {
 		.min_ = 0,
 		.max_ = 2,
 		.inc_shifted_ = 1,
-		.init_value_ = 0,
+		.init_value_ = 1,
 		.mask_ = step_mask_[REPEAT_VELOCITY]
 	},
 	[DELAY] = {

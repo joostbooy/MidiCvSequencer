@@ -59,7 +59,7 @@ public:
 		case GATE_LENGTH:		return ClockEngine::gate_duration_text(value);
 		case NUM_REPEATS:		return RepeatEngine::repeat_text(value);
 		case REPEAT_SPREAD:		return RepeatEngine::spread_text(value);
-		case REPEAT_VELOCITY:	return RepeatEngine::velocity_mode_text(value);
+		case REPEAT_VELOCITY:	return RepeatEngine::velocity_ramp_text(value);
 		case DELAY:				return ClockEngine::gate_duration_text(value);
 		default:
 			break;

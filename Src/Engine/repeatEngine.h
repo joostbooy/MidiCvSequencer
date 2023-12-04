@@ -8,18 +8,18 @@ class RepeatEngine {
 
 public:
 
-	enum VelocityMode {
-		OFF,
+	enum VelocityRamp {
 		UP,
+		NONE,
 		DOWN
 	};
 
-	static const char* velocity_mode_text(uint8_t mode) {
-		switch (mode)
+	static const char* velocity_ramp_text(uint8_t type) {
+		switch (type)
 		{
-		case OFF:	return " ";
-		case UP:	return ">";
-		case DOWN:	return "<";
+		case UP:	return "/";
+		case NONE:	return "-";
+		case DOWN:	return "\\";
 		default:	return nullptr;
 			break;
 		}
@@ -44,16 +44,16 @@ public:
 		interval_ = 0;
 		num_repeats_ = 0;
 
-		velocity_mode_ = OFF;
-		velocity_value_ = 0;
+		velocity_ramp_ = NONE;
+		velocity_base_ = 0;
 	}
 
 
-	void process(uint8_t repeats, uint32_t gate_length, uint8_t spread, uint8_t vel, uint8_t vel_mode) {
+	void process(uint8_t repeats, uint32_t gate_length, uint8_t spread, uint8_t vel, uint8_t vel_ramp) {
 		reset();
 
-		velocity_value_ = vel;
-		velocity_mode_ = vel_mode;
+		velocity_base_ = vel;
+		velocity_ramp_ = vel_ramp;
 
 		if (repeats < 7) {
 			int repeats_ = 7 - repeats + 1;
@@ -94,8 +94,8 @@ private:
 	uint8_t num_repeats_;
 	uint8_t index_;
 	uint8_t velocity_;
-	uint8_t velocity_value_;
-	uint8_t velocity_mode_;
+	uint8_t velocity_base_;
+	uint8_t velocity_ramp_;
 	uint32_t interval_;
 	uint32_t table_[8];
 	Reciprocal<16>reciprocal;
@@ -124,12 +124,12 @@ private:
 	}
 
 	uint8_t next_velocity() {
-		if (velocity_mode_ == UP) {
-			return velocity_value_ * reciprocal(num_repeats_) * index_;
-		} else if (velocity_mode_ == DOWN) {
-			return velocity_value_ * reciprocal(num_repeats_) * (num_repeats_ - (index_ - 1));
+		if (velocity_ramp_ == UP) {
+			return velocity_base_ * reciprocal(num_repeats_) * index_;
+		} else if (velocity_ramp_ == DOWN) {
+			return velocity_base_ * reciprocal(num_repeats_) * (num_repeats_ - (index_ - 1));
 		}
-		return velocity_value_;
+		return velocity_base_;
 	}
 
 };
