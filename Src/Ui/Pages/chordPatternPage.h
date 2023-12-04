@@ -119,17 +119,23 @@ namespace ChordPatternPage {
 
 	}
 
-	bool step_is_random(int step) {
-		auto track = settings.selected_chord_track();
+	bool step_is_randomised(int step) {
+		auto &track = settings.selected_chord_track();
+		int pattern_index = settings.selected_pattern();
 		int item = settings.selected_step_item();
-		int pattern_ = settings.selected_pattern();
-		return track.pattern.random_is_enabled(pattern_, item, step);
+
+		if (item == ChordTrack::PROBABILITY) {
+			if (read_step(step, ChordTrack::PROBABILITY) < 7) {
+				return true;
+			}
+		}
+		return track.pattern.random_is_enabled(pattern_index, NoteTrack::StepItem(item), step);
 	}
 
 	void draw_step(int step, int curr_tick) {
 		uint32_t x = curr_tick + chordTrackEngine.when();
 		uint32_t w = chordTrackEngine.length();
-		bool is_random = step_is_random(step);
+		bool is_random = step_is_randomised(step);
 		PianoRollPainter::draw_note(step, trackState.event, x, w, is_random);
 	}
 
