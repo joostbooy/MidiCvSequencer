@@ -63,7 +63,7 @@ public:
 		if (step_value_frames > 0) {
 			--step_value_frames;
 
-			int coll = step + 1;
+			int coll = step;
 			int w = window.cell(coll, 0).w;
 			int h = window.cell(coll, 0).h;
 			int x = window.cell(coll, 0).x;
@@ -121,8 +121,8 @@ public:
 
 		int y = cell.y;
 		int h = cell.h - 1;
-		int x = std::ceil(float(wf * delay) + cell.x);
-		int w = std::ceil(float(wf * length));
+		int x = float(wf * delay) + cell.x;
+		int w = float(wf * length);
 		if (w < 1) {
 			w = 1;
 		}
