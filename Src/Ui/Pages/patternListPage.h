@@ -119,6 +119,19 @@ namespace PatternListPage {
 			ConfirmationPage::set(TopPage::str.write("DELETE PATTERN ", index + 1, "?"), [](uint8_t option) {
 				if (option == ConfirmationPage::CONFIRM) {
 					PatternEditPage::remove_pattern(index);
+					enter();
+				}
+			});
+
+			pages.open(Pages::CONFIRMATION_PAGE);
+			return;
+		}
+
+		//clear
+		if (id == Controller::CLEAR_BUTTON) {
+			ConfirmationPage::set(TopPage::str.write("CLEAR PATTERN ", index + 1, "?"), [](uint8_t option) {
+				if (option == ConfirmationPage::CONFIRM) {
+					PatternEditPage::clear_pattern(index);
 				}
 			});
 
