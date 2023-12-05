@@ -143,6 +143,7 @@ namespace PatternListPage {
 	}
 
 	void drawLeds() {
+		LedPainter::set_clear(Matrix::GREEN);
 		LedPainter::set_delete(Matrix::GREEN);
 		LedPainter::footer_buttons(NUM_FOOTER_OPTIONS);
 	}
