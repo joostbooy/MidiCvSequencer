@@ -16,7 +16,7 @@ public:
 	}
 
 	static void shadow(Window &w, int offset) {
-		canvas.fill(w.x + offset, w.y + offset, w.width, w.height, Canvas::SUBTRACTED);
+		canvas.fill(w.x - offset, w.y - offset, w.width + (offset * 2), w.height + (offset * 2), Canvas::SUBTRACTED);
 	}
 
 	static void text(Window &w, const char* text, Canvas::Allign x, Canvas::Allign y, Canvas::Color color = Canvas::BLACK) {
