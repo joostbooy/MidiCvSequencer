@@ -4,13 +4,13 @@
 // step masks
 SerialMask DrumTrack::step_mask_[NUM_STEP_ITEMS] = {
 	[TRIGGER]			= { .reg = 0, .bits = 1, .shifts = 0 },
-	[DRUM_NOTE]			= { .reg = 0, .bits = 3, .shifts = 1 },
-	[PROBABILITY]		= { .reg = 0, .bits = 3, .shifts = 4 },
-	[VELOCITY]			= { .reg = 0, .bits = 7, .shifts = 7 },
-	[GATE_LENGTH]		= { .reg = 0, .bits = 7, .shifts = 14 },
-	[NUM_REPEATS]		= { .reg = 0, .bits = 4, .shifts = 21 },
-	[REPEAT_SPREAD]		= { .reg = 0, .bits = 3, .shifts = 25 },
-	[REPEAT_VELOCITY]	= { .reg = 0, .bits = 2, .shifts = 28 },
+	[DRUM_NOTE]			= { .reg = 0, .bits = 2, .shifts = 1 },
+	[PROBABILITY]		= { .reg = 0, .bits = 3, .shifts = 3 },
+	[VELOCITY]			= { .reg = 0, .bits = 7, .shifts = 6 },
+	[GATE_LENGTH]		= { .reg = 0, .bits = 7, .shifts = 13 },
+	[NUM_REPEATS]		= { .reg = 0, .bits = 4, .shifts = 20 },
+	[REPEAT_SPREAD]		= { .reg = 0, .bits = 3, .shifts = 24 },
+	[REPEAT_VELOCITY]	= { .reg = 0, .bits = 2, .shifts = 27 },
 	[DELAY]				= { .reg = 1, .bits = 3, .shifts = 0 },
 };
 
