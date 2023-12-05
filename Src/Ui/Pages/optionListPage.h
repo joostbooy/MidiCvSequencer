@@ -112,6 +112,8 @@ namespace OptionListPage {
 		// header
 		WindowPainter::draw_header();
 
+		WindowPainter::shadow(window, 5);
+
 		// title
 		canvas.set_font(Font::SMALL);
 		canvas.fill(window.x, window.y - 8, window.width, 10, Canvas::BLACK);
