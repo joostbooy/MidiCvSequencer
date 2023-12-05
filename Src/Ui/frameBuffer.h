@@ -11,7 +11,7 @@ class FrameBuffer {
 public:
 
 	inline bool inside(int x, int y) {
-		return (x < kWidth) && (y < kHeight);
+		return (x >= 0 && x < kWidth) && (y >= 0 && y < kHeight);
 	}
 
 	inline void clear() {

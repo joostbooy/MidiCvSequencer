@@ -34,15 +34,15 @@ public:
 	};
 
 	//Frame buffer
-	static const uint16_t width_ = 256;
-	static const uint16_t height_ = 64;
-	const uint16_t width() { return Canvas::width_; }
-	const uint16_t height() { return Canvas::height_; }
+	static const int width_ = 256;
+	static const int height_ = 64;
+	const int width() { return Canvas::width_; }
+	const int height() { return Canvas::height_; }
 
 	FrameBuffer <width_, height_> buffer;
 
 
-	void draw_pixel(uint16_t x, uint16_t y, Color color) {
+	void draw_pixel(int x, int y, Color color) {
 		if (buffer.inside(x, y) == false) {
 			return;
 		}
@@ -79,32 +79,32 @@ public:
 		}
 	}
 
-	void horizontal_line(uint16_t x, uint16_t y, uint16_t w, Color color) {
-		uint16_t x2 = x + w;
-		for (uint16_t xi = x; xi < x2; ++xi) {
+	void horizontal_line(int x, int y, int w, Color color) {
+		int x2 = x + w;
+		for (int xi = x; xi < x2; ++xi) {
 			draw_pixel(xi, y, color);
 		}
 	}
 
-	void vertical_line(uint16_t x, uint16_t y, uint16_t h, Color color) {
-		uint16_t y2 = y + h;
-		for (uint16_t yi = y; yi < y2; ++yi) {
+	void vertical_line(int x, int y, int h, Color color) {
+		int y2 = y + h;
+		for (int yi = y; yi < y2; ++yi) {
 			draw_pixel(x, yi, color);
 		}
 	}
 
-	void fill(uint16_t x, uint16_t y, uint16_t w, uint16_t h, Color color) {
-		uint16_t y2 = y + h;
-		for (uint16_t yi = y; yi < y2; ++yi) {
+	void fill(int x, int y, int w, int h, Color color) {
+		int y2 = y + h;
+		for (int yi = y; yi < y2; ++yi) {
 			horizontal_line(x, yi, w, color);
 		}
 	}
 
-	void frame(uint16_t x, uint16_t y, uint16_t w, uint16_t h, Color color, uint16_t border = 1) {
-		uint16_t x2 = clip_min(0, x + w - 1);
-		uint16_t y2 = clip_min(0, y + h - 1);
+	void frame(int x, int y, int w, int h, Color color, int border = 1) {
+		int x2 = clip_min(0, x + w - 1);
+		int y2 = clip_min(0, y + h - 1);
 
-		for (uint16_t i = 0; i < border; ++i) {
+		for (int i = 0; i < border; ++i) {
 			horizontal_line(x, y + i, w, color);
 			horizontal_line(x, y2 - i, w, color);
 			vertical_line(x + i, y, h, color);
@@ -112,7 +112,7 @@ public:
 		}
 	}
 
-	void box(uint16_t x, uint16_t y, uint16_t w, uint16_t h, Color frame_clr, Color fill_clr, uint16_t border = 1){
+	void box(int x, int y, int w, int h, Color frame_clr, Color fill_clr, int border = 1){
 		if (frame_clr != Color::NONE) {
 			frame(x, y, w, h, frame_clr, border);
 		}
@@ -154,8 +154,8 @@ public:
 			break;
 		}
 
-		*x = clip(0, width() - frame_w, x_);
-		*y = clip(0, height() - frame_h, y_);
+		*x = clip(0, width() - w, x_);
+		*y = clip(0, height() - h, y_);
 	}
 
 	// bitmap
@@ -170,11 +170,11 @@ public:
 		font.set_type(type);
 	}
 
-	uint16_t text_cursor(){
+	int text_cursor(){
 		return text_cursor_;
 	}
 
-	void draw_text(uint16_t x, uint16_t y, const char *str, Color color = BLACK) {
+	void draw_text(int x, int y, const char *str, Color color = BLACK) {
 		font_color = color;
 		while (*str) {
 			draw_char(x, y, *str++);
@@ -197,11 +197,11 @@ public:
 		draw_bitmap(x_, y_, id);
 	}
 
-	void draw_char(uint16_t x, uint16_t y, char c);
-	void draw_bitmap(uint16_t x, uint16_t y, Bitmap::Id id, uint16_t frame = 0);
+	void draw_char(int x, int y, char c);
+	void draw_bitmap(int x, int y, Bitmap::Id id, int frame = 0);
 
 private:
-	uint16_t text_cursor_ = 0;
+	int text_cursor_ = 0;
 	Color font_color = BLACK;
 	Color bitmap_color = BLACK;
 };
