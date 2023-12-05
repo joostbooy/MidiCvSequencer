@@ -63,6 +63,7 @@ namespace SongPage {
 		case NEW:
 			ConfirmationPage::set("CREATE NEW SONG ?", [](uint8_t option) {
 				if (option == ConfirmationPage::CONFIRM) {
+					engine.add_request_wait(Engine::STOP);
 					settings.init();
 					MessagePainter::show("NEW SONG CREATED");
 				}
