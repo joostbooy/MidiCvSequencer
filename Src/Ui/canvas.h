@@ -21,7 +21,6 @@ public:
 		INVERTED,
 		SUBTRACTED,
 		MULTIPLIED,
-		NONE
 	};
 
 	enum Allign {
@@ -30,7 +29,6 @@ public:
 		CENTER,
 		TOP,
 		BOTTOM,
-		NO_ALLIGNMENT
 	};
 
 	//Frame buffer
@@ -73,7 +71,6 @@ public:
 		case MULTIPLIED:
 			buffer.write(x, y, clip_max(0xF, buffer.read(x, y) * 3));
 			break;
-		case NONE:
 		default:
 			break;
 		}
@@ -113,13 +110,8 @@ public:
 	}
 
 	void box(int x, int y, int w, int h, Color frame_clr, Color fill_clr, int border = 1){
-		if (frame_clr != Color::NONE) {
-			frame(x, y, w, h, frame_clr, border);
-		}
-
-		if (fill_clr != Color::NONE) {
-			fill(x + border, y + border, w - (border * 2), h - (border * 2), fill_clr);
-		}
+		frame(x, y, w, h, frame_clr, border);
+		fill(x + border, y + border, w - (border * 2), h - (border * 2), fill_clr);
 	}
 
 	void get_xy_allignment(int *x, int *y, int w, int h, int frame_w, int frame_h, Allign x_allign, Allign y_allign) {
@@ -154,8 +146,8 @@ public:
 			break;
 		}
 
-		*x = clip(0, width() - w, x_);
-		*y = clip(0, height() - h, y_);
+		*x = clip(0, width() - frame_w, x_);
+		*y = clip(0, height() - frame_h, y_);
 	}
 
 	// bitmap

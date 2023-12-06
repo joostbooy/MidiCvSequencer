@@ -28,6 +28,13 @@ public:
 		window.scroll_to_row(127 - note);
 	}
 
+	static void highlight_note(int note) {
+		if (note_is_visible(note)) {
+			Window::Cell cell = window.cell(0, 127 - note);
+			canvas.fill(cell.x, cell.y, window.width, cell.h, Canvas::INVERTED);
+		}
+	}
+
 	static void scroll_y(int inc) {
 		if (inc > 0) {
 			window.scroll_to_row(window.row().last + inc);
@@ -136,10 +143,12 @@ public:
 			}
 		}
 
-		// velocity (always show)
-		h = (cell.h / 128.0f) * velo + 1;
-		y = (window.y + window.height) + (cell.h - h) + 1;
-		canvas.vertical_line(x, y, h, Canvas::GRAY);
+		// velocity 
+		if (velo > 0) {
+			h = (cell.h / 128.0f) * velo + 1;
+			y = (window.y + window.height) + (cell.h - h) + 1;
+			canvas.vertical_line(x, y, h, Canvas::GRAY);
+		}
 	}
 
 private:
