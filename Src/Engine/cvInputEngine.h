@@ -39,7 +39,7 @@ public:
 			adc.convert_next_channel();
 		}
 	}
-	
+
 	bool event_received(uint8_t port, MidiEvent::Event &event) {
 		if (midi_que[port].readable()) {
 			event = midi_que[port].read();
@@ -148,7 +148,7 @@ private:
 		event.time = time;
 		event.port = port;
 		event.message = channel | MidiEvent::NOTE_ON;
-		event.data[0] = value * 127;
+		event.data[0] = value;
 		event.data[1] = 127;
 		MidiEvent::set_source(&event, MidiEvent::PORT, port);
 
