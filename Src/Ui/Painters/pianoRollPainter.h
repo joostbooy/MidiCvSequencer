@@ -143,7 +143,7 @@ public:
 			}
 		}
 
-		// velocity 
+		// velocity
 		if (velo > 0) {
 			h = (cell.h / 128.0f) * velo + 1;
 			y = (window.y + window.height) + (cell.h - h) + 1;
