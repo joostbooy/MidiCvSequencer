@@ -51,7 +51,7 @@ public:
 	}
 
 	inline void set_root(int value) {
-		root_ =  clip(0, 11, value);
+		root_ = stmlib::clip(0, 11, value);
 		make_keymap();
 	}
 
@@ -65,7 +65,7 @@ public:
 	}
 
 	inline void set_type(int value) {
-		type_ = clip(0, NUM_TYPES - 1, value);
+		type_ = stmlib::clip(0, NUM_TYPES - 1, value);
 
 		switch (type_)
 		{

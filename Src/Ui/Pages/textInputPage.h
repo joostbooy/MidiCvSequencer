@@ -308,7 +308,7 @@ namespace TextInputPage {
 		//draw text_cursor
 		if (text_cursor_ticks < 500) {
 			uint8_t h = font.height();
-			cursor_x = clip_min(box_x, cursor_x - 1);
+			cursor_x = stmlib::clip_min(box_x, cursor_x - 1);
 			canvas.vertical_line(cursor_x, char_y, h, Canvas::WHITE);
 		}
 

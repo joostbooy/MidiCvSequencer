@@ -20,7 +20,7 @@ public:
 
 	// should result in -5V
 	void set_min(int value) {
-		min_ = clip(0, max_, value);
+		min_ = stmlib::clip(0, max_, value);
 	}
 
 	int max() {
@@ -29,7 +29,7 @@ public:
 
 	// should result in +5V
 	void set_max(int value) {
-		max_ = clip(min_, 65535, value);
+		max_ = stmlib::clip(min_, 65535, value);
 	}
 
 	// methods
@@ -61,7 +61,7 @@ private:
 	uint16_t max_ = 65535;
 
 	float note_to_volt(int note) {
-		note = clip(0, kMaxNotes, note);
+		note = stmlib::clip(0, kMaxNotes, note);
 		return (note - 60) * (1.f / 12.f);
 	}
 

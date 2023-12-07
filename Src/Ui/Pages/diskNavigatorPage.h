@@ -110,7 +110,7 @@ namespace DiskNavigatorPage {
 		if (entries_total > 0) {
 			cursor_max = entries_total - 1;
 		}
-		cursor = clip(0, cursor_max, cursor);
+		cursor = stmlib::clip(0, cursor_max, cursor);
 		window.scroll_to_row(cursor);
 
 		disk.entry.make_list(window.row().first, window.row().max_visible);
@@ -147,7 +147,7 @@ namespace DiskNavigatorPage {
 
 	void onEncoder(uint8_t id, int inc) {
 		if (id == Controller::MENU_ENC || id == Controller::Y_ENC) {
-			cursor = clip(0, cursor_max, cursor + inc);
+			cursor = stmlib::clip(0, cursor_max, cursor + inc);
 
 			uint8_t first = window.row().first;
 			window.scroll_to_row(cursor);

@@ -42,7 +42,7 @@ namespace SongMonitorPage {
 	}
 
 	void onEncoder(uint8_t id, int inc) {
-		selected_track = clip(0, 15, selected_track + inc);
+		selected_track = stmlib::clip(0, 15, selected_track + inc);
 		window.scroll_to_row(selected_track);
 	}
 

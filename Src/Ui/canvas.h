@@ -69,7 +69,7 @@ public:
 			buffer.write(x, y, buffer.read(x, y) / 3);
 			break;
 		case MULTIPLIED:
-			buffer.write(x, y, clip_max(0xF, buffer.read(x, y) * 3));
+			buffer.write(x, y, stmlib::clip_max(0xF, buffer.read(x, y) * 3));
 			break;
 		default:
 			break;
@@ -98,8 +98,8 @@ public:
 	}
 
 	void frame(int x, int y, int w, int h, Color color, int border = 1) {
-		int x2 = clip_min(0, x + w - 1);
-		int y2 = clip_min(0, y + h - 1);
+		int x2 = stmlib::clip_min(0, x + w - 1);
+		int y2 = stmlib::clip_min(0, y + h - 1);
 
 		for (int i = 0; i < border; ++i) {
 			horizontal_line(x, y + i, w, color);
@@ -146,8 +146,8 @@ public:
 			break;
 		}
 
-		*x = clip(0, width() - frame_w, x_);
-		*y = clip(0, height() - frame_h, y_);
+		*x = stmlib::clip(0, width() - frame_w, x_);
+		*y = stmlib::clip(0, height() - frame_h, y_);
 	}
 
 	// bitmap

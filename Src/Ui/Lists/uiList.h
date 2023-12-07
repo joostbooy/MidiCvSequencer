@@ -25,7 +25,7 @@ public:
 	}
 
 	void select_item(int item) {
-		selected_item_ = clip(0, num_items() - 1, item);
+		selected_item_ = stmlib::clip(0, num_items() - 1, item);
 	}
 
 	void on_click() {

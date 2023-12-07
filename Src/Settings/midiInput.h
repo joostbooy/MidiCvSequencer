@@ -56,7 +56,7 @@ public:
 	}
 
 	void set_channel_send(int channel) {
-		channel_send_ = clip(0, 15, channel);
+		channel_send_ = stmlib::clip(0, 15, channel);
 	}
 
 	const char* channel_send_text() {
@@ -69,7 +69,7 @@ public:
 	}
 
 	void set_channel_receive(int channel) {
-		channel_receive_ = clip(-1, 16, channel);
+		channel_receive_ = stmlib::clip(-1, 16, channel);
 	}
 
 	const char* channel_receive_text() {
@@ -82,7 +82,7 @@ public:
 	}
 
 	void set_cc_receive(int cc_number) {
-		cc_receive_ = clip(-1, 127, cc_number);
+		cc_receive_ = stmlib::clip(-1, 127, cc_number);
 	}
 
 	const char* cc_receive_text(int value) {

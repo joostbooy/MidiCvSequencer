@@ -49,7 +49,7 @@ public:
 	}
 
 	void build(uint8_t root, uint8_t root_shifts, uint8_t variation, uint8_t inversion) {
-		uint8_t shifted_root = clip_min(0, root - root_shifts);
+		uint8_t shifted_root = stmlib::clip_min(0, root - root_shifts);
 
 		note_[0] = scale_->read(shifted_root);
 		note_[1] = scale_->read(root + 2);
@@ -135,7 +135,7 @@ public:
 			break;
 		}
 	}
-	
+
 	static const char* root_text(uint8_t root) {
 		return UiText::note_text(root, false);
 	}

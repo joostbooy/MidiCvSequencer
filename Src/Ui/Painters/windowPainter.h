@@ -30,7 +30,7 @@ public:
 	static void vertical_scrollbar(Window &w) {
 		if (w.row().scrollable) {
 			int x = w.x + w.width - bar_size;
-			x = clip(w.x, w.x + w.width, x);
+			x = stmlib::clip(w.x, w.x + w.width, x);
 			draw_vertical_scrollbar(x, w.y, bar_size, w.height, w.row().items_total, w.row().max_visible, w.row().first);
 		}
 	}
@@ -38,7 +38,7 @@ public:
 	static void horizontal_scrollbar(Window &w) {
 		if (w.coll().scrollable) {
 			int y = w.y + w.height - bar_size;
-			y = clip(w.y, w.y + w.height, y);
+			y = stmlib::clip(w.y, w.y + w.height, y);
 			draw_horizontal_scrollbar(w.x, y, w.width, bar_size, w.coll().items_total, w.coll().max_visible, w.coll().first);
 		}
 	}
@@ -114,14 +114,14 @@ private:
 		int bar_y = (curr_top_row * h) / rows_total;
 		int bar_height = (rows_visible * h) / rows_total;
 		canvas.box(x, y, w, h, Canvas::BLACK, Canvas::WHITE);
-		canvas.box(x + 2, (y + bar_y) + 2, w - 4, clip_min(1, bar_height - 4), Canvas::BLACK, Canvas::BLACK);
+		canvas.box(x + 2, (y + bar_y) + 2, w - 4, stmlib::clip_min(1, bar_height - 4), Canvas::BLACK, Canvas::BLACK);
 	}
 
 	static void draw_horizontal_scrollbar(int x, int y, int w, int h, int colls_total, int colls_visible, int curr_left_coll) {
 		int bar_x = (curr_left_coll * w) / colls_total;
 		int bar_width = (colls_visible * w) / colls_total;
 		canvas.box(x, y, w, h, Canvas::BLACK, Canvas::WHITE);
-		canvas.box((x + bar_x) + 2, y + 2, clip_min(1, bar_width - 4), h - 4, Canvas::BLACK, Canvas::BLACK);
+		canvas.box((x + bar_x) + 2, y + 2, stmlib::clip_min(1, bar_width - 4), h - 4, Canvas::BLACK, Canvas::BLACK);
 	}
 
 };

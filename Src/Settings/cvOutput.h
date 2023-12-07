@@ -115,7 +115,7 @@ public:
 	}
 
 	void set_cv_source(int value) {
-		cv_source_ = clip(0, MidiEvent::NUM_SOURCES - 1, value);
+		cv_source_ = stmlib::clip(0, MidiEvent::NUM_SOURCES - 1, value);
 	}
 
 	const char* cv_source_text() {
@@ -128,7 +128,7 @@ public:
 	}
 
 	void set_cv_mode(int mode) {
-		cv_mode_ = clip(0, NUM_CV_MODES - 1, mode);
+		cv_mode_ = stmlib::clip(0, NUM_CV_MODES - 1, mode);
 	}
 
 	const char* cv_mode_text() {
@@ -141,7 +141,7 @@ public:
 	}
 
 	void set_gate_source(int value) {
-		gate_source_ = clip(0, MidiEvent::NUM_SOURCES - 1, value);
+		gate_source_ = stmlib::clip(0, MidiEvent::NUM_SOURCES - 1, value);
 	}
 
 	const char* gate_source_text() {
@@ -154,7 +154,7 @@ public:
 	}
 
 	void set_gate_mode(int mode) {
-		gate_mode_ = clip(0, NUM_GATE_MODES - 1, mode);
+		gate_mode_ = stmlib::clip(0, NUM_GATE_MODES - 1, mode);
 	}
 
 	const char* gate_mode_text() {
@@ -181,7 +181,7 @@ public:
 
 	void set_clock_speed(int speed) {
 		if (gate_mode() == CLOCK_PULSE) {
-			clock_speed_ = clip(0, ClockEngine::NUM_SIGNATURES - 1, speed);
+			clock_speed_ = stmlib::clip(0, ClockEngine::NUM_SIGNATURES - 1, speed);
 		}
 	}
 
@@ -199,7 +199,7 @@ public:
 
 	void set_slide_speed(int value) {
 		if (cv_mode() == NOTE) {
-			slide_speed_ = clip(0, ClockEngine::NUM_SIGNATURES - 1, value);
+			slide_speed_ = stmlib::clip(0, ClockEngine::NUM_SIGNATURES - 1, value);
 		}
 	}
 
@@ -217,7 +217,7 @@ public:
 
 	void set_slide_mode(int value) {
 		if (cv_mode() == NOTE) {
-			slide_mode_ = clip(0, NUM_SLIDE_MODES - 1, value);
+			slide_mode_ = stmlib::clip(0, NUM_SLIDE_MODES - 1, value);
 		}
 	}
 

@@ -194,7 +194,7 @@ private:
 
 	void interpolate(int first_step, int last_step) {
 		if (first_step > last_step) {
-			swap(first_step, last_step);
+			stmlib::swap(first_step, last_step);
 		}
 
 		float first_value = read(first_step);

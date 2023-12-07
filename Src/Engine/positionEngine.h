@@ -142,7 +142,7 @@ private:
 		exclude_mask = ~random_mask;
 		for (int i = 0; i < 16; ++i) {
 			uint8_t rng_value = Rng::u16() % 16;
-			swap(shuffle_array[i], shuffle_array[rng_value]);
+			stmlib::swap(shuffle_array[i], shuffle_array[rng_value]);
 		}
 	}
 

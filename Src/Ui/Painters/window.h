@@ -83,7 +83,7 @@ public:
 private:
 
 	inline void scroll_to(Axis &a, int index) {
-		int index_ = clip(0, a.items_total - 1, index);
+		int index_ = stmlib::clip(0, a.items_total - 1, index);
 
 		if (index_ > a.last) {
 			a.last = index_;

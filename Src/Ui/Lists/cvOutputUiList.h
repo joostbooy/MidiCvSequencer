@@ -72,7 +72,7 @@ public:
 		switch (item)
 		{
 		case PORT:
-			port_ = clip(0, CvOutput::NUM_PORTS - 1, port_ + inc);
+			port_ = stmlib::clip(0, CvOutput::NUM_PORTS - 1, port_ + inc);
 			break;
 		case CV_SOURCE:
 			cvOutput.set_cv_source(cvOutput.cv_source() + inc);

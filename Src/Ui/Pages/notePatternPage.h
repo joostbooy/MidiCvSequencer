@@ -22,11 +22,9 @@ namespace NotePatternPage {
 	TrackState trackState;
 	NoteTrackEngine<false>noteTrackEngine;
 
-
-	int read_step(int step, int item) {
+	int read_step(int pattern, int step, int item) {
 		NoteTrack &track = settings.selected_note_track();
 
-		int pattern = settings.selected_pattern();
 		int value = track.read_step(pattern, step, NoteTrack::StepItem(item));
 
 		if ((item == NoteTrack::NOTE) && track.read(NoteTrack::USE_SCALE)) {
@@ -34,6 +32,10 @@ namespace NotePatternPage {
 		}
 
 		return value;
+	}
+
+	int read_step(int step, int item) {
+		return read_step(settings.selected_pattern(), step, item);
 	}
 
 	bool step_is_randomised(int step) {
@@ -108,22 +110,16 @@ namespace NotePatternPage {
 	}
 
 	void draw_step(int step, int curr_tick) {
-		uint32_t x = curr_tick + noteTrackEngine.when();
+		uint32_t x = noteTrackEngine.when() + curr_tick;
 		uint32_t w = noteTrackEngine.length();
-		bool is_random = step_is_randomised(step);
-		PianoRollPainter::draw_note(step, trackState.event, x, w, is_random);
+		PianoRollPainter::draw_note(step, trackState.event, x, w, step_is_randomised(step));
 	}
 
 	void draw_last_touched_step(int pattern_index) {
-		auto &track = settings.selected_note_track();
 		int item = settings.selected_step_item();
-		int value = track.read_step(pattern_index, last_touched_step, NoteTrack::StepItem(item));
-
-		if ((item == NoteTrack::NOTE) && track.read(NoteTrack::USE_SCALE)) {
-			value = settings.song.scale.read_map(value);
-		}
-
+		int value = read_step(pattern_index, last_touched_step, item);
 		const char *text = NoteTrack::step_value_text(NoteTrack::StepItem(item), value);
+
 		PianoRollPainter::draw_step_value(last_touched_step, value, text);
 	}
 

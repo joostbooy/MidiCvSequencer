@@ -60,7 +60,7 @@ public:
 		switch (item)
 		{
 		case PORT:
-			port_ = clip(0, MidiPort::NUM_PORTS - 1, port_ + inc);
+			port_ = stmlib::clip(0, MidiPort::NUM_PORTS - 1, port_ + inc);
 			break;
 		case CHANNEL_RECEIVE:
 			input.set_channel_receive(input.channel_receive() + inc);

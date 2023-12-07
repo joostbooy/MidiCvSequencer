@@ -57,7 +57,7 @@ public:
 		switch (item)
 		{
 		case PORT:
-			port_ = clip(0, CvInput::NUM_PORTS - 1, port_ + inc);
+			port_ = stmlib::clip(0, CvInput::NUM_PORTS - 1, port_ + inc);
 			break;
 		case CV_MODE:
 			cvInput.set_cv_mode(cvInput.cv_mode() + inc);

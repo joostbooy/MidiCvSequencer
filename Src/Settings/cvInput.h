@@ -85,7 +85,7 @@ public:
 	}
 
 	void set_cv_mode(int mode) {
-		cv_mode_ = clip(0, NUM_CV_MODES - 1, mode);
+		cv_mode_ = stmlib::clip(0, NUM_CV_MODES - 1, mode);
 	}
 
 	const char* cv_mode_text() {
@@ -98,7 +98,7 @@ public:
 	}
 
 	void set_gate_mode(int mode) {
-		gate_mode_ = clip(0, NUM_GATE_MODES - 1, mode);
+		gate_mode_ = stmlib::clip(0, NUM_GATE_MODES - 1, mode);
 	}
 
 	const char* gate_mode_text() {
@@ -111,7 +111,7 @@ public:
 	}
 
 	void set_forward_port(int value) {
-		forward_port_ = clip(0, MidiPort::NUM_PORTS - 1, value);
+		forward_port_ = stmlib::clip(0, MidiPort::NUM_PORTS - 1, value);
 	}
 
 	const char* forward_port_text() {
@@ -124,7 +124,7 @@ public:
 	}
 
 	void set_forward_channel(int value) {
-		forward_channel_ = clip(-1, 15, value);
+		forward_channel_ = stmlib::clip(-1, 15, value);
 	}
 
 	const char* forward_channel_text() {

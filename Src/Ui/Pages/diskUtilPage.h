@@ -85,7 +85,7 @@ namespace DiskUtilPage {
 	}
 
 	void onEncoder(uint8_t id, int inc) {
-		cursor = clip(0, num_options - 1, cursor + inc);
+		cursor = stmlib::clip(0, num_options - 1, cursor + inc);
 		window.scroll_to_row(cursor);
 	}
 

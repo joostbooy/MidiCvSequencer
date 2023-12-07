@@ -121,7 +121,7 @@ namespace PatternHeaderPage {
 		{
 		case Controller::MENU_ENC:
 			if (mode == SELECT) {
-				selected_item = clip(0, NUM_ITEMS - 1, selected_item + inc);
+				selected_item = stmlib::clip(0, NUM_ITEMS - 1, selected_item + inc);
 				window.scroll_to_collumn(selected_item);
 			} else {
 				edit(selected_item, inc, shift);

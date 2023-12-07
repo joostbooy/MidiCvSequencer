@@ -43,7 +43,7 @@ public:
 
 	void set_bpm(int value) {
 		if (sync_port() == INTERNAL) {
-			bpm_ = clip(0, MAX_BPM - 1, value);
+			bpm_ = stmlib::clip(0, MAX_BPM - 1, value);
 			update_inc(bpm(), bpm_fractional());
 		}
 	}
@@ -55,7 +55,7 @@ public:
 
 	void set_bpm_fractional(int value) {
 		if (sync_port() == INTERNAL) {
-			bpm_fractional_ = clip(0, MAX_BPM_FRACTIONAL - 1, value);
+			bpm_fractional_ = stmlib::clip(0, MAX_BPM_FRACTIONAL - 1, value);
 			update_inc(bpm(), bpm_fractional());
 		}
 	}
@@ -74,7 +74,7 @@ public:
 	}
 
 	void set_sync_port(int value) {
-		sync_port_ = clip(0, NUM_SYNC_PORTS - 1, value);
+		sync_port_ = stmlib::clip(0, NUM_SYNC_PORTS - 1, value);
 	}
 
 	const char* sync_port_text() {

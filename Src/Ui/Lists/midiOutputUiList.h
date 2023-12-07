@@ -54,7 +54,7 @@ public:
 		switch (item)
 		{
 		case PORT:
-			port_ = clip(0, MidiPort::NUM_PORTS - 1, port_ + inc);
+			port_ = stmlib::clip(0, MidiPort::NUM_PORTS - 1, port_ + inc);
 			break;
 		case SEND_CLOCK:
 			output.set_send_clock(inc > 0);

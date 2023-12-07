@@ -47,12 +47,12 @@ public:
 	}
 
 	const char* page_name(int index) override {
-		index = clip(0, size_ - 1, index);
+		index = stmlib::clip(0, size_ - 1, index);
 		return page[index].name;
 	}
 
 	Bitmap::Id page_icon(int index) override {
-		index = clip(0, size_ - 1, index);
+		index = stmlib::clip(0, size_ - 1, index);
 		return page[index].icon;
 	}
 

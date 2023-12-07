@@ -75,7 +75,7 @@ public:
 	}
 
 	void select_track_index(int track_index) {
-		selected_track_index_ = clip(0, song.max_tracks() - 1, track_index);
+		selected_track_index_ = stmlib::clip(0, song.max_tracks() - 1, track_index);
 		select_pattern(selected_pattern_);
 		select_step_item(selected_step_item_);
 	}
@@ -113,7 +113,7 @@ public:
 			selected_pattern_ = 0;
 			return;
 		}
-		selected_pattern_ = clip(0, num_patterns - 1, pattern_index);
+		selected_pattern_ = stmlib::clip(0, num_patterns - 1, pattern_index);
 	}
 
 	// follow pattern
@@ -136,7 +136,7 @@ public:
 			selected_step_item_ = 0;
 			return;
 		}
-		selected_step_item_ = clip(0, num_items - 1, step_item);
+		selected_step_item_ = stmlib::clip(0, num_items - 1, step_item);
 	}
 
 	// save & load

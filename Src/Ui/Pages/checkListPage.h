@@ -87,7 +87,7 @@ namespace CheckListPage {
 
 	void onEncoder(uint8_t id, int inc) {
 		if (controller.encoder_to_function(id) >= 0) {
-			cursor = clip(0, list_size - 1, cursor + inc);
+			cursor = stmlib::clip(0, list_size - 1, cursor + inc);
 			window.scroll_to_row(cursor);
 		}
 	}

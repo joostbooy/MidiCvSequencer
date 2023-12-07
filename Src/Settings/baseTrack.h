@@ -74,7 +74,7 @@ public:
 	}
 
 	void set_type(int value) {
-		data_->type_ = clip(0, NUM_TYPES - 1, value);
+		data_->type_ = stmlib::clip(0, NUM_TYPES - 1, value);
 	}
 
 	const char* type_text() {
@@ -87,7 +87,7 @@ public:
 	}
 
 	void set_port(int port) {
-		data_->port_ = clip(0, MidiPort::NUM_PORTS - 1, port);
+		data_->port_ = stmlib::clip(0, MidiPort::NUM_PORTS - 1, port);
 	}
 
 	const char* port_text() {
@@ -100,7 +100,7 @@ public:
 	}
 
 	void set_channel(int channel) {
-		data_->channel_ = clip(0, 15, channel);
+		data_->channel_ = stmlib::clip(0, 15, channel);
 	}
 
 	const char* channel_text() {
@@ -113,7 +113,7 @@ public:
 	}
 
 	void set_clock_mode(int clock_mode) {
-		data_->clock_mode_ = clip(0, PositionEngine::NUM_MODES - 1, clock_mode);
+		data_->clock_mode_ = stmlib::clip(0, PositionEngine::NUM_MODES - 1, clock_mode);
 	}
 
 	const char* clock_mode_text() {
@@ -126,7 +126,7 @@ public:
 	}
 
 	void set_clock_speed(int clock_speed) {
-		data_->clock_speed_ = clip(0, ClockEngine::NUM_SIGNATURES - 1, clock_speed);
+		data_->clock_speed_ = stmlib::clip(0, ClockEngine::NUM_SIGNATURES - 1, clock_speed);
 	}
 
 	const char* clock_speed_text() {
@@ -139,7 +139,7 @@ public:
 	}
 
 	void set_delay(int delay) {
-		data_->delay_ = clip(0, 3, delay);
+		data_->delay_ = stmlib::clip(0, 3, delay);
 	}
 
 	const char* delay_text() {
@@ -152,7 +152,7 @@ public:
 	}
 
 	void set_swing(int value) {
-		data_->swing_ = clip(1, 15, value);
+		data_->swing_ = stmlib::clip(1, 15, value);
 	}
 
 	const char* swing_text() {
@@ -165,7 +165,7 @@ public:
 	}
 
 	void set_humanise(int value) {
-		data_->humanise_ = clip(0, 7, value);
+		data_->humanise_ = stmlib::clip(0, 7, value);
 	}
 
 	const char* humanise_text() {
@@ -267,7 +267,7 @@ public:
 		return text;
 	}
 
-	
+
 private:
 	TrackData *data_;
 	TrackData::List* pattern_list;

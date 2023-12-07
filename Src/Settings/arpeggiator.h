@@ -118,7 +118,7 @@ public:
 	}
 
 	void set_speed(int value, bool boundary_check = 1) {
-		speed_ = boundary_check ? clip(0, ClockEngine::NUM_SIGNATURES - 1, value) : value;
+		speed_ = boundary_check ? stmlib::clip(0, ClockEngine::NUM_SIGNATURES - 1, value) : value;
 	}
 
 	const char* speed_text() {
@@ -131,7 +131,7 @@ public:
 	}
 
 	void set_swing(int value, bool boundary_check = 1) {
-		swing_ = boundary_check ? clip(0, 15, value) : value;
+		swing_ = boundary_check ? stmlib::clip(0, 15, value) : value;
 	}
 
 	const char* swing_text() {
@@ -144,7 +144,7 @@ public:
 	}
 
 	void set_offset(int value, bool boundary_check = 1) {
-		offset_ = boundary_check ? clip(0, 15, value) : value;
+		offset_ = boundary_check ? stmlib::clip(0, 15, value) : value;
 	}
 
 	const char* offset_text() {
@@ -157,7 +157,7 @@ public:
 	}
 
 	void set_trigger_mode(int value, bool boundary_check = 1) {
-		trigger_mode_ = boundary_check ? clip(0, NUM_TRIGGER_MODES - 1, value) : value;
+		trigger_mode_ = boundary_check ? stmlib::clip(0, NUM_TRIGGER_MODES - 1, value) : value;
 	}
 
 	const char* trigger_mode_text() {
@@ -170,7 +170,7 @@ public:
 	}
 
 	void set_note_mode(int value, bool boundary_check = 1) {
-		note_mode_ = boundary_check ? clip(0, NUM_CLOCK_MODES - 1, value) : value;
+		note_mode_ = boundary_check ? stmlib::clip(0, NUM_CLOCK_MODES - 1, value) : value;
 	}
 
 
@@ -185,7 +185,7 @@ public:
 
 
 	void set_velocity_mode(int value, bool boundary_check = 1) {
-		velocity_mode_ = boundary_check ? clip(0, NUM_CLOCK_MODES - 1, value) : value;
+		velocity_mode_ = boundary_check ? stmlib::clip(0, NUM_CLOCK_MODES - 1, value) : value;
 	}
 
 	const char* velocity_mode_text() {
@@ -198,7 +198,7 @@ public:
 	}
 
 	void set_gate_mode(int value, bool boundary_check = 1) {
-		gate_mode_ = boundary_check ? clip(0, NUM_CLOCK_MODES - 1, value) : value;
+		gate_mode_ = boundary_check ? stmlib::clip(0, NUM_CLOCK_MODES - 1, value) : value;
 	}
 
 	const char* gate_mode_text() {
@@ -211,7 +211,7 @@ public:
 	}
 
 	void set_gate_length(int value) {
-		gate_length_ = clip(1, 63, value);
+		gate_length_ = stmlib::clip(1, 63, value);
 	}
 
 	const char* gate_length_text() {

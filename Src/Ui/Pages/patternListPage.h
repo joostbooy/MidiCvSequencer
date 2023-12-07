@@ -84,7 +84,7 @@ namespace PatternListPage {
 			if (moving) {
 				inc > 0 ? move_right() : move_left();
 			} else {
-				index = clip(0, max() - 1, index + inc);
+				index = stmlib::clip(0, max() - 1, index + inc);
 				window.scroll_to_row(index);
 			}
 		}
