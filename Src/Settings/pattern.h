@@ -78,6 +78,14 @@ public:
 		return swap_index;
 	}
 
+	bool duplicate(uint8_t src_index, uint8_t dest_index) {
+		if (src_index < list_->size_ && dest_index < list_->size_) {
+			data(dest_index) = data(src_index);
+			return true;
+		}
+		return false;
+	}
+
 private:
 	TrackData::List *list_;
 
