@@ -6,7 +6,6 @@
 #include "scale.h"
 #include "chord.h"
 #include "midiClock.h"
-
 #include "uiList.h"
 
 class Song {
