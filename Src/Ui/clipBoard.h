@@ -25,6 +25,7 @@ public:
 private:
 	int pattern_type_;
 	TrackData::Pattern pattern_;
+	StringBuilderBase<TrackData::kMaxLabelLength>str;
 };
 
 extern ClipBoard clipboard;
