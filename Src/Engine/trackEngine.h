@@ -69,7 +69,6 @@ public:
 		processed_ticks = 0;
 
 		stop_audition();
-
 		process_step(track, pattern, step);
 		send_step(track);
 
