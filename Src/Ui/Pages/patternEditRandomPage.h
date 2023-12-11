@@ -27,7 +27,7 @@ namespace PatternEditRandomPage {
 
 	Window window = {
 		.x = (canvas.width() - w) / 2,
-		.y = (canvas.height() - h + 10) / 2,
+		.y = (canvas.height() - h) / 2,
 		.width = w,
 		.height = h,
 		.collumns = 2,
@@ -182,11 +182,9 @@ namespace PatternEditRandomPage {
 
 	}
 
-
 	void drawDisplay() {
-		canvas.fill(window.x + 4, window.y + 4, window.width, window.height, Canvas::SUBTRACTED);
-		canvas.fill(window.x - 2, window.y - 2, window.width + 4, window.height + 4, Canvas::BLACK);
-		canvas.box(window.x, window.y, window.width, window.height, Canvas::WHITE, Canvas::WHITE);
+		canvas.fill(window.x - 4, window.y - 4, window.width + 8, window.height + 8, Canvas::DARK_GRAY);
+		canvas.fill(window.x - 3, window.y - 3, window.width + 6, window.height + 6, Canvas::WHITE);
 	}
 
 	const uint16_t targetFps() {
