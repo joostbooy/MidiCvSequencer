@@ -167,18 +167,22 @@ public:
 	}
 
 	void draw_text(int x, int y, const char *str, Color color = BLACK) {
-		font_color = color;
-		while (*str) {
-			draw_char(x, y, *str++);
-			x = text_cursor();
+		if (str) {
+			font_color = color;
+			while (*str) {
+				draw_char(x, y, *str++);
+				x = text_cursor();
+			}
 		}
 	}
 
 	void draw_text(int x, int y, int w, int h, const char *str, Allign x_allign, Allign y_allign, Color color = BLACK) {
-		int x_ = x;
-		int y_ = y;
-		get_xy_allignment(&x_, &y_, w, h, font.string_width(str), font.height(), x_allign, y_allign);
-		draw_text(x_, y_, str, color);
+		if (str) {
+			int x_ = x;
+			int y_ = y;
+			get_xy_allignment(&x_, &y_, w, h, font.string_width(str), font.height(), x_allign, y_allign);
+			draw_text(x_, y_, str, color);
+		}
 	}
 
 	void draw_bitmap(int x, int y, int w, int h, Bitmap::Id id, Allign x_allign, Allign y_allign) {
