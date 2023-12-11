@@ -43,6 +43,10 @@ public:
 	}
 
 	// Methods
+	const char* name(uint8_t index) {
+		return UiText::str.write("P", index + 1, "-", label(index));
+	}
+
 	void clear(int index) {
 		for (int i = 0; i < TrackData::kMaxStepItems; ++i) {
 			*random_mask(index, i) = 0;
