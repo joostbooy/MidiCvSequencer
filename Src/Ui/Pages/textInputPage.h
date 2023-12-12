@@ -35,6 +35,7 @@ namespace TextInputPage {
 
 	uint8_t dest_max_;
 	const uint8_t kCharTableSize = 51;
+	const uint8_t kCharsPerRow = 17;
 	const uint8_t kStackMax = 64;
 	Stack <char, kStackMax> char_stack;
 	StringBuilderBase<kStackMax> message;
@@ -171,13 +172,34 @@ namespace TextInputPage {
 		}
 	}
 
-	void onEncoder(uint8_t id, int inc) {
-		int func = controller.encoder_to_function(id);
+	void char_cursor_up() {
+		int up = char_cursor - kCharsPerRow;
+		if (up >= 0) {
+			char_cursor = up;
+		}
+	}
 
-		if (func == 0) {
+	void char_cursor_down() {
+		int down = char_cursor + kCharsPerRow;
+		if (down < kCharTableSize - 1) {
+			char_cursor = down;
+		}
+	}
+
+	void onEncoder(uint8_t id, int inc) {
+		switch (id)
+		{
+		case Controller::MENU_ENC:
 			inc > 0 ? text_cursor_right() : text_cursor_left();
-		} else if (func == 3) {
+			break;
+		case Controller::X_ENC:
 			inc > 0 ? char_cursor_right() : char_cursor_left();
+			break;
+		case Controller::Y_ENC:
+			inc > 0 ? char_cursor_down() : char_cursor_up();
+			break;
+		default:
+			break;
 		}
 	}
 
@@ -194,7 +216,7 @@ namespace TextInputPage {
 			return;
 		}
 
-		if (id == Controller::EDIT_BUTTON) {
+		if (id == Controller::X_ENC_PUSH || id == Controller::Y_ENC_PUSH) {
 			insert(char_table[char_cursor]);
 			return;
 		}
@@ -265,8 +287,12 @@ namespace TextInputPage {
 			LedPainter::set_copy(Matrix::GREEN);
 		}
 
+		LedPainter::set_x(Matrix::GREEN);
+		LedPainter::set_y(Matrix::GREEN);
+		LedPainter::set_menu(Matrix::GREEN);
+
 		LedPainter::set_clear(Matrix::GREEN);
-		LedPainter::footer_encoders(Matrix::ORANGE, Matrix::BLACK, Matrix::BLACK, Matrix::ORANGE);
+
 		LedPainter::footer_buttons(Matrix::GREEN, Matrix::RED, Matrix::ORANGE, Matrix::ORANGE);
 	}
 
@@ -322,7 +348,7 @@ namespace TextInputPage {
 			canvas.set_font(Font::SMALL, color);
 			canvas.draw_char(x, y, char_table[i]);
 			x = canvas.text_cursor() + 10;
-			if (x >= (canvas.width() - 8)) {
+			if ((i % kCharsPerRow) == (kCharsPerRow - 1)) {
 				x = 2;
 				y += 8;
 			}
