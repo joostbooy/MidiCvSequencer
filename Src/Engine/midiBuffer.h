@@ -18,29 +18,29 @@ public:
 	Que<uint8_t, 8> clock_out_que;
 
 	void init(int port_index) {
-		num_data_bytes = 0;
-		last_message = 0x00;
+		num_data_bytes_ = 0;
+		last_message_ = 0x00;
 
 		event.port = port_index;
 		clock_event.port = port_index;
 	}
 
 	void write_out(MidiEvent::Event *event) {
-		if (event->message == last_message) {
+		if (event->message == last_message_) {
 			force_write_out(event, 2);
 		} else {
-			last_message = event->message;
+			last_message_ = event->message;
 			force_write_out(event, 3);
 		}
 	}
 
 	bool write_out_non_blocking(MidiEvent::Event *event) {
 		size_t available = out_que.available_size();
-		uint8_t requested = event->message != last_message ? 3 : 2;
+		uint8_t requested = event->message != last_message_ ? 3 : 2;
 
 		if (available >= requested) {
 			if (requested == 3) {
-				last_message = event->message;
+				last_message_ = event->message;
 				out_que.write(event->message);
 			}
 			out_que.write(event->data[0]);
@@ -73,8 +73,8 @@ private:
 	MidiEvent::Event event;
 	MidiEvent::Event clock_event;
 
-	uint8_t num_data_bytes;
-	uint8_t last_message;
+	uint8_t num_data_bytes_;
+	uint8_t last_message_;
 
 
 	void force_write_out(MidiEvent::Event *event, const size_t size) {
@@ -91,13 +91,13 @@ private:
 	bool parse(uint8_t reading, uint32_t time) {
 		if (reading >= 0x80) {
 			event.message = reading;
-			num_data_bytes = 0;
+			num_data_bytes_ = 0;
 		} else {
-			event.data[num_data_bytes] = reading;
-			++num_data_bytes;
+			event.data[num_data_bytes_] = reading;
+			++num_data_bytes_;
 
-			if (num_data_bytes >= 2) {
-				num_data_bytes = 0;
+			if (num_data_bytes_ >= 2) {
+				num_data_bytes_ = 0;
 				event.time = time;
 				return true;
 			}
