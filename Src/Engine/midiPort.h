@@ -118,7 +118,7 @@ private:
 		} else if (buff.out_que.readable()) {
 			uint8_t byte = buff.out_que.read();
 
-			if (byte & 0x80 && byte != usb_status) {
+			if (byte & 0x80) {
 				usb_status = byte;
 				data[0] = usb_status >> 4;
 				data[1] = usb_status;
