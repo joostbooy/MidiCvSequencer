@@ -39,6 +39,7 @@
 - Westlicht			https://github.com/westlicht
 - Pichenettes		https://github.com/pichenettes
 - Chan					https://elm-chan.org/fsw/ff/00index_e.html
+- Ha Thach 			https://docs.tinyusb.org/en/latest/
 
 ## License
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
