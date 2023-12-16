@@ -1,6 +1,6 @@
 #include "engine.h"
 #include "scale.h"
-
+#include "usb.h"
 #include "debug.h"
 
 Engine engine;
@@ -181,6 +181,8 @@ void Engine::tick() {
 // low priority
 void Engine::process() {
 	MidiEvent::Event event;
+
+	usb.task();
 
 	for (int i = 0; i < CvInput::NUM_PORTS; ++i) {
 		cvInputEngine.process(i);

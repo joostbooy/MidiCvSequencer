@@ -2,6 +2,7 @@
 #define MidiPort_h
 
 #include "uart.h"
+#include "usb.h"
 #include "midiBuffer.h"
 
 class MidiPort {
@@ -32,6 +33,8 @@ public:
 	}
 
 	void init() {
+		usb_status = 0x00;
+
 		for (int i = 0; i < NUM_PORTS; ++i) {
 			buffer_[i].init(i);
 			last_received[i] = 0x00;
@@ -56,64 +59,80 @@ public:
 	}
 
 	void receive(uint32_t time) {
-		for (int i = 0; i < NUM_PORTS; ++i) {
-			MidiBuffer &buff = buffer_[i];
-
-			if (readable(i)) {
-				last_received[i] = read(i);
-				if (buff.in_que.writeable()) {
-					buff.in_que.write( {.data = last_received[i], .time = time } );
+		for (int i = 0; i < MIDI_UART_4; ++i) {
+			if (uart.readable(i)) {
+				last_received[i] = uart.read(i);
+				if (buffer_[i].in_que.writeable()) {
+					buffer_[i].in_que.write( {.data = last_received[i], .time = time } );
 				}
 			}
 		}
+
+		receive_usb(time);
 	}
 
 	void send() {
-		for (int i = 0; i < NUM_PORTS; ++i) {
-			MidiBuffer &buff = buffer_[i];
-
-			if (writeable(i)) {
-				if (buff.clock_out_que.readable()) {
-					write(i, buff.clock_out_que.read());
-				} else if (buff.out_que.readable()) {
-					write(i, buff.out_que.read());
+		for (int i = 0; i < MIDI_UART_4; ++i) {
+			if (uart.writeable(i)) {
+				if (buffer_[i].clock_out_que.readable()) {
+					uart.write(i, buffer_[i].clock_out_que.read());
+				} else if (buffer_[i].out_que.readable()) {
+					uart.write(i, buffer_[i].out_que.read());
 				}
 			}
 		}
+
+		send_usb();
 	}
 
 private:
 
 	MidiBuffer buffer_[NUM_PORTS];
 	uint8_t last_received[NUM_PORTS];
+	uint8_t usb_status;
 
-	inline bool readable(uint8_t port) {
-		if (port < MIDI_USB) {
-			return uart.readable(port);
+	inline void receive_usb(uint32_t time) {
+		uint8_t data[4];
+		MidiBuffer &buff = buffer_[MIDI_USB];
+
+		if ((buff.in_que.available_size() >= 3) && usb.read(data)) {
+			last_received[MIDI_USB] = data[1];
+
+			buff.in_que.write( {.data = data[1], .time = time } );
+			if (data[1] < 0xF8) {
+				buff.in_que.write( {.data = data[2], .time = time } );
+				buff.in_que.write( {.data = data[3], .time = time } );
+			}
 		}
-		return true;
 	}
 
-	inline uint8_t read(uint8_t port) {
-		if (port < MIDI_USB) {
-			return uart.read(port);
-		}
-		return 0x00;
-	}
+	void send_usb() {
+		uint8_t data[4];
+		MidiBuffer &buff = buffer_[MIDI_USB];
 
-	inline bool writeable(uint8_t port) {
-		if (port < MIDI_USB) {
-			return uart.writeable(port);
-		}
-		return true;
-	}
+		if (buff.clock_out_que.readable()) {
+			data[0] = 0x0F;
+			data[1] = buff.clock_out_que.read();
+			data[2] = 0x00;
+			data[3] = 0x00;
+		} else if (buff.out_que.readable()) {
+			uint8_t byte = buff.out_que.read();
 
-	inline void write(uint8_t port, uint8_t data) {
-		if (port < MIDI_USB) {
-			uart.write(port, data);
-			return;
+			if (byte & 0x80 && byte != usb_status) {
+				usb_status = byte;
+				data[0] = usb_status >> 4;
+				data[1] = usb_status;
+				data[2] = buff.out_que.read();
+				data[3] = buff.out_que.read();
+			} else {
+				data[0] = usb_status >> 4;
+				data[1] = usb_status;
+				data[2] = byte;
+				data[3] = buff.out_que.read();
+			}
 		}
-		//usb.write(data);
+
+		usb.write(data);
 	}
 
 };

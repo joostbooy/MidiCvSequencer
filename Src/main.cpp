@@ -5,6 +5,7 @@
 #include "matrix.h"
 #include "display.h"
 #include "adc.h"
+#include "usb.h"
 #include "disk.h"
 #include "debug.h"
 #include "engine.h"
@@ -66,6 +67,7 @@ int main(void)
 	adc.init();
 	dac.init();
 	gateIO.init();
+	usb.init();
 	disk.init();
 	disk.mount();
 

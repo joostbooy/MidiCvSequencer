@@ -20,7 +20,7 @@ LIB_DIR = /Users/joostbooy/Desktop/Code/stm32/lib
 STM_REPO = /Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1
 UTILS_DIR = $(LIB_DIR)/utils
 FATFS_LIB = $(LIB_DIR)/ff14b/source
-#USB_DIR = $(LIB_DIR)/tinyusb/src
+USB_DIR = $(LIB_DIR)/tinyusb
 UI_DIR = Src/Ui
 ENGINE_DIR = Src/Engine
 SETTINGS_DIR = Src/Settings
@@ -62,6 +62,14 @@ FLOAT_ABI = -mfloat-abi=hard
 C_SOURCES =  \
 $(wildcard Src/*.c) \
 $(wildcard Drivers/*.c) \
+$(wildcard Drivers/Usb/*.c) \
+$(wildcard $(USB_DIR)/hw/*.c) \
+$(wildcard $(USB_DIR)/src/*.c) \
+$(wildcard $(USB_DIR)/src/common/*.c) \
+$(wildcard $(USB_DIR)/src/device/*.c) \
+$(wildcard $(USB_DIR)/src/class/midi/*.c) \
+$(wildcard $(USB_DIR)/src/portable/synopsys/dwc2/*.c) \
+$(wildcard $(USB_DIR)/src/portable/st/stm32_fsdev/*.c) \
 $(wildcard $(FATFS_LIB)/*.c) \
 $(filter-out $(wildcard $(HAL_DIR)/Src/*template*), $(wildcard $(HAL_DIR)/Src/*.c)) \
 $(SYSTEM)
@@ -70,6 +78,7 @@ $(SYSTEM)
 CPP_SOURCES = \
 $(wildcard Src/*.cpp) \
 $(wildcard Drivers/*.cpp) \
+$(wildcard Drivers/Usb/*.cpp) \
 $(wildcard LookupTables/*.cpp) \
 $(wildcard $(ENGINE_DIR)/*.cpp) \
 $(wildcard $(SETTINGS_DIR)/*.cpp) \
@@ -118,6 +127,7 @@ AS_INCLUDES =
 C_INCLUDES = \
 -ISrc \
 -IDrivers \
+-IDrivers/Usb \
 -IlookupTables \
 -Istm32 \
 -I$(HAL_DIR)/Inc \
@@ -132,6 +142,12 @@ C_INCLUDES = \
 -I$(UI_DIR)/Pages \
 -I$(UI_DIR)/Painters \
 -I$(UI_DIR)/Lists \
+-I$(USB_DIR)/hw \
+-I$(USB_DIR)/src \
+-I$(USB_DIR)/src/device \
+-I$(USB_DIR)/src/class/midi \
+-I$(USB_DIR)/src/portable/synopsys/dwc2 \
+-I$(USB_DIR)/src/portable/st/stm32_fsdev \
 -I$(FATFS_LIB) \
 -I$(FILESYSTEM_DIR)
 

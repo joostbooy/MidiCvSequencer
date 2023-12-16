@@ -28,7 +28,7 @@ void Sys::init() {
 	__HAL_RCC_TIM3_CLK_ENABLE();
 	__HAL_RCC_TIM4_CLK_ENABLE();
 	__HAL_RCC_TIM5_CLK_ENABLE();
-
+	__HAL_RCC_USB_OTG_FS_CLK_ENABLE();
 
 	RCC_OscInitTypeDef RCC_OscInitStruct = {0};
 	RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
