@@ -33,7 +33,8 @@ public:
 	}
 
 	void init() {
-		usb_status = 0x00;
+		usb_data_pos = 0;
+		memset(usb_data, 0x00, 4);
 
 		for (int i = 0; i < NUM_PORTS; ++i) {
 			buffer_[i].init(i);
@@ -87,9 +88,10 @@ public:
 
 private:
 
-	MidiBuffer buffer_[NUM_PORTS];
+	uint8_t usb_data[4];
+	uint8_t usb_data_pos = 0;
 	uint8_t last_received[NUM_PORTS];
-	uint8_t usb_status;
+	MidiBuffer buffer_[NUM_PORTS];
 
 	inline void receive_usb(uint32_t time) {
 		uint8_t data[4];
@@ -106,33 +108,27 @@ private:
 		}
 	}
 
-	void send_usb() {
-		uint8_t data[4];
+	inline void send_usb() {
 		MidiBuffer &buff = buffer_[MIDI_USB];
 
 		if (buff.clock_out_que.readable()) {
-			data[0] = 0x0F;
-			data[1] = buff.clock_out_que.read();
-			data[2] = 0x00;
-			data[3] = 0x00;
+			usb.write_byte(buff.clock_out_que.read());
 		} else if (buff.out_que.readable()) {
-			uint8_t byte = buff.out_que.read();
+			uint8_t data = buff.out_que.read();
 
-			if (byte & 0x80) {
-				usb_status = byte;
-				data[0] = usb_status >> 4;
-				data[1] = usb_status;
-				data[2] = buff.out_que.read();
-				data[3] = buff.out_que.read();
+			if (data & 0x80) {
+				usb_data[0] = data >> 4;
+				usb_data[1] = data;
+				usb_data_pos = 2;
 			} else {
-				data[0] = usb_status >> 4;
-				data[1] = usb_status;
-				data[2] = byte;
-				data[3] = buff.out_que.read();
+				usb_data[usb_data_pos] = data;
+
+				if (++usb_data_pos >= 4) {
+					usb_data_pos = 2;
+					usb.write(usb_data);
+				}
 			}
 		}
-
-		usb.write(data);
 	}
 
 };
