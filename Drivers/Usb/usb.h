@@ -20,20 +20,17 @@ public:
 		return tud_midi_packet_read(data);
 	}
 
-	void blocking_read(uint8_t data[4]) {
-		while (!read(data));
-	}
-
 	bool write(uint8_t data[4]) {
 		return tud_midi_packet_write(data);
 	}
 
-	void blocking_write(uint8_t data[4]) {
-		while (!write(data));
+	bool write_byte(uint8_t byte) {
+		data_[1] = byte;
+		return write(data_);
 	}
 
 private:
-
+	uint8_t data_[4] { 0x0F, 0x00, 0x00, 0x00 };
 };
 
 extern Usb usb;
