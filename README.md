@@ -12,6 +12,7 @@
 - 8 CV & gate outputs
 - 4 CV & gate inputs
 - 4 Midi in & out ports
+- Midi Usb port
 - microSD card storage
 - Monochrome OLED screen
 - 19 clickable encoders
