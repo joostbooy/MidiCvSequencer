@@ -46,14 +46,6 @@ public:
 		}
 	}
 
-	void set_velocity(uint8_t velocity) {
-		velocity_ = velocity;
-	}
-
-	void set_gate_length(uint8_t gate_length) {
-		gate_length_ = clockEngine.gate_duration(gate_length);
-	}
-
 	uint32_t swing() {
 		return clockEngine.swing(arpeggiator_->swing());
 	}
@@ -67,16 +59,16 @@ public:
 
 	uint8_t velocity() {
 		if (arpeggiator_->velocity_mode() == Arpeggiator::OFF) {
-			return velocity_;
+			return arpeggiator_->velocity();
 		}
-		return reciprocal(size_) * (velocity_clock.curr + 1) * velocity_;
+		return reciprocal(size_) * (velocity_clock.curr + 1) * arpeggiator_->velocity();
 	}
 
 	uint32_t gate_length() {
 		if (arpeggiator_->gate_mode() == Arpeggiator::OFF) {
-			return gate_length_;
+			return clockEngine.gate_duration(arpeggiator_->gate_length());
 		}
-		return reciprocal(size_) * (gate_clock.curr + 1) * gate_length_;
+		return reciprocal(size_) * (gate_clock.curr + 1) * clockEngine.gate_duration(arpeggiator_->gate_length());
 	}
 
 private:
@@ -84,9 +76,7 @@ private:
 	uint8_t size_;
 	uint8_t notes_[kMaxSize];
 	uint8_t trigger_position_;
-	uint8_t velocity_;
-	uint32_t gate_length_;
-
+	
 	static Reciprocal<kMaxSize>reciprocal;
 
 	struct Clock {

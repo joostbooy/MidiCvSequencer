@@ -201,8 +201,6 @@ private:
 		NoteStack &noteStack = note_stack_[port];
 		ArpeggiatorEngine &arpeggiator = arpeggiatorEngine[port];
 
-		arpeggiator.set_velocity(100);
-		arpeggiator.set_gate_length(4);
 		arpeggiator.clear_notes();
 
 		for (int i = 0; i < noteStack.size(); ++i) {

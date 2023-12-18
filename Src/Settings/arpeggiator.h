@@ -101,6 +101,7 @@ public:
 	void init() {
 		set_offset(0);
 		set_trigger_mode(XXXX);
+		set_velocity(100);
 		set_gate_length(4);
 		set_note_mode(OFF);
 		set_velocity_mode(OFF);
@@ -173,7 +174,6 @@ public:
 		note_mode_ = boundary_check ? stmlib::clip(0, NUM_CLOCK_MODES - 1, value) : value;
 	}
 
-
 	const char* note_mode_text() {
 		return clock_mode_text(note_mode());
 	}
@@ -210,12 +210,25 @@ public:
 		return gate_length_;
 	}
 
-	void set_gate_length(int value) {
-		gate_length_ = stmlib::clip(1, 63, value);
+	void set_gate_length(int value, bool boundary_check = 1) {
+		gate_length_ = boundary_check ? stmlib::clip(1, 63, value) : value;
 	}
 
 	const char* gate_length_text() {
 		return ClockEngine::gate_duration_text(gate_length());
+	}
+
+	// velocity
+	uint8_t velocity() {
+		return velocity_;
+	}
+
+	void set_velocity(int value, bool boundary_check = 1) {
+		velocity_ = boundary_check ? stmlib::clip(0, 127, value) : value;
+	}
+
+	const char* velocity_text() {
+		return UiText::str.write(velocity());
 	}
 
 
@@ -232,6 +245,7 @@ public:
 	void load(FileReader &fileReader) {
 		fileReader.read(offset_);
 		fileReader.read(trigger_mode_);
+		fileReader.read(velocity_);
 		fileReader.read(gate_length_);
 		fileReader.read(speed_);
 		fileReader.read(swing_);
@@ -243,6 +257,7 @@ public:
 	void save(FileWriter &fileWriter) {
 		fileWriter.write(offset_);
 		fileWriter.write(trigger_mode_);
+		fileWriter.write(velocity_);
 		fileWriter.write(gate_length_);
 		fileWriter.write(speed_);
 		fileWriter.write(swing_);
@@ -254,6 +269,7 @@ public:
 private:
 	uint8_t offset_;
 	uint8_t trigger_mode_;
+	uint8_t velocity_;
 	uint8_t gate_length_;
 	uint8_t speed_;
 	uint8_t swing_;

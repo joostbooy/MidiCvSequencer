@@ -112,9 +112,8 @@ public:
 		arpeggiator.set_gate_mode(arp_gate, false);
 		arpeggiator.set_velocity_mode(arp_velocity, false);
 		arpeggiator.set_offset(arp_offset, false);
-
-		arpeggiatorEngine.set_velocity(velocity);
-		arpeggiatorEngine.set_gate_length(gate_length);
+		arpeggiator.set_velocity(velocity, false);
+		arpeggiator.set_gate_length(gate_length, false);
 
 		arpeggiatorEngine.clear_notes();
 		for (int i = 0; i < chord_.size(); ++i) {
