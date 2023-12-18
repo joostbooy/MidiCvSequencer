@@ -61,7 +61,6 @@ public:
 	}
 
 	void process_step(uint8_t pattern, uint8_t step) {
-		uint8_t note = get_step_value(pattern, step, DrumTrack::DRUM_NOTE);
 		uint8_t velocity = get_step_value(pattern, step, DrumTrack::VELOCITY);
 		uint8_t delay = get_step_value(pattern, step, DrumTrack::DELAY);
 		uint8_t gate_length = get_step_value(pattern, step, DrumTrack::GATE_LENGTH);
@@ -74,13 +73,13 @@ public:
 		event.port = drumTrack_->port();
 		event.tie = gate_length >= 64;
 		event.message = MidiEvent::NOTE_ON | drumTrack_->channel();
-		event.data[0] = read_drum_note(note);
+		event.data[0] = drumTrack_->read(DrumTrack::DRUM_NOTE);
 		event.data[1] = velocity;
 
 		when_ = trackState_->clock.gate_duration(delay);
 		length_ = trackState_->clock.gate_duration(gate_length);
 
-		// repeats	
+		// repeats
 		repeats_->process(repeats, length_, spread, velocity, repeat_velocity);
 		if (repeats_->next_interval()) {
 			length_ = repeats_->interval();
@@ -98,18 +97,6 @@ private:
 	uint32_t length_;
 	uint32_t when_;
 
-	inline uint8_t read_drum_note(int index) {
-		switch (index)
-		{
-		case 0:	return drumTrack_->read(DrumTrack::DRUM_NOTE_1);
-		case 1:	return drumTrack_->read(DrumTrack::DRUM_NOTE_2);
-		case 2:	return drumTrack_->read(DrumTrack::DRUM_NOTE_3);
-		case 3:	return drumTrack_->read(DrumTrack::DRUM_NOTE_4);
-		default:
-			break;
-		}
-		return 0;
-	}
 
 	inline int get_step_value(uint8_t pattern, uint8_t step, DrumTrack::StepItem item) {
 		if (allow_randomization) {

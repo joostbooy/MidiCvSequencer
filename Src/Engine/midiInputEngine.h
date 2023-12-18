@@ -19,6 +19,7 @@ public:
 			bend_value_[i] = 0;
 			cc_value_[i] = 0;
 			note_stack_[i].init();
+			arpeggiatorEngine[i].init(&settings.midiInput(i).arpeggiator);
 		}
 	};
 
@@ -33,10 +34,19 @@ public:
 	void tick() {
 		MidiEvent::Event e;
 
-		//++num_ticks_;
+		++num_ticks_;
 		if (suspended) {
 			return;
 		}
+
+		// for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
+		//	if (settings.midiInput(i).arpeggiator.enabled()) {
+		//		tick_arpeggiator(i, num_ticks_);
+		//	}
+		// }
+
+		num_ticks_ = 0;
+
 
 		while (midi_que.readable()) {
 			e = midi_que.read();
@@ -67,6 +77,9 @@ public:
 
 	void reset() {
 		num_ticks_ = 0;
+		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
+			arpeggiatorEngine[i].reset();
+		}
 	}
 
 	void all_notes_off() {
@@ -75,7 +88,7 @@ public:
 		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
 			while (note_stack_[i].pull(event)) {
 				MidiEvent::convert_to_note_off(&event);
-				midi_que.write(event);
+				outputEngine_->send_note_off(event);
 			}
 		}
 	}
@@ -130,12 +143,14 @@ public:
 
 private:
 	bool suspended;
-	uint32_t num_ticks_;
+	int num_ticks_;
 	MidiOutputEngine *outputEngine_;
 
 	uint8_t cc_value_[MidiPort::NUM_PORTS];
 	uint16_t bend_value_[MidiPort::NUM_PORTS];
 	NoteStack note_stack_[MidiPort::NUM_PORTS];
+	ArpeggiatorEngine arpeggiatorEngine[MidiPort::NUM_PORTS];
+
 	Que<MidiEvent::Event, 64>midi_que;
 
 	void cc_change(MidiEvent::Event &event) {
@@ -154,28 +169,60 @@ private:
 	}
 
 	void note_on(MidiEvent::Event &event) {
+		NoteStack &noteStack = note_stack_[event.port];
 		MidiInput &midiInput = settings.midiInput(event.port);
 
-		event.message &= ~(0x0F);
-		event.message |= (midiInput.channel_send() & 0x0F);
+		event.message = MidiEvent::NOTE_ON | midiInput.channel_send();
 
 		uint8_t key = event.data[0];
 		if (midiInput.quantise_note()) {
 			event.data[0] = settings.song.scale.snap_and_transpose(key);
 		}
 
-		note_stack_[event.port].add_note(key, event);
-		midi_que.write(event);
+		if (noteStack.add_note(key, event)) {
+			midi_que.write(event);
+		}
 	}
 
 	void note_off(MidiEvent::Event &event) {
 		MidiEvent::Event off_event;
+
+		NoteStack &noteStack = note_stack_[event.port];
 		uint8_t key = event.data[0];
 
-		if (note_stack_[event.port].remove_note(key, off_event)) {
+		if (noteStack.remove_note(key, off_event)) {
 			midi_que.write(off_event);
 		}
 	}
+
+	void tick_arpeggiator(uint8_t port, int ticks) {
+		MidiEvent::Event e;
+
+		NoteStack &noteStack = note_stack_[port];
+		ArpeggiatorEngine &arpeggiator = arpeggiatorEngine[port];
+
+		arpeggiator.set_velocity(100);
+		arpeggiator.set_gate_length(4);
+		arpeggiator.clear_notes();
+
+		for (int i = 0; i < noteStack.size(); ++i) {
+			arpeggiator.set_note(noteStack.read(i).data[0]);
+		}
+
+		e.tie = false;
+		e.port = port;
+		e.source = noteStack.read(0).source;
+		e.message = noteStack.read(0).message;
+
+		for (int i = 0; i < ticks; ++i) {
+			if (arpeggiator.tick()) {
+				e.data[0] = arpeggiator.note();
+				e.data[1] = arpeggiator.velocity();
+				outputEngine_->schedule_note(e, arpeggiator.swing(), arpeggiator.gate_length());
+			}
+		}
+	}
+
 };
 
 #endif
