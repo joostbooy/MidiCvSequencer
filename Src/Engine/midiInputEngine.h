@@ -39,6 +39,8 @@ public:
 			return;
 		}
 
+		// TODO :  need to find way to safely switch between arpeggiator & normal node send
+
 		// for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
 		//	if (settings.midiInput(i).arpeggiator.enabled()) {
 		//		tick_arpeggiator(i, num_ticks_);
