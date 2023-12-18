@@ -136,7 +136,7 @@ public:
 	}
 
 	const char* swing_text() {
-		return ClockEngine::swing_text(speed());
+		return ClockEngine::swing_text(swing());
 	}
 
 	// offset
