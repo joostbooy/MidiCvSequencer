@@ -18,6 +18,7 @@ public:
 		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
 			bend_value_[i] = 0;
 			cc_value_[i] = 0;
+			arpeggiator_state[i] = 0;
 			note_stack_[i].init();
 			arpeggiatorEngine[i].init(&settings.midiInput(i).arpeggiator);
 		}
@@ -39,16 +40,16 @@ public:
 			return;
 		}
 
-		// TODO :  need to find way to safely switch between arpeggiator & normal node send
-
-		// for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
-		//	if (settings.midiInput(i).arpeggiator.enabled()) {
-		//		tick_arpeggiator(i, num_ticks_);
-		//	}
-		// }
+		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
+			if (arpeggiator_state[i] != settings.midiInput(i).arpeggiator.enabled()) {
+				arpeggiator_state[i] = settings.midiInput(i).arpeggiator.enabled();
+				clear(i);
+			} else if (arpeggiator_state[i]) {
+				tick_arpeggiator(i, num_ticks_);
+			}
+		}
 
 		num_ticks_ = 0;
-
 
 		while (midi_que.readable()) {
 			e = midi_que.read();
@@ -72,26 +73,10 @@ public:
 		}
 	}
 
-	void clear() {
-		all_notes_off();
-		reset();
-	}
-
 	void reset() {
 		num_ticks_ = 0;
 		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
 			arpeggiatorEngine[i].reset();
-		}
-	}
-
-	void all_notes_off() {
-		MidiEvent::Event event;
-
-		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
-			while (note_stack_[i].pull(event)) {
-				MidiEvent::convert_to_note_off(&event);
-				outputEngine_->send_note_off(event);
-			}
 		}
 	}
 
@@ -150,6 +135,7 @@ private:
 
 	uint8_t cc_value_[MidiPort::NUM_PORTS];
 	uint16_t bend_value_[MidiPort::NUM_PORTS];
+	bool arpeggiator_state[MidiPort::NUM_PORTS];
 	NoteStack note_stack_[MidiPort::NUM_PORTS];
 	ArpeggiatorEngine arpeggiatorEngine[MidiPort::NUM_PORTS];
 
@@ -205,6 +191,10 @@ private:
 
 		arpeggiator.clear_notes();
 
+		if (noteStack.size() < 1) {
+			return;
+		}
+
 		for (int i = 0; i < noteStack.size(); ++i) {
 			arpeggiator.set_note(noteStack.read(i).data[0]);
 		}
@@ -221,6 +211,17 @@ private:
 				outputEngine_->schedule_note(e, arpeggiator.swing(), arpeggiator.gate_length());
 			}
 		}
+	}
+
+	void clear(int port) {
+		MidiEvent::Event event;
+
+		while (note_stack_[port].pull(event)) {
+			MidiEvent::convert_to_note_off(&event);
+			outputEngine_->send_note_off(event);
+		}
+
+		midi_que.clear();
 	}
 
 };
