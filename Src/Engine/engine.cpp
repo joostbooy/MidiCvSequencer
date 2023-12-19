@@ -61,8 +61,9 @@ void Engine::start() {
 	clock_ticks = 0;
 	processed_ticks = 0;
 	midiClock.reset();
-	trackEngine.stop_audition();
+	midiInputEngine.reset();
 	cvOutputEngine.start();
+	trackEngine.stop_audition();
 
 	state_ = RUNNING;
 }
@@ -72,7 +73,7 @@ void Engine::stop() {
 
 	trackEngine.reset();
 	cvOutputEngine.reset();
-	midiInputEngine.clear();
+	midiInputEngine.reset();
 	midiOutputEngine.clear();
 
 	// clearing might take a while,
