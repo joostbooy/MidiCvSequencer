@@ -30,7 +30,7 @@ public:
 	}
 
 	bool add_note(uint8_t key, MidiEvent::Event &event) {
-		if (size_ >= kMax || key_to_slot(key) >= 0) {
+		if (size_ >= kMax || excists(key, event)) {
 			return false;
 		}
 
@@ -90,6 +90,16 @@ private:
 		}
 		return slot;
 	}
+
+	bool excists(uint8_t key, MidiEvent::Event &e) {
+		for (int i = 0; i < size_; ++i) {
+			if (entry[i].key == key || entry[i].event.data[0] == e.data[0]) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 };
 
 #endif
