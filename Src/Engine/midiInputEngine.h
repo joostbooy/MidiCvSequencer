@@ -43,7 +43,7 @@ public:
 		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
 			if (arpeggiator_state[i] != settings.midiInput(i).arpeggiator.enabled()) {
 				arpeggiator_state[i] = settings.midiInput(i).arpeggiator.enabled();
-				clear(i);
+				all_note_off(i);
 			} else if (arpeggiator_state[i]) {
 				tick_arpeggiator(i, num_ticks_);
 			}
@@ -213,7 +213,7 @@ private:
 		}
 	}
 
-	void clear(int port) {
+	void all_note_off(int port) {
 		MidiEvent::Event event;
 
 		while (note_stack_[port].pull(event)) {
@@ -221,7 +221,12 @@ private:
 			outputEngine_->send_note_off(event);
 		}
 
-		midi_que.clear();
+		while (midi_que.readable()) {
+			event = midi_que.read();
+			if (MidiEvent::is_note_off(&event)) {
+				outputEngine_->send_note_off(event);
+			}
+		}
 	}
 
 };
