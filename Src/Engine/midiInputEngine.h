@@ -20,6 +20,7 @@ public:
 			cc_value_[i] = 0;
 			bend_value_[i] = 0;
 			note_stack_[i].init();
+			channel_receive_[i] = 0;
 			arpeggiatorEngine[i].init(&settings.midiInput(i).arpeggiator);
 			arpeggiator_state_[i] = 0;
 		}
@@ -113,10 +114,16 @@ public:
 			reset_request = false;
 		}
 
-		// clear notes if arpeggiator state changed
 		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
+			// clear notes if arpeggiator state changed
 			if (arpeggiator_state_[i] != settings.midiInput(i).arpeggiator.enabled()) {
 				arpeggiator_state_[i] = settings.midiInput(i).arpeggiator.enabled();
+				all_note_off(i);
+			}
+
+			// clear notes if channel receive changed
+			if (channel_receive_[i] != settings.midiInput(i).channel_receive()) {
+				channel_receive_[i] = settings.midiInput(i).channel_receive();
 				all_note_off(i);
 			}
 		}
@@ -162,6 +169,8 @@ private:
 	volatile bool reset_request;
 
 	MidiOutputEngine *outputEngine_;
+
+	int channel_receive_[MidiPort::NUM_PORTS];;
 	uint8_t cc_value_[MidiPort::NUM_PORTS];
 	uint16_t bend_value_[MidiPort::NUM_PORTS];
 	bool arpeggiator_state_[MidiPort::NUM_PORTS];
