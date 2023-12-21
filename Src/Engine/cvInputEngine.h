@@ -170,8 +170,8 @@ private:
 			event.time = time;
 			event.port = port;
 			event.message = channel | MidiEvent::CONTROLLER_CHANGE;
-			event.data[0] = value;
-			event.data[1] = number;
+			event.data[0] = number;
+			event.data[1] = value;
 			MidiEvent::set_source(&event, MidiEvent::PORT, port);
 
 			midi_que[port].write(event);
