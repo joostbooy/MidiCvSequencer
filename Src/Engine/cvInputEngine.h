@@ -149,7 +149,7 @@ private:
 		event.port = port;
 		event.message = channel | MidiEvent::NOTE_ON;
 		event.data[0] = value;
-		event.data[1] = 127;
+		event.data[1] = 100;
 		MidiEvent::set_source(&event, MidiEvent::PORT, port);
 
 		note_is_playing[cv_port] = true;
