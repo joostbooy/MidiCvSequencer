@@ -103,7 +103,7 @@ public:
 		}
 	}
 
-	void process() {
+	void update() {
 		// reset
 		if (reset_request) {
 			ticks = 0;
@@ -121,7 +121,7 @@ public:
 			}
 		}
 
-		// tick the arpeggiator
+		// tick the arpeggiators
 		while (ticks) {
 			--ticks;
 			for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
@@ -146,17 +146,6 @@ private:
 
 	Que<Entry, 64>entry_que;
 
-	volatile int ticks;
-	volatile bool reset_request;
-
-	MidiOutputEngine *outputEngine_;
-	uint8_t cc_value_[MidiPort::NUM_PORTS];
-	uint16_t bend_value_[MidiPort::NUM_PORTS];
-	bool arpeggiator_state_[MidiPort::NUM_PORTS];
-	NoteStack note_stack_[MidiPort::NUM_PORTS];
-	ArpeggiatorEngine arpeggiatorEngine[MidiPort::NUM_PORTS];
-
-
 	void add_event(Type type, MidiEvent::Event &e, uint32_t when, uint32_t length) {
 		while (!entry_que.writeable());
 
@@ -167,6 +156,18 @@ private:
 			.event = e,
 		});
 	}
+
+
+	volatile int ticks;
+	volatile bool reset_request;
+
+	MidiOutputEngine *outputEngine_;
+	uint8_t cc_value_[MidiPort::NUM_PORTS];
+	uint16_t bend_value_[MidiPort::NUM_PORTS];
+	bool arpeggiator_state_[MidiPort::NUM_PORTS];
+	NoteStack note_stack_[MidiPort::NUM_PORTS];
+	ArpeggiatorEngine arpeggiatorEngine[MidiPort::NUM_PORTS];
+
 
 	void cc_change(MidiEvent::Event &event) {
 		if (cc_value_[event.port] != event.data[1]) {
@@ -214,6 +215,15 @@ private:
 		}
 	}
 
+	void all_note_off(int port) {
+		MidiEvent::Event event;
+
+		while (note_stack_[port].pull(event)) {
+			MidiEvent::convert_to_note_off(&event);
+			add_event(SEND, event, 0, 0);
+		}
+	}
+
 	void tick_arpeggiator(uint8_t port) {
 		MidiEvent::Event e;
 
@@ -235,15 +245,6 @@ private:
 			e.data[0] = arpeggiator.note();
 			e.data[1] = arpeggiator.velocity();
 			add_event(SCHEDULE, e, arpeggiator.swing(), arpeggiator.gate_length());
-		}
-	}
-
-	void all_note_off(int port) {
-		MidiEvent::Event event;
-
-		while (note_stack_[port].pull(event)) {
-			MidiEvent::convert_to_note_off(&event);
-			add_event(SEND, event, 0, 0);
 		}
 	}
 

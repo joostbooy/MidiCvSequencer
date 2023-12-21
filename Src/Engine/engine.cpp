@@ -198,7 +198,7 @@ void Engine::process() {
 		}
 	}
 
-	midiInputEngine.process();
+	midiInputEngine.update();
 }
 
 // 2 khz interrupt
