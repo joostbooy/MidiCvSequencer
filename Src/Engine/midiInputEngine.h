@@ -12,6 +12,8 @@ public:
 
 	void init(MidiOutputEngine *outputEngine) {
 		ticks = 0;
+		reset_request = 0;
+
 		outputEngine_ = outputEngine;
 
 		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
@@ -24,10 +26,7 @@ public:
 	};
 
 	void reset() {
-		ticks = 0;
-		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
-			arpeggiatorEngine[i].reset();
-		}
+		reset_request = true;
 	}
 
 	void tick() {
@@ -105,6 +104,15 @@ public:
 	}
 
 	void process() {
+		// reset
+		if (reset_request) {
+			ticks = 0;
+			for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
+				arpeggiatorEngine[i].reset();
+			}
+			reset_request = false;
+		}
+
 		// clear notes if arpeggiator state changed
 		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
 			if (arpeggiator_state_[i] != settings.midiInput(i).arpeggiator.enabled()) {
@@ -139,6 +147,8 @@ private:
 	Que<Entry, 64>entry_que;
 
 	volatile int ticks;
+	volatile bool reset_request;
+
 	MidiOutputEngine *outputEngine_;
 	uint8_t cc_value_[MidiPort::NUM_PORTS];
 	uint16_t bend_value_[MidiPort::NUM_PORTS];
