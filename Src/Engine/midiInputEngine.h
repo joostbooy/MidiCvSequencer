@@ -11,72 +11,52 @@ class MidiInputEngine {
 public:
 
 	void init(MidiOutputEngine *outputEngine) {
-		num_ticks_ = 0;
-		suspended = false;
+		ticks = 0;
 		outputEngine_ = outputEngine;
 
 		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
-			bend_value_[i] = 0;
 			cc_value_[i] = 0;
-			arpeggiator_state[i] = 0;
+			bend_value_[i] = 0;
 			note_stack_[i].init();
 			arpeggiatorEngine[i].init(&settings.midiInput(i).arpeggiator);
+			arpeggiator_state_[i] = 0;
 		}
 	};
 
-	void suspend() {
-		suspended = true;
-	}
-
-	void resume() {
-		suspended = false;
+	void reset() {
+		ticks = 0;
+		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
+			arpeggiatorEngine[i].reset();
+		}
 	}
 
 	void tick() {
-		MidiEvent::Event e;
+		++ticks;
 
-		++num_ticks_;
-		if (suspended) {
-			return;
-		}
+		while (entry_que.readable()) {
+			Entry e = entry_que.read();
 
-		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
-			if (arpeggiator_state[i] != settings.midiInput(i).arpeggiator.enabled()) {
-				arpeggiator_state[i] = settings.midiInput(i).arpeggiator.enabled();
-				all_note_off(i);
-			} else if (arpeggiator_state[i]) {
-				tick_arpeggiator(i, num_ticks_);
+			if (e.type == SCHEDULE) {
+				outputEngine_->schedule_note(e.event, e.when, e.length);
+			} else if (e.type == SEND) {
+				switch (MidiEvent::get_type(&e.event))
+				{
+				case MidiEvent::NOTE_ON:
+					outputEngine_->send_note_on(e.event);
+					break;
+				case MidiEvent::NOTE_OFF:
+					outputEngine_->send_note_off(e.event);
+					break;
+				case MidiEvent::CONTROLLER_CHANGE:
+					outputEngine_->send_cc(e.event);
+					break;
+				case MidiEvent::PITCH_BEND:
+					outputEngine_->send_bend(e.event);
+					break;
+				default:
+					break;
+				}
 			}
-		}
-
-		num_ticks_ = 0;
-
-		while (midi_que.readable()) {
-			e = midi_que.read();
-			switch (MidiEvent::get_type(&e))
-			{
-			case MidiEvent::NOTE_ON:
-				outputEngine_->send_note_on(e);
-				break;
-			case MidiEvent::NOTE_OFF:
-				outputEngine_->send_note_off(e);
-				break;
-			case MidiEvent::CONTROLLER_CHANGE:
-				outputEngine_->send_cc(e);
-				break;
-			case MidiEvent::PITCH_BEND:
-				outputEngine_->send_bend(e);
-				break;
-			default:
-				break;
-			}
-		}
-	}
-
-	void reset() {
-		num_ticks_ = 0;
-		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
-			arpeggiatorEngine[i].reset();
 		}
 	}
 
@@ -96,8 +76,6 @@ public:
 		if (!midiInput.channel_accepted(channel)) {
 			return;
 		}
-
-		suspend();
 
 		switch (message)
 		{
@@ -124,27 +102,66 @@ public:
 		default:
 			break;
 		}
+	}
 
-		resume();
+	void process() {
+		// clear notes if arpeggiator state changed
+		for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
+			if (arpeggiator_state_[i] != settings.midiInput(i).arpeggiator.enabled()) {
+				arpeggiator_state_[i] = settings.midiInput(i).arpeggiator.enabled();
+				all_note_off(i);
+			}
+		}
+
+		// tick the arpeggiator
+		while (ticks) {
+			--ticks;
+			for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
+				tick_arpeggiator(i);
+			}
+		}
 	}
 
 private:
-	bool suspended;
-	int num_ticks_;
-	MidiOutputEngine *outputEngine_;
 
+	enum Type {
+		SEND,
+		SCHEDULE
+	};
+
+	struct Entry {
+		Type type;
+		uint32_t when;
+		uint32_t length;
+		MidiEvent::Event event;
+	};
+
+	Que<Entry, 64>entry_que;
+
+	volatile int ticks;
+	MidiOutputEngine *outputEngine_;
 	uint8_t cc_value_[MidiPort::NUM_PORTS];
 	uint16_t bend_value_[MidiPort::NUM_PORTS];
-	bool arpeggiator_state[MidiPort::NUM_PORTS];
+	bool arpeggiator_state_[MidiPort::NUM_PORTS];
 	NoteStack note_stack_[MidiPort::NUM_PORTS];
 	ArpeggiatorEngine arpeggiatorEngine[MidiPort::NUM_PORTS];
 
-	Que<MidiEvent::Event, 64>midi_que;
+
+	void add_event(Type type, MidiEvent::Event &e, uint32_t when, uint32_t length) {
+		while (!entry_que.writeable());
+
+		entry_que.write({
+			.type = type,
+			.when = when,
+			.length = length,
+			.event = e,
+		});
+	}
 
 	void cc_change(MidiEvent::Event &event) {
 		if (cc_value_[event.port] != event.data[1]) {
 			cc_value_[event.port] = event.data[1];
-			midi_que.write(event);
+			add_event(SEND, event, 0, 0);
 		}
 	}
 
@@ -152,7 +169,7 @@ private:
 		uint16_t value = MidiEvent::get_14bit_data(&event);
 		if (bend_value_[event.port] != value) {
 			bend_value_[event.port] = value;
-			midi_que.write(event);
+			add_event(SEND, event, 0, 0);
 		}
 	}
 
@@ -168,7 +185,9 @@ private:
 		}
 
 		if (noteStack.add_note(key, event)) {
-			midi_que.write(event);
+			if (arpeggiator_state_[event.port] == false) {
+				add_event(SEND, event, 0, 0);
+			}
 		}
 	}
 
@@ -179,21 +198,19 @@ private:
 		uint8_t key = event.data[0];
 
 		if (noteStack.remove_note(key, off_event)) {
-			midi_que.write(off_event);
+			if (arpeggiator_state_[event.port] == false) {
+				add_event(SEND, off_event, 0, 0);
+			}
 		}
 	}
 
-	void tick_arpeggiator(uint8_t port, int ticks) {
+	void tick_arpeggiator(uint8_t port) {
 		MidiEvent::Event e;
 
 		NoteStack &noteStack = note_stack_[port];
 		ArpeggiatorEngine &arpeggiator = arpeggiatorEngine[port];
 
 		arpeggiator.clear_notes();
-
-		if (noteStack.size() < 1) {
-			return;
-		}
 
 		for (int i = 0; i < noteStack.size(); ++i) {
 			arpeggiator.set_note(noteStack.read(i).data[0]);
@@ -204,12 +221,10 @@ private:
 		e.source = noteStack.read(0).source;
 		e.message = noteStack.read(0).message;
 
-		for (int i = 0; i < ticks; ++i) {
-			if (arpeggiator.tick()) {
-				e.data[0] = arpeggiator.note();
-				e.data[1] = arpeggiator.velocity();
-				outputEngine_->schedule_note(e, arpeggiator.swing(), arpeggiator.gate_length());
-			}
+		if (arpeggiator.tick() && arpeggiator_state_[port] && noteStack.size()) {
+			e.data[0] = arpeggiator.note();
+			e.data[1] = arpeggiator.velocity();
+			add_event(SCHEDULE, e, arpeggiator.swing(), arpeggiator.gate_length());
 		}
 	}
 
@@ -218,14 +233,7 @@ private:
 
 		while (note_stack_[port].pull(event)) {
 			MidiEvent::convert_to_note_off(&event);
-			outputEngine_->send_note_off(event);
-		}
-
-		while (midi_que.readable()) {
-			event = midi_que.read();
-			if (MidiEvent::is_note_off(&event)) {
-				outputEngine_->send_note_off(event);
-			}
+			add_event(SEND, event, 0, 0);
 		}
 	}
 

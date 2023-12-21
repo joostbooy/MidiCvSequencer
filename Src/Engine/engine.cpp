@@ -84,12 +84,12 @@ void Engine::stop() {
 }
 
 void Engine::suspend() {
-	midiInputEngine.suspend();
+	//midiInputEngine.suspend();
 	trackEngine.suspend();
 }
 
 void Engine::resume() {
-	midiInputEngine.resume();
+	//midiInputEngine.resume();
 	trackEngine.resume();
 }
 
@@ -197,6 +197,8 @@ void Engine::process() {
 			midiInputEngine.process_event(event);
 		}
 	}
+
+	midiInputEngine.process();
 }
 
 // 2 khz interrupt
