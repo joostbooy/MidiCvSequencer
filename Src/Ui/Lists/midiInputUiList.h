@@ -105,7 +105,7 @@ public:
 			input.arpeggiator.set_offset(input.arpeggiator.offset() + inc);
 			break;
 		case ARP_SPEED:
-			input.arpeggiator.set_speed(input.arpeggiator.speed() + inc);
+			input.arpeggiator.set_speed(input.arpeggiator.speed() + (shifted ? 3 * inc : inc));
 			break;
 		case ARP_SWING:
 			input.arpeggiator.set_swing(input.arpeggiator.swing() + inc);
@@ -114,13 +114,13 @@ public:
 			input.arpeggiator.set_note_mode(input.arpeggiator.note_mode() + inc);
 			break;
 		case ARP_VELOCITY:
-			input.arpeggiator.set_velocity(input.arpeggiator.velocity() + inc);
+			input.arpeggiator.set_velocity(input.arpeggiator.velocity() + (shifted ? 10 * inc : inc));
 			break;
 		case ARP_VELOCITY_MODE:
 			input.arpeggiator.set_velocity_mode(input.arpeggiator.velocity_mode() + inc);
 			break;
 		case ARP_GATE_LENGTH:
-			input.arpeggiator.set_gate_length(input.arpeggiator.gate_length() + inc);
+			input.arpeggiator.set_gate_length(input.arpeggiator.gate_length() + (shifted ? 4 * inc : inc));
 			break;
 		case ARP_GATE_MODE:
 			input.arpeggiator.set_gate_mode(input.arpeggiator.gate_mode() + inc);
