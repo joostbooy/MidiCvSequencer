@@ -172,14 +172,23 @@ private:
 	void cc_change(MidiEvent::Event &event) {
 		if (cc_value_[event.port] != event.data[1]) {
 			cc_value_[event.port] = event.data[1];
+
+			event.message = MidiEvent::CONTROLLER_CHANGE;
+			event.message |= settings.midiInput(event.port).channel_send();
+
 			add_event(SEND, event, 0, 0);
 		}
 	}
 
 	void pitch_bend(MidiEvent::Event &event) {
 		uint16_t value = MidiEvent::get_14bit_data(&event);
+
 		if (bend_value_[event.port] != value) {
 			bend_value_[event.port] = value;
+
+			event.message = MidiEvent::PITCH_BEND;
+			event.message |= settings.midiInput(event.port).channel_send();
+
 			add_event(SEND, event, 0, 0);
 		}
 	}
@@ -188,7 +197,8 @@ private:
 		NoteStack &noteStack = note_stack_[event.port];
 		MidiInput &midiInput = settings.midiInput(event.port);
 
-		event.message = MidiEvent::NOTE_ON | midiInput.channel_send();
+		event.message = MidiEvent::NOTE_ON;
+		event.message |= midiInput.channel_send();
 
 		uint8_t key = event.data[0];
 		if (midiInput.quantise_note()) {
