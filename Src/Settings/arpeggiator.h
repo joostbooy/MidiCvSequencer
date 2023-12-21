@@ -132,7 +132,7 @@ public:
 	}
 
 	void set_swing(int value, bool boundary_check = 1) {
-		swing_ = boundary_check ? stmlib::clip(0, 15, value) : value;
+		swing_ = boundary_check ? stmlib::clip(1, 15, value) : value;
 	}
 
 	const char* swing_text() {
