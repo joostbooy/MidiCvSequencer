@@ -174,14 +174,15 @@ namespace PatternHeaderPage {
 	}
 
 	void refresh_follow() {
-		// follow disabled
+		// follow disabled, nothing todo
 		if (settings.follow_pattern() == false || (engine.state() != Engine::RUNNING)) {
 			return;
 		}
 
 		// timeout follow
 		if (follow_timeOut < timeOutMax) {
-			int frame = (1.0f / timeOutMax) * follow_timeOut * 9;
+			const int kNumFrames = 9;
+			int frame = (1.0f / timeOutMax) * follow_timeOut * kNumFrames;
 			canvas.draw_bitmap(246, 0, Bitmap::TIMER, frame);
 			return;
 		}
