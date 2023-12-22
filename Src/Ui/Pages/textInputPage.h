@@ -204,7 +204,7 @@ namespace TextInputPage {
 	}
 
 	bool text_is_empty() {
-		return char_stack.read(0) == '\0' || char_stack.read(0) == '.';
+		return disk != nullptr && (char_stack.read(0) == '\0' || char_stack.read(0) == '.');
 	}
 
 	bool name_excists() {
