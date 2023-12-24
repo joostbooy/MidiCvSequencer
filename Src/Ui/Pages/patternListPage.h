@@ -160,7 +160,7 @@ namespace PatternListPage {
 
 		for (int i = window.row().first; i <= window.row().last; ++i) {
 			color = (index == i) ? Canvas::BLACK : Canvas::LIGHT_GRAY;
-			const char *a = TopPage::str.write(i + 1);
+			const char *a = TopPage::str.write("P", i + 1);
 			const char *b = settings.selected_track().pattern.label(i);
 			WindowPainter::text(window.cell(0, i), a, Canvas::LEFT, Canvas::CENTER, color);
 			WindowPainter::text(window.cell(1, i), b, Canvas::LEFT, Canvas::CENTER, color);
