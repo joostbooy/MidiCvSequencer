@@ -86,7 +86,7 @@ public:
 		char label_[TrackData::kMaxLabelLength];
 
 		if (src_index < list_->size_ && dest_index < list_->size_) {
-			copy_label(label_, src_index);
+			copy_label(dest_index, label_);
 			data(dest_index) = data(src_index);
 			set_label(dest_index, label_);
 			return true;
@@ -105,7 +105,7 @@ private:
 		return data ^ x;
 	}
 
-	void copy_label(char *buffer, int index) {
+	void copy_label(int index, char *buffer) {
 		StringUtils::copy(buffer, data(index).label_, TrackData::kMaxLabelLength);
 	}
 
