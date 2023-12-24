@@ -60,7 +60,7 @@ public:
 	}
 
 	void receive(uint32_t time) {
-		for (int i = 0; i < MIDI_UART_4; ++i) {
+		for (int i = 0; i <= MIDI_UART_4; ++i) {
 			if (uart.readable(i)) {
 				last_received[i] = uart.read(i);
 				if (buffer_[i].in_que.writeable()) {
@@ -73,7 +73,7 @@ public:
 	}
 
 	void send() {
-		for (int i = 0; i < MIDI_UART_4; ++i) {
+		for (int i = 0; i <= MIDI_UART_4; ++i) {
 			if (uart.writeable(i)) {
 				if (buffer_[i].clock_out_que.readable()) {
 					uart.write(i, buffer_[i].clock_out_que.read());
