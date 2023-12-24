@@ -83,8 +83,12 @@ public:
 	}
 
 	bool duplicate(uint8_t src_index, uint8_t dest_index) {
+		char label_[TrackData::kMaxLabelLength];
+
 		if (src_index < list_->size_ && dest_index < list_->size_) {
+			copy_label(label_, src_index);
 			data(dest_index) = data(src_index);
+			set_label(dest_index, label_);
 			return true;
 		}
 		return false;
@@ -99,6 +103,10 @@ private:
 		uint16_t x = (bit_1 ^ bit_2);
 		x = (x << index_1) | (x << index_2);
 		return data ^ x;
+	}
+
+	void copy_label(char *buffer, int index) {
+		StringUtils::copy(buffer, data(index).label_, TrackData::kMaxLabelLength);
 	}
 
 };
