@@ -10,8 +10,8 @@ public:
 	enum Mode {
 		FORWARD,
 		BACKWARD,
-		ALTERNATE,
-		PING_PONG,
+		ZIGZAG,
+		ZIGZAG_REVERSE,
 		RANDOM,
 		DRUNKEN_WALK,
 		SHUFFLE,
@@ -22,14 +22,14 @@ public:
 	static const char* mode_text(int mode) {
 		switch (mode)
 		{
-		case FORWARD:		return "FORWARD";
-		case BACKWARD:		return "BACKWARD";
-		case ALTERNATE:		return "ALTERNATE";
-		case PING_PONG:		return "PING PONG";
-		case RANDOM:		return "RANDOM";
-		case DRUNKEN_WALK:	return "DRUNKEN WALK";
-		case SHUFFLE:		return "SHUFFLE";
-		default:			return nullptr;
+		case FORWARD:			return "FORWARD";
+		case BACKWARD:			return "BACKWARD";
+		case ZIGZAG:			return "ZIGZAG";
+		case ZIGZAG_REVERSE:	return "ZIGZAG REVERSE";
+		case RANDOM:			return "RANDOM";
+		case DRUNKEN_WALK:		return "DRUNKEN WALK";
+		case SHUFFLE:			return "SHUFFLE";
+		default:				return nullptr;
 			break;
 		}
 	}
@@ -54,26 +54,7 @@ public:
 	}
 
 	uint32_t update_pattern(uint32_t ticks, uint16_t num_patterns) {
-		switch (mode_)
-		{
-		case FORWARD:
-		case BACKWARD:
-		case RANDOM:
-		case DRUNKEN_WALK:
-		case SHUFFLE:
-			pattern_ = (ticks / 16) % num_patterns;
-			break;
-		case ALTERNATE:
-			pattern_ = (ticks / (16 * 2)) % num_patterns;
-			break;
-		case PING_PONG:
-			pattern_ = (ticks / (2 * 16 - 2)) % num_patterns;
-			break;
-		default:
-			step_ = 0;
-			pattern_ = 0;
-			break;
-		}
+		pattern_ = (ticks / 16) % num_patterns;
 		return pattern_;
 	}
 
@@ -86,13 +67,19 @@ public:
 		case BACKWARD:
 			step_ = 15 - (ticks % 16);
 			break;
-		case ALTERNATE:
-			ticks %= (16 * 2);
-			step_ = (ticks < 16) ? ticks : 15 - (ticks - 16);
+		case ZIGZAG:
+			ticks %= 16;
+			step_ = ticks / 2;
+			if ((ticks % 2) == 1) {
+				step_ = 15 - step_;
+			}
 			break;
-		case PING_PONG:
-			ticks %= (2 * 16 - 2);
-			step_ = (ticks < 16) ? ticks : (15 - (ticks - 16) - 1);
+		case ZIGZAG_REVERSE:
+			ticks %= 16;
+			step_ = ticks / 2;
+			if ((ticks % 2) == 0) {
+				step_ = 15 - step_;
+			}
 			break;
 		case RANDOM:
 			step_ = ticks % 16;
