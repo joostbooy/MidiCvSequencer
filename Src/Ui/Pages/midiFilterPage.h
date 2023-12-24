@@ -130,16 +130,18 @@ namespace MidiFilterPage {
 	void drawDisplay() {
 		canvas.set_font(Font::SMALL);
 
-		// list
-		const char* glyph;
-		Canvas::Color color;
+		// title
+		canvas.set_font(Font::SMALL);
+		canvas.fill(window.x, window.y - 8, window.width, 10, Canvas::BLACK);
+		canvas.horizontal_line(window.x + 1, window.y - 9, window.width - 2, Canvas::BLACK);
+		canvas.draw_text(window.x, window.y - 9, window.width, 10, "MIDI FILTER", Canvas::CENTER, Canvas::CENTER, Canvas::WHITE);
 
-		WindowPainter::shadow(window, 5);
+		// list
 		WindowPainter::fill(window, Canvas::BLACK, Canvas::WHITE);
 
 		for (int i = window.row().first; i <= window.row().last; ++i) {
-			color = (cursor == i) ? Canvas::BLACK : Canvas::LIGHT_GRAY;
-			glyph = list_buffer[i] ? font.glyph(Font::CHECKMARK) : " ";
+			Canvas::Color color = (cursor == i) ? Canvas::BLACK : Canvas::LIGHT_GRAY;
+			const char* glyph = list_buffer[i] ? font.glyph(Font::CHECKMARK) : " ";
 			WindowPainter::text(window.cell(0, i), MidiFilter::messageTypeText(i), Canvas::LEFT, Canvas::CENTER, color);
 			WindowPainter::text(window.cell(1, i), glyph, Canvas::LEFT, Canvas::CENTER, color);
 		}
