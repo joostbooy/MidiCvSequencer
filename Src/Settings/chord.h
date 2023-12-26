@@ -138,7 +138,7 @@ public:
 	}
 
 	static const char* root_text(uint8_t root) {
-		return UiText::note_text(root, false);
+		return UiText::note_text(scale_->read(root), false);
 	}
 
 	static const char* root_to_type_text(uint8_t root) {
