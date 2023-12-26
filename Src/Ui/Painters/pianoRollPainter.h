@@ -28,13 +28,6 @@ public:
 		window.scroll_to_row(127 - note);
 	}
 
-	static void highlight_note(int note) {
-		if (row_is_visible(127 - note)) {
-			Window::Cell cell = window.cell(0, 127 - note);
-			canvas.fill(cell.x, cell.y, cell.w, cell.h, Canvas::INVERTED);
-		}
-	}
-
 	static void scroll_y(int inc) {
 		if (inc > 0) {
 			window.scroll_to_row(window.row().last + inc);
