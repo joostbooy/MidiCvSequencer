@@ -29,9 +29,9 @@ public:
 	}
 
 	static void highlight_note(int note) {
-		if (note_is_visible(note)) {
+		if (row_is_visible(127 - note)) {
 			Window::Cell cell = window.cell(0, 127 - note);
-			canvas.fill(cell.x, cell.y, window.width, cell.h, Canvas::INVERTED);
+			canvas.fill(cell.x, cell.y, cell.w, cell.h, Canvas::INVERTED);
 		}
 	}
 
@@ -60,7 +60,6 @@ public:
 		}
 	}
 
-	// draws over velocity
 	static void draw_step_value(int step, int value, const char *text) {
 		if (value != last_step_value) {
 			last_step_value = value;
@@ -135,7 +134,7 @@ public:
 		}
 
 		// note
-		if (note_is_visible(note)) {
+		if (row_is_visible(note)) {
 			canvas.box(x, y, w, h, Canvas::LIGHT_GRAY, Canvas::GRAY);
 			canvas.horizontal_line(x, y + h, w, Canvas::LIGHT_GRAY);
 			if (is_random) {
@@ -170,8 +169,8 @@ private:
 		return is_black_key_[key % 12];
 	}
 
-	static bool note_is_visible(uint8_t note) {
-		return note >= window.row().first && note <= window.row().last;
+	static bool row_is_visible(uint8_t row) {
+		return row >= window.row().first && row <= window.row().last;
 	}
 
 	static bool note_is_active(uint8_t note) {
