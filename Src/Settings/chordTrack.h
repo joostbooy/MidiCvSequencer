@@ -66,7 +66,7 @@ public:
 		{
 		case TRIGGER:			return UiText::bool_to_on_off(data);
 		case PROBABILITY:		return UiText::percentage_text(data, 7);
-		case CHORD_TYPE:		return Chord::root_to_type_text(data);
+		case CHORD_TYPE:		return Chord::name(data);
 		case CHORD_VARIATION:	return Chord::variation_text(data);
 		case CHORD_INVERSION:	return Chord::inversion_text(data);
 		case CHORD_ROOT_SHIFT:	return UiText::unsigned_int_to_text(data);

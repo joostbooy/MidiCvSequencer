@@ -2,6 +2,8 @@
 
 Scale* Chord::scale_;
 
+StringBuilderBase<16>Chord::str_;
+
 void Chord::init(Scale *scale) {
 	scale_ = scale;
 }

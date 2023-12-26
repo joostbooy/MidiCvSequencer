@@ -2,6 +2,7 @@
 #define Chord_h
 
 #include "stmf4lib.h"
+#include "stringBuilder.h"
 #include "scale.h"
 
 class Chord {
@@ -158,10 +159,15 @@ public:
 		}
 	}
 
+	static const char *name(uint8_t root) {
+		return str_.write(root_text(root), " ", root_to_type_text(root));
+	}
+
 private:
 	uint8_t size_ = 0;
 	uint8_t note_[4];
 	static Scale *scale_;
+	static StringBuilderBase<16> str_;
 
 	static const uint8_t lut_chords_major_scale[7];
 	static const uint8_t lut_chords_minor_scale[7];
