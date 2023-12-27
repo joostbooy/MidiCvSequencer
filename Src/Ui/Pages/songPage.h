@@ -23,10 +23,11 @@ namespace SongPage {
 		NEW,
 		EDIT_NAME,
 		UNMUTE_TRACKS,
+		TRACK_LIST,
 		NUM_FOOTER_OPTIONS
 	};
 
-	const char* const footer_text[NUM_FOOTER_OPTIONS] = { "NEW", "EDIT NAME", "UNMUTE TRACKS" };
+	const char* const footer_text[NUM_FOOTER_OPTIONS] = { "NEW", "EDIT NAME", "UNMUTE TRACKS", "TRACK LIST"};
 
 	void clear_settings() {
 		settings.song.init();
@@ -80,6 +81,9 @@ namespace SongPage {
 				 settings.song.set_track_solo(i, false);
 			}
 			MessagePainter::show("ALL TRACKS UNMUTED");
+			break;
+		case TRACK_LIST:
+			pages.open(Pages::TRACK_LIST_PAGE);
 			break;
 		default:
 			break;

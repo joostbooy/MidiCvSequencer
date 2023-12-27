@@ -15,8 +15,8 @@ public:
 	Scale scale;
 	MidiClock midiClock;
 
-	Track &track(int track_index) {
-		return track_[track_index];
+	Track &track(int index) {
+		return track_[track_list_[index]];
 	}
 
 	void init() {
@@ -29,10 +29,11 @@ public:
 		TrackData::init();
 
 		for (int i = 0; i < Track::NUM_TYPES; ++i) {
-			clear_list(&track_list_[i]);
+			clear_list(&track_type_list_[i]);
 		}
 
 		for (int i = 0; i < kMaxTracks; ++i) {
+			track_list_[i] = i;
 			track(i).init(i);
 			create_track(i, Track::NOTE_TRACK);
 		}
@@ -70,24 +71,42 @@ public:
 
 		if (index < kMaxTracks) {
 			// remove old type form list
-			remove_from_list(&track_list_[t.type()], index);
+			remove_from_list(&track_type_list_[t.type()], index);
 
 			t.create(type);
 			set_track_mute(index, false);
 			set_track_solo(index, false);
 
-			add_to_list(&track_list_[type], index);
+			add_to_list(&track_type_list_[type], index);
+			return true;
+		}
+		return false;
+	}
+
+	bool swap_track_with_left(int index) {
+		int left = index - 1;
+		if (left >= 0 && left < kMaxTracks) {
+			swap_tracks(left, index);
+			return true;
+		}
+		return false;
+	}
+
+	bool swap_track_with_right(int index) {
+		int right = index + 1;
+		if (right >= 0 && right < kMaxTracks) {
+			swap_tracks(right, index);
 			return true;
 		}
 		return false;
 	}
 
 	uint8_t num_tracks(uint8_t track_type) {
-		return track_list_[track_type].size_;
+		return track_type_list_[track_type].size_;
 	}
 
 	uint8_t read_track_list(uint8_t list_index, uint8_t track_type) {
-		return track_list_[track_type].entry_[list_index];
+		return track_type_list_[track_type].entry_[list_index];
 	}
 
 	// mute & solo
@@ -138,16 +157,37 @@ private:
 		uint8_t entry_[kMaxTracks];
 	};
 
-	List track_list_[Track::NUM_TYPES];
+	int track_list_[kMaxTracks];
+	List track_type_list_[Track::NUM_TYPES];
 
 	uint32_t mute_flags;
 	uint32_t solo_flags;
 	char name_[kMaxNameLength];
 	Track track_[kMaxTracks];
+	Track track_copy;
 
 	void clear_list(List* list);
 	void add_to_list(List* list, uint8_t track_index);
 	void remove_from_list(List* list, uint8_t track_index);
+
+	void swap_tracks(int a, int b) {
+		remove_from_list(&track_type_list_[track(a).type()], a);
+		remove_from_list(&track_type_list_[track(b).type()], b);
+
+		int a_ = track_list_[a];
+		track_list_[a] = track_list_[b];
+		track_list_[b] = a_;
+
+		//	track(a).set_index(a);
+		//	track(b).set_index(b);
+
+		for (int i = 0; i < 16; ++i) {
+			track(i).set_index(i);
+		}
+
+		add_to_list(&track_type_list_[track(a).type()], b);
+		add_to_list(&track_type_list_[track(b).type()], a);
+	}
 };
 
 #endif

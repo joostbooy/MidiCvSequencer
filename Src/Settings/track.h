@@ -28,6 +28,10 @@ public:
 		BaseTrack::init(&data);
 	}
 
+	void set_index(int index) {
+		index_ = index;
+	}
+
 	int index() {
 		return index_;
 	}
@@ -42,7 +46,7 @@ public:
 	}
 
 	const char* name_small() {
-		UiText::str.write("T", index_ + 1, " ", BaseTrack::label());
+		UiText::str.write("T", index_ + 1, "-", BaseTrack::label());
 		UiText::str.truncate(6);
 		return UiText::str.read();
 	}
