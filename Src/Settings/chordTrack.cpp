@@ -121,7 +121,7 @@ SerialItem ChordTrack::step_item_[NUM_STEP_ITEMS] = {
 	},
 	[ARP_OFFSET] = {
 		.min_ = 0,
-		.max_ = 7,
+		.max_ = 3,
 		.inc_shifted_ = 1,
 		.init_value_ = 0,
 		.mask_ = step_mask_[ARP_OFFSET]
