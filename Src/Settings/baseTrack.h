@@ -6,7 +6,6 @@
 #include "stringUtils.h"
 #include "trackData.h"
 #include "pattern.h"
-//#include "serialItem.h"
 #include "midiPort.h"
 #include "clockEngine.h"
 #include "positionEngine.h"
