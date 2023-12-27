@@ -66,7 +66,7 @@ namespace PatternHeaderPage {
 
 		switch (item)
 		{
-		case TRACK:				return track.name();
+		case TRACK:				return track.name_small();
 		case PATTERN:			return track.pattern.name(settings.selected_pattern());
 		case STEP_ITEM:			return step_item_text(track.type(), settings.selected_step_item());
 		case FOLLOW_PATTERN:	return UiText::str.write("FOLLOW ", settings.follow_pattern() ? "ON" : "OFF");
