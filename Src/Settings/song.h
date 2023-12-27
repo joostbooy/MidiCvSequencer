@@ -164,7 +164,6 @@ private:
 	uint32_t solo_flags;
 	char name_[kMaxNameLength];
 	Track track_[kMaxTracks];
-	Track track_copy;
 
 	void clear_list(List* list);
 	void add_to_list(List* list, uint8_t track_index);
