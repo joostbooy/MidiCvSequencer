@@ -23,10 +23,9 @@ public:
 		scale.init();
 		midiClock.init();
 		Chord::init(&scale);
+		TrackData::init();
 
 		set_name("NEW_SONG");
-
-		TrackData::init();
 
 		for (int i = 0; i < Track::NUM_TYPES; ++i) {
 			clear_list(&track_type_list_[i]);
@@ -34,7 +33,8 @@ public:
 
 		for (int i = 0; i < kMaxTracks; ++i) {
 			track_list_[i] = i;
-			track(i).init(i);
+			track(i).init();
+			track(i).set_index(i);
 			create_track(i, Track::NOTE_TRACK);
 		}
 	}
@@ -177,9 +177,7 @@ private:
 		track_list_[a] = track_list_[b];
 		track_list_[b] = a_;
 
-		//	track(a).set_index(a);
-		//	track(b).set_index(b);
-
+		// update indices
 		for (int i = 0; i < 16; ++i) {
 			track(i).set_index(i);
 		}
