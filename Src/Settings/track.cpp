@@ -4,6 +4,7 @@
 
 
 void Track::save(FileWriter &fileWriter) {
+	fileWriter.write(index_);
 	fileWriter.write(data.type_);
 	fileWriter.write(data.port_);
 	fileWriter.write(data.channel_);
@@ -23,6 +24,7 @@ void Track::save(FileWriter &fileWriter) {
 }
 
 void Track::load(FileReader &fileReader) {
+	fileReader.read(index_);
 	fileReader.read(data.type_);
 	fileReader.read(data.port_);
 	fileReader.read(data.channel_);
