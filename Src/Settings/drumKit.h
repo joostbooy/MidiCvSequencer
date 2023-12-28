@@ -9,13 +9,11 @@ public:
 
 	void init(Song *song) {
 		song_ = song;
-		clock_speed_ = ClockEngine::WHOLE_16TH;
 	}
 
 	void update_clock_speed(int value) {
-		clock_speed_ = value;
 		for (int i = 0; i < num_tracks(); ++i) {
-			track(i).set_clock_speed(clock_speed_);
+			track(i).set_clock_speed(value);
 		}
 	}
 
@@ -23,8 +21,9 @@ public:
 		if (song_->available_patterns() >= num_patterns() && song_->available_patterns() > 0) {
 			song_->create_track(index, Track::DRUM_TRACK);
 
+			int clock_speed = read_clock_speed();
 			int list_index = track_to_list_index(index);
-			track(list_index).set_clock_speed(clock_speed_);
+			track(list_index).set_clock_speed(clock_speed);
 
 			int pattern_count = num_patterns() - 1;
 			for (int i = 0; i < pattern_count; ++i) {
@@ -39,10 +38,11 @@ public:
 	void clear_track(int index) {
 		int list_index = track_to_list_index(index);
 		int pattern_count = num_patterns() - 1;
+		int clock_speed = read_clock_speed();
 
 		if (list_index >= 0) {
 			track(list_index).clear();
-			track(list_index).set_clock_speed(clock_speed_);
+			track(list_index).set_clock_speed(clock_speed);
 			for (int i = 0; i < pattern_count; ++i) {
 				track(list_index).add_pattern();
 			}
@@ -74,7 +74,6 @@ public:
 private:
 
 	Song *song_;
-	int clock_speed_;
 
 	inline int num_tracks() {
 		return song_->num_tracks(Track::DRUM_TRACK);
@@ -106,6 +105,15 @@ private:
 		}
 		return -1;
 	}
+
+	inline int read_clock_speed() {
+		if (num_tracks() > 0) {
+			return track(0).clock_speed();
+		} else {
+			return ClockEngine::WHOLE_16TH;
+		}
+	}
+	
 };
 
 #endif
