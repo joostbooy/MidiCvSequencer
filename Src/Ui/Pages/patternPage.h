@@ -14,7 +14,6 @@
 
 #include "pianoRollPainter.h"
 
-
 namespace PatternPage {
 	//Declarations
 	void init();
@@ -39,6 +38,7 @@ namespace PatternPage {
 		DrumPatternPage::init();
 
 		PianoRollPainter::init();
+		DrumPainter::init();
 	}
 
 	void enter() {
