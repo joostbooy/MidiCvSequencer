@@ -17,9 +17,7 @@ public:
 	DrumTrack drum;
 	CurveTrack curve;
 
-	void init(int index) {
-		index_ = index;
-
+	void init() {
 		note.init(&data);
 		chord.init(&data);
 		drum.init(&data);
@@ -51,7 +49,7 @@ public:
 		return UiText::str.read();
 	}
 
-	// Only call through song.create_track()
+	// Only call through song.create_track() or drumKit.create_track()
 	void create(uint8_t track_type) {
 		BaseTrack::set_type(track_type);
 
