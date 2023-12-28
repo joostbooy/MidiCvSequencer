@@ -9,16 +9,12 @@ class DrumTrack : public BaseTrack {
 public:
 
 	enum Item {
-		DRUM_NOTE_1,
-		DRUM_NOTE_2,
-		DRUM_NOTE_3,
-		DRUM_NOTE_4,
+		DRUM_NOTE,
 		NUM_TRACK_ITEMS
 	};
 
 	enum StepItem {
 		TRIGGER,
-		DRUM_NOTE,
 		PROBABILITY,
 		VELOCITY,
 		GATE_LENGTH,
@@ -35,7 +31,6 @@ public:
 		switch (item)
 		{
 		case TRIGGER:			return "TRIGGER";
-		case DRUM_NOTE:			return "DRUM NOTE";
 		case PROBABILITY:		return "PROBABILITY";
 		case VELOCITY:			return "VELOCITY";
 		case GATE_LENGTH:		return "GATE LENGTH";
@@ -53,7 +48,6 @@ public:
 		switch (item)
 		{
 		case TRIGGER:			return UiText::bool_to_on_off(value);
-		case DRUM_NOTE:			return UiText::unsigned_int_to_text(value);
 		case PROBABILITY:		return UiText::percentage_text(value, 7);
 		case VELOCITY:			return UiText::unsigned_int_to_text(value);
 		case GATE_LENGTH:		return ClockEngine::gate_duration_text(value);
@@ -147,7 +141,6 @@ public:
 	void write_step(int pattern_index, int step_index, StepItem item, int value) {
 		step_item_[item].write(BaseTrack::pattern.step(pattern_index, step_index), value);
 	}
-
 
 	bool add_pattern() {
 		int pattern_index = BaseTrack::add_pattern();

@@ -8,11 +8,7 @@ class DrumTrackUiList : public UiList {
 public:
 
 	enum Item {
-		DRUM_NOTE_1 = BaseTrackUiList::NUM_ITEMS,
-		DRUM_NOTE_2,
-		DRUM_NOTE_3,
-		DRUM_NOTE_4,
-
+		DRUM_NOTE = BaseTrackUiList::NUM_ITEMS,
 		NUM_ITEMS
 	};
 
@@ -27,10 +23,7 @@ public:
 
 		switch (item)
 		{
-		case DRUM_NOTE_1:		return "DRUM NOTE 1";
-		case DRUM_NOTE_2:		return "DRUM NOTE 2";
-		case DRUM_NOTE_3:		return "DRUM NOTE 3";
-		case DRUM_NOTE_4:		return "DRUM NOTE 4";
+		case DRUM_NOTE:		return "DRUM NOTE";
 		default:
 			return nullptr;
 		}
@@ -45,36 +38,28 @@ public:
 
 		switch (item)
 		{
-		case DRUM_NOTE_1:	 return UiText::str.write(drum_track.read(DrumTrack::DRUM_NOTE_1));
-		case DRUM_NOTE_2:	 return UiText::str.write(drum_track.read(DrumTrack::DRUM_NOTE_2));
-		case DRUM_NOTE_3:	 return UiText::str.write(drum_track.read(DrumTrack::DRUM_NOTE_3));
-		case DRUM_NOTE_4:	 return UiText::str.write(drum_track.read(DrumTrack::DRUM_NOTE_4));
+		case DRUM_NOTE:	 return UiText::str.write(drum_track.read(DrumTrack::DRUM_NOTE));
 		default:
 			return nullptr;
 		}
 	};
 
 	void edit(int item, int inc, bool shifted) override {
+		auto &drum_track = settings.selected_drum_track();
+
 		if (item < BaseTrackUiList::NUM_ITEMS) {
 			baseTrackUiList.edit(item, inc, shifted);
+
+			if (item == BaseTrackUiList::CLOCK_SPEED) {
+				settings.drumKit.update_clock_speed(drum_track.clock_speed());
+			}
 			return;
 		}
 
-		auto &drum_track = settings.selected_drum_track();
-
 		switch (item)
 		{
-		case DRUM_NOTE_1:
-			drum_track.edit(DrumTrack::DRUM_NOTE_1, inc, shifted);
-			break;
-		case DRUM_NOTE_2:
-			drum_track.edit(DrumTrack::DRUM_NOTE_2, inc, shifted);
-			break;
-		case DRUM_NOTE_3:
-			drum_track.edit(DrumTrack::DRUM_NOTE_3, inc, shifted);
-			break;
-		case DRUM_NOTE_4:
-			drum_track.edit(DrumTrack::DRUM_NOTE_4, inc, shifted);
+		case DRUM_NOTE:
+			drum_track.edit(DrumTrack::DRUM_NOTE, inc, shifted);
 			break;
 		default:
 			break;

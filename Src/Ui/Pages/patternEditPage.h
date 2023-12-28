@@ -20,28 +20,24 @@ namespace PatternEditPage {
 	int last_pattern = 0;
 
 	void add_pattern() {
-		auto& track = settings.selected_track();
-
-		if (settings.song.available_patterns() == 0) {
-			MessagePainter::show("FAILED! MEMORY FULL");
-			return;
-		}
+		bool succes = false;
+		Track& track = settings.selected_track();
 
 		engine.suspend();
 
 		switch (track.type())
 		{
 		case BaseTrack::NOTE_TRACK:
-			track.note.add_pattern();
+			succes = track.note.add_pattern();
 			break;
 		case BaseTrack::CHORD_TRACK:
-			track.chord.add_pattern();
+			succes = track.chord.add_pattern();
 			break;
 		case BaseTrack::DRUM_TRACK:
-			track.drum.add_pattern();
+			succes = settings.drumKit.add_pattern();
 			break;
 		case BaseTrack::CURVE_TRACK:
-			track.curve.add_pattern();
+			succes = track.curve.add_pattern();
 			break;
 		default:
 			break;
@@ -49,8 +45,12 @@ namespace PatternEditPage {
 
 		engine.resume();
 
-		settings.select_pattern(track.num_patterns() - 1);
-		MessagePainter::show("PATTERN ADDED");
+		if (succes) {
+			settings.select_pattern(track.num_patterns() - 1);
+			MessagePainter::show("PATTERN ADDED");
+		} else {
+			MessagePainter::show("FAILED! NOT ENOUGH RAM");
+		}
 	}
 
 	void clear_pattern(int pattern) {
@@ -82,25 +82,42 @@ namespace PatternEditPage {
 	}
 
 	void remove_pattern(int pattern) {
-		auto track = settings.selected_track();
+		bool succes = false;
+		Track &track = settings.selected_track();
 
 		engine.suspend();
 
-		if (track.num_patterns() == 1) {
-			clear_pattern(pattern);
-		} else if (track.remove_pattern(pattern)) {
-			settings.select_pattern(pattern - 1);
-			MessagePainter::show("PATTERN REMOVED");
+		switch (track.type())
+		{
+		case BaseTrack::NOTE_TRACK:
+			succes = track.note.remove_pattern(pattern);
+			break;
+		case BaseTrack::CHORD_TRACK:
+			succes = track.chord.remove_pattern(pattern);
+			break;
+		case BaseTrack::DRUM_TRACK:
+			succes = settings.drumKit.remove_pattern(pattern);
+			break;
+		case BaseTrack::CURVE_TRACK:
+			succes = track.curve.remove_pattern(pattern);
+			break;
+		default:
+			break;
 		}
 
 		engine.resume();
+
+		if (succes) {
+			settings.select_pattern(pattern - 1);
+			MessagePainter::show("PATTERN REMOVED");
+		}
 	}
 
 	void edit_label(int pattern) {
 		const int kMax = TrackData::kMaxLabelLength;
 		const char* label = settings.selected_track().pattern.label(pattern);
 
-		TextInputPage::set(label, kMax, "SET LABEL");
+		TextInputPage::set(label, kMax, "SET PATTERN LABEL");
 
 		pages.open(Pages::TEXT_INPUT_PAGE);
 	}

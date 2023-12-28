@@ -23,6 +23,15 @@ namespace TrackPage {
 	void clear_track();
 	void update_list_type(bool force = false);
 
+	// Footer options
+	enum FooterOptions {
+		SET_TYPE,
+		EDIT_LABEL,
+		PATTERNS,
+		NUM_FOOTER_OPTIONS
+	};
+
+	const char* const footer_text[NUM_FOOTER_OPTIONS] = { "SET TYPE", "EDIT LABEL", "PATTERNS"};
 
 	// List types
 	NoteTrackUiList noteTrackUiList;
@@ -42,35 +51,33 @@ namespace TrackPage {
 		[Track::CURVE_TRACK]	= "CURVE",
 	};
 
-	void create_track_callback(uint8_t option, bool confirmed) {
+	void create_track(uint8_t option, bool confirmed) {
+		if (!confirmed) {
+			return;
+		}
+
+		bool succes = false;
 		int index = settings.selected_track_index();
 
-		if (confirmed) {
-			engine.suspend();
+		engine.suspend();
+		engine.request_track_clear_wait(index);
 
-			engine.request_track_clear_wait(index);
-			if (settings.song.create_track(index, option)) {
-				settings.select_pattern(0);
-				settings.select_step_item(0);
-				MessagePainter::show("TRACK CREATED");
-			}
+		if (option == Track::DRUM_TRACK) {
+			succes = settings.drumKit.create_track(index);
+		} else {
+			succes = settings.song.create_track(index, option);
+		}
 
-			engine.resume();
+		engine.resume();
 
-			update_list_type();
+		if (succes) {
+			settings.select_pattern(0);
+			settings.select_step_item(0);
+			MessagePainter::show("TRACK CREATED");
+		} else {
+			MessagePainter::show("FAILED !");
 		}
 	}
-
-	// Footer options
-	enum FooterOptions {
-		SET_TYPE,
-		EDIT_LABEL,
-		PATTERNS,
-		NUM_FOOTER_OPTIONS
-	};
-
-	const char* const footer_text[NUM_FOOTER_OPTIONS] = { "SET TYPE", "EDIT LABEL", "PATTERNS"};
-
 
 	void clear_track() {
 		Track &track = settings.selected_track();
@@ -86,7 +93,7 @@ namespace TrackPage {
 			track.chord.clear();
 			break;
 		case Track::DRUM_TRACK:
-			track.drum.clear();
+			settings.drumKit.clear_track(track.index());
 			break;
 		case Track::CURVE_TRACK:
 			track.curve.clear();
@@ -102,6 +109,7 @@ namespace TrackPage {
 
 		MessagePainter::show("TRACK CLEARED");
 	}
+
 
 	UiList *selected_list() {
 		switch (settings.selected_track().type())
@@ -185,7 +193,7 @@ namespace TrackPage {
 		switch (controller.button_to_function(id))
 		{
 		case SET_TYPE:
-			OptionListPage::set(create_text, NUM_CREATE_OPTIONS, "SET TYPE", create_track_callback);
+			OptionListPage::set(create_text, NUM_CREATE_OPTIONS, "SET TYPE", create_track);
 			pages.open(Pages::OPTION_LIST_PAGE);
 			break;
 		case EDIT_LABEL:

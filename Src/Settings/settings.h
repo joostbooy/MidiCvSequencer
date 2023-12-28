@@ -8,6 +8,7 @@
 #include "midiInput.h"
 #include "midiOutput.h"
 #include "calibration.h"
+#include "drumKit.h"
 
 class Settings {
 
@@ -22,7 +23,7 @@ public:
 	}
 
 	Song song;
-
+	DrumKit drumKit;
 	Calibration calibration;
 
 	MidiInput &midiInput(int port) {
@@ -48,6 +49,7 @@ public:
 		follow_pattern_ = false;
 
 		song.init();
+		drumKit.init(&song);
 		clipboard.init();
 		path.clear();
 
@@ -85,7 +87,6 @@ public:
 		return song.track(selected_track_index_);
 	}
 
-	// note track
 	NoteTrack& selected_note_track() {
 		return song.track(selected_track_index_).note;
 	}

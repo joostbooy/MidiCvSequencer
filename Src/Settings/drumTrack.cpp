@@ -4,14 +4,13 @@
 // step masks
 SerialMask DrumTrack::step_mask_[NUM_STEP_ITEMS] = {
 	[TRIGGER]			= { .reg = 0, .bits = 1, .shifts = 0 },
-	[DRUM_NOTE]			= { .reg = 0, .bits = 2, .shifts = 1 },
-	[PROBABILITY]		= { .reg = 0, .bits = 3, .shifts = 3 },
-	[VELOCITY]			= { .reg = 0, .bits = 7, .shifts = 6 },
-	[GATE_LENGTH]		= { .reg = 0, .bits = 7, .shifts = 13 },
-	[NUM_REPEATS]		= { .reg = 0, .bits = 4, .shifts = 20 },
-	[REPEAT_SPREAD]		= { .reg = 0, .bits = 3, .shifts = 24 },
-	[REPEAT_VELOCITY]	= { .reg = 0, .bits = 2, .shifts = 27 },
-	[DELAY]				= { .reg = 1, .bits = 3, .shifts = 0 },
+	[PROBABILITY]		= { .reg = 0, .bits = 3, .shifts = 1 },
+	[VELOCITY]			= { .reg = 0, .bits = 7, .shifts = 4 },
+	[GATE_LENGTH]		= { .reg = 0, .bits = 7, .shifts = 11 },
+	[NUM_REPEATS]		= { .reg = 0, .bits = 4, .shifts = 18 },
+	[REPEAT_SPREAD]		= { .reg = 0, .bits = 3, .shifts = 22 },
+	[REPEAT_VELOCITY]	= { .reg = 0, .bits = 2, .shifts = 25 },
+	[DELAY]				= { .reg = 0, .bits = 3, .shifts = 27 },
 };
 
 // step items
@@ -22,13 +21,6 @@ SerialItem DrumTrack::step_item_[NUM_STEP_ITEMS] = {
 		.inc_shifted_ = 1,
 		.init_value_ = 0,
 		.mask_ = step_mask_[TRIGGER]
-	},
-	[DRUM_NOTE] = {
-		.min_ = 0,
-		.max_ = 3,
-		.inc_shifted_ = 1,
-		.init_value_ = 0,
-		.mask_ = step_mask_[DRUM_NOTE]
 	},
 	[PROBABILITY] = {
 		.min_ = 0,
@@ -84,40 +76,16 @@ SerialItem DrumTrack::step_item_[NUM_STEP_ITEMS] = {
 
 // track masks
 SerialMask DrumTrack::track_mask_[NUM_TRACK_ITEMS] = {
-	[DRUM_NOTE_1]	= { .reg = 0, .bits = 7, .shifts = 0 },
-	[DRUM_NOTE_2]	= { .reg = 0, .bits = 7, .shifts = 7 },
-	[DRUM_NOTE_3]	= { .reg = 0, .bits = 7, .shifts = 14 },
-	[DRUM_NOTE_4]	= { .reg = 0, .bits = 7, .shifts = 21 },
+	[DRUM_NOTE]	= { .reg = 0, .bits = 7, .shifts = 0 },
 };
 
 // track items
 SerialItem DrumTrack::track_item_[NUM_TRACK_ITEMS] = {
-	[DRUM_NOTE_1] = {
+	[DRUM_NOTE] = {
 		.min_ = 0,
 		.max_ = 127,
 		.inc_shifted_ = 10,
 		.init_value_ = 0,
-		.mask_ = track_mask_[DRUM_NOTE_1]
-	},
-	[DRUM_NOTE_2] = {
-		.min_ = 0,
-		.max_ = 127,
-		.inc_shifted_ = 10,
-		.init_value_ = 1,
-		.mask_ = track_mask_[DRUM_NOTE_2]
-	},
-	[DRUM_NOTE_3] = {
-		.min_ = 0,
-		.max_ = 127,
-		.inc_shifted_ = 10,
-		.init_value_ = 2,
-		.mask_ = track_mask_[DRUM_NOTE_3]
-	},
-	[DRUM_NOTE_4] = {
-		.min_ = 0,
-		.max_ = 127,
-		.inc_shifted_ = 10,
-		.init_value_ = 3,
-		.mask_ = track_mask_[DRUM_NOTE_4]
+		.mask_ = track_mask_[DRUM_NOTE]
 	},
 };
