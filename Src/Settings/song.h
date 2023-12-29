@@ -173,9 +173,18 @@ private:
 		remove_from_list(&track_type_list_[track(a).type()], a);
 		remove_from_list(&track_type_list_[track(b).type()], b);
 
+		// swap list indices
 		int a_ = track_list_[a];
 		track_list_[a] = track_list_[b];
 		track_list_[b] = a_;
+
+		// swap solo mute bits
+		bool a_mute = track_is_muted(a);
+		bool a_solo = track_is_solod(a);
+		set_track_mute(a, track_is_muted(b));
+		set_track_solo(a, track_is_solod(b));
+		set_track_mute(b, a_mute);
+		set_track_solo(b, a_solo);
 
 		// update indices
 		for (int i = 0; i < 16; ++i) {
@@ -185,6 +194,7 @@ private:
 		add_to_list(&track_type_list_[track(a).type()], b);
 		add_to_list(&track_type_list_[track(b).type()], a);
 	}
+
 };
 
 #endif
