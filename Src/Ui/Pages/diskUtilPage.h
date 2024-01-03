@@ -168,7 +168,7 @@ namespace DiskUtilPage {
 	}
 
 	void drawLeds() {
-
+		LedPainter::footer_buttons(Matrix::GREEN, Matrix::RED, Matrix::BLACK, Matrix::BLACK);
 	}
 
 	void msTick(uint16_t ticks) {
