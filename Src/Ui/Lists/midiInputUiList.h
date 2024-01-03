@@ -105,7 +105,7 @@ public:
 			input.set_pitch_bend_receive(inc > 0);
 			break;
 		case CC_RECEIVE:
-			input.set_cc_receive(input.cc_receive() + inc);
+			input.set_cc_receive(input.cc_receive() + (shifted ? 10 * inc : inc));
 			break;
 		case ARP_OFFSET:
 			input.arpeggiator.set_offset(input.arpeggiator.offset() + inc);
