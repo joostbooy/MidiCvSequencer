@@ -14,6 +14,7 @@ public:
 		CHANNEL_SEND,
 		QUANTISE_NOTE,
 		PITCH_BEND_RECEIVE,
+		CC_RECEIVE,
 		ARP_OFFSET,
 		ARP_SPEED,
 		ARP_SWING,
@@ -43,6 +44,7 @@ public:
 		case CHANNEL_SEND:			return "CHANNEL SEND";
 		case QUANTISE_NOTE:			return "QUANTISE NOTE";
 		case PITCH_BEND_RECEIVE:	return "PITCH BEND RECEIVE";
+		case CC_RECEIVE:			return "CC RECEIVE";
 		case ARP_OFFSET:			return "ARP OFFSET";
 		case ARP_SPEED:				return "ARP SPEED";
 		case ARP_SWING:				return "ARP SWING";
@@ -67,6 +69,7 @@ public:
 		case CHANNEL_SEND:			return input.channel_send_text();
 		case QUANTISE_NOTE:			return input.quantise_note_text();
 		case PITCH_BEND_RECEIVE:	return input.pitch_bend_receive_text();
+		case CC_RECEIVE:			return input.cc_receive_text();
 		case ARP_OFFSET:			return input.arpeggiator.offset_text();
 		case ARP_SPEED:				return input.arpeggiator.speed_text();
 		case ARP_SWING:				return input.arpeggiator.swing_text();
@@ -100,6 +103,9 @@ public:
 			break;
 		case PITCH_BEND_RECEIVE:
 			input.set_pitch_bend_receive(inc > 0);
+			break;
+		case CC_RECEIVE:
+			input.set_cc_receive(input.cc_receive() + inc);
 			break;
 		case ARP_OFFSET:
 			input.arpeggiator.set_offset(input.arpeggiator.offset() + inc);

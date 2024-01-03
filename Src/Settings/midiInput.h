@@ -85,7 +85,7 @@ public:
 		cc_receive_ = stmlib::clip(-1, 127, cc_number);
 	}
 
-	const char* cc_receive_text(int value) {
+	const char* cc_receive_text() {
 		if (cc_receive() < 0) {
 			return "NONE";
 		}
