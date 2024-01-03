@@ -191,8 +191,8 @@ private:
 			track(i).set_index(i);
 		}
 
-		add_to_list(&track_type_list_[track(a).type()], b);
-		add_to_list(&track_type_list_[track(b).type()], a);
+		add_to_list(&track_type_list_[track(a).type()], a);
+		add_to_list(&track_type_list_[track(b).type()], b);
 	}
 
 };
