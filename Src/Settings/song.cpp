@@ -36,10 +36,6 @@ void Song::save(FileWriter &fileWriter) {
 	midiClock.save(fileWriter);
 
 	// track lists
-	for (int i = 0; i < kMaxTracks; ++i) {
-		fileWriter.write(track_list_[i]);
-	}
-
 	for (int i = 0; i < Track::NUM_TYPES; ++i) {
 		fileWriter.write(track_type_list_[i]);
 	}
@@ -71,10 +67,6 @@ void Song::load(FileReader &fileReader) {
 	midiClock.load(fileReader);
 
 	// track lists
-	for (int i = 0; i < kMaxTracks; ++i) {
-		fileReader.read(track_list_[i]);
-	}
-
 	for (int i = 0; i < Track::NUM_TYPES; ++i) {
 		fileReader.read(track_type_list_[i]);
 	}
