@@ -161,9 +161,13 @@ private:
 		if (last_value[cv_port] != value) {
 			last_value[cv_port] = value;
 
-			uint8_t port = cvIn.forward_port();
-			uint8_t channel = cvIn.forward_channel();
-			uint8_t number = settings.midiInput(port).cc_receive();
+			int port = cvIn.forward_port();
+			int channel = cvIn.forward_channel();
+			int number = settings.midiInput(port).cc_receive();
+
+			if (number < 0) {
+				return;
+			}
 
 			MidiEvent::Event event;
 
