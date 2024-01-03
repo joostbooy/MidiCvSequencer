@@ -21,21 +21,24 @@ namespace DiskUtilPage {
 	const uint16_t targetFps();
 
 
-	enum Options {
+	enum FooterOptions {
+		CONFIRM,
+		CANCEL,
+		NUM_FOOTER_OPTIONS
+	};
+
+	const char* const footer_text[NUM_FOOTER_OPTIONS] = { "CONFIRM", "CANCEL" };
+
+
+	enum EditOptions {
 		ADD_FOLDER,
 		RENAME,
 		DELETE,
-		CANCEL,
 
 		NUM_OPTIONS
 	};
 
-	const char* const option_text[NUM_OPTIONS] = {
-		"ADD FOLDER",
-		"RENAME",
-		"DELETE",
-		"CANCEL"
-	};
+	const char* const edit_option_text[NUM_OPTIONS] = { "ADD FOLDER", "RENAME", "DELETE", };
 
 	int cursor = 0;
 	uint8_t num_options;
@@ -125,12 +128,8 @@ namespace DiskUtilPage {
 		pages.close(Pages::DISK_UTIL_PAGE);
 	}
 
-	void onButton(uint8_t id, uint8_t value) {
-		if (value == 0 || id != Controller::EDIT_BUTTON) {
-			return;
-		}
-
-		switch (cursor)
+	void edit(int option) {
+		switch (option)
 		{
 		case ADD_FOLDER:
 			TopPage::str.clear();
@@ -147,11 +146,24 @@ namespace DiskUtilPage {
 			ConfirmationPage::set(TopPage::str.read(), &delete_entry_callback);
 			pages.open(Pages::CONFIRMATION_PAGE);
 			break;
-		case CANCEL:
-			pages.close(Pages::DISK_UTIL_PAGE);
-			break;
 		default:
 			break;
+		}
+	}
+
+	void onButton(uint8_t id, uint8_t value) {
+		if (value >= 1) {
+			switch (controller.button_to_function(id))
+			{
+			case CONFIRM:
+				edit(cursor);
+				break;
+			case CANCEL:
+				pages.close(Pages::DISK_UTIL_PAGE);
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
@@ -176,9 +188,12 @@ namespace DiskUtilPage {
 
 		for (int i = window.row().first; i <= window.row().last; ++i) {
 			Canvas::Color color = i == cursor ? Canvas::BLACK : Canvas::LIGHT_GRAY;
-			WindowPainter::text(window.cell(0, i), option_text[i], Canvas::LEFT, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(0, i), edit_option_text[i], Canvas::LEFT, Canvas::CENTER, color);
 		}
 		WindowPainter::vertical_scrollbar(window);
+
+		//footer
+		WindowPainter::draw_footer(footer_text, NUM_FOOTER_OPTIONS);
 	}
 
 	const uint16_t targetFps() {
