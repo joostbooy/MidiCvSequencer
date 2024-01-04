@@ -149,14 +149,6 @@ public:
 		}
 	}
 
-	// TODO
-	static const char* micros_to_time_text(uint32_t micros) {
-		uint32_t minutes = (micros / 60000000) % 60;
-		uint32_t seconds = (micros / 1000000) % 60;
-		uint32_t milliseconds = (micros / 1000) % 1000;
-		return str.write(minutes, ":", seconds, ":", milliseconds);
-	}
-
 private:
 	static const char* note_to_text[12];
 };
