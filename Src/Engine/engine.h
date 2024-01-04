@@ -40,6 +40,8 @@ public:
 	void resume();
 	void process();
 
+	float processing_time();
+
 	// states
 	State state() {
 		return state_;
@@ -82,6 +84,7 @@ private:
 	volatile uint8_t requests = 0x00;
 	volatile uint32_t clock_ticks = 0;
 	volatile uint32_t processed_ticks = 0;
+	volatile uint32_t processing_time_ = 0;
 
 	volatile uint8_t track_to_clear = 0;
 	volatile uint8_t track_to_audition = 0;

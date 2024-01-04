@@ -201,8 +201,13 @@ void Engine::process() {
 	midiInputEngine.update();
 }
 
+float Engine::processing_time() {
+	return (1.f / 500.f) * processing_time_;
+}
+
 // 2 khz interrupt
 void Engine::update() {
+	uint32_t start = micros.read();
 
 	while (processed_ticks != clock_ticks) {
 		++processed_ticks;
@@ -221,4 +226,6 @@ void Engine::update() {
 	}
 
 	cvOutputEngine.send();
+
+	processing_time_ = micros.read() - start;
 }
