@@ -20,10 +20,11 @@ namespace SystemPage {
 	enum FooterOptions {
 		CALIBRATE_CV,
 		TEST_HARDWARE,
+		VERSION,
 		NUM_OPTIONS
 	};
 
-	const char* const footer_text[NUM_OPTIONS] = {"CALIBRATE CV", "TEST HARDWARE"};
+	const char* const footer_text[NUM_OPTIONS] = {"CALIBRATE CV", "TEST HARDWARE", "VERSION"};
 
 	Window window = {
 		.x = 0,
@@ -50,6 +51,7 @@ namespace SystemPage {
 		}
 	}
 
+
 	void exit() {
 
 	}
@@ -68,6 +70,9 @@ namespace SystemPage {
 			case TEST_HARDWARE:
 				pages.open(Pages::HARDWARE_PAGE);
 				break;
+			case VERSION:
+				MessagePainter::show(TopPage::str.write("FIRMWARE ", settings.current_version_text()));
+				break;
 			default:
 				break;
 			}
@@ -82,38 +87,48 @@ namespace SystemPage {
 
 	}
 
+	void draw_graph(int x, int y, int w, int h, float value, const char* title, const char* value_text) {
+		int fill_h = value * h;
+		int fill_y = (h - fill_h) + y;
+		canvas.fill(x, y, w, h, Canvas::GRAY);
+		canvas.fill(x, fill_y, w, fill_h, Canvas::BLACK);
+
+		canvas.draw_text(x + w + 2, y + h - 14, title);
+		canvas.draw_text(x + w + 2, y + h - 6, value_text);
+	}
+
+	void draw_processing_time(int x, int y, int w, int h, float time) {
+		draw_graph(x, y, w, h, time, "CPU", UiText::str.write(100 * time, "%"));
+	}
+
+	void draw_available_patterns(int x, int y, int w, int h, uint32_t total, uint32_t free) {
+		uint32_t used = total - free;
+		float value = (1.f / total) * used;
+		draw_graph(x, y, w, h, value, "PATTERNS", TopPage::str.write(used, "/", total));
+	}
+
+	void draw_sd_card_available_kb(int x, int y, int w, int h, uint32_t total, uint32_t free) {
+		uint32_t used = total - free;
+		float value = (1.f / total) * used;
+
+		TopPage::str.write(UiText::kb_to_mem_size_text(used), "/", UiText::kb_to_mem_size_text(total));
+		draw_graph(x, y, w, h, value, "SD CARD", TopPage::str.read());
+	}
+
 	void drawDisplay() {
 		WindowPainter::draw_header();
 
 		canvas.set_font(Font::SMALL);
 
-		// firmware version
-		WindowPainter::text(window.cell(0, 0), "FIRMWARE", Canvas::LEFT, Canvas::CENTER);
-		WindowPainter::text(window.cell(1, 0), settings.current_version_text(), Canvas::LEFT, Canvas::CENTER);
-
-		// sd card total
-		WindowPainter::text(window.cell(0, 1), "SD CARD TOTAL", Canvas::LEFT, Canvas::CENTER);
-		WindowPainter::text(window.cell(1, 1), UiText::bytes_to_mem_size_text(sd_size_total * 512), Canvas::LEFT, Canvas::CENTER);
-
-		// sd card free
-		WindowPainter::text(window.cell(0, 2), "SD CARD FREE", Canvas::LEFT, Canvas::CENTER);
-		WindowPainter::text(window.cell(1, 2), UiText::bytes_to_mem_size_text(sd_size_free * 512), Canvas::LEFT, Canvas::CENTER);
-
-		// settings path
-		WindowPainter::text(window.cell(0, 3), "PATH", Canvas::LEFT, Canvas::CENTER);
-		WindowPainter::text(window.cell(1, 3), settings.read_path(), Canvas::LEFT, Canvas::CENTER);
-
-		// pattern memory
-		int total = settings.song.max_patterns();
-		int free = settings.song.available_patterns();
-		WindowPainter::text(window.cell(0, 4), "PATTERNS USED", Canvas::LEFT, Canvas::CENTER);
-		WindowPainter::text(window.cell(1, 4), TopPage::str.write(free, "/", total), Canvas::LEFT, Canvas::CENTER);
+		draw_available_patterns(37, 15, 10, 30, settings.song.max_patterns(), settings.song.available_patterns());
+		draw_sd_card_available_kb(122, 15, 10, 30, sd_size_total, sd_size_free);
+		draw_processing_time(207, 15, 10, 30, engine.processing_time());
 
 		WindowPainter::draw_footer(footer_text, NUM_OPTIONS);
 	}
 
 	const uint16_t targetFps() {
-		return 1000 / 16;
+		return 1000 / 24;
 	}
 
 	const Pages::EventHandlers eventHandlers = {
