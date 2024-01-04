@@ -26,8 +26,15 @@ namespace CurvePatternPage {
 	const int box_w = 256;
 	const int step_w = box_w / 16;
 
-	void init() {
+	TrackState trackState;
+	CurveTrackEngine<false>curveTrackEngine;
 
+	const int clock_speed = ClockEngine::TRIPLET_32TH;
+	const int step_duration = ClockEngine::step_duration(clock_speed);
+	const float inc = float(step_w) / float(step_duration);
+
+	void init() {
+		trackState.clock.set_speed(clock_speed);
 	}
 
 	void enter() {
@@ -75,34 +82,7 @@ namespace CurvePatternPage {
 		last_y = curr_y;
 	}
 
-	void draw_step(int step, bool trigger, int value, int shape, const char *text) {
-		float value_ = (1.f / 127.f) * value;
-		float shape_ = (1.f / 8.f) * shape;
-
-		last_value = curr_value;
-		if (trigger) {
-			curr_value = value_;
-		}
-
-		for (int i = 0; i < step_w; ++i) {
-			int x = i + (step * step_w);
-			float phase = Curve::bend(i * (1.f / step_w), shape_);
-			float sample = Dsp::cross_fade(last_value, curr_value, phase);
-			draw_sample(x, sample);
-		}
-
-		canvas.draw_text((step * step_w), box_y, step_w, 64, text, Canvas::CENTER, Canvas::BOTTOM);
-	}
-
-
 	void drawDisplay() {
-		int item = settings.selected_step_item();
-		int pattern = settings.selected_pattern();
-		CurveTrack &track = settings.selected_curve_track();
-
-		// set init value
-		curr_value = (1.f / 127.f) * track.read(CurveTrack::INIT_VALUE);
-
 		// draw background
 		for (int i = 0; i < 16; ++i) {
 			if (i % 2) {
@@ -114,18 +94,29 @@ namespace CurvePatternPage {
 		const int y = box_y + (box_h / 2);
 		canvas.horizontal_line(box_x, y, box_w, Canvas::GRAY);
 
+		// draw pattern
+		curveTrackEngine.init(settings.selected_track_index(), &trackState);
+		curveTrackEngine.reset();
 
-		// draw steps
-		CurveTrack::StepItem item_ = CurveTrack::StepItem(item);
+		for (int step = 0; step < 16; ++step) {
+			if (settings.selected_curve_track().read_step(settings.selected_pattern(), step, CurveTrack::TRIGGER)) {
+				curveTrackEngine.process_step(settings.selected_pattern(), step);
+			}
 
-		for (int i = 0; i < TrackData::kMaxStepsPerPattern; ++i) {
-			int value = track.read_step(pattern, i, item_);
-			int shape = track.read_step(pattern, i, CurveTrack::SHAPE);
-			int cc_value = track.read_step(pattern, i, CurveTrack::CC_VALUE);
-			bool trigger = track.read_step(pattern, i, CurveTrack::TRIGGER);
-			draw_step(i, trigger, cc_value, shape, CurveTrack::step_value_text(item_, value));
+			int last_x = -1;
+			
+			for (int i = 0; i < step_duration; ++i) {
+				curveTrackEngine.tick_step(false);
+
+				int x = (i * inc) + (step * step_w);
+				if (x != last_x) {
+					last_x = x;
+					draw_sample(x, curveTrackEngine.curr_value() * (1.f / 65535.f));
+				}
+			}
 		}
 	}
+
 
 	const uint16_t targetFps() {
 		return 1000 / 16;
