@@ -187,13 +187,14 @@ void Engine::process() {
 
 	for (int i = 0; i < CvInput::NUM_PORTS; ++i) {
 		cvInputEngine.process(i);
-		while (cvInputEngine.event_received(i, event)) {
-			midiInputEngine.process_event(event);
-		}
 	}
 
 	for (int i = 0; i < MidiPort::NUM_PORTS; ++i) {
 		while (midiPort.buffer(i).event_received(event)) {
+			midiInputEngine.process_event(event);
+		}
+
+		while (cvInputEngine.event_received(i, event)) {
 			midiInputEngine.process_event(event);
 		}
 	}

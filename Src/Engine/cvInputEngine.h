@@ -59,8 +59,15 @@ public:
 	void process(uint8_t port) {
 		CvEvent cvEvent;
 
-		while (cv_que[port].readable() && midi_que[port].writeable()) {
+		while (cv_que[port].readable()) {
 			CvInput &cvIn = settings.cvInput(port);
+
+			// check if midi port is writeable
+			if (midi_que[cvIn.forward_port()].writeable() == false) {
+				return;
+			}
+
+			// pull que
 			cvEvent = cv_que[port].read();
 
 			// filter adc
@@ -125,7 +132,7 @@ private:
 	};
 
 	Que<CvEvent, 32> cv_que[CvInput::NUM_PORTS];
-	Que<MidiEvent::Event, 32>midi_que[CvInput::NUM_PORTS];
+	Que<MidiEvent::Event, 32>midi_que[MidiPort::NUM_PORTS];
 
 
 	void send_note_off(uint8_t cv_port) {
