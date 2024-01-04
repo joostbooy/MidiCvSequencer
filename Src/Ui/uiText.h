@@ -134,20 +134,18 @@ public:
 		return str.write(intergral, ".", fractional, "V");
 	};
 
-	static const char* bytes_to_mem_size_text(uint32_t bytes) {
-		uint32_t gb = bytes / 1000000000;
-		uint32_t mb = bytes / 1000000;
+	static const char* kb_to_mem_size_text(uint32_t kb) {
+		uint32_t gb = kb / 1000000;
+		uint32_t mb = kb / 1000;
 
 		if (gb > 0) {
-			uint32_t gb_frac = (bytes - (gb * 1000000000)) / 10000000;
+			uint32_t gb_frac = (kb - (gb * 1000000)) / 10000;
 			return str.write(gb, ".", gb_frac, " GB");
-		} else if (mb > 0) {
-			uint32_t mb_frac = (bytes - (mb * 1000000)) / 10000;
+		} else if (mb > 0){
+			uint32_t mb_frac = (kb - (mb * 1000)) / 10;
 			return str.write(mb, ".", mb_frac, " MB");
 		} else {
-			uint32_t kb = bytes / 1000;
-			uint32_t kb_frac = (bytes - (kb * 1000)) / 10;
-			return str.write(kb, ".", kb_frac, " KB");
+			return str.write(kb, " KB");
 		}
 	}
 
