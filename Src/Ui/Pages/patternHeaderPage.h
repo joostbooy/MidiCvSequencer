@@ -2,7 +2,6 @@
 #define PatternHeaderPage_h
 
 #include "topPage.h"
-#include "patternSelectionUiList.h"
 #include "PatternEditPage.h"
 
 namespace PatternHeaderPage {
