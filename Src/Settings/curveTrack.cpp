@@ -7,7 +7,7 @@ SerialMask CurveTrack::step_mask_[NUM_STEP_ITEMS] = {
 	[PROBABILITY]	= { .reg = 0, .bits = 3, .shifts = 1 },
 	[CC_VALUE]		= { .reg = 0, .bits = 7, .shifts = 4 },
 	[SHAPE]			= { .reg = 0, .bits = 4, .shifts = 11 },
-	//[SKEW]			= { .reg = 0, .bits = 4, .shifts = 15 },
+	[SHIFT]			= { .reg = 0, .bits = 3, .shifts = 15 },
 };
 
 // step items
@@ -40,13 +40,13 @@ SerialItem CurveTrack::step_item_[NUM_STEP_ITEMS] = {
 		.init_value_ = 4,
 		.mask_ = step_mask_[SHAPE]
 	},
-//	[SKEW] = {
-//		.min_ = 0,
-//		.max_ = 3,
-//		.inc_shifted_ = 1,
-//		.init_value_ = 0,
-//		.mask_ = step_mask_[SKEW]
-//	},
+	[SHIFT] = {
+		.min_ = 0,
+		.max_ = 4,
+		.inc_shifted_ = 1,
+		.init_value_ = 4,
+		.mask_ = step_mask_[SHIFT]
+	},
 };
 
 // track masks

@@ -21,7 +21,7 @@ public:
 		PROBABILITY,
 		CC_VALUE,
 		SHAPE,
-		//SKEW,
+		SHIFT,
 		NUM_STEP_ITEMS
 	};
 
@@ -32,7 +32,7 @@ public:
 		case PROBABILITY:	return "PROBABILITY";
 		case CC_VALUE:		return "CC VALUE";
 		case SHAPE:			return "SHAPE";
-		//case SKEW:			return "SKEW";
+		case SHIFT:			return "SHIFT";
 		default:
 			break;
 		}
@@ -46,7 +46,7 @@ public:
 		case PROBABILITY:	return UiText::percentage_text(data, 7);
 		case CC_VALUE:		return UiText::unsigned_int_to_text(data);
 		case SHAPE:			return UiText::percentage_text(data, 9);
-		//case SKEW:			return UiText::percentage_text(data, 9);
+		case SHIFT:			return UiText::signed_int_to_text(data - 4);
 		default:
 			break;
 		}

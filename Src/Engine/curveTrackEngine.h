@@ -90,9 +90,36 @@ public:
 		target_value_ = get_step_value(pattern, step, CurveTrack::CC_VALUE);
 		target_value_ <<= 9;	// convert to 16 bit
 
-		phase_ = 0.f;
 		shape_ = (1.f / 8.f) * get_step_value(pattern, step, CurveTrack::SHAPE);
 		inc_ = trackState_->clock.step_duration_reciprocal();
+
+		int shift = get_step_value(pattern, step, CurveTrack::SHIFT);
+
+		switch (shift)
+		{
+		case 0:
+			phase_ = 1.f;
+			break;
+		case 1:
+			inc_ *= 4.f;
+			phase_ = 0.f;
+			break;
+		case 2:
+			inc_ *= 2.f;
+			phase_ = 0.f;
+			break;
+		case 3:
+			inc_ *= 1.5f;
+			phase_ = 0.f;
+			break;
+		case 4:
+			phase_ = 0.f;
+			break;
+		default:
+			inc_ = 0.f;
+			phase_ = 0.f;
+			break;
+		}
 	}
 
 private:
