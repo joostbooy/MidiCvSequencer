@@ -84,10 +84,7 @@ public:
 			cvOutput.set_slide_mode(cvOutput.slide_mode() + inc);
 			break;
 		case SLIDE_SPEED:
-			if (shifted) {
-				inc *= 3;
-			}
-			cvOutput.set_slide_speed(cvOutput.slide_speed() + inc);
+			cvOutput.set_slide_speed(cvOutput.slide_speed() + (shifted ? inc * 3 : inc));
 			break;
 		case GATE_SOURCE:
 			cvOutput.set_gate_source(cvOutput.gate_source() + inc);

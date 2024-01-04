@@ -83,10 +83,7 @@ public:
 			track.set_clock_mode(track.clock_mode() + inc);
 			break;
 		case CLOCK_SPEED:
-			if (shifted) {
-				inc *= 3;
-			}
-			track.set_clock_speed(track.clock_speed() + inc);
+			track.set_clock_speed(track.clock_speed() + (shifted ? inc * 3 : inc));
 			break;
 		case DELAY:
 			track.set_delay(track.delay() + inc);
