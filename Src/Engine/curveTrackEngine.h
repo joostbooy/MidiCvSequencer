@@ -94,33 +94,15 @@ public:
 		inc_ = trackState_->clock.step_duration_reciprocal();
 
 		int shift = get_step_value(pattern, step, CurveTrack::SHIFT);
-
-		switch (shift)
-		{
-		case 0:
+		if (shift == 0) {
 			phase_ = 1.f;
-			break;
-		case 1:
-			inc_ *= 4.f;
-			phase_ = 0.f;
-			break;
-		case 2:
-			inc_ *= 2.f;
-			phase_ = 0.f;
-			break;
-		case 3:
-			inc_ *= 1.5f;
-			phase_ = 0.f;
-			break;
-		case 4:
-			phase_ = 0.f;
-			break;
-		default:
 			inc_ = 0.f;
+		} else {
 			phase_ = 0.f;
-			break;
+			inc_ *= inc_multipliers[shift];
 		}
 	}
+
 
 private:
 	CurveTrack *curveTrack_;
@@ -135,6 +117,8 @@ private:
 
 	uint8_t track_index_;
 	uint8_t cc_number_;
+
+	const float inc_multipliers[5] = { 0.f, 4.f, 2.f, 1.5f, 1.f };
 
 	inline int get_step_value(uint8_t pattern, uint8_t step, CurveTrack::StepItem item) {
 		if (allow_randomization) {
