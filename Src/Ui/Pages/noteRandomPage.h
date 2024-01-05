@@ -89,12 +89,16 @@ namespace NoteRandomPage {
 		// item name
 		PatternEditRandomPage::draw_name(NoteTrack::step_item_text(NoteTrack::StepItem(item)));
 
-		// min
+		// min max
 		int min_value = track.read_random_min(pattern, NoteTrack::StepItem(item));
-		PatternEditRandomPage::draw_min(NoteTrack::step_value_text(NoteTrack::StepItem(item), min_value));
-
-		// max
 		int max_value = track.read_random_max(pattern, NoteTrack::StepItem(item));
+
+		if ((item == NoteTrack::NOTE) && track.read(NoteTrack::USE_SCALE)) {
+			min_value = settings.song.scale.read_map(min_value);
+			max_value = settings.song.scale.read_map(max_value);
+		}
+
+		PatternEditRandomPage::draw_min(NoteTrack::step_value_text(NoteTrack::StepItem(item), min_value));
 		PatternEditRandomPage::draw_max(NoteTrack::step_value_text(NoteTrack::StepItem(item), max_value));
 	}
 
