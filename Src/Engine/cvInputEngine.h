@@ -59,15 +59,13 @@ public:
 	void process(uint8_t port) {
 		CvEvent cvEvent;
 
+		int midi_port = settings.cvInput(port).forward_port();
+		if (midi_que[midi_port].writeable() == false) {
+			return;
+		}
+
 		while (cv_que[port].readable()) {
-			CvInput &cvIn = settings.cvInput(port);
-
-			// check if midi port is writeable
-			if (midi_que[cvIn.forward_port()].writeable() == false) {
-				return;
-			}
-
-			// pull que
+			CvInput &cvInput = settings.cvInput(port);
 			cvEvent = cv_que[port].read();
 
 			// filter adc
@@ -81,7 +79,7 @@ public:
 			last_gate[port] = gate;
 
 			// nothing todo
-			if (cvIn.forward_channel() < 0) {
+			if (cvInput.forward_channel() < 0) {
 				continue;
 			}
 
@@ -89,25 +87,25 @@ public:
 			float value = filterd[port];
 			uint32_t time = cvEvent.time;
 
-			switch (cvIn.cv_mode())
+			switch (cvInput.cv_mode())
 			{
 			case CvInput::CC:
-				send_as_cc(port, cvIn, value * 127, time);
+				send_as_cc(port, cvInput, value * 127, time);
 				break;
 			case CvInput::CC_SAMPLE_HOLD:
 				if (gate != last && gate == 1) {
-					send_as_cc(port, cvIn, value * 127, time);
+					send_as_cc(port, cvInput, value * 127, time);
 				}
 				break;
 			case CvInput::PITCH_BEND:
-				send_as_bend(port, cvIn, value * 16382, time);
+				send_as_bend(port, cvInput, value * 16382, time);
 				break;
 			case CvInput::NOTE:
 				if (gate != last) {
 					send_note_off(port);	// always turn note off on either a new note or a note off (monophonic)
 
 					if (gate >= 1) {
-						send_as_note(port, cvIn, value * 127, time);
+						send_as_note(port, cvInput, value * 127, time);
 					}
 				}
 				break;
@@ -146,11 +144,11 @@ private:
 		}
 	}
 
-	void send_as_note(uint8_t cv_port, CvInput &cvIn, uint8_t value, uint32_t time) {
+	void send_as_note(uint8_t cv_port, CvInput &cvInput, uint8_t value, uint32_t time) {
 		MidiEvent::Event &event = note_event[cv_port];
 
-		uint8_t port = cvIn.forward_port();
-		uint8_t channel = cvIn.forward_channel();
+		uint8_t port = cvInput.forward_port();
+		uint8_t channel = cvInput.forward_channel();
 
 		event.time = time;
 		event.port = port;
@@ -164,12 +162,12 @@ private:
 		midi_que[port].write(event);
 	}
 
-	void send_as_cc(uint8_t cv_port, CvInput &cvIn, uint8_t value, uint32_t time) {
+	void send_as_cc(uint8_t cv_port, CvInput &cvInput, uint8_t value, uint32_t time) {
 		if (last_value[cv_port] != value) {
 			last_value[cv_port] = value;
 
-			int port = cvIn.forward_port();
-			int channel = cvIn.forward_channel();
+			int port = cvInput.forward_port();
+			int channel = cvInput.forward_channel();
 			int number = settings.midiInput(port).cc_receive();
 
 			if (number < 0) {
@@ -189,12 +187,12 @@ private:
 		}
 	}
 
-	void send_as_bend(uint8_t cv_port, CvInput &cvIn, uint16_t value, uint32_t time) {
+	void send_as_bend(uint8_t cv_port, CvInput &cvInput, uint16_t value, uint32_t time) {
 		if (last_value[cv_port] != value >> 5) {
 			last_value[cv_port] = value >> 5;
 
-			uint8_t port = cvIn.forward_port();
-			uint8_t channel = cvIn.forward_channel();
+			uint8_t port = cvInput.forward_port();
+			uint8_t channel = cvInput.forward_channel();
 
 			MidiEvent::Event event;
 
