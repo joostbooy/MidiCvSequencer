@@ -52,6 +52,8 @@ public:
 
 	bool receive_clock_message(uint8_t port, uint8_t *message) {
 		uint8_t last = last_received[port];
+		last_received[port] = 0x00;
+
 		if (last >= 0xF8) {
 			*message = last;
 			return true;
