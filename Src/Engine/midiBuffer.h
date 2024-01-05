@@ -23,6 +23,9 @@ public:
 
 		event.port = port_index;
 		clock_event.port = port_index;
+
+		MidiEvent::set_source(&event, MidiEvent::PORT, port_index);
+		MidiEvent::set_source(&clock_event, MidiEvent::PORT, port_index);
 	}
 
 	void write_out(MidiEvent::Event *event) {
