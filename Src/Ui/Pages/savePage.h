@@ -16,7 +16,7 @@ namespace SavePage {
 	void onEncoder(uint8_t id, int inc);
 	const uint16_t targetFps();
 
-	void on_confirm() {
+	void save_settings() {
 		engine.add_request_wait(Engine::STOP);
 
 		TopPage::str.write(DiskNavigatorPage::curr_path(), "/", settings.song.name(), ".PRJ");
@@ -29,6 +29,15 @@ namespace SavePage {
 		}
 
 		ui.clear_que();
+	}
+
+	void on_confirm() {
+		ConfirmationPage::set("SAVE SETTINGS ?", [](uint8_t option) {
+			if (option == ConfirmationPage::CONFIRM) {
+				save_settings();
+			}
+		});
+		pages.open(Pages::CONFIRMATION_PAGE);
 	}
 
 	void init() {

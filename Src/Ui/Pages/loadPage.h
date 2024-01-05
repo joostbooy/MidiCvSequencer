@@ -17,11 +17,7 @@ namespace LoadPage {
 	const uint16_t targetFps();
 
 	// Variables
-	void on_confirm() {
-		if (DiskNavigatorPage::curr_entry_is_dir()) {
-			return;
-		}
-
+	void load_settings() {
 		engine.add_request_wait(Engine::STOP);
 
 		TopPage::str.write(DiskNavigatorPage::curr_path(), "/", DiskNavigatorPage::curr_entry_name());
@@ -34,6 +30,19 @@ namespace LoadPage {
 		}
 
 		ui.clear_que();
+	}
+
+	void on_confirm() {
+		if (DiskNavigatorPage::curr_entry_is_dir()) {
+			return;
+		}
+
+		ConfirmationPage::set("LOAD SETTINGS ?", [](uint8_t option) {
+			if (option == ConfirmationPage::CONFIRM) {
+				load_settings();
+			}
+		});
+		pages.open(Pages::CONFIRMATION_PAGE);
 	}
 
 	void init() {
