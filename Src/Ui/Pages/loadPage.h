@@ -24,7 +24,7 @@ namespace LoadPage {
 
 		if (settings.load(TopPage::str.read())) {
 			MessagePainter::show("SETTINGS LOADED");
-			chapter.open(Chapter::SONG);
+			chapter.init();
 		} else {
 			MessagePainter::show("FAILED !");
 		}
