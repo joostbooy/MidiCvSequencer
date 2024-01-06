@@ -49,7 +49,7 @@ public:
 	}
 
 	static void reset_step_value() {
-		scroll_bar_frames = 32;
+		step_value_frames = 32;
 	}
 
 	static void draw_step_value(int step, const char *text) {
