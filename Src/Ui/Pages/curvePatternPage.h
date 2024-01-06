@@ -20,6 +20,9 @@ namespace CurvePatternPage {
 	float last_value;
 	float curr_value;
 
+	int last_touched_step = 0;
+	int step_value_frames = 0;
+
 	const int box_x = 0;
 	const int box_y = 12;
 	const int box_h = 40;
@@ -38,19 +41,37 @@ namespace CurvePatternPage {
 	}
 
 	void enter() {
-
+		step_value_frames = 0;
 	}
 
 	void exit() {
 
 	}
 
-	void onEncoder(uint8_t id, int inc) {
+	void on_step_control(int step) {
+		last_touched_step = step;
+		step_value_frames = 32;
+	}
 
+	void onEncoder(uint8_t id, int inc) {
+		int step = controller.encoder_to_step(id);
+		if (step >= 0) {
+			on_step_control(step);
+		}
 	}
 
 	void onButton(uint8_t id, uint8_t state) {
+		int step_button = controller.button_to_step(id);
+		if (state >= 1 && step_button >= 0) {
+			on_step_control(step_button);
+			return;
+		}
 
+		int step_encoder = controller.encoder_push_to_step(id);
+		if (state >= 1 && step_encoder >= 0) {
+			on_step_control(step_encoder);
+			return;
+		}
 	}
 
 	void drawLeds() {
@@ -59,6 +80,17 @@ namespace CurvePatternPage {
 
 	void msTick(uint16_t ticks) {
 
+	}
+
+
+	void draw_step_value(int step) {
+		int item = settings.selected_step_item();
+		int value = settings.selected_curve_track().read_step(settings.selected_pattern(), step, CurveTrack::StepItem(item));
+		const char *text = CurveTrack::step_value_text(CurveTrack::StepItem(item), value);
+
+		int x = box_x + (step * step_w);
+		int y = box_y + box_h;
+		canvas.draw_text(x, y, text);
 	}
 
 	void draw_sample(int x, float sample) {
@@ -104,7 +136,7 @@ namespace CurvePatternPage {
 			}
 
 			int last_x = -1;
-			
+
 			for (int i = 0; i < step_duration; ++i) {
 				curveTrackEngine.tick_step(false);
 
@@ -114,6 +146,11 @@ namespace CurvePatternPage {
 					draw_sample(x, curveTrackEngine.curr_value() * (1.f / 65535.f));
 				}
 			}
+		}
+
+		if (step_value_frames) {
+			--step_value_frames;
+			draw_step_value(last_touched_step);
 		}
 	}
 
