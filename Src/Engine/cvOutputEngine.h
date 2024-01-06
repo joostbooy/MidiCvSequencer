@@ -102,6 +102,7 @@ public:
 			gateIO.set_output(i, gate_state);
 
 			// Update cv
+			uint16_t value;
 			source = cvOut.cv_source();
 
 			switch (cvOut.cv_mode())
@@ -114,10 +115,16 @@ public:
 				break;
 			case CvOutput::NOTE:
 				if (cvOut.slide_mode() == CvOutput::ON || (cvOut.slide_mode() == CvOutput::LEGATO && legato_flag[source] == true)) {
-					dac.set(i, next_slide_value(source, cvOut.slide_speed()));
+					value = next_slide_value(source, cvOut.slide_speed());
 				} else {
-					dac.set(i, note_value[source]);
+					value = note_value[source];
 				}
+
+				if (cvOut.bend_enabled()) {
+					value = apply_bend(value, cvOut.bend_source());
+				}
+
+				dac.set(i, value);
 				break;
 			default:
 				break;
@@ -218,14 +225,13 @@ private:
 		return value;
 	}
 
-	// unimplemented for now, might be to taxing
-	inline uint16_t apply_bend(uint8_t source, uint16_t pitch) {
+	inline uint16_t apply_bend(uint16_t pitch, uint8_t bend_source) {
 		const uint16_t whole_note = settings.calibration.note_to_value(2) - settings.calibration.note_to_value(0);
 
 		uint16_t low = stmlib::clip_min(0, pitch - whole_note);
 		uint16_t high = stmlib::clip_max(65535, pitch + whole_note);
 
-		return Dsp::cross_fade(low, pitch, high, bend_value[source]);
+		return Dsp::cross_fade(low, pitch, high, bend_value[bend_source]);
 	}
 };
 

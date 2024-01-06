@@ -14,6 +14,7 @@ public:
 		CV_MODE,
 		SLIDE_MODE,
 		SLIDE_SPEED,
+		BEND_SOURCE,
 		GATE_SOURCE,
 		GATE_MODE,
 		GATE_INVERT,
@@ -38,6 +39,7 @@ public:
 		case CV_MODE:			return "CV MODE";
 		case SLIDE_MODE:		return "SLIDE MODE";
 		case SLIDE_SPEED:		return "SLIDE SPEED";
+		case BEND_SOURCE:		return "BEND SOURCE";
 		case GATE_SOURCE:		return "GATE SOURCE";
 		case GATE_MODE:			return "GATE MODE";
 		case GATE_INVERT:		return "GATE INVERT";
@@ -57,6 +59,7 @@ public:
 		case CV_MODE:			return cvOutput.cv_mode_text();
 		case SLIDE_MODE:		return cvOutput.slide_mode_text();
 		case SLIDE_SPEED:		return cvOutput.slide_speed_text();
+		case BEND_SOURCE:		return cvOutput.bend_source_text();
 		case GATE_SOURCE:		return cvOutput.gate_source_text();
 		case GATE_MODE:			return cvOutput.gate_mode_text();
 		case GATE_INVERT:		return cvOutput.gate_invert_text();
@@ -85,6 +88,9 @@ public:
 			break;
 		case SLIDE_SPEED:
 			cvOutput.set_slide_speed(cvOutput.slide_speed() + (shifted ? inc * 3 : inc));
+			break;
+		case BEND_SOURCE:
+			cvOutput.set_bend_source(cvOutput.bend_source() + inc);
 			break;
 		case GATE_SOURCE:
 			cvOutput.set_gate_source(cvOutput.gate_source() + inc);
