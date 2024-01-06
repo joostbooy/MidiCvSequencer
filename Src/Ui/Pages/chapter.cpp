@@ -3,33 +3,32 @@
 #define CHAPTER_SIZE(chapter_pages) (sizeof(chapter_pages) / sizeof(ChapterPage))
 
 ChapterPage song_pages[] = {
-	{ .name = "SETTINGS", 		.id = Pages::SONG_PAGE,			.icon = Bitmap::SONG_PAGE },
-	{ .name = "MONITOR", 		.id = Pages::SONG_MONITOR_PAGE,	.icon = Bitmap::SONG_MONITOR_PAGE },
+	{ .name = "SETTINGS", 	.id = Pages::SONG_PAGE,			.icon = Bitmap::SONG_PAGE },
+	{ .name = "MONITOR", 	.id = Pages::SONG_MONITOR_PAGE,	.icon = Bitmap::SONG_MONITOR_PAGE },
 };
 
 ChapterPage track_pages[] = {
-	{ .name = "SETTINGS", 		.id = Pages::TRACK_PAGE,			.icon = Bitmap::TRACK_PAGE },
+	{ .name = "SETTINGS", 	.id = Pages::TRACK_PAGE,		.icon = Bitmap::SETTINGS_PAGE },
 };
 
 ChapterPage pattern_pages[] = {
-	{ .name = "PATTERN", 		.id = Pages::PATTERN_PAGE,			.icon = Bitmap::PATTERN_PAGE },
-	//{ .name = "RANDOM", 		.id = Pages::PATTERN_RANDOM_PAGE,	.icon = Bitmap::RANDOM_PAGE },
+	{ .name = "PATTERN", 	.id = Pages::PATTERN_PAGE,		.icon = Bitmap::PATTERN_PAGE },
 };
 
 ChapterPage midi_pages[] = {
-	{ .name = "INPUT", 			.id = Pages::MIDI_INPUT_PAGE,	.icon = Bitmap::MIDI_PAGE },
-	{ .name = "OUTPUT", 		.id = Pages::MIDI_OUTPUT_PAGE,	.icon = Bitmap::MIDI_PAGE },
+	{ .name = "INPUT", 		.id = Pages::MIDI_INPUT_PAGE,	.icon = Bitmap::MIDI_IN_PAGE },
+	{ .name = "OUTPUT", 	.id = Pages::MIDI_OUTPUT_PAGE,	.icon = Bitmap::MIDI_OUT_PAGE },
 };
 
 ChapterPage cv_pages[] = {
-	{ .name = "INPUT", 			.id = Pages::CV_INPUT_PAGE,		.icon = Bitmap::CV_PAGE },
-	{ .name = "OUTPUT", 		.id = Pages::CV_OUTPUT_PAGE,	.icon = Bitmap::CV_PAGE },
+	{ .name = "INPUT", 		.id = Pages::CV_INPUT_PAGE,		.icon = Bitmap::CV_IN_PAGE },
+	{ .name = "OUTPUT", 	.id = Pages::CV_OUTPUT_PAGE,	.icon = Bitmap::CV_OUT_PAGE },
 };
 
 ChapterPage system_pages[] = {
-	{ .name = "SAVE", 			.id = Pages::SAVE_PAGE,			.icon = Bitmap::PROJECT_SAVE_PAGE },
-	{ .name = "LOAD", 			.id = Pages::LOAD_PAGE,			.icon = Bitmap::PROJECT_LOAD_PAGE },
-	{ .name = "SETTINGS", 		.id = Pages::SYSTEM_PAGE,		.icon = Bitmap::SYSTEM_PAGE },
+	{ .name = "SAVE", 		.id = Pages::SAVE_PAGE,			.icon = Bitmap::PROJECT_SAVE_PAGE },
+	{ .name = "LOAD", 		.id = Pages::LOAD_PAGE,			.icon = Bitmap::PROJECT_LOAD_PAGE },
+	{ .name = "SETTINGS",	.id = Pages::SYSTEM_PAGE,		.icon = Bitmap::SETTINGS_PAGE },
 };
 
 ChapterEntry<CHAPTER_SIZE(song_pages), song_pages> song_chapter;
