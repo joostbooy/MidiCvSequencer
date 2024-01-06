@@ -48,12 +48,11 @@ public:
 		}
 	}
 
-	static void draw_step_value(int step, int value, const char *text) {
-		if (value != last_step_value) {
-			last_step_value = value;
-			step_value_frames = 32;
-		}
+	static void reset_step_value() {
+		scroll_bar_frames = 32;
+	}
 
+	static void draw_step_value(int step, const char *text) {
 		if (step_value_frames > 0) {
 			--step_value_frames;
 

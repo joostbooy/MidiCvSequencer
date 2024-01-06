@@ -86,6 +86,7 @@ namespace ChordPatternPage {
 	void on_step_control(int step) {
 		if (read_step(step, ChordTrack::TRIGGER)) {
 			build_step_chord(step);
+			PianoRollPainter::reset_step_value();
 		}
 	}
 
@@ -105,9 +106,16 @@ namespace ChordPatternPage {
 	}
 
 	void onButton(uint8_t id, uint8_t state) {
-		int step = controller.button_to_step(id);
-		if (step >= 0) {
-			on_step_control(step);
+		int step_button = controller.button_to_step(id);
+		if (step_button >= 0) {
+			on_step_control(step_button);
+			return;
+		}
+
+		int step_encoder = controller.encoder_push_to_step(id);
+		if (state >= 1 && step_encoder >= 0) {
+			on_step_control(step_encoder);
+			return;
 		}
 	}
 
@@ -151,7 +159,7 @@ namespace ChordPatternPage {
 		int item = settings.selected_step_item();
 		int value = track.read_step(pattern_index, last_touched_step, ChordTrack::StepItem(item));
 		const char *text = ChordTrack::step_value_text(ChordTrack::StepItem(item), value);
-		PianoRollPainter::draw_step_value(last_touched_step, value, text);
+		PianoRollPainter::draw_step_value(last_touched_step, text);
 	}
 
 	void drawDisplay() {

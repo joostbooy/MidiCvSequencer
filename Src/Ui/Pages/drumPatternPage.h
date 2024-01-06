@@ -60,6 +60,7 @@ namespace DrumPatternPage {
 
 	void on_step_control(int step) {
 		last_touched_step = step;
+		DrumPainter::reset_step_value();
 	}
 
 	void onEncoder(uint8_t id, int inc) {
@@ -78,9 +79,16 @@ namespace DrumPatternPage {
 	}
 
 	void onButton(uint8_t id, uint8_t state) {
-		int step = controller.button_to_step(id);
-		if (state >= 1 && step >= 0) {
-			on_step_control(step);
+		int step_button = controller.button_to_step(id);
+		if (state >= 1 && step_button >= 0) {
+			on_step_control(step_button);
+			return;
+		}
+
+		int step_encoder = controller.encoder_push_to_step(id);
+		if (state >= 1 && step_encoder >= 0) {
+			on_step_control(step_encoder);
+			return;
 		}
 	}
 
@@ -113,7 +121,7 @@ namespace DrumPatternPage {
 		int value = track.read_step(pattern_index, last_touched_step, DrumTrack::StepItem(item));
 
 		const char *text = DrumTrack::step_value_text(DrumTrack::StepItem(item), value);
-		DrumPainter::draw_step_value(last_touched_step, value, text);
+		DrumPainter::draw_step_value(last_touched_step, text);
 	}
 
 	void draw_drum_track(int trk_index, int pat_index, int step_duration) {

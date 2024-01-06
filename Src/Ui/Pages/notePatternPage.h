@@ -75,6 +75,7 @@ namespace NotePatternPage {
 		if (read_step(step, NoteTrack::TRIGGER)) {
 			int note = read_step(step, NoteTrack::NOTE);
 			PianoRollPainter::set_last_touched_note(note);
+			PianoRollPainter::reset_step_value();
 			last_touched_step = step;
 		}
 	}
@@ -95,9 +96,16 @@ namespace NotePatternPage {
 	}
 
 	void onButton(uint8_t id, uint8_t state) {
-		int step = controller.button_to_step(id);
-		if (step >= 0) {
-			on_step_control(step);
+		int step_button = controller.button_to_step(id);
+		if (step_button >= 0) {
+			on_step_control(step_button);
+			return;
+		}
+
+		int step_encoder = controller.encoder_push_to_step(id);
+		if (state >= 1 && step_encoder >= 0) {
+			on_step_control(step_encoder);
+			return;
 		}
 	}
 
@@ -120,7 +128,7 @@ namespace NotePatternPage {
 		int value = read_step(pattern_index, last_touched_step, item);
 		const char *text = NoteTrack::step_value_text(NoteTrack::StepItem(item), value);
 
-		PianoRollPainter::draw_step_value(last_touched_step, value, text);
+		PianoRollPainter::draw_step_value(last_touched_step, text);
 	}
 
 	void drawDisplay() {
