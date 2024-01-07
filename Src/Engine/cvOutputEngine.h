@@ -32,7 +32,7 @@ public:
 			legato_flag[i] = 0;
 			note_count[i] = 0;
 			slide_phase[i] = 0.f;
-			bend_value[i] = 0.f;
+			bend_value[i] = 0.5f;
 			last_note_value[i] = note_value[i];
 		}
 
