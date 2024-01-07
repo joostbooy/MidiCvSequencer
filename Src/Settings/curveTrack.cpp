@@ -30,7 +30,7 @@ SerialItem CurveTrack::step_item_[NUM_STEP_ITEMS] = {
 		.min_ = 0,
 		.max_ = 127,
 		.inc_shifted_ = 10,
-		.init_value_ = 63,
+		.init_value_ = 64,
 		.mask_ = step_mask_[CC_VALUE]
 	},
 	[SHAPE] = {
