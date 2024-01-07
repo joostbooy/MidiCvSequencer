@@ -195,6 +195,8 @@ namespace DiskNavigatorPage {
 	}
 
 	void drawLeds() {
+		LedPainter::set_y(Matrix::GREEN);
+		LedPainter::set_menu(Matrix::GREEN);
 		LedPainter::footer_buttons(NUM_OPTIONS);
 	}
 
@@ -222,7 +224,7 @@ namespace DiskNavigatorPage {
 				WindowPainter::text(window.cell(0, i), e->name.read(), Canvas::LEFT, Canvas::CENTER);
 				WindowPainter::text(window.cell(1, i), UiText::kb_to_mem_size_text(e->size / 1000), Canvas::LEFT, Canvas::CENTER);
 			}
-			
+
 			if (i == cursor && disk.entry.list_size() > 0) {
 				WindowPainter::highlight(window.cell(0, cursor));
 			}
