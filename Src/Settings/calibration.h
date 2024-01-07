@@ -68,13 +68,13 @@ private:
 	uint16_t note_table_[kMaxNotes];
 
 	uint16_t volt_to_value(float volts) {
-		float x = (1.f / kMaxOctaves) * (volts + 5.f);
+		float x = (1.f / kMaxOctaves) * volts;
 		return Dsp::cross_fade(max_, min_, x);
 	}
 
 	void fill_note_table() {
 		for (int note = 0; note < kMaxNotes; ++note) {
-			float volt = (note - 60) * (1.f / 12.f)
+			float volt = note * (1.f / 12.f);
 			note_table_[note] = volt_to_value(volt);
 		}
 	}
