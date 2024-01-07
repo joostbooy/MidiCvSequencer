@@ -40,7 +40,7 @@ public:
 	}
 
 	uint16_t note_to_value(int note) {
-		return note_table_[smtlib::clip(0, kMaxNotes - 1, note)];
+		return note_table_[stmlib::clip(0, kMaxNotes - 1, note)];
 	}
 
 	uint16_t semi_note_value() {
