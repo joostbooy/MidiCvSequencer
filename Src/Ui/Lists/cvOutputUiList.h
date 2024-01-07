@@ -15,6 +15,7 @@ public:
 		SLIDE_MODE,
 		SLIDE_SPEED,
 		BEND_SOURCE,
+		BEND_SEMITONES,
 		GATE_SOURCE,
 		GATE_MODE,
 		GATE_INVERT,
@@ -40,6 +41,7 @@ public:
 		case SLIDE_MODE:		return "SLIDE MODE";
 		case SLIDE_SPEED:		return "SLIDE SPEED";
 		case BEND_SOURCE:		return "BEND SOURCE";
+		case BEND_SEMITONES:	return "BEND SEMITONES";
 		case GATE_SOURCE:		return "GATE SOURCE";
 		case GATE_MODE:			return "GATE MODE";
 		case GATE_INVERT:		return "GATE INVERT";
@@ -60,6 +62,7 @@ public:
 		case SLIDE_MODE:		return cvOutput.slide_mode_text();
 		case SLIDE_SPEED:		return cvOutput.slide_speed_text();
 		case BEND_SOURCE:		return cvOutput.bend_source_text();
+		case BEND_SEMITONES:	return cvOutput.bend_semitones_text();
 		case GATE_SOURCE:		return cvOutput.gate_source_text();
 		case GATE_MODE:			return cvOutput.gate_mode_text();
 		case GATE_INVERT:		return cvOutput.gate_invert_text();
@@ -91,6 +94,9 @@ public:
 			break;
 		case BEND_SOURCE:
 			cvOutput.set_bend_source(cvOutput.bend_source() + inc);
+			break;
+		case BEND_SEMITONES:
+			cvOutput.set_bend_semitones(cvOutput.bend_semitones() + inc);
 			break;
 		case GATE_SOURCE:
 			cvOutput.set_gate_source(cvOutput.gate_source() + inc);

@@ -107,6 +107,7 @@ public:
 		set_slide_mode(OFF);
 		set_clock_speed(ClockEngine::WHOLE_16TH);
 		set_slide_speed(ClockEngine::WHOLE_16TH);
+		set_bend_semitones(2);
 		set_bend_source(-1);
 	}
 
@@ -251,6 +252,24 @@ public:
 		return bend_source() >= 0;
 	}
 
+	// bend semitones
+	uint8_t bend_semitones() {
+		return bend_semitones_;
+	}
+
+	void set_bend_semitones(int value) {
+		if (cv_mode() == NOTE && bend_enabled() == true) {
+			slide_mode_ = stmlib::clip(1, 4, value);
+		}
+	}
+
+	const char* bend_semitones_text() {
+		if (cv_mode() == NOTE && bend_enabled() == true) {
+			return UiText::str.write(bend_semitones());
+		}
+		return "-";
+	}
+
 
 	/***************
 	*	Methods
@@ -267,6 +286,7 @@ public:
 		fileWriter.write(slide_mode_);
 		fileWriter.write(slide_speed_);
 		fileWriter.write(bend_source_);
+		fileWriter.write(bend_semitones_);
 	}
 
 	void load(FileReader &fileReader) {
@@ -279,6 +299,7 @@ public:
 		fileReader.read(slide_mode_);
 		fileReader.read(slide_speed_);
 		fileReader.read(bend_source_);
+		fileReader.read(bend_semitones_);
 	}
 
 private:
@@ -291,6 +312,8 @@ private:
 	uint8_t slide_mode_;
 	uint8_t slide_speed_;
 	int8_t bend_source_;
+	uint8_t bend_semitones_;
 };
 
 #endif
+f

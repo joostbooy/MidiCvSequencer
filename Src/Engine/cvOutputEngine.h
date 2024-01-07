@@ -121,7 +121,7 @@ public:
 				}
 
 				if (cvOut.bend_enabled()) {
-					value = apply_bend(value, cvOut.bend_source());
+					value = apply_bend(value, cvOut.bend_source(), cvOut.bend_semitones());
 				}
 
 				dac.set(i, value);
@@ -225,11 +225,11 @@ private:
 		return value;
 	}
 
-	inline uint16_t apply_bend(uint16_t pitch, uint8_t bend_source) {
-		const uint16_t whole_note = settings.calibration.note_to_value(2) - settings.calibration.note_to_value(0);
+	inline uint16_t apply_bend(uint16_t pitch, uint8_t bend_source, uint8_t num_semitones) {
+		uint16_t range = settings.calibration.semi_note_value() * num_semitones;
 
-		uint16_t low = stmlib::clip_min(0, pitch - whole_note);
-		uint16_t high = stmlib::clip_max(65535, pitch + whole_note);
+		uint16_t low = stmlib::clip_min(0, pitch - range);
+		uint16_t high = stmlib::clip_max(65535, pitch + range);
 
 		return Dsp::cross_fade(low, pitch, high, bend_value[bend_source]);
 	}
