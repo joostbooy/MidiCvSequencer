@@ -84,7 +84,7 @@ SerialItem CurveTrack::track_item_[NUM_TRACK_ITEMS] = {
 		.min_ = 0,
 		.max_ = 1,
 		.inc_shifted_ = 0,
-		.init_value_ = 0,
+		.init_value_ = 1,
 		.mask_ = track_mask_[SEND_BEND]
 	},
 };
