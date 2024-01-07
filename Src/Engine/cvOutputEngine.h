@@ -231,7 +231,7 @@ private:
 		uint16_t low = stmlib::clip_min(0, pitch - range);
 		uint16_t high = stmlib::clip_max(65535, pitch + range);
 
-		return Dsp::cross_fade(low, pitch, high, bend_value[bend_source]);
+		return Dsp::cross_fade(high, pitch, low, bend_value[bend_source]);
 	}
 };
 
