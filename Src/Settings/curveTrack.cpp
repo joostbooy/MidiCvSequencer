@@ -5,7 +5,7 @@
 SerialMask CurveTrack::step_mask_[NUM_STEP_ITEMS] = {
 	[TRIGGER]		= { .reg = 0, .bits = 1, .shifts = 0 },
 	[PROBABILITY]	= { .reg = 0, .bits = 3, .shifts = 1 },
-	[CC_VALUE]		= { .reg = 0, .bits = 7, .shifts = 4 },
+	[VALUE]		= { .reg = 0, .bits = 7, .shifts = 4 },
 	[SHAPE]			= { .reg = 0, .bits = 4, .shifts = 11 },
 	[SHIFT]			= { .reg = 0, .bits = 3, .shifts = 15 },
 };
@@ -26,12 +26,12 @@ SerialItem CurveTrack::step_item_[NUM_STEP_ITEMS] = {
 		.init_value_ = 7,
 		.mask_ = step_mask_[PROBABILITY]
 	},
-	[CC_VALUE] = {
+	[VALUE] = {
 		.min_ = 0,
 		.max_ = 127,
 		.inc_shifted_ = 10,
 		.init_value_ = 64,
-		.mask_ = step_mask_[CC_VALUE]
+		.mask_ = step_mask_[VALUE]
 	},
 	[SHAPE] = {
 		.min_ = 0,

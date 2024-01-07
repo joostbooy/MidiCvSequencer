@@ -87,7 +87,7 @@ public:
 		cc_number_ = curveTrack_->read(CurveTrack::CC_NUMBER);
 
 		last_value_ = curr_value_;
-		target_value_ = get_step_value(pattern, step, CurveTrack::CC_VALUE);
+		target_value_ = get_step_value(pattern, step, CurveTrack::VALUE);
 		target_value_ <<= 9;	// convert to 16 bit
 
 		shape_ = (1.f / 8.f) * get_step_value(pattern, step, CurveTrack::SHAPE);
