@@ -77,6 +77,7 @@ namespace MidiInputPage {
 	// Bottom to top
 	void drawDisplay() {
 		ListPage::drawDisplay();
+		LedPainter::set_step_encoder(midiInputUiList.selected_port(), Matrix::GREEN);
 		WindowPainter::draw_footer(footer_text, NUM_FOOTER_OPTIONS);
 	}
 

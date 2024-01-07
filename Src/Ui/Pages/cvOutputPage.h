@@ -67,6 +67,7 @@ namespace CvOutputPage {
 
 	void drawLeds() {
 		ListPage::drawLeds();
+		LedPainter::set_step_encoder(cvOutputUiList.selected_port(), Matrix::GREEN);
 		LedPainter::footer_buttons(NUM_FOOTER_OPTIONS);
 	}
 
