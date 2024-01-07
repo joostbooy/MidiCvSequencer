@@ -259,7 +259,7 @@ public:
 
 	void set_bend_semitones(int value) {
 		if (cv_mode() == NOTE && bend_enabled() == true) {
-			bend_semitones_ = stmlib::clip(1, 24, value);
+			bend_semitones_ = stmlib::clip(1, 12, value);
 		}
 	}
 
