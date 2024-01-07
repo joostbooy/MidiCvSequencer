@@ -5,7 +5,7 @@
 SerialMask CurveTrack::step_mask_[NUM_STEP_ITEMS] = {
 	[TRIGGER]		= { .reg = 0, .bits = 1, .shifts = 0 },
 	[PROBABILITY]	= { .reg = 0, .bits = 3, .shifts = 1 },
-	[VALUE]		= { .reg = 0, .bits = 7, .shifts = 4 },
+	[VALUE]			= { .reg = 0, .bits = 7, .shifts = 4 },
 	[SHAPE]			= { .reg = 0, .bits = 4, .shifts = 11 },
 	[SHIFT]			= { .reg = 0, .bits = 3, .shifts = 15 },
 };
