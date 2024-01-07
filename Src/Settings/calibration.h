@@ -12,6 +12,7 @@ public:
 	void init() {
 		min_ = 0;
 		max_ = 65535;
+		fill_note_table();
 	}
 
 	int min() {
@@ -33,25 +34,30 @@ public:
 	}
 
 	// methods
-	uint16_t cv_to_value(uint16_t value) {
-		float volt = cv_to_volt(value);
-		return volt_to_value(volt);
+	uint16_t cv_to_value(uint16_t cv) {
+		float x = (1.f / 65535.f) * cv;
+		return Dsp::cross_fade(max_, min_, x);
 	}
 
 	uint16_t note_to_value(int note) {
-		float volt = note_to_volt(note);
-		return volt_to_value(volt);
+		return note_table_[smtlib::clip(0, kMaxNotes - 1, note)];
+	}
+
+	uint16_t semi_note_value() {
+		return note_to_value(1) - note_to_value(0);
 	}
 
 	// storage
 	void save(FileWriter &fileWriter) {
 		fileWriter.write(min_);
 		fileWriter.write(max_);
+		fill_note_table();
 	}
 
 	void load(FileReader &fileReader) {
 		fileReader.read(min_);
 		fileReader.read(max_);
+		fill_note_table();
 	}
 
 private:
@@ -59,20 +65,18 @@ private:
 	static const int kMaxNotes = kMaxOctaves * 12;
 	uint16_t min_ = 0;
 	uint16_t max_ = 65535;
-
-	float note_to_volt(int note) {
-		note = stmlib::clip(0, kMaxNotes, note);
-		return (note - 60) * (1.f / 12.f);
-	}
-
-	float cv_to_volt(uint16_t value) {
-		float x = (1.f / 65535.f) * value;
-		return Dsp::cross_fade(-5.f, 5.f, x);
-	}
+	uint16_t note_table_[kMaxNotes];
 
 	uint16_t volt_to_value(float volts) {
 		float x = (1.f / kMaxOctaves) * (volts + 5.f);
 		return Dsp::cross_fade(max_, min_, x);
+	}
+
+	void fill_note_table() {
+		for (int note = 0; note < kMaxNotes; ++note) {
+			float volt = (note - 60) * (1.f / 12.f)
+			note_table_[note] = volt_to_value(volt);
+		}
 	}
 };
 
