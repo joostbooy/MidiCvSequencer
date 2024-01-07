@@ -231,13 +231,13 @@ public:
 	}
 
 	// bend source
-	uint8_t bend_source() {
+	int bend_source() {
 		return bend_source_;
 	}
 
 	void set_bend_source(int value) {
 		if (cv_mode() == NOTE) {
-			slide_mode_ = stmlib::clip(-1, MidiEvent::NUM_SOURCES - 1, value);
+			bend_source_ = stmlib::clip(-1, MidiEvent::NUM_SOURCES - 1, value);
 		}
 	}
 
@@ -259,7 +259,7 @@ public:
 
 	void set_bend_semitones(int value) {
 		if (cv_mode() == NOTE && bend_enabled() == true) {
-			slide_mode_ = stmlib::clip(1, 4, value);
+			bend_semitones_ = stmlib::clip(1, 24, value);
 		}
 	}
 
@@ -316,4 +316,3 @@ private:
 };
 
 #endif
-f
