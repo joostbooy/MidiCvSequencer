@@ -106,6 +106,10 @@ namespace ListPage {
 		if (callback_) {
 			LedPainter::set_clear(Matrix::GREEN);
 		}
+
+		LedPainter::set_y(Matrix::GREEN);
+		LedPainter::set_edit(Matrix::GREEN);
+		LedPainter::set_menu(Matrix::GREEN);
 	}
 
 	void msTick(uint16_t ticks) {
