@@ -86,7 +86,7 @@ namespace CheckListPage {
 	}
 
 	void onEncoder(uint8_t id, int inc) {
-		if (controller.encoder_to_function(id) >= 0) {
+		if (id == Controller::MENU_ENC) {
 			cursor = stmlib::clip(0, list_size - 1, cursor + inc);
 			window.scroll_to_row(cursor);
 		}
@@ -97,7 +97,7 @@ namespace CheckListPage {
 			return;
 		}
 
-		if (id == Controller::EDIT_BUTTON) {
+		if (id == Controller::MENU_ENC_PUSH || id == Controller::EDIT_BUTTON ) {
 			bool state = list_buffer[cursor];
 			list_buffer[cursor] = !state;
 			return;
@@ -131,8 +131,9 @@ namespace CheckListPage {
 	}
 
 	void drawLeds() {
-		LedPainter::footer_encoders(4);
-		LedPainter::footer_buttons(NUM_FOOTER_OPTIONS);
+		LedPainter::set_edit(Matrix::GREEN);
+		LedPainter::set_menu(Matrix::GREEN);
+		LedPainter::footer_buttons(Matrix::GREEN, Matrix::GREEN, Matrix::GREEN, Matrix::RED);
 	}
 
 	void msTick(uint16_t ticks) {
