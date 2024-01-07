@@ -44,7 +44,7 @@ public:
 	}
 
 	uint16_t semi_note_value() {
-		return note_to_value(1) - note_to_value(0);
+		return note_to_value(0) - note_to_value(1);
 	}
 
 	// storage
