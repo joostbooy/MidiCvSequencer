@@ -141,7 +141,6 @@ namespace TopPage {
 			LedPainter::set_save(Matrix::GREEN);
 		}
 
-		LedPainter::set_edit(controller.is_pressed(Controller::EDIT_BUTTON) ? Matrix::RED : Matrix::BLACK);
 		LedPainter::set_shift(controller.is_pressed(Controller::SHIFT_BUTTON) ? Matrix::RED : Matrix::BLACK);
 		LedPainter::paint_chapters(chapter);
 	}
