@@ -12,7 +12,6 @@ public:
 	void init() {
 		min_ = 0;
 		max_ = 65535;
-		fill_note_table();
 	}
 
 	int min() {
@@ -40,7 +39,8 @@ public:
 	}
 
 	uint16_t note_to_value(int note) {
-		return note_table_[stmlib::clip(0, kMaxNotes - 1, note)];
+		float x = (1.f / kMaxNotes) * stmlib::clip(0, kMaxNotes - 1, note);
+		return Dsp::cross_fade(max_, min_, x);
 	}
 
 	uint16_t semi_note_value() {
@@ -51,33 +51,18 @@ public:
 	void save(FileWriter &fileWriter) {
 		fileWriter.write(min_);
 		fileWriter.write(max_);
-		fill_note_table();
 	}
 
 	void load(FileReader &fileReader) {
 		fileReader.read(min_);
 		fileReader.read(max_);
-		fill_note_table();
 	}
 
 private:
-	static const int kMaxVolts = 10;	// 5v p.p
+	static const int kMaxVolts = 10; //5V p.p
 	static const int kMaxNotes = kMaxVolts * 12;
 	uint16_t min_ = 0;
 	uint16_t max_ = 65535;
-	uint16_t note_table_[kMaxNotes];
-
-	uint16_t volt_to_value(float volts) {
-		float x = (1.f / kMaxVolts) * volts;
-		return Dsp::cross_fade(max_, min_, x);
-	}
-
-	void fill_note_table() {
-		for (int note = 0; note < kMaxNotes; ++note) {
-			float volt = note * (1.f / 12.f);
-			note_table_[note] = volt_to_value(volt);
-		}
-	}
 };
 
 #endif
