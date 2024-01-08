@@ -225,19 +225,10 @@ private:
 		return value;
 	}
 
-	// inline uint16_t apply_bend(uint16_t pitch, uint8_t bend_source, uint8_t num_semitones) {
-	//	uint16_t range = settings.calibration.semi_note_value() * num_semitones;
-
-	//		uint16_t low = stmlib::clip_min(0, pitch - range);
-	//		uint16_t high = stmlib::clip_max(65535, pitch + range);
-
-	//		return Dsp::cross_fade(high, pitch, low, bend_value[bend_source]);
-	//	}
-
-	inline uint16_t apply_bend(int pitch, uint8_t bend_source, uint8_t num_semitones) {
+	inline uint16_t apply_bend(int pitch, int bend_source, int num_semitones) {
 		int range = settings.calibration.semi_note_value() * num_semitones;
 		int value = Dsp::cross_fade((pitch + range), (pitch - range), bend_value[bend_source]);
-		return stmlib::clip(0, 65535, value);
+		return stmlib::clip(settings.calibration.min(), settings.calibration.max(), value);
 	}
 };
 
