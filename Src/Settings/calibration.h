@@ -33,14 +33,18 @@ public:
 	}
 
 	// methods
-	uint16_t cv_to_value(uint16_t value) {
-		float volt = cv_to_volt(value);
-		return volt_to_value(volt);
+	uint16_t read(uint16_t value) {
+		float x = (1.f / 65535.f) * value;
+		return Dsp::cross_fade(max_, min_, x);
 	}
 
 	uint16_t note_to_value(int note) {
-		float volt = note_to_volt(note);
-		return volt_to_value(volt);
+		float x = (1.f / kMaxNotes) * stmlib::clip(0, kMaxNotes - 1, note);
+		return Dsp::cross_fade(max_, min_, x);
+	}
+
+	uint16_t semi_note_value() {
+		return note_to_value(0) - note_to_value(1);
 	}
 
 	// storage
@@ -55,25 +59,10 @@ public:
 	}
 
 private:
-	static const int kMaxOctaves = 10;
-	static const int kMaxNotes = kMaxOctaves * 12;
+	static const int kMaxVolts = 10; //5V p.p
+	static const int kMaxNotes = kMaxVolts * 12;
 	uint16_t min_ = 0;
 	uint16_t max_ = 65535;
-
-	float note_to_volt(int note) {
-		note = stmlib::clip(0, kMaxNotes, note);
-		return (note - 60) * (1.f / 12.f);
-	}
-
-	float cv_to_volt(uint16_t value) {
-		float x = (1.f / 65535.f) * value;
-		return Dsp::cross_fade(-5.f, 5.f, x);
-	}
-
-	uint16_t volt_to_value(float volts) {
-		float x = (1.f / kMaxOctaves) * (volts + 5.f);
-		return Dsp::cross_fade(max_, min_, x);
-	}
 };
 
 #endif

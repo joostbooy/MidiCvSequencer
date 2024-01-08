@@ -32,7 +32,7 @@ public:
 			legato_flag[i] = 0;
 			note_count[i] = 0;
 			slide_phase[i] = 0.f;
-			bend_value[i] = 0.f;
+			bend_value[i] = 0.5f;
 			last_note_value[i] = note_value[i];
 		}
 
@@ -102,6 +102,7 @@ public:
 			gateIO.set_output(i, gate_state);
 
 			// Update cv
+			uint16_t value;
 			source = cvOut.cv_source();
 
 			switch (cvOut.cv_mode())
@@ -114,10 +115,16 @@ public:
 				break;
 			case CvOutput::NOTE:
 				if (cvOut.slide_mode() == CvOutput::ON || (cvOut.slide_mode() == CvOutput::LEGATO && legato_flag[source] == true)) {
-					dac.set(i, next_slide_value(source, cvOut.slide_speed()));
+					value = next_slide_value(source, cvOut.slide_speed());
 				} else {
-					dac.set(i, note_value[source]);
+					value = note_value[source];
 				}
+
+				if (cvOut.bend_enabled()) {
+					value = apply_bend(value, cvOut.bend_source(), cvOut.bend_semitones());
+				}
+
+				dac.set(i, value);
 				break;
 			default:
 				break;
@@ -150,9 +157,9 @@ public:
 
 	void write_cc(MidiEvent::Event &event, int value_16_bit = -1) {
 		if (value_16_bit >= 0) {
-			cc_value[event.source] = settings.calibration.cv_to_value(value_16_bit);
+			cc_value[event.source] = settings.calibration.read(value_16_bit);
 		} else {
-			cc_value[event.source] = settings.calibration.cv_to_value(event.data[1] << 9);
+			cc_value[event.source] = settings.calibration.read(event.data[1] << 9);
 		}
 	}
 
@@ -186,7 +193,7 @@ public:
 		// set note & vel
 		last_note_value[source] = note_value[source];
 		note_value[source] = settings.calibration.note_to_value(event.data[0]);
-		vel_value[source] = settings.calibration.cv_to_value(event.data[1]);
+		vel_value[source] = settings.calibration.read(event.data[1] << 9);
 	}
 
 private:
@@ -216,6 +223,12 @@ private:
 		}
 
 		return value;
+	}
+
+	inline uint16_t apply_bend(int pitch, int bend_source, int num_semitones) {
+		int range = settings.calibration.semi_note_value() * num_semitones;
+		int value = Dsp::cross_fade((pitch + range), (pitch - range), bend_value[bend_source]);
+		return stmlib::clip(settings.calibration.min(), settings.calibration.max(), value);
 	}
 };
 
