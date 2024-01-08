@@ -34,8 +34,8 @@ public:
 	}
 
 	// methods
-	uint16_t cv_to_value(uint16_t cv) {
-		float x = (1.f / 65535.f) * cv;
+	uint16_t read(uint16_t value) {
+		float x = (1.f / 65535.f) * value;
 		return Dsp::cross_fade(max_, min_, x);
 	}
 
@@ -61,14 +61,14 @@ public:
 	}
 
 private:
-	static const int kMaxOctaves = 10;
-	static const int kMaxNotes = kMaxOctaves * 12;
+	static const int kMaxVolts = 10;	// 5v p.p
+	static const int kMaxNotes = kMaxVolts * 12;
 	uint16_t min_ = 0;
 	uint16_t max_ = 65535;
 	uint16_t note_table_[kMaxNotes];
 
 	uint16_t volt_to_value(float volts) {
-		float x = (1.f / kMaxOctaves) * volts;
+		float x = (1.f / kMaxVolts) * volts;
 		return Dsp::cross_fade(max_, min_, x);
 	}
 
