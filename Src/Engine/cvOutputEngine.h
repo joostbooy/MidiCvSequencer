@@ -157,9 +157,9 @@ public:
 
 	void write_cc(MidiEvent::Event &event, int value_16_bit = -1) {
 		if (value_16_bit >= 0) {
-			cc_value[event.source] = settings.calibration.cv_to_value(value_16_bit);
+			cc_value[event.source] = settings.calibration.read(value_16_bit);
 		} else {
-			cc_value[event.source] = settings.calibration.cv_to_value(event.data[1] << 9);
+			cc_value[event.source] = settings.calibration.read(event.data[1] << 9);
 		}
 	}
 
@@ -193,7 +193,7 @@ public:
 		// set note & vel
 		last_note_value[source] = note_value[source];
 		note_value[source] = settings.calibration.note_to_value(event.data[0]);
-		vel_value[source] = settings.calibration.cv_to_value(event.data[1]);
+		vel_value[source] = settings.calibration.read(event.data[1] << 9);
 	}
 
 private:
@@ -225,13 +225,19 @@ private:
 		return value;
 	}
 
-	inline uint16_t apply_bend(uint16_t pitch, uint8_t bend_source, uint8_t num_semitones) {
-		uint16_t range = settings.calibration.semi_note_value() * num_semitones;
+	// inline uint16_t apply_bend(uint16_t pitch, uint8_t bend_source, uint8_t num_semitones) {
+	//	uint16_t range = settings.calibration.semi_note_value() * num_semitones;
 
-		uint16_t low = stmlib::clip_min(0, pitch - range);
-		uint16_t high = stmlib::clip_max(65535, pitch + range);
+	//		uint16_t low = stmlib::clip_min(0, pitch - range);
+	//		uint16_t high = stmlib::clip_max(65535, pitch + range);
 
-		return Dsp::cross_fade(high, pitch, low, bend_value[bend_source]);
+	//		return Dsp::cross_fade(high, pitch, low, bend_value[bend_source]);
+	//	}
+
+	inline uint16_t apply_bend(int pitch, uint8_t bend_source, uint8_t num_semitones) {
+		int range = settings.calibration.semi_note_value() * num_semitones;
+		int value = Dsp::cross_fade((pitch + range), (pitch - range), bend_value[bend_source]);
+		return stmlib::clip(0, 65535, value);
 	}
 };
 
