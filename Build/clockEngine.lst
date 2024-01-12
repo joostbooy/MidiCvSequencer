@@ -1,0 +1,127 @@
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTLFypT.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"clockEngine.cpp"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	_ZN11ClockEngine25step_duration_reciprocal_E
+  18              		.global	_ZN11ClockEngine14step_duration_E
+  19              		.section	.rodata._ZN11ClockEngine14step_duration_E,"a"
+  20              		.align	2
+  23              	_ZN11ClockEngine14step_duration_E:
+  24 0000 80040000 		.word	1152
+  25 0004 00030000 		.word	768
+  26 0008 00020000 		.word	512
+  27 000c 40020000 		.word	576
+  28 0010 80010000 		.word	384
+  29 0014 00010000 		.word	256
+  30 0018 20010000 		.word	288
+  31 001c C0000000 		.word	192
+  32 0020 80000000 		.word	128
+  33 0024 90000000 		.word	144
+  34 0028 60000000 		.word	96
+  35 002c 40000000 		.word	64
+  36 0030 48000000 		.word	72
+  37 0034 30000000 		.word	48
+  38 0038 20000000 		.word	32
+  39 003c 24000000 		.word	36
+  40 0040 18000000 		.word	24
+  41 0044 10000000 		.word	16
+  42              		.section	.rodata._ZN11ClockEngine25step_duration_reciprocal_E,"a"
+  43              		.align	2
+  46              	_ZN11ClockEngine25step_duration_reciprocal_E:
+  47 0000 398E633A 		.word	979603001
+  48 0004 ABAAAA3A 		.word	984263339
+  49 0008 0000003B 		.word	989855744
+  50 000c 398EE33A 		.word	987991609
+  51 0010 ABAA2A3B 		.word	992651947
+  52 0014 0000803B 		.word	998244352
+  53 0018 398E633B 		.word	996380217
+  54 001c ABAAAA3B 		.word	1001040555
+  55 0020 0000003C 		.word	1006632960
+  56 0024 398EE33B 		.word	1004768825
+  57 0028 ABAA2A3C 		.word	1009429163
+  58 002c 0000803C 		.word	1015021568
+  59 0030 398E633C 		.word	1013157433
+  60 0034 ABAAAA3C 		.word	1017817771
+  61 0038 0000003D 		.word	1023410176
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTLFypT.s 			page 2
+
+
+  62 003c 398EE33C 		.word	1021546041
+  63 0040 ABAA2A3D 		.word	1026206379
+  64 0044 0000803D 		.word	1031798784
+  65              		.text
+  66              	.Letext0:
+  67              		.file 1 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+  68              		.file 2 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+  69              		.file 3 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+  70              		.file 4 "lookupTables/lookupTables.h"
+  71              		.file 5 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Include/core_
+  72              		.file 6 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Device/ST/STM
+  73              		.file 7 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/li
+  74              		.file 8 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Drive
+  75              		.file 9 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+  76              		.file 10 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  77              		.file 11 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  78              		.file 12 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  79              		.file 13 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  80              		.file 14 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  81              		.file 15 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  82              		.file 16 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  83              		.file 17 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  84              		.file 18 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  85              		.file 19 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  86              		.file 20 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  87              		.file 21 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  88              		.file 22 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  89              		.file 23 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  90              		.file 24 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  91              		.file 25 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  92              		.file 26 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  93              		.file 27 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  94              		.file 28 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  95              		.file 29 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  96              		.file 30 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  97              		.file 31 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  98              		.file 32 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+  99              		.file 33 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/l
+ 100              		.file 34 "<built-in>"
+ 101              		.file 35 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 102              		.file 36 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 103              		.file 37 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 104              		.file 38 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 105              		.file 39 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 106              		.file 40 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 107              		.file 41 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 108              		.file 42 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 109              		.file 43 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 110              		.file 44 "Drivers/uart.h"
+ 111              		.file 45 "Drivers/Usb/usb.h"
+ 112              		.file 46 "lookupTables/font.h"
+ 113              		.file 47 "Src/Engine/clockEngine.h"
+ 114              		.file 48 "Src/Engine/clockEngine.cpp"
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTLFypT.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 clockEngine.cpp
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTLFypT.s:46     .rodata._ZN11ClockEngine25step_duration_reciprocal_E:0000000000000000 _ZN11ClockEngine25step_duration_reciprocal_E
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTLFypT.s:23     .rodata._ZN11ClockEngine14step_duration_E:0000000000000000 _ZN11ClockEngine14step_duration_E
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTLFypT.s:20     .rodata._ZN11ClockEngine14step_duration_E:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTLFypT.s:43     .rodata._ZN11ClockEngine25step_duration_reciprocal_E:0000000000000000 $d
+
+NO UNDEFINED SYMBOLS

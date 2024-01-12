@@ -1,0 +1,411 @@
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"messagePainter.cpp"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.startup._GLOBAL__sub_I__ZN14MessagePainter1xE,"ax",%progbits
+  18              		.align	1
+  19              		.p2align 2,,3
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	_GLOBAL__sub_I__ZN14MessagePainter1xE:
+  27              	.LFB2503:
+  28              		.file 1 "Src/Ui/Painters/messagePainter.cpp"
+   1:Src/Ui/Painters/messagePainter.cpp **** #include "messagePainter.h"
+   2:Src/Ui/Painters/messagePainter.cpp **** 
+   3:Src/Ui/Painters/messagePainter.cpp **** uint16_t MessagePainter::x = 0;
+   4:Src/Ui/Painters/messagePainter.cpp **** uint16_t MessagePainter::y = 16;
+   5:Src/Ui/Painters/messagePainter.cpp **** uint16_t MessagePainter::w = 0;
+   6:Src/Ui/Painters/messagePainter.cpp **** uint16_t MessagePainter::h = 32;
+   7:Src/Ui/Painters/messagePainter.cpp **** 
+   8:Src/Ui/Painters/messagePainter.cpp **** 
+   9:Src/Ui/Painters/messagePainter.cpp **** bool MessagePainter::is_error;
+  10:Src/Ui/Painters/messagePainter.cpp **** bool MessagePainter::is_visible;
+  11:Src/Ui/Painters/messagePainter.cpp **** uint16_t MessagePainter::duration_ms = 0;
+  12:Src/Ui/Painters/messagePainter.cpp **** uint16_t MessagePainter::interval_;
+  13:Src/Ui/Painters/messagePainter.cpp **** StringBuilderBase<32> MessagePainter::str;
+  29              		.loc 1 13 42 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34              	.LVL0:
+  35              	.LBB28:
+  36              	.LBI28:
+  37              		.loc 1 13 42 view .LVU1
+  38              	.LBB29:
+  39              	.LBB30:
+  40              	.LBI30:
+  41              		.file 2 "/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h"
+   1:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** #ifndef StringBuilder_h
+   2:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** #define StringBuilder_h
+   3:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+   4:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** #include "stmf4lib.h"
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s 			page 2
+
+
+   5:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+   6:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** class StringBuilder {
+   7:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+   8:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** public:
+   9:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  10:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	StringBuilder(char* ptr, int kMax) {
+  11:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char_buff_ = ptr;
+  12:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		kMax_ = kMax;
+  13:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  14:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  15:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  16:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	void clear() {
+  17:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		pos = 0;
+  18:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char_buff_[0] = '\0';
+  19:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  20:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  21:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	uint8_t length() {
+  22:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return pos;
+  23:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  24:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  25:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* read()  {
+  26:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return char_buff_;
+  27:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  28:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  29:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	void truncate(uint8_t last) {
+  30:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		if (last < pos) {
+  31:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			pos = last;
+  32:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			char_buff_[pos] = '\0';
+  33:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		}
+  34:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  35:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  36:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	// Char
+  37:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* append(const char* txt) {
+  38:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		copy(&char_buff_[pos], txt);
+  39:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  40:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  41:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  42:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* prepend(const char* txt) {
+  43:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char copy_buff[kMax_];
+  44:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		for (int i = 0; i <= pos; ++i) {
+  45:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			copy_buff[i] = char_buff_[i];
+  46:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		}
+  47:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		write(txt, &copy_buff[0]);
+  48:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  49:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  50:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  51:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	// Int
+  52:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* append(int32_t value) {
+  53:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char int_buffer[kMax_];
+  54:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		itoa(value, int_buffer, 10);
+  55:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		copy(&char_buff_[pos], int_buffer);
+  56:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  57:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  58:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  59:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* prepend(int32_t value) {
+  60:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char copy_buff[kMax_];
+  61:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		for (int i = 0; i <= pos; ++i) {
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s 			page 3
+
+
+  62:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			copy_buff[i] = char_buff_[i];
+  63:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		}
+  64:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		write(value, &copy_buff[0]);
+  65:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  66:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  67:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  68:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	// Builders
+  69:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	template <typename type_a>
+  70:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* write(type_a a) {
+  71:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  72:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(a);
+  73:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  74:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  75:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  76:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	template <typename type_a, typename type_b>
+  77:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* write(type_a a, type_b b) {
+  78:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  79:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(a);
+  80:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(b);
+  81:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  82:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  83:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  84:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	template <typename type_a, typename type_b, typename type_c>
+  85:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* write(type_a a, type_b b, type_c c) {
+  86:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  87:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(a);
+  88:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(b);
+  89:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(c);
+  90:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  91:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  92:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  93:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	template <typename type_a, typename type_b, typename type_c, typename type_d>
+  94:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* write(type_a a, type_b b, type_c c, type_d d) {
+  95:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  96:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(a);
+  97:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(b);
+  98:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(c);
+  99:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(d);
+ 100:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+ 101:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+ 102:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 103:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	template <typename type_a, typename type_b, typename type_c, typename type_d, typename type_e>
+ 104:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* write(type_a a, type_b b, type_c c, type_d d, type_e e) {
+ 105:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+ 106:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(a);
+ 107:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(b);
+ 108:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(c);
+ 109:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(d);
+ 110:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(e);
+ 111:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+ 112:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+ 113:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 114:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	template <typename type_a, typename type_b, typename type_c, typename type_d, typename type_e, typ
+ 115:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* write(type_a a, type_b b, type_c c, type_d d, type_e e, type_f f) {
+ 116:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+ 117:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(a);
+ 118:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(b);
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s 			page 4
+
+
+ 119:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(c);
+ 120:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(d);
+ 121:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(e);
+ 122:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(f);
+ 123:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+ 124:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+ 125:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 126:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** private:
+ 127:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	uint8_t pos = 0;
+ 128:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	char* char_buff_;
+ 129:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	int kMax_;
+ 130:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 131:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	void copy(char* dest, const char* src) {
+ 132:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		if (pos >= kMax_) { return; }
+ 133:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 134:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		while (*src != '\0') {
+ 135:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			*dest++ = *src++;
+ 136:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			if (++pos >= kMax_){
+ 137:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 				break;
+ 138:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			}
+ 139:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		}
+ 140:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		*dest = '\0';
+ 141:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+ 142:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** };
+ 143:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 144:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 145:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** template <const uint8_t kMax>
+ 146:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** class StringBuilderBase : public StringBuilder {
+ 147:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 148:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** public:
+ 149:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	StringBuilderBase() : StringBuilder(char_buff, kMax) {};
+  42              		.loc 2 149 2 view .LVU2
+  43              	.LBB31:
+  44              	.LBB32:
+  45              	.LBI32:
+  10:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char_buff_ = ptr;
+  46              		.loc 2 10 2 view .LVU3
+  47              	.LBB33:
+  48              	.LBB34:
+  10:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char_buff_ = ptr;
+  49              		.loc 2 10 37 is_stmt 0 view .LVU4
+  50 0000 044B     		ldr	r3, .L3
+  51 0002 1A46     		mov	r2, r3
+  52 0004 0021     		movs	r1, #0
+  53 0006 02F80C1B 		strb	r1, [r2], #12
+  11:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		kMax_ = kMax;
+  54              		.loc 2 11 3 is_stmt 1 view .LVU5
+  12:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  55              		.loc 2 12 9 is_stmt 0 view .LVU6
+  56 000a 2020     		movs	r0, #32
+  11:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		kMax_ = kMax;
+  57              		.loc 2 11 14 view .LVU7
+  58 000c C3E90120 		strd	r2, r0, [r3, #4]
+  12:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  59              		.loc 2 12 3 is_stmt 1 view .LVU8
+  13:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  60              		.loc 2 13 3 view .LVU9
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s 			page 5
+
+
+  61              	.LBB35:
+  62              	.LBI35:
+  16:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		pos = 0;
+  63              		.loc 2 16 7 view .LVU10
+  64              	.LVL1:
+  65              	.LBB36:
+  17:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char_buff_[0] = '\0';
+  66              		.loc 2 17 3 view .LVU11
+  18:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  67              		.loc 2 18 3 view .LVU12
+  18:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  68              		.loc 2 18 17 is_stmt 0 view .LVU13
+  69 0010 1973     		strb	r1, [r3, #12]
+  70              	.LVL2:
+  18:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  71              		.loc 2 18 17 view .LVU14
+  72              	.LBE36:
+  73              	.LBE35:
+  74              	.LBE34:
+  75              	.LBE33:
+  76              	.LBE32:
+  77              	.LBE31:
+  78              	.LBE30:
+  79              	.LBE29:
+  80              	.LBE28:
+  81              		.loc 1 13 42 view .LVU15
+  82 0012 7047     		bx	lr
+  83              	.L4:
+  84              		.align	2
+  85              	.L3:
+  86 0014 00000000 		.word	.LANCHOR0
+  87              		.cfi_endproc
+  88              	.LFE2503:
+  90              		.section	.init_array,"aw",%init_array
+  91              		.align	2
+  92 0000 00000000 		.word	_GLOBAL__sub_I__ZN14MessagePainter1xE(target1)
+  93              		.global	_ZN14MessagePainter3strE
+  94              		.global	_ZN14MessagePainter9interval_E
+  95              		.global	_ZN14MessagePainter11duration_msE
+  96              		.global	_ZN14MessagePainter10is_visibleE
+  97              		.global	_ZN14MessagePainter8is_errorE
+  98              		.global	_ZN14MessagePainter1hE
+  99              		.global	_ZN14MessagePainter1wE
+ 100              		.global	_ZN14MessagePainter1yE
+ 101              		.global	_ZN14MessagePainter1xE
+ 102              		.section	.bss._ZN14MessagePainter10is_visibleE,"aw",%nobits
+ 105              	_ZN14MessagePainter10is_visibleE:
+ 106 0000 00       		.space	1
+ 107              		.section	.bss._ZN14MessagePainter11duration_msE,"aw",%nobits
+ 108              		.align	1
+ 111              	_ZN14MessagePainter11duration_msE:
+ 112 0000 0000     		.space	2
+ 113              		.section	.bss._ZN14MessagePainter1wE,"aw",%nobits
+ 114              		.align	1
+ 117              	_ZN14MessagePainter1wE:
+ 118 0000 0000     		.space	2
+ 119              		.section	.bss._ZN14MessagePainter1xE,"aw",%nobits
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s 			page 6
+
+
+ 120              		.align	1
+ 123              	_ZN14MessagePainter1xE:
+ 124 0000 0000     		.space	2
+ 125              		.section	.bss._ZN14MessagePainter3strE,"aw",%nobits
+ 126              		.align	2
+ 127              		.set	.LANCHOR0,. + 0
+ 130              	_ZN14MessagePainter3strE:
+ 131 0000 00000000 		.space	48
+ 131      00000000 
+ 131      00000000 
+ 131      00000000 
+ 131      00000000 
+ 132              		.section	.bss._ZN14MessagePainter8is_errorE,"aw",%nobits
+ 135              	_ZN14MessagePainter8is_errorE:
+ 136 0000 00       		.space	1
+ 137              		.section	.bss._ZN14MessagePainter9interval_E,"aw",%nobits
+ 138              		.align	1
+ 141              	_ZN14MessagePainter9interval_E:
+ 142 0000 0000     		.space	2
+ 143              		.section	.data._ZN14MessagePainter1hE,"aw"
+ 144              		.align	1
+ 147              	_ZN14MessagePainter1hE:
+ 148 0000 2000     		.short	32
+ 149              		.section	.data._ZN14MessagePainter1yE,"aw"
+ 150              		.align	1
+ 153              	_ZN14MessagePainter1yE:
+ 154 0000 1000     		.short	16
+ 155              		.text
+ 156              	.Letext0:
+ 157              		.file 3 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 158              		.file 4 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 159              		.file 5 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 160              		.file 6 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Include/core_
+ 161              		.file 7 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Device/ST/STM
+ 162              		.file 8 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/li
+ 163              		.file 9 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Drive
+ 164              		.file 10 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 165              		.file 11 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 166              		.file 12 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 167              		.file 13 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 168              		.file 14 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 169              		.file 15 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 170              		.file 16 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 171              		.file 17 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 172              		.file 18 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 173              		.file 19 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 174              		.file 20 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 175              		.file 21 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 176              		.file 22 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 177              		.file 23 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 178              		.file 24 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 179              		.file 25 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 180              		.file 26 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 181              		.file 27 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 182              		.file 28 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 183              		.file 29 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 184              		.file 30 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s 			page 7
+
+
+ 185              		.file 31 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 186              		.file 32 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 187              		.file 33 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 188              		.file 34 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/l
+ 189              		.file 35 "<built-in>"
+ 190              		.file 36 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 191              		.file 37 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 192              		.file 38 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 193              		.file 39 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 194              		.file 40 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 195              		.file 41 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 196              		.file 42 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 197              		.file 43 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 198              		.file 44 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 199              		.file 45 "lookupTables/font.h"
+ 200              		.file 46 "lookupTables/bitmap.h"
+ 201              		.file 47 "Src/Ui/canvas.h"
+ 202              		.file 48 "Src/Ui/frameBuffer.h"
+ 203              		.file 49 "Src/Ui/Painters/messagePainter.h"
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 messagePainter.cpp
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:18     .text.startup._GLOBAL__sub_I__ZN14MessagePainter1xE:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:26     .text.startup._GLOBAL__sub_I__ZN14MessagePainter1xE:0000000000000000 _GLOBAL__sub_I__ZN14MessagePainter1xE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:86     .text.startup._GLOBAL__sub_I__ZN14MessagePainter1xE:0000000000000014 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:91     .init_array:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:130    .bss._ZN14MessagePainter3strE:0000000000000000 _ZN14MessagePainter3strE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:141    .bss._ZN14MessagePainter9interval_E:0000000000000000 _ZN14MessagePainter9interval_E
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:111    .bss._ZN14MessagePainter11duration_msE:0000000000000000 _ZN14MessagePainter11duration_msE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:105    .bss._ZN14MessagePainter10is_visibleE:0000000000000000 _ZN14MessagePainter10is_visibleE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:135    .bss._ZN14MessagePainter8is_errorE:0000000000000000 _ZN14MessagePainter8is_errorE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:147    .data._ZN14MessagePainter1hE:0000000000000000 _ZN14MessagePainter1hE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:117    .bss._ZN14MessagePainter1wE:0000000000000000 _ZN14MessagePainter1wE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:153    .data._ZN14MessagePainter1yE:0000000000000000 _ZN14MessagePainter1yE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:123    .bss._ZN14MessagePainter1xE:0000000000000000 _ZN14MessagePainter1xE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:106    .bss._ZN14MessagePainter10is_visibleE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:108    .bss._ZN14MessagePainter11duration_msE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:114    .bss._ZN14MessagePainter1wE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:120    .bss._ZN14MessagePainter1xE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:126    .bss._ZN14MessagePainter3strE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:136    .bss._ZN14MessagePainter8is_errorE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:138    .bss._ZN14MessagePainter9interval_E:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:144    .data._ZN14MessagePainter1hE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccTr44ap.s:150    .data._ZN14MessagePainter1yE:0000000000000000 $d
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,2445 @@
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"chapter.cpp"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9num_pagesEv,"axG",%progbits,_ZN12Chap
+  18              		.align	1
+  19              		.p2align 2,,3
+  20              		.weak	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9num_pagesEv
+  21              		.arch armv7e-m
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  25              		.fpu fpv4-sp-d16
+  27              	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9num_pagesEv:
+  28              	.LVL0:
+  29              	.LFB2489:
+  30              		.file 1 "Src/Ui/Pages/chapter.h"
+   1:Src/Ui/Pages/chapter.h **** #ifndef Chapter_h
+   2:Src/Ui/Pages/chapter.h **** #define Chapter_h
+   3:Src/Ui/Pages/chapter.h **** 
+   4:Src/Ui/Pages/chapter.h **** #include "pages.h"
+   5:Src/Ui/Pages/chapter.h **** #include "bitmap.h"
+   6:Src/Ui/Pages/chapter.h **** 
+   7:Src/Ui/Pages/chapter.h **** 
+   8:Src/Ui/Pages/chapter.h **** // Page
+   9:Src/Ui/Pages/chapter.h **** class ChapterPage {
+  10:Src/Ui/Pages/chapter.h **** public:
+  11:Src/Ui/Pages/chapter.h **** 	const char* name;
+  12:Src/Ui/Pages/chapter.h **** 	Pages::Id id;
+  13:Src/Ui/Pages/chapter.h **** 	Bitmap::Id icon;
+  14:Src/Ui/Pages/chapter.h **** };
+  15:Src/Ui/Pages/chapter.h **** 
+  16:Src/Ui/Pages/chapter.h **** // Chapter entry
+  17:Src/Ui/Pages/chapter.h **** class ChapterEntryBase {
+  18:Src/Ui/Pages/chapter.h **** public:
+  19:Src/Ui/Pages/chapter.h **** 	virtual uint8_t num_pages();
+  20:Src/Ui/Pages/chapter.h **** 	virtual void open_page(int index);
+  21:Src/Ui/Pages/chapter.h **** 	virtual uint8_t curr_page();
+  22:Src/Ui/Pages/chapter.h **** 	virtual const char* page_name(int index);
+  23:Src/Ui/Pages/chapter.h **** 	virtual Bitmap::Id page_icon(int index);
+  24:Src/Ui/Pages/chapter.h **** };
+  25:Src/Ui/Pages/chapter.h **** 
+  26:Src/Ui/Pages/chapter.h **** template<const uint8_t size_, ChapterPage* page_>
+  27:Src/Ui/Pages/chapter.h **** class ChapterEntry : public ChapterEntryBase {
+  28:Src/Ui/Pages/chapter.h **** 
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 2
+
+
+  29:Src/Ui/Pages/chapter.h **** public:
+  30:Src/Ui/Pages/chapter.h **** 
+  31:Src/Ui/Pages/chapter.h **** 	uint8_t curr_page() override {
+  32:Src/Ui/Pages/chapter.h **** 		return curr_page_;
+  33:Src/Ui/Pages/chapter.h **** 	}
+  34:Src/Ui/Pages/chapter.h **** 
+  35:Src/Ui/Pages/chapter.h **** 	uint8_t num_pages() override {
+  31              		.loc 1 35 10 view -0
+  32              		.cfi_startproc
+  33              		@ args = 0, pretend = 0, frame = 0
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+  35              		@ link register save eliminated.
+  36:Src/Ui/Pages/chapter.h **** 		return size_;
+  37:Src/Ui/Pages/chapter.h **** 	}
+  36              		.loc 1 37 2 is_stmt 0 view .LVU1
+  37 0000 0320     		movs	r0, #3
+  38              	.LVL1:
+  39              		.loc 1 37 2 view .LVU2
+  40 0002 7047     		bx	lr
+  41              		.cfi_endproc
+  42              	.LFE2489:
+  44              		.section	.text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9curr_pageEv,"axG",%progbits,_ZN12Chap
+  45              		.align	1
+  46              		.p2align 2,,3
+  47              		.weak	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9curr_pageEv
+  48              		.syntax unified
+  49              		.thumb
+  50              		.thumb_func
+  51              		.fpu fpv4-sp-d16
+  53              	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9curr_pageEv:
+  54              	.LVL2:
+  55              	.LFB2491:
+  31:Src/Ui/Pages/chapter.h **** 		return curr_page_;
+  56              		.loc 1 31 10 is_stmt 1 view -0
+  57              		.cfi_startproc
+  58              		@ args = 0, pretend = 0, frame = 0
+  59              		@ frame_needed = 0, uses_anonymous_args = 0
+  60              		@ link register save eliminated.
+  33:Src/Ui/Pages/chapter.h **** 
+  61              		.loc 1 33 2 is_stmt 0 view .LVU4
+  62 0000 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+  63              	.LVL3:
+  33:Src/Ui/Pages/chapter.h **** 
+  64              		.loc 1 33 2 view .LVU5
+  65 0002 7047     		bx	lr
+  66              		.cfi_endproc
+  67              	.LFE2491:
+  69              		.section	.text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_nameEi,"axG",%progbits,_ZN12Chap
+  70              		.align	1
+  71              		.p2align 2,,3
+  72              		.weak	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_nameEi
+  73              		.syntax unified
+  74              		.thumb
+  75              		.thumb_func
+  76              		.fpu fpv4-sp-d16
+  78              	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_nameEi:
+  79              	.LVL4:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 3
+
+
+  80              	.LFB2492:
+  38:Src/Ui/Pages/chapter.h **** 
+  39:Src/Ui/Pages/chapter.h **** 	void open_page(int index) override {
+  40:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+  41:Src/Ui/Pages/chapter.h **** 			return;
+  42:Src/Ui/Pages/chapter.h **** 		}
+  43:Src/Ui/Pages/chapter.h **** 
+  44:Src/Ui/Pages/chapter.h **** 		pages.close_all();
+  45:Src/Ui/Pages/chapter.h **** 		pages.open(page[index].id);
+  46:Src/Ui/Pages/chapter.h **** 		curr_page_ = index;
+  47:Src/Ui/Pages/chapter.h **** 	}
+  48:Src/Ui/Pages/chapter.h **** 
+  49:Src/Ui/Pages/chapter.h **** 	const char* page_name(int index) override {
+  81              		.loc 1 49 14 is_stmt 1 view -0
+  82              		.cfi_startproc
+  83              		@ args = 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 0, uses_anonymous_args = 0
+  85              		@ link register save eliminated.
+  86              		.file 2 "stm32/stmf4lib.h"
+   1:stm32/stmf4lib.h **** #ifndef STM32F4Lib_h
+   2:stm32/stmf4lib.h **** #define STM32F4Lib_h
+   3:stm32/stmf4lib.h **** 
+   4:stm32/stmf4lib.h **** #include "stm32f4xx.h"
+   5:stm32/stmf4lib.h **** #include <functional>
+   6:stm32/stmf4lib.h **** #include <stdlib.h>
+   7:stm32/stmf4lib.h **** #include <stdint.h>
+   8:stm32/stmf4lib.h **** #include <limits>
+   9:stm32/stmf4lib.h **** #include <cstring>
+  10:stm32/stmf4lib.h **** #include <cmath>
+  11:stm32/stmf4lib.h **** 
+  12:stm32/stmf4lib.h **** //#include <assert.h>
+  13:stm32/stmf4lib.h **** //#include <algorithm>
+  14:stm32/stmf4lib.h **** 
+  15:stm32/stmf4lib.h **** #define CCM_RAM __attribute__((section(".ccmram")))
+  16:stm32/stmf4lib.h **** #define FORCE_INLINE __attribute__((always_inline))
+  17:stm32/stmf4lib.h **** 
+  18:stm32/stmf4lib.h **** class stmlib {
+  19:stm32/stmf4lib.h **** 
+  20:stm32/stmf4lib.h **** public:
+  21:stm32/stmf4lib.h **** 
+  22:stm32/stmf4lib.h **** 	static inline int clip_min(int min, int value) {
+  23:stm32/stmf4lib.h **** 		return value > min ? value : min;
+  24:stm32/stmf4lib.h **** 	}
+  25:stm32/stmf4lib.h **** 
+  26:stm32/stmf4lib.h **** 	static inline int clip_max(int max, int value) {
+  27:stm32/stmf4lib.h **** 		return value < max ? value : max;
+  28:stm32/stmf4lib.h **** 	}
+  29:stm32/stmf4lib.h **** 
+  30:stm32/stmf4lib.h **** 	static inline int clip(int min, int max, int value) {
+  31:stm32/stmf4lib.h **** 		return value > max ? max : (value < min ? min : value);
+  87              		.loc 2 31 3 view .LVU7
+  50:Src/Ui/Pages/chapter.h **** 		index = stmlib::clip(0, size_ - 1, index);
+  51:Src/Ui/Pages/chapter.h **** 		return page[index].name;
+  88              		.loc 1 51 15 is_stmt 0 view .LVU8
+  89 0000 21EAE171 		bic	r1, r1, r1, asr #31
+  90              	.LVL5:
+  91              		.loc 1 51 15 view .LVU9
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 4
+
+
+  92 0004 0229     		cmp	r1, #2
+  93              		.loc 1 51 22 view .LVU10
+  94 0006 4368     		ldr	r3, [r0, #4]
+  95              		.loc 1 51 15 view .LVU11
+  96 0008 A8BF     		it	ge
+  97 000a 0221     		movge	r1, #2
+  52:Src/Ui/Pages/chapter.h **** 	}
+  98              		.loc 1 52 2 view .LVU12
+  99 000c 53F83100 		ldr	r0, [r3, r1, lsl #3]
+ 100              	.LVL6:
+ 101              		.loc 1 52 2 view .LVU13
+ 102 0010 7047     		bx	lr
+ 103              		.cfi_endproc
+ 104              	.LFE2492:
+ 106 0012 00BF     		.section	.text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_iconEi,"axG",%progbits,_ZN12Chap
+ 107              		.align	1
+ 108              		.p2align 2,,3
+ 109              		.weak	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_iconEi
+ 110              		.syntax unified
+ 111              		.thumb
+ 112              		.thumb_func
+ 113              		.fpu fpv4-sp-d16
+ 115              	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_iconEi:
+ 116              	.LVL7:
+ 117              	.LFB2493:
+  53:Src/Ui/Pages/chapter.h **** 
+  54:Src/Ui/Pages/chapter.h **** 	Bitmap::Id page_icon(int index) override {
+ 118              		.loc 1 54 13 is_stmt 1 view -0
+ 119              		.cfi_startproc
+ 120              		@ args = 0, pretend = 0, frame = 0
+ 121              		@ frame_needed = 0, uses_anonymous_args = 0
+ 122              		@ link register save eliminated.
+ 123              		.loc 2 31 3 view .LVU15
+  55:Src/Ui/Pages/chapter.h **** 		index = stmlib::clip(0, size_ - 1, index);
+  56:Src/Ui/Pages/chapter.h **** 		return page[index].icon;
+ 124              		.loc 1 56 15 is_stmt 0 view .LVU16
+ 125 0000 21EAE171 		bic	r1, r1, r1, asr #31
+ 126              	.LVL8:
+ 127              		.loc 1 56 22 view .LVU17
+ 128 0004 4368     		ldr	r3, [r0, #4]
+ 129              		.loc 1 56 15 view .LVU18
+ 130 0006 0229     		cmp	r1, #2
+ 131 0008 A8BF     		it	ge
+ 132 000a 0221     		movge	r1, #2
+ 133              		.loc 1 56 22 view .LVU19
+ 134 000c 03EBC100 		add	r0, r3, r1, lsl #3
+ 135              	.LVL9:
+  57:Src/Ui/Pages/chapter.h **** 	}
+ 136              		.loc 1 57 2 view .LVU20
+ 137 0010 4079     		ldrb	r0, [r0, #5]	@ zero_extendqisi2
+ 138 0012 7047     		bx	lr
+ 139              		.cfi_endproc
+ 140              	.LFE2493:
+ 142              		.section	.text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9num_pagesEv,"axG",%progbits,_ZN12ChapterEn
+ 143              		.align	1
+ 144              		.p2align 2,,3
+ 145              		.weak	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9num_pagesEv
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 5
+
+
+ 146              		.syntax unified
+ 147              		.thumb
+ 148              		.thumb_func
+ 149              		.fpu fpv4-sp-d16
+ 151              	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9num_pagesEv:
+ 152              	.LVL10:
+ 153              	.LFB2494:
+  35:Src/Ui/Pages/chapter.h **** 		return size_;
+ 154              		.loc 1 35 10 is_stmt 1 view -0
+ 155              		.cfi_startproc
+ 156              		@ args = 0, pretend = 0, frame = 0
+ 157              		@ frame_needed = 0, uses_anonymous_args = 0
+ 158              		@ link register save eliminated.
+  37:Src/Ui/Pages/chapter.h **** 
+ 159              		.loc 1 37 2 is_stmt 0 view .LVU22
+ 160 0000 0220     		movs	r0, #2
+ 161              	.LVL11:
+  37:Src/Ui/Pages/chapter.h **** 
+ 162              		.loc 1 37 2 view .LVU23
+ 163 0002 7047     		bx	lr
+ 164              		.cfi_endproc
+ 165              	.LFE2494:
+ 167              		.section	.text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9curr_pageEv,"axG",%progbits,_ZN12ChapterEn
+ 168              		.align	1
+ 169              		.p2align 2,,3
+ 170              		.weak	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9curr_pageEv
+ 171              		.syntax unified
+ 172              		.thumb
+ 173              		.thumb_func
+ 174              		.fpu fpv4-sp-d16
+ 176              	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9curr_pageEv:
+ 177              	.LVL12:
+ 178              	.LFB2496:
+  31:Src/Ui/Pages/chapter.h **** 		return curr_page_;
+ 179              		.loc 1 31 10 is_stmt 1 view -0
+ 180              		.cfi_startproc
+ 181              		@ args = 0, pretend = 0, frame = 0
+ 182              		@ frame_needed = 0, uses_anonymous_args = 0
+ 183              		@ link register save eliminated.
+  33:Src/Ui/Pages/chapter.h **** 
+ 184              		.loc 1 33 2 is_stmt 0 view .LVU25
+ 185 0000 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+ 186              	.LVL13:
+  33:Src/Ui/Pages/chapter.h **** 
+ 187              		.loc 1 33 2 view .LVU26
+ 188 0002 7047     		bx	lr
+ 189              		.cfi_endproc
+ 190              	.LFE2496:
+ 192              		.section	.text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_nameEi,"axG",%progbits,_ZN12ChapterEn
+ 193              		.align	1
+ 194              		.p2align 2,,3
+ 195              		.weak	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_nameEi
+ 196              		.syntax unified
+ 197              		.thumb
+ 198              		.thumb_func
+ 199              		.fpu fpv4-sp-d16
+ 201              	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_nameEi:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 6
+
+
+ 202              	.LVL14:
+ 203              	.LFB2497:
+  49:Src/Ui/Pages/chapter.h **** 		index = stmlib::clip(0, size_ - 1, index);
+ 204              		.loc 1 49 14 is_stmt 1 view -0
+ 205              		.cfi_startproc
+ 206              		@ args = 0, pretend = 0, frame = 0
+ 207              		@ frame_needed = 0, uses_anonymous_args = 0
+ 208              		@ link register save eliminated.
+ 209              		.loc 2 31 3 view .LVU28
+  51:Src/Ui/Pages/chapter.h **** 	}
+ 210              		.loc 1 51 22 is_stmt 0 view .LVU29
+ 211 0000 4368     		ldr	r3, [r0, #4]
+  51:Src/Ui/Pages/chapter.h **** 	}
+ 212              		.loc 1 51 15 view .LVU30
+ 213 0002 81F30101 		usat	r1, #1, r1
+ 214              	.LVL15:
+  52:Src/Ui/Pages/chapter.h **** 
+ 215              		.loc 1 52 2 view .LVU31
+ 216 0006 53F83100 		ldr	r0, [r3, r1, lsl #3]
+ 217              	.LVL16:
+  52:Src/Ui/Pages/chapter.h **** 
+ 218              		.loc 1 52 2 view .LVU32
+ 219 000a 7047     		bx	lr
+ 220              		.cfi_endproc
+ 221              	.LFE2497:
+ 223              		.section	.text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_iconEi,"axG",%progbits,_ZN12ChapterEn
+ 224              		.align	1
+ 225              		.p2align 2,,3
+ 226              		.weak	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_iconEi
+ 227              		.syntax unified
+ 228              		.thumb
+ 229              		.thumb_func
+ 230              		.fpu fpv4-sp-d16
+ 232              	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_iconEi:
+ 233              	.LVL17:
+ 234              	.LFB2498:
+  54:Src/Ui/Pages/chapter.h **** 		index = stmlib::clip(0, size_ - 1, index);
+ 235              		.loc 1 54 13 is_stmt 1 view -0
+ 236              		.cfi_startproc
+ 237              		@ args = 0, pretend = 0, frame = 0
+ 238              		@ frame_needed = 0, uses_anonymous_args = 0
+ 239              		@ link register save eliminated.
+ 240              		.loc 2 31 3 view .LVU34
+  56:Src/Ui/Pages/chapter.h **** 	}
+ 241              		.loc 1 56 22 is_stmt 0 view .LVU35
+ 242 0000 4368     		ldr	r3, [r0, #4]
+  56:Src/Ui/Pages/chapter.h **** 	}
+ 243              		.loc 1 56 15 view .LVU36
+ 244 0002 81F30101 		usat	r1, #1, r1
+ 245              	.LVL18:
+  56:Src/Ui/Pages/chapter.h **** 	}
+ 246              		.loc 1 56 22 view .LVU37
+ 247 0006 03EBC100 		add	r0, r3, r1, lsl #3
+ 248              	.LVL19:
+ 249              		.loc 1 57 2 view .LVU38
+ 250 000a 4079     		ldrb	r0, [r0, #5]	@ zero_extendqisi2
+ 251 000c 7047     		bx	lr
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 7
+
+
+ 252              		.cfi_endproc
+ 253              	.LFE2498:
+ 255 000e 00BF     		.section	.text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9num_pagesEv,"axG",%progbits,_ZN12Chapte
+ 256              		.align	1
+ 257              		.p2align 2,,3
+ 258              		.weak	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9num_pagesEv
+ 259              		.syntax unified
+ 260              		.thumb
+ 261              		.thumb_func
+ 262              		.fpu fpv4-sp-d16
+ 264              	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9num_pagesEv:
+ 265              	.LVL20:
+ 266              	.LFB2499:
+  35:Src/Ui/Pages/chapter.h **** 		return size_;
+ 267              		.loc 1 35 10 is_stmt 1 view -0
+ 268              		.cfi_startproc
+ 269              		@ args = 0, pretend = 0, frame = 0
+ 270              		@ frame_needed = 0, uses_anonymous_args = 0
+ 271              		@ link register save eliminated.
+  37:Src/Ui/Pages/chapter.h **** 
+ 272              		.loc 1 37 2 is_stmt 0 view .LVU40
+ 273 0000 0220     		movs	r0, #2
+ 274              	.LVL21:
+  37:Src/Ui/Pages/chapter.h **** 
+ 275              		.loc 1 37 2 view .LVU41
+ 276 0002 7047     		bx	lr
+ 277              		.cfi_endproc
+ 278              	.LFE2499:
+ 280              		.section	.text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9curr_pageEv,"axG",%progbits,_ZN12Chapte
+ 281              		.align	1
+ 282              		.p2align 2,,3
+ 283              		.weak	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9curr_pageEv
+ 284              		.syntax unified
+ 285              		.thumb
+ 286              		.thumb_func
+ 287              		.fpu fpv4-sp-d16
+ 289              	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9curr_pageEv:
+ 290              	.LVL22:
+ 291              	.LFB2501:
+  31:Src/Ui/Pages/chapter.h **** 		return curr_page_;
+ 292              		.loc 1 31 10 is_stmt 1 view -0
+ 293              		.cfi_startproc
+ 294              		@ args = 0, pretend = 0, frame = 0
+ 295              		@ frame_needed = 0, uses_anonymous_args = 0
+ 296              		@ link register save eliminated.
+  33:Src/Ui/Pages/chapter.h **** 
+ 297              		.loc 1 33 2 is_stmt 0 view .LVU43
+ 298 0000 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+ 299              	.LVL23:
+  33:Src/Ui/Pages/chapter.h **** 
+ 300              		.loc 1 33 2 view .LVU44
+ 301 0002 7047     		bx	lr
+ 302              		.cfi_endproc
+ 303              	.LFE2501:
+ 305              		.section	.text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_nameEi,"axG",%progbits,_ZN12Chapte
+ 306              		.align	1
+ 307              		.p2align 2,,3
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 8
+
+
+ 308              		.weak	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_nameEi
+ 309              		.syntax unified
+ 310              		.thumb
+ 311              		.thumb_func
+ 312              		.fpu fpv4-sp-d16
+ 314              	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_nameEi:
+ 315              	.LVL24:
+ 316              	.LFB2502:
+  49:Src/Ui/Pages/chapter.h **** 		index = stmlib::clip(0, size_ - 1, index);
+ 317              		.loc 1 49 14 is_stmt 1 view -0
+ 318              		.cfi_startproc
+ 319              		@ args = 0, pretend = 0, frame = 0
+ 320              		@ frame_needed = 0, uses_anonymous_args = 0
+ 321              		@ link register save eliminated.
+ 322              		.loc 2 31 3 view .LVU46
+  51:Src/Ui/Pages/chapter.h **** 	}
+ 323              		.loc 1 51 22 is_stmt 0 view .LVU47
+ 324 0000 4368     		ldr	r3, [r0, #4]
+  51:Src/Ui/Pages/chapter.h **** 	}
+ 325              		.loc 1 51 15 view .LVU48
+ 326 0002 81F30101 		usat	r1, #1, r1
+ 327              	.LVL25:
+  52:Src/Ui/Pages/chapter.h **** 
+ 328              		.loc 1 52 2 view .LVU49
+ 329 0006 53F83100 		ldr	r0, [r3, r1, lsl #3]
+ 330              	.LVL26:
+  52:Src/Ui/Pages/chapter.h **** 
+ 331              		.loc 1 52 2 view .LVU50
+ 332 000a 7047     		bx	lr
+ 333              		.cfi_endproc
+ 334              	.LFE2502:
+ 336              		.section	.text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_iconEi,"axG",%progbits,_ZN12Chapte
+ 337              		.align	1
+ 338              		.p2align 2,,3
+ 339              		.weak	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_iconEi
+ 340              		.syntax unified
+ 341              		.thumb
+ 342              		.thumb_func
+ 343              		.fpu fpv4-sp-d16
+ 345              	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_iconEi:
+ 346              	.LVL27:
+ 347              	.LFB2503:
+  54:Src/Ui/Pages/chapter.h **** 		index = stmlib::clip(0, size_ - 1, index);
+ 348              		.loc 1 54 13 is_stmt 1 view -0
+ 349              		.cfi_startproc
+ 350              		@ args = 0, pretend = 0, frame = 0
+ 351              		@ frame_needed = 0, uses_anonymous_args = 0
+ 352              		@ link register save eliminated.
+ 353              		.loc 2 31 3 view .LVU52
+  56:Src/Ui/Pages/chapter.h **** 	}
+ 354              		.loc 1 56 22 is_stmt 0 view .LVU53
+ 355 0000 4368     		ldr	r3, [r0, #4]
+  56:Src/Ui/Pages/chapter.h **** 	}
+ 356              		.loc 1 56 15 view .LVU54
+ 357 0002 81F30101 		usat	r1, #1, r1
+ 358              	.LVL28:
+  56:Src/Ui/Pages/chapter.h **** 	}
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 9
+
+
+ 359              		.loc 1 56 22 view .LVU55
+ 360 0006 03EBC100 		add	r0, r3, r1, lsl #3
+ 361              	.LVL29:
+ 362              		.loc 1 57 2 view .LVU56
+ 363 000a 4079     		ldrb	r0, [r0, #5]	@ zero_extendqisi2
+ 364 000c 7047     		bx	lr
+ 365              		.cfi_endproc
+ 366              	.LFE2503:
+ 368 000e 00BF     		.section	.text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9num_pagesEv,"axG",%progbits,_ZN12Cha
+ 369              		.align	1
+ 370              		.p2align 2,,3
+ 371              		.weak	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9num_pagesEv
+ 372              		.syntax unified
+ 373              		.thumb
+ 374              		.thumb_func
+ 375              		.fpu fpv4-sp-d16
+ 377              	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9num_pagesEv:
+ 378              	.LVL30:
+ 379              	.LFB2504:
+  35:Src/Ui/Pages/chapter.h **** 		return size_;
+ 380              		.loc 1 35 10 is_stmt 1 view -0
+ 381              		.cfi_startproc
+ 382              		@ args = 0, pretend = 0, frame = 0
+ 383              		@ frame_needed = 0, uses_anonymous_args = 0
+ 384              		@ link register save eliminated.
+  37:Src/Ui/Pages/chapter.h **** 
+ 385              		.loc 1 37 2 is_stmt 0 view .LVU58
+ 386 0000 0120     		movs	r0, #1
+ 387              	.LVL31:
+  37:Src/Ui/Pages/chapter.h **** 
+ 388              		.loc 1 37 2 view .LVU59
+ 389 0002 7047     		bx	lr
+ 390              		.cfi_endproc
+ 391              	.LFE2504:
+ 393              		.section	.text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9curr_pageEv,"axG",%progbits,_ZN12Cha
+ 394              		.align	1
+ 395              		.p2align 2,,3
+ 396              		.weak	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9curr_pageEv
+ 397              		.syntax unified
+ 398              		.thumb
+ 399              		.thumb_func
+ 400              		.fpu fpv4-sp-d16
+ 402              	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9curr_pageEv:
+ 403              	.LVL32:
+ 404              	.LFB2506:
+  31:Src/Ui/Pages/chapter.h **** 		return curr_page_;
+ 405              		.loc 1 31 10 is_stmt 1 view -0
+ 406              		.cfi_startproc
+ 407              		@ args = 0, pretend = 0, frame = 0
+ 408              		@ frame_needed = 0, uses_anonymous_args = 0
+ 409              		@ link register save eliminated.
+  33:Src/Ui/Pages/chapter.h **** 
+ 410              		.loc 1 33 2 is_stmt 0 view .LVU61
+ 411 0000 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+ 412              	.LVL33:
+  33:Src/Ui/Pages/chapter.h **** 
+ 413              		.loc 1 33 2 view .LVU62
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 10
+
+
+ 414 0002 7047     		bx	lr
+ 415              		.cfi_endproc
+ 416              	.LFE2506:
+ 418              		.section	.text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_nameEi,"axG",%progbits,_ZN12Cha
+ 419              		.align	1
+ 420              		.p2align 2,,3
+ 421              		.weak	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_nameEi
+ 422              		.syntax unified
+ 423              		.thumb
+ 424              		.thumb_func
+ 425              		.fpu fpv4-sp-d16
+ 427              	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_nameEi:
+ 428              	.LVL34:
+ 429              	.LFB2507:
+  49:Src/Ui/Pages/chapter.h **** 		index = stmlib::clip(0, size_ - 1, index);
+ 430              		.loc 1 49 14 is_stmt 1 view -0
+ 431              		.cfi_startproc
+ 432              		@ args = 0, pretend = 0, frame = 0
+ 433              		@ frame_needed = 0, uses_anonymous_args = 0
+ 434              		@ link register save eliminated.
+ 435              		.loc 2 31 3 view .LVU64
+  51:Src/Ui/Pages/chapter.h **** 	}
+ 436              		.loc 1 51 22 is_stmt 0 view .LVU65
+ 437 0000 4368     		ldr	r3, [r0, #4]
+  52:Src/Ui/Pages/chapter.h **** 
+ 438              		.loc 1 52 2 view .LVU66
+ 439 0002 1868     		ldr	r0, [r3]
+ 440              	.LVL35:
+  52:Src/Ui/Pages/chapter.h **** 
+ 441              		.loc 1 52 2 view .LVU67
+ 442 0004 7047     		bx	lr
+ 443              		.cfi_endproc
+ 444              	.LFE2507:
+ 446 0006 00BF     		.section	.text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_iconEi,"axG",%progbits,_ZN12Cha
+ 447              		.align	1
+ 448              		.p2align 2,,3
+ 449              		.weak	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_iconEi
+ 450              		.syntax unified
+ 451              		.thumb
+ 452              		.thumb_func
+ 453              		.fpu fpv4-sp-d16
+ 455              	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_iconEi:
+ 456              	.LVL36:
+ 457              	.LFB2508:
+  54:Src/Ui/Pages/chapter.h **** 		index = stmlib::clip(0, size_ - 1, index);
+ 458              		.loc 1 54 13 is_stmt 1 view -0
+ 459              		.cfi_startproc
+ 460              		@ args = 0, pretend = 0, frame = 0
+ 461              		@ frame_needed = 0, uses_anonymous_args = 0
+ 462              		@ link register save eliminated.
+ 463              		.loc 2 31 3 view .LVU69
+  56:Src/Ui/Pages/chapter.h **** 	}
+ 464              		.loc 1 56 22 is_stmt 0 view .LVU70
+ 465 0000 4368     		ldr	r3, [r0, #4]
+ 466              		.loc 1 57 2 view .LVU71
+ 467 0002 5879     		ldrb	r0, [r3, #5]	@ zero_extendqisi2
+ 468              	.LVL37:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 11
+
+
+ 469              		.loc 1 57 2 view .LVU72
+ 470 0004 7047     		bx	lr
+ 471              		.cfi_endproc
+ 472              	.LFE2508:
+ 474 0006 00BF     		.section	.text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9num_pagesEv,"axG",%progbits,_ZN12Chapt
+ 475              		.align	1
+ 476              		.p2align 2,,3
+ 477              		.weak	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9num_pagesEv
+ 478              		.syntax unified
+ 479              		.thumb
+ 480              		.thumb_func
+ 481              		.fpu fpv4-sp-d16
+ 483              	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9num_pagesEv:
+ 484              	.LVL38:
+ 485              	.LFB2509:
+  35:Src/Ui/Pages/chapter.h **** 		return size_;
+ 486              		.loc 1 35 10 is_stmt 1 view -0
+ 487              		.cfi_startproc
+ 488              		@ args = 0, pretend = 0, frame = 0
+ 489              		@ frame_needed = 0, uses_anonymous_args = 0
+ 490              		@ link register save eliminated.
+  37:Src/Ui/Pages/chapter.h **** 
+ 491              		.loc 1 37 2 is_stmt 0 view .LVU74
+ 492 0000 0120     		movs	r0, #1
+ 493              	.LVL39:
+  37:Src/Ui/Pages/chapter.h **** 
+ 494              		.loc 1 37 2 view .LVU75
+ 495 0002 7047     		bx	lr
+ 496              		.cfi_endproc
+ 497              	.LFE2509:
+ 499              		.section	.text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9curr_pageEv,"axG",%progbits,_ZN12Chapt
+ 500              		.align	1
+ 501              		.p2align 2,,3
+ 502              		.weak	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9curr_pageEv
+ 503              		.syntax unified
+ 504              		.thumb
+ 505              		.thumb_func
+ 506              		.fpu fpv4-sp-d16
+ 508              	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9curr_pageEv:
+ 509              	.LVL40:
+ 510              	.LFB2511:
+  31:Src/Ui/Pages/chapter.h **** 		return curr_page_;
+ 511              		.loc 1 31 10 is_stmt 1 view -0
+ 512              		.cfi_startproc
+ 513              		@ args = 0, pretend = 0, frame = 0
+ 514              		@ frame_needed = 0, uses_anonymous_args = 0
+ 515              		@ link register save eliminated.
+  33:Src/Ui/Pages/chapter.h **** 
+ 516              		.loc 1 33 2 is_stmt 0 view .LVU77
+ 517 0000 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+ 518              	.LVL41:
+  33:Src/Ui/Pages/chapter.h **** 
+ 519              		.loc 1 33 2 view .LVU78
+ 520 0002 7047     		bx	lr
+ 521              		.cfi_endproc
+ 522              	.LFE2511:
+ 524              		.section	.text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_nameEi,"axG",%progbits,_ZN12Chapt
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 12
+
+
+ 525              		.align	1
+ 526              		.p2align 2,,3
+ 527              		.weak	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_nameEi
+ 528              		.syntax unified
+ 529              		.thumb
+ 530              		.thumb_func
+ 531              		.fpu fpv4-sp-d16
+ 533              	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_nameEi:
+ 534              	.LVL42:
+ 535              	.LFB2512:
+  49:Src/Ui/Pages/chapter.h **** 		index = stmlib::clip(0, size_ - 1, index);
+ 536              		.loc 1 49 14 is_stmt 1 view -0
+ 537              		.cfi_startproc
+ 538              		@ args = 0, pretend = 0, frame = 0
+ 539              		@ frame_needed = 0, uses_anonymous_args = 0
+ 540              		@ link register save eliminated.
+ 541              		.loc 2 31 3 view .LVU80
+  51:Src/Ui/Pages/chapter.h **** 	}
+ 542              		.loc 1 51 22 is_stmt 0 view .LVU81
+ 543 0000 4368     		ldr	r3, [r0, #4]
+  52:Src/Ui/Pages/chapter.h **** 
+ 544              		.loc 1 52 2 view .LVU82
+ 545 0002 1868     		ldr	r0, [r3]
+ 546              	.LVL43:
+  52:Src/Ui/Pages/chapter.h **** 
+ 547              		.loc 1 52 2 view .LVU83
+ 548 0004 7047     		bx	lr
+ 549              		.cfi_endproc
+ 550              	.LFE2512:
+ 552 0006 00BF     		.section	.text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_iconEi,"axG",%progbits,_ZN12Chapt
+ 553              		.align	1
+ 554              		.p2align 2,,3
+ 555              		.weak	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_iconEi
+ 556              		.syntax unified
+ 557              		.thumb
+ 558              		.thumb_func
+ 559              		.fpu fpv4-sp-d16
+ 561              	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_iconEi:
+ 562              	.LVL44:
+ 563              	.LFB2513:
+  54:Src/Ui/Pages/chapter.h **** 		index = stmlib::clip(0, size_ - 1, index);
+ 564              		.loc 1 54 13 is_stmt 1 view -0
+ 565              		.cfi_startproc
+ 566              		@ args = 0, pretend = 0, frame = 0
+ 567              		@ frame_needed = 0, uses_anonymous_args = 0
+ 568              		@ link register save eliminated.
+ 569              		.loc 2 31 3 view .LVU85
+  56:Src/Ui/Pages/chapter.h **** 	}
+ 570              		.loc 1 56 22 is_stmt 0 view .LVU86
+ 571 0000 4368     		ldr	r3, [r0, #4]
+ 572              		.loc 1 57 2 view .LVU87
+ 573 0002 5879     		ldrb	r0, [r3, #5]	@ zero_extendqisi2
+ 574              	.LVL45:
+ 575              		.loc 1 57 2 view .LVU88
+ 576 0004 7047     		bx	lr
+ 577              		.cfi_endproc
+ 578              	.LFE2513:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 13
+
+
+ 580 0006 00BF     		.section	.text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9num_pagesEv,"axG",%progbits,_ZN12Chapte
+ 581              		.align	1
+ 582              		.p2align 2,,3
+ 583              		.weak	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9num_pagesEv
+ 584              		.syntax unified
+ 585              		.thumb
+ 586              		.thumb_func
+ 587              		.fpu fpv4-sp-d16
+ 589              	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9num_pagesEv:
+ 590              	.LVL46:
+ 591              	.LFB2514:
+  35:Src/Ui/Pages/chapter.h **** 		return size_;
+ 592              		.loc 1 35 10 is_stmt 1 view -0
+ 593              		.cfi_startproc
+ 594              		@ args = 0, pretend = 0, frame = 0
+ 595              		@ frame_needed = 0, uses_anonymous_args = 0
+ 596              		@ link register save eliminated.
+  37:Src/Ui/Pages/chapter.h **** 
+ 597              		.loc 1 37 2 is_stmt 0 view .LVU90
+ 598 0000 0220     		movs	r0, #2
+ 599              	.LVL47:
+  37:Src/Ui/Pages/chapter.h **** 
+ 600              		.loc 1 37 2 view .LVU91
+ 601 0002 7047     		bx	lr
+ 602              		.cfi_endproc
+ 603              	.LFE2514:
+ 605              		.section	.text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9curr_pageEv,"axG",%progbits,_ZN12Chapte
+ 606              		.align	1
+ 607              		.p2align 2,,3
+ 608              		.weak	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9curr_pageEv
+ 609              		.syntax unified
+ 610              		.thumb
+ 611              		.thumb_func
+ 612              		.fpu fpv4-sp-d16
+ 614              	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9curr_pageEv:
+ 615              	.LVL48:
+ 616              	.LFB2516:
+  31:Src/Ui/Pages/chapter.h **** 		return curr_page_;
+ 617              		.loc 1 31 10 is_stmt 1 view -0
+ 618              		.cfi_startproc
+ 619              		@ args = 0, pretend = 0, frame = 0
+ 620              		@ frame_needed = 0, uses_anonymous_args = 0
+ 621              		@ link register save eliminated.
+  33:Src/Ui/Pages/chapter.h **** 
+ 622              		.loc 1 33 2 is_stmt 0 view .LVU93
+ 623 0000 007B     		ldrb	r0, [r0, #12]	@ zero_extendqisi2
+ 624              	.LVL49:
+  33:Src/Ui/Pages/chapter.h **** 
+ 625              		.loc 1 33 2 view .LVU94
+ 626 0002 7047     		bx	lr
+ 627              		.cfi_endproc
+ 628              	.LFE2516:
+ 630              		.section	.text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_nameEi,"axG",%progbits,_ZN12Chapte
+ 631              		.align	1
+ 632              		.p2align 2,,3
+ 633              		.weak	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_nameEi
+ 634              		.syntax unified
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 14
+
+
+ 635              		.thumb
+ 636              		.thumb_func
+ 637              		.fpu fpv4-sp-d16
+ 639              	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_nameEi:
+ 640              	.LVL50:
+ 641              	.LFB2517:
+  49:Src/Ui/Pages/chapter.h **** 		index = stmlib::clip(0, size_ - 1, index);
+ 642              		.loc 1 49 14 is_stmt 1 view -0
+ 643              		.cfi_startproc
+ 644              		@ args = 0, pretend = 0, frame = 0
+ 645              		@ frame_needed = 0, uses_anonymous_args = 0
+ 646              		@ link register save eliminated.
+ 647              		.loc 2 31 3 view .LVU96
+  51:Src/Ui/Pages/chapter.h **** 	}
+ 648              		.loc 1 51 22 is_stmt 0 view .LVU97
+ 649 0000 4368     		ldr	r3, [r0, #4]
+  51:Src/Ui/Pages/chapter.h **** 	}
+ 650              		.loc 1 51 15 view .LVU98
+ 651 0002 81F30101 		usat	r1, #1, r1
+ 652              	.LVL51:
+  52:Src/Ui/Pages/chapter.h **** 
+ 653              		.loc 1 52 2 view .LVU99
+ 654 0006 53F83100 		ldr	r0, [r3, r1, lsl #3]
+ 655              	.LVL52:
+  52:Src/Ui/Pages/chapter.h **** 
+ 656              		.loc 1 52 2 view .LVU100
+ 657 000a 7047     		bx	lr
+ 658              		.cfi_endproc
+ 659              	.LFE2517:
+ 661              		.section	.text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_iconEi,"axG",%progbits,_ZN12Chapte
+ 662              		.align	1
+ 663              		.p2align 2,,3
+ 664              		.weak	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_iconEi
+ 665              		.syntax unified
+ 666              		.thumb
+ 667              		.thumb_func
+ 668              		.fpu fpv4-sp-d16
+ 670              	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_iconEi:
+ 671              	.LVL53:
+ 672              	.LFB2518:
+  54:Src/Ui/Pages/chapter.h **** 		index = stmlib::clip(0, size_ - 1, index);
+ 673              		.loc 1 54 13 is_stmt 1 view -0
+ 674              		.cfi_startproc
+ 675              		@ args = 0, pretend = 0, frame = 0
+ 676              		@ frame_needed = 0, uses_anonymous_args = 0
+ 677              		@ link register save eliminated.
+ 678              		.loc 2 31 3 view .LVU102
+  56:Src/Ui/Pages/chapter.h **** 	}
+ 679              		.loc 1 56 22 is_stmt 0 view .LVU103
+ 680 0000 4368     		ldr	r3, [r0, #4]
+  56:Src/Ui/Pages/chapter.h **** 	}
+ 681              		.loc 1 56 15 view .LVU104
+ 682 0002 81F30101 		usat	r1, #1, r1
+ 683              	.LVL54:
+  56:Src/Ui/Pages/chapter.h **** 	}
+ 684              		.loc 1 56 22 view .LVU105
+ 685 0006 03EBC100 		add	r0, r3, r1, lsl #3
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 15
+
+
+ 686              	.LVL55:
+ 687              		.loc 1 57 2 view .LVU106
+ 688 000a 4079     		ldrb	r0, [r0, #5]	@ zero_extendqisi2
+ 689 000c 7047     		bx	lr
+ 690              		.cfi_endproc
+ 691              	.LFE2518:
+ 693 000e 00BF     		.section	.text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9open_pageEi,"axG",%progbits,_ZN12Chap
+ 694              		.align	1
+ 695              		.p2align 2,,3
+ 696              		.weak	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9open_pageEi
+ 697              		.syntax unified
+ 698              		.thumb
+ 699              		.thumb_func
+ 700              		.fpu fpv4-sp-d16
+ 702              	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9open_pageEi:
+ 703              	.LVL56:
+ 704              	.LFB2490:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 705              		.loc 1 39 7 is_stmt 1 view -0
+ 706              		.cfi_startproc
+ 707              		@ args = 0, pretend = 0, frame = 0
+ 708              		@ frame_needed = 0, uses_anonymous_args = 0
+ 709              	.LBB42:
+ 710              	.LBI42:
+  58:Src/Ui/Pages/chapter.h **** 
+  59:Src/Ui/Pages/chapter.h **** private:
+  60:Src/Ui/Pages/chapter.h **** 	ChapterPage* page = page_;
+  61:Src/Ui/Pages/chapter.h **** 	uint8_t size = size_;
+  62:Src/Ui/Pages/chapter.h **** 	int curr_page_ = 0;
+  63:Src/Ui/Pages/chapter.h **** 
+  64:Src/Ui/Pages/chapter.h **** 	bool inside(int index) {
+ 711              		.loc 1 64 7 view .LVU108
+ 712              		.loc 1 64 7 is_stmt 0 view .LVU109
+ 713              	.LBE42:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 714              		.loc 1 39 7 view .LVU110
+ 715 0000 70B5     		push	{r4, r5, r6, lr}
+ 716              		.cfi_def_cfa_offset 16
+ 717              		.cfi_offset 4, -16
+ 718              		.cfi_offset 5, -12
+ 719              		.cfi_offset 6, -8
+ 720              		.cfi_offset 14, -4
+ 721              	.LBB44:
+ 722              	.LBB43:
+  65:Src/Ui/Pages/chapter.h **** 		return (index >= 0) && (index < size);
+ 723              		.loc 1 65 23 view .LVU111
+ 724 0002 0C1E     		subs	r4, r1, #0
+ 725 0004 0CDB     		blt	.L26
+ 726              		.loc 1 65 35 view .LVU112
+ 727 0006 037A     		ldrb	r3, [r0, #8]	@ zero_extendqisi2
+ 728              		.loc 1 65 23 view .LVU113
+ 729 0008 9C42     		cmp	r4, r3
+ 730 000a 0546     		mov	r5, r0
+ 731 000c 08DA     		bge	.L26
+ 732              	.LVL57:
+ 733              		.loc 1 65 23 view .LVU114
+ 734              	.LBE43:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 16
+
+
+ 735              	.LBE44:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 736              		.loc 1 40 46 view .LVU115
+ 737 000e 4168     		ldr	r1, [r0, #4]
+ 738              	.LVL58:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 739              		.loc 1 40 46 view .LVU116
+ 740 0010 0948     		ldr	r0, .L32
+ 741              	.LVL59:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 742              		.loc 1 40 46 view .LVU117
+ 743 0012 01EBC402 		add	r2, r1, r4, lsl #3
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 744              		.loc 1 40 59 view .LVU118
+ 745 0016 E600     		lsls	r6, r4, #3
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 746              		.loc 1 40 46 view .LVU119
+ 747 0018 1179     		ldrb	r1, [r2, #4]	@ zero_extendqisi2
+ 748 001a FFF7FEFF 		bl	_ZN5Pages7is_openENS_2IdE
+ 749              	.LVL60:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 750              		.loc 1 40 30 view .LVU120
+ 751 001e 00B1     		cbz	r0, .L31
+ 752              	.LVL61:
+ 753              	.L26:
+  47:Src/Ui/Pages/chapter.h **** 
+ 754              		.loc 1 47 2 view .LVU121
+ 755 0020 70BD     		pop	{r4, r5, r6, pc}
+ 756              	.LVL62:
+ 757              	.L31:
+  44:Src/Ui/Pages/chapter.h **** 		pages.open(page[index].id);
+ 758              		.loc 1 44 18 view .LVU122
+ 759 0022 0548     		ldr	r0, .L32
+ 760 0024 FFF7FEFF 		bl	_ZN5Pages9close_allEv
+ 761              	.LVL63:
+  45:Src/Ui/Pages/chapter.h **** 		curr_page_ = index;
+ 762              		.loc 1 45 13 view .LVU123
+ 763 0028 6B68     		ldr	r3, [r5, #4]
+ 764 002a 0348     		ldr	r0, .L32
+ 765 002c 3344     		add	r3, r3, r6
+ 766 002e 1979     		ldrb	r1, [r3, #4]	@ zero_extendqisi2
+ 767 0030 FFF7FEFF 		bl	_ZN5Pages4openENS_2IdE
+ 768              	.LVL64:
+  46:Src/Ui/Pages/chapter.h **** 	}
+ 769              		.loc 1 46 3 view .LVU124
+ 770 0034 EC60     		str	r4, [r5, #12]
+  47:Src/Ui/Pages/chapter.h **** 
+ 771              		.loc 1 47 2 view .LVU125
+ 772 0036 70BD     		pop	{r4, r5, r6, pc}
+ 773              	.LVL65:
+ 774              	.L33:
+  47:Src/Ui/Pages/chapter.h **** 
+ 775              		.loc 1 47 2 view .LVU126
+ 776              		.align	2
+ 777              	.L32:
+ 778 0038 00000000 		.word	pages
+ 779              		.cfi_endproc
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 17
+
+
+ 780              	.LFE2490:
+ 782              		.section	.text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9open_pageEi,"axG",%progbits,_ZN12ChapterEn
+ 783              		.align	1
+ 784              		.p2align 2,,3
+ 785              		.weak	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9open_pageEi
+ 786              		.syntax unified
+ 787              		.thumb
+ 788              		.thumb_func
+ 789              		.fpu fpv4-sp-d16
+ 791              	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9open_pageEi:
+ 792              	.LVL66:
+ 793              	.LFB2495:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 794              		.loc 1 39 7 is_stmt 1 view -0
+ 795              		.cfi_startproc
+ 796              		@ args = 0, pretend = 0, frame = 0
+ 797              		@ frame_needed = 0, uses_anonymous_args = 0
+ 798              	.LBB45:
+ 799              	.LBI45:
+  64:Src/Ui/Pages/chapter.h **** 		return (index >= 0) && (index < size);
+ 800              		.loc 1 64 7 view .LVU128
+  64:Src/Ui/Pages/chapter.h **** 		return (index >= 0) && (index < size);
+ 801              		.loc 1 64 7 is_stmt 0 view .LVU129
+ 802              	.LBE45:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 803              		.loc 1 39 7 view .LVU130
+ 804 0000 70B5     		push	{r4, r5, r6, lr}
+ 805              		.cfi_def_cfa_offset 16
+ 806              		.cfi_offset 4, -16
+ 807              		.cfi_offset 5, -12
+ 808              		.cfi_offset 6, -8
+ 809              		.cfi_offset 14, -4
+ 810              	.LBB47:
+ 811              	.LBB46:
+ 812              		.loc 1 65 23 view .LVU131
+ 813 0002 0C1E     		subs	r4, r1, #0
+ 814 0004 0CDB     		blt	.L34
+ 815              		.loc 1 65 35 view .LVU132
+ 816 0006 037A     		ldrb	r3, [r0, #8]	@ zero_extendqisi2
+ 817              		.loc 1 65 23 view .LVU133
+ 818 0008 9C42     		cmp	r4, r3
+ 819 000a 0546     		mov	r5, r0
+ 820 000c 08DA     		bge	.L34
+ 821              	.LVL67:
+ 822              		.loc 1 65 23 view .LVU134
+ 823              	.LBE46:
+ 824              	.LBE47:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 825              		.loc 1 40 46 view .LVU135
+ 826 000e 4168     		ldr	r1, [r0, #4]
+ 827              	.LVL68:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 828              		.loc 1 40 46 view .LVU136
+ 829 0010 0948     		ldr	r0, .L40
+ 830              	.LVL69:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 831              		.loc 1 40 46 view .LVU137
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 18
+
+
+ 832 0012 01EBC402 		add	r2, r1, r4, lsl #3
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 833              		.loc 1 40 59 view .LVU138
+ 834 0016 E600     		lsls	r6, r4, #3
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 835              		.loc 1 40 46 view .LVU139
+ 836 0018 1179     		ldrb	r1, [r2, #4]	@ zero_extendqisi2
+ 837 001a FFF7FEFF 		bl	_ZN5Pages7is_openENS_2IdE
+ 838              	.LVL70:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 839              		.loc 1 40 30 view .LVU140
+ 840 001e 00B1     		cbz	r0, .L39
+ 841              	.LVL71:
+ 842              	.L34:
+  47:Src/Ui/Pages/chapter.h **** 
+ 843              		.loc 1 47 2 view .LVU141
+ 844 0020 70BD     		pop	{r4, r5, r6, pc}
+ 845              	.LVL72:
+ 846              	.L39:
+  44:Src/Ui/Pages/chapter.h **** 		pages.open(page[index].id);
+ 847              		.loc 1 44 18 view .LVU142
+ 848 0022 0548     		ldr	r0, .L40
+ 849 0024 FFF7FEFF 		bl	_ZN5Pages9close_allEv
+ 850              	.LVL73:
+  45:Src/Ui/Pages/chapter.h **** 		curr_page_ = index;
+ 851              		.loc 1 45 13 view .LVU143
+ 852 0028 6B68     		ldr	r3, [r5, #4]
+ 853 002a 0348     		ldr	r0, .L40
+ 854 002c 3344     		add	r3, r3, r6
+ 855 002e 1979     		ldrb	r1, [r3, #4]	@ zero_extendqisi2
+ 856 0030 FFF7FEFF 		bl	_ZN5Pages4openENS_2IdE
+ 857              	.LVL74:
+  46:Src/Ui/Pages/chapter.h **** 	}
+ 858              		.loc 1 46 3 view .LVU144
+ 859 0034 EC60     		str	r4, [r5, #12]
+  47:Src/Ui/Pages/chapter.h **** 
+ 860              		.loc 1 47 2 view .LVU145
+ 861 0036 70BD     		pop	{r4, r5, r6, pc}
+ 862              	.LVL75:
+ 863              	.L41:
+  47:Src/Ui/Pages/chapter.h **** 
+ 864              		.loc 1 47 2 view .LVU146
+ 865              		.align	2
+ 866              	.L40:
+ 867 0038 00000000 		.word	pages
+ 868              		.cfi_endproc
+ 869              	.LFE2495:
+ 871              		.section	.text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9open_pageEi,"axG",%progbits,_ZN12Chapte
+ 872              		.align	1
+ 873              		.p2align 2,,3
+ 874              		.weak	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9open_pageEi
+ 875              		.syntax unified
+ 876              		.thumb
+ 877              		.thumb_func
+ 878              		.fpu fpv4-sp-d16
+ 880              	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9open_pageEi:
+ 881              	.LVL76:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 19
+
+
+ 882              	.LFB2500:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 883              		.loc 1 39 7 is_stmt 1 view -0
+ 884              		.cfi_startproc
+ 885              		@ args = 0, pretend = 0, frame = 0
+ 886              		@ frame_needed = 0, uses_anonymous_args = 0
+ 887              	.LBB48:
+ 888              	.LBI48:
+  64:Src/Ui/Pages/chapter.h **** 		return (index >= 0) && (index < size);
+ 889              		.loc 1 64 7 view .LVU148
+  64:Src/Ui/Pages/chapter.h **** 		return (index >= 0) && (index < size);
+ 890              		.loc 1 64 7 is_stmt 0 view .LVU149
+ 891              	.LBE48:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 892              		.loc 1 39 7 view .LVU150
+ 893 0000 70B5     		push	{r4, r5, r6, lr}
+ 894              		.cfi_def_cfa_offset 16
+ 895              		.cfi_offset 4, -16
+ 896              		.cfi_offset 5, -12
+ 897              		.cfi_offset 6, -8
+ 898              		.cfi_offset 14, -4
+ 899              	.LBB50:
+ 900              	.LBB49:
+ 901              		.loc 1 65 23 view .LVU151
+ 902 0002 0C1E     		subs	r4, r1, #0
+ 903 0004 0CDB     		blt	.L42
+ 904              		.loc 1 65 35 view .LVU152
+ 905 0006 037A     		ldrb	r3, [r0, #8]	@ zero_extendqisi2
+ 906              		.loc 1 65 23 view .LVU153
+ 907 0008 9C42     		cmp	r4, r3
+ 908 000a 0546     		mov	r5, r0
+ 909 000c 08DA     		bge	.L42
+ 910              	.LVL77:
+ 911              		.loc 1 65 23 view .LVU154
+ 912              	.LBE49:
+ 913              	.LBE50:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 914              		.loc 1 40 46 view .LVU155
+ 915 000e 4168     		ldr	r1, [r0, #4]
+ 916              	.LVL78:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 917              		.loc 1 40 46 view .LVU156
+ 918 0010 0948     		ldr	r0, .L48
+ 919              	.LVL79:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 920              		.loc 1 40 46 view .LVU157
+ 921 0012 01EBC402 		add	r2, r1, r4, lsl #3
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 922              		.loc 1 40 59 view .LVU158
+ 923 0016 E600     		lsls	r6, r4, #3
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 924              		.loc 1 40 46 view .LVU159
+ 925 0018 1179     		ldrb	r1, [r2, #4]	@ zero_extendqisi2
+ 926 001a FFF7FEFF 		bl	_ZN5Pages7is_openENS_2IdE
+ 927              	.LVL80:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 928              		.loc 1 40 30 view .LVU160
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 20
+
+
+ 929 001e 00B1     		cbz	r0, .L47
+ 930              	.LVL81:
+ 931              	.L42:
+  47:Src/Ui/Pages/chapter.h **** 
+ 932              		.loc 1 47 2 view .LVU161
+ 933 0020 70BD     		pop	{r4, r5, r6, pc}
+ 934              	.LVL82:
+ 935              	.L47:
+  44:Src/Ui/Pages/chapter.h **** 		pages.open(page[index].id);
+ 936              		.loc 1 44 18 view .LVU162
+ 937 0022 0548     		ldr	r0, .L48
+ 938 0024 FFF7FEFF 		bl	_ZN5Pages9close_allEv
+ 939              	.LVL83:
+  45:Src/Ui/Pages/chapter.h **** 		curr_page_ = index;
+ 940              		.loc 1 45 13 view .LVU163
+ 941 0028 6B68     		ldr	r3, [r5, #4]
+ 942 002a 0348     		ldr	r0, .L48
+ 943 002c 3344     		add	r3, r3, r6
+ 944 002e 1979     		ldrb	r1, [r3, #4]	@ zero_extendqisi2
+ 945 0030 FFF7FEFF 		bl	_ZN5Pages4openENS_2IdE
+ 946              	.LVL84:
+  46:Src/Ui/Pages/chapter.h **** 	}
+ 947              		.loc 1 46 3 view .LVU164
+ 948 0034 EC60     		str	r4, [r5, #12]
+  47:Src/Ui/Pages/chapter.h **** 
+ 949              		.loc 1 47 2 view .LVU165
+ 950 0036 70BD     		pop	{r4, r5, r6, pc}
+ 951              	.LVL85:
+ 952              	.L49:
+  47:Src/Ui/Pages/chapter.h **** 
+ 953              		.loc 1 47 2 view .LVU166
+ 954              		.align	2
+ 955              	.L48:
+ 956 0038 00000000 		.word	pages
+ 957              		.cfi_endproc
+ 958              	.LFE2500:
+ 960              		.section	.text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9open_pageEi,"axG",%progbits,_ZN12Cha
+ 961              		.align	1
+ 962              		.p2align 2,,3
+ 963              		.weak	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9open_pageEi
+ 964              		.syntax unified
+ 965              		.thumb
+ 966              		.thumb_func
+ 967              		.fpu fpv4-sp-d16
+ 969              	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9open_pageEi:
+ 970              	.LVL86:
+ 971              	.LFB2505:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 972              		.loc 1 39 7 is_stmt 1 view -0
+ 973              		.cfi_startproc
+ 974              		@ args = 0, pretend = 0, frame = 0
+ 975              		@ frame_needed = 0, uses_anonymous_args = 0
+ 976              	.LBB51:
+ 977              	.LBI51:
+  64:Src/Ui/Pages/chapter.h **** 		return (index >= 0) && (index < size);
+ 978              		.loc 1 64 7 view .LVU168
+  64:Src/Ui/Pages/chapter.h **** 		return (index >= 0) && (index < size);
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 21
+
+
+ 979              		.loc 1 64 7 is_stmt 0 view .LVU169
+ 980              	.LBE51:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 981              		.loc 1 39 7 view .LVU170
+ 982 0000 70B5     		push	{r4, r5, r6, lr}
+ 983              		.cfi_def_cfa_offset 16
+ 984              		.cfi_offset 4, -16
+ 985              		.cfi_offset 5, -12
+ 986              		.cfi_offset 6, -8
+ 987              		.cfi_offset 14, -4
+ 988              	.LBB53:
+ 989              	.LBB52:
+ 990              		.loc 1 65 23 view .LVU171
+ 991 0002 0C1E     		subs	r4, r1, #0
+ 992 0004 0CDB     		blt	.L50
+ 993              		.loc 1 65 35 view .LVU172
+ 994 0006 037A     		ldrb	r3, [r0, #8]	@ zero_extendqisi2
+ 995              		.loc 1 65 23 view .LVU173
+ 996 0008 9C42     		cmp	r4, r3
+ 997 000a 0546     		mov	r5, r0
+ 998 000c 08DA     		bge	.L50
+ 999              	.LVL87:
+ 1000              		.loc 1 65 23 view .LVU174
+ 1001              	.LBE52:
+ 1002              	.LBE53:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1003              		.loc 1 40 46 view .LVU175
+ 1004 000e 4168     		ldr	r1, [r0, #4]
+ 1005              	.LVL88:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1006              		.loc 1 40 46 view .LVU176
+ 1007 0010 0948     		ldr	r0, .L56
+ 1008              	.LVL89:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1009              		.loc 1 40 46 view .LVU177
+ 1010 0012 01EBC402 		add	r2, r1, r4, lsl #3
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1011              		.loc 1 40 59 view .LVU178
+ 1012 0016 E600     		lsls	r6, r4, #3
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1013              		.loc 1 40 46 view .LVU179
+ 1014 0018 1179     		ldrb	r1, [r2, #4]	@ zero_extendqisi2
+ 1015 001a FFF7FEFF 		bl	_ZN5Pages7is_openENS_2IdE
+ 1016              	.LVL90:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1017              		.loc 1 40 30 view .LVU180
+ 1018 001e 00B1     		cbz	r0, .L55
+ 1019              	.LVL91:
+ 1020              	.L50:
+  47:Src/Ui/Pages/chapter.h **** 
+ 1021              		.loc 1 47 2 view .LVU181
+ 1022 0020 70BD     		pop	{r4, r5, r6, pc}
+ 1023              	.LVL92:
+ 1024              	.L55:
+  44:Src/Ui/Pages/chapter.h **** 		pages.open(page[index].id);
+ 1025              		.loc 1 44 18 view .LVU182
+ 1026 0022 0548     		ldr	r0, .L56
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 22
+
+
+ 1027 0024 FFF7FEFF 		bl	_ZN5Pages9close_allEv
+ 1028              	.LVL93:
+  45:Src/Ui/Pages/chapter.h **** 		curr_page_ = index;
+ 1029              		.loc 1 45 13 view .LVU183
+ 1030 0028 6B68     		ldr	r3, [r5, #4]
+ 1031 002a 0348     		ldr	r0, .L56
+ 1032 002c 3344     		add	r3, r3, r6
+ 1033 002e 1979     		ldrb	r1, [r3, #4]	@ zero_extendqisi2
+ 1034 0030 FFF7FEFF 		bl	_ZN5Pages4openENS_2IdE
+ 1035              	.LVL94:
+  46:Src/Ui/Pages/chapter.h **** 	}
+ 1036              		.loc 1 46 3 view .LVU184
+ 1037 0034 EC60     		str	r4, [r5, #12]
+  47:Src/Ui/Pages/chapter.h **** 
+ 1038              		.loc 1 47 2 view .LVU185
+ 1039 0036 70BD     		pop	{r4, r5, r6, pc}
+ 1040              	.LVL95:
+ 1041              	.L57:
+  47:Src/Ui/Pages/chapter.h **** 
+ 1042              		.loc 1 47 2 view .LVU186
+ 1043              		.align	2
+ 1044              	.L56:
+ 1045 0038 00000000 		.word	pages
+ 1046              		.cfi_endproc
+ 1047              	.LFE2505:
+ 1049              		.section	.text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9open_pageEi,"axG",%progbits,_ZN12Chapt
+ 1050              		.align	1
+ 1051              		.p2align 2,,3
+ 1052              		.weak	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9open_pageEi
+ 1053              		.syntax unified
+ 1054              		.thumb
+ 1055              		.thumb_func
+ 1056              		.fpu fpv4-sp-d16
+ 1058              	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9open_pageEi:
+ 1059              	.LVL96:
+ 1060              	.LFB2510:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 1061              		.loc 1 39 7 is_stmt 1 view -0
+ 1062              		.cfi_startproc
+ 1063              		@ args = 0, pretend = 0, frame = 0
+ 1064              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1065              	.LBB54:
+ 1066              	.LBI54:
+  64:Src/Ui/Pages/chapter.h **** 		return (index >= 0) && (index < size);
+ 1067              		.loc 1 64 7 view .LVU188
+  64:Src/Ui/Pages/chapter.h **** 		return (index >= 0) && (index < size);
+ 1068              		.loc 1 64 7 is_stmt 0 view .LVU189
+ 1069              	.LBE54:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 1070              		.loc 1 39 7 view .LVU190
+ 1071 0000 70B5     		push	{r4, r5, r6, lr}
+ 1072              		.cfi_def_cfa_offset 16
+ 1073              		.cfi_offset 4, -16
+ 1074              		.cfi_offset 5, -12
+ 1075              		.cfi_offset 6, -8
+ 1076              		.cfi_offset 14, -4
+ 1077              	.LBB56:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 23
+
+
+ 1078              	.LBB55:
+ 1079              		.loc 1 65 23 view .LVU191
+ 1080 0002 0C1E     		subs	r4, r1, #0
+ 1081 0004 0CDB     		blt	.L58
+ 1082              		.loc 1 65 35 view .LVU192
+ 1083 0006 037A     		ldrb	r3, [r0, #8]	@ zero_extendqisi2
+ 1084              		.loc 1 65 23 view .LVU193
+ 1085 0008 9C42     		cmp	r4, r3
+ 1086 000a 0546     		mov	r5, r0
+ 1087 000c 08DA     		bge	.L58
+ 1088              	.LVL97:
+ 1089              		.loc 1 65 23 view .LVU194
+ 1090              	.LBE55:
+ 1091              	.LBE56:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1092              		.loc 1 40 46 view .LVU195
+ 1093 000e 4168     		ldr	r1, [r0, #4]
+ 1094              	.LVL98:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1095              		.loc 1 40 46 view .LVU196
+ 1096 0010 0948     		ldr	r0, .L64
+ 1097              	.LVL99:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1098              		.loc 1 40 46 view .LVU197
+ 1099 0012 01EBC402 		add	r2, r1, r4, lsl #3
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1100              		.loc 1 40 59 view .LVU198
+ 1101 0016 E600     		lsls	r6, r4, #3
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1102              		.loc 1 40 46 view .LVU199
+ 1103 0018 1179     		ldrb	r1, [r2, #4]	@ zero_extendqisi2
+ 1104 001a FFF7FEFF 		bl	_ZN5Pages7is_openENS_2IdE
+ 1105              	.LVL100:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1106              		.loc 1 40 30 view .LVU200
+ 1107 001e 00B1     		cbz	r0, .L63
+ 1108              	.LVL101:
+ 1109              	.L58:
+  47:Src/Ui/Pages/chapter.h **** 
+ 1110              		.loc 1 47 2 view .LVU201
+ 1111 0020 70BD     		pop	{r4, r5, r6, pc}
+ 1112              	.LVL102:
+ 1113              	.L63:
+  44:Src/Ui/Pages/chapter.h **** 		pages.open(page[index].id);
+ 1114              		.loc 1 44 18 view .LVU202
+ 1115 0022 0548     		ldr	r0, .L64
+ 1116 0024 FFF7FEFF 		bl	_ZN5Pages9close_allEv
+ 1117              	.LVL103:
+  45:Src/Ui/Pages/chapter.h **** 		curr_page_ = index;
+ 1118              		.loc 1 45 13 view .LVU203
+ 1119 0028 6B68     		ldr	r3, [r5, #4]
+ 1120 002a 0348     		ldr	r0, .L64
+ 1121 002c 3344     		add	r3, r3, r6
+ 1122 002e 1979     		ldrb	r1, [r3, #4]	@ zero_extendqisi2
+ 1123 0030 FFF7FEFF 		bl	_ZN5Pages4openENS_2IdE
+ 1124              	.LVL104:
+  46:Src/Ui/Pages/chapter.h **** 	}
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 24
+
+
+ 1125              		.loc 1 46 3 view .LVU204
+ 1126 0034 EC60     		str	r4, [r5, #12]
+  47:Src/Ui/Pages/chapter.h **** 
+ 1127              		.loc 1 47 2 view .LVU205
+ 1128 0036 70BD     		pop	{r4, r5, r6, pc}
+ 1129              	.LVL105:
+ 1130              	.L65:
+  47:Src/Ui/Pages/chapter.h **** 
+ 1131              		.loc 1 47 2 view .LVU206
+ 1132              		.align	2
+ 1133              	.L64:
+ 1134 0038 00000000 		.word	pages
+ 1135              		.cfi_endproc
+ 1136              	.LFE2510:
+ 1138              		.section	.text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9open_pageEi,"axG",%progbits,_ZN12Chapte
+ 1139              		.align	1
+ 1140              		.p2align 2,,3
+ 1141              		.weak	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9open_pageEi
+ 1142              		.syntax unified
+ 1143              		.thumb
+ 1144              		.thumb_func
+ 1145              		.fpu fpv4-sp-d16
+ 1147              	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9open_pageEi:
+ 1148              	.LVL106:
+ 1149              	.LFB2515:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 1150              		.loc 1 39 7 is_stmt 1 view -0
+ 1151              		.cfi_startproc
+ 1152              		@ args = 0, pretend = 0, frame = 0
+ 1153              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1154              	.LBB59:
+ 1155              	.LBI59:
+  64:Src/Ui/Pages/chapter.h **** 		return (index >= 0) && (index < size);
+ 1156              		.loc 1 64 7 view .LVU208
+  64:Src/Ui/Pages/chapter.h **** 		return (index >= 0) && (index < size);
+ 1157              		.loc 1 64 7 is_stmt 0 view .LVU209
+ 1158              	.LBE59:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 1159              		.loc 1 39 7 view .LVU210
+ 1160 0000 70B5     		push	{r4, r5, r6, lr}
+ 1161              		.cfi_def_cfa_offset 16
+ 1162              		.cfi_offset 4, -16
+ 1163              		.cfi_offset 5, -12
+ 1164              		.cfi_offset 6, -8
+ 1165              		.cfi_offset 14, -4
+ 1166              	.LBB61:
+ 1167              	.LBB60:
+ 1168              		.loc 1 65 23 view .LVU211
+ 1169 0002 0C1E     		subs	r4, r1, #0
+ 1170 0004 0CDB     		blt	.L66
+ 1171              		.loc 1 65 35 view .LVU212
+ 1172 0006 037A     		ldrb	r3, [r0, #8]	@ zero_extendqisi2
+ 1173              		.loc 1 65 23 view .LVU213
+ 1174 0008 9C42     		cmp	r4, r3
+ 1175 000a 0546     		mov	r5, r0
+ 1176 000c 08DA     		bge	.L66
+ 1177              	.LVL107:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 25
+
+
+ 1178              		.loc 1 65 23 view .LVU214
+ 1179              	.LBE60:
+ 1180              	.LBE61:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1181              		.loc 1 40 46 view .LVU215
+ 1182 000e 4168     		ldr	r1, [r0, #4]
+ 1183              	.LVL108:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1184              		.loc 1 40 46 view .LVU216
+ 1185 0010 0948     		ldr	r0, .L72
+ 1186              	.LVL109:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1187              		.loc 1 40 46 view .LVU217
+ 1188 0012 01EBC402 		add	r2, r1, r4, lsl #3
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1189              		.loc 1 40 59 view .LVU218
+ 1190 0016 E600     		lsls	r6, r4, #3
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1191              		.loc 1 40 46 view .LVU219
+ 1192 0018 1179     		ldrb	r1, [r2, #4]	@ zero_extendqisi2
+ 1193 001a FFF7FEFF 		bl	_ZN5Pages7is_openENS_2IdE
+ 1194              	.LVL110:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1195              		.loc 1 40 30 view .LVU220
+ 1196 001e 00B1     		cbz	r0, .L71
+ 1197              	.LVL111:
+ 1198              	.L66:
+  47:Src/Ui/Pages/chapter.h **** 
+ 1199              		.loc 1 47 2 view .LVU221
+ 1200 0020 70BD     		pop	{r4, r5, r6, pc}
+ 1201              	.LVL112:
+ 1202              	.L71:
+  44:Src/Ui/Pages/chapter.h **** 		pages.open(page[index].id);
+ 1203              		.loc 1 44 18 view .LVU222
+ 1204 0022 0548     		ldr	r0, .L72
+ 1205 0024 FFF7FEFF 		bl	_ZN5Pages9close_allEv
+ 1206              	.LVL113:
+  45:Src/Ui/Pages/chapter.h **** 		curr_page_ = index;
+ 1207              		.loc 1 45 13 view .LVU223
+ 1208 0028 6B68     		ldr	r3, [r5, #4]
+ 1209 002a 0348     		ldr	r0, .L72
+ 1210 002c 3344     		add	r3, r3, r6
+ 1211 002e 1979     		ldrb	r1, [r3, #4]	@ zero_extendqisi2
+ 1212 0030 FFF7FEFF 		bl	_ZN5Pages4openENS_2IdE
+ 1213              	.LVL114:
+  46:Src/Ui/Pages/chapter.h **** 	}
+ 1214              		.loc 1 46 3 view .LVU224
+ 1215 0034 EC60     		str	r4, [r5, #12]
+  47:Src/Ui/Pages/chapter.h **** 
+ 1216              		.loc 1 47 2 view .LVU225
+ 1217 0036 70BD     		pop	{r4, r5, r6, pc}
+ 1218              	.LVL115:
+ 1219              	.L73:
+  47:Src/Ui/Pages/chapter.h **** 
+ 1220              		.loc 1 47 2 view .LVU226
+ 1221              		.align	2
+ 1222              	.L72:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 26
+
+
+ 1223 0038 00000000 		.word	pages
+ 1224              		.cfi_endproc
+ 1225              	.LFE2515:
+ 1227              		.section	.text._ZN7Chapter4initEv,"ax",%progbits
+ 1228              		.align	1
+ 1229              		.p2align 2,,3
+ 1230              		.global	_ZN7Chapter4initEv
+ 1231              		.syntax unified
+ 1232              		.thumb
+ 1233              		.thumb_func
+ 1234              		.fpu fpv4-sp-d16
+ 1236              	_ZN7Chapter4initEv:
+ 1237              	.LVL116:
+ 1238              	.LFB2028:
+ 1239              		.file 3 "Src/Ui/Pages/chapter.cpp"
+   1:Src/Ui/Pages/chapter.cpp **** #include "chapter.h"
+   2:Src/Ui/Pages/chapter.cpp **** 
+   3:Src/Ui/Pages/chapter.cpp **** #define CHAPTER_SIZE(chapter_pages) (sizeof(chapter_pages) / sizeof(ChapterPage))
+   4:Src/Ui/Pages/chapter.cpp **** 
+   5:Src/Ui/Pages/chapter.cpp **** ChapterPage song_pages[] = {
+   6:Src/Ui/Pages/chapter.cpp **** 	{ .name = "SETTINGS", 	.id = Pages::SONG_PAGE,			.icon = Bitmap::SONG_PAGE },
+   7:Src/Ui/Pages/chapter.cpp **** 	{ .name = "MONITOR", 	.id = Pages::SONG_MONITOR_PAGE,	.icon = Bitmap::SONG_MONITOR_PAGE },
+   8:Src/Ui/Pages/chapter.cpp **** };
+   9:Src/Ui/Pages/chapter.cpp **** 
+  10:Src/Ui/Pages/chapter.cpp **** ChapterPage track_pages[] = {
+  11:Src/Ui/Pages/chapter.cpp **** 	{ .name = "SETTINGS", 	.id = Pages::TRACK_PAGE,		.icon = Bitmap::SETTINGS_PAGE },
+  12:Src/Ui/Pages/chapter.cpp **** };
+  13:Src/Ui/Pages/chapter.cpp **** 
+  14:Src/Ui/Pages/chapter.cpp **** ChapterPage pattern_pages[] = {
+  15:Src/Ui/Pages/chapter.cpp **** 	{ .name = "PATTERN", 	.id = Pages::PATTERN_PAGE,		.icon = Bitmap::PATTERN_PAGE },
+  16:Src/Ui/Pages/chapter.cpp **** };
+  17:Src/Ui/Pages/chapter.cpp **** 
+  18:Src/Ui/Pages/chapter.cpp **** ChapterPage midi_pages[] = {
+  19:Src/Ui/Pages/chapter.cpp **** 	{ .name = "INPUT", 		.id = Pages::MIDI_INPUT_PAGE,	.icon = Bitmap::MIDI_IN_PAGE },
+  20:Src/Ui/Pages/chapter.cpp **** 	{ .name = "OUTPUT", 	.id = Pages::MIDI_OUTPUT_PAGE,	.icon = Bitmap::MIDI_OUT_PAGE },
+  21:Src/Ui/Pages/chapter.cpp **** };
+  22:Src/Ui/Pages/chapter.cpp **** 
+  23:Src/Ui/Pages/chapter.cpp **** ChapterPage cv_pages[] = {
+  24:Src/Ui/Pages/chapter.cpp **** 	{ .name = "INPUT", 		.id = Pages::CV_INPUT_PAGE,		.icon = Bitmap::CV_IN_PAGE },
+  25:Src/Ui/Pages/chapter.cpp **** 	{ .name = "OUTPUT", 	.id = Pages::CV_OUTPUT_PAGE,	.icon = Bitmap::CV_OUT_PAGE },
+  26:Src/Ui/Pages/chapter.cpp **** };
+  27:Src/Ui/Pages/chapter.cpp **** 
+  28:Src/Ui/Pages/chapter.cpp **** ChapterPage system_pages[] = {
+  29:Src/Ui/Pages/chapter.cpp **** 	{ .name = "SAVE", 		.id = Pages::SAVE_PAGE,			.icon = Bitmap::PROJECT_SAVE_PAGE },
+  30:Src/Ui/Pages/chapter.cpp **** 	{ .name = "LOAD", 		.id = Pages::LOAD_PAGE,			.icon = Bitmap::PROJECT_LOAD_PAGE },
+  31:Src/Ui/Pages/chapter.cpp **** 	{ .name = "SETTINGS",	.id = Pages::SYSTEM_PAGE,		.icon = Bitmap::SETTINGS_PAGE },
+  32:Src/Ui/Pages/chapter.cpp **** };
+  33:Src/Ui/Pages/chapter.cpp **** 
+  34:Src/Ui/Pages/chapter.cpp **** ChapterEntry<CHAPTER_SIZE(song_pages), song_pages> song_chapter;
+  35:Src/Ui/Pages/chapter.cpp **** ChapterEntry<CHAPTER_SIZE(track_pages), track_pages> track_chapter;
+  36:Src/Ui/Pages/chapter.cpp **** ChapterEntry<CHAPTER_SIZE(pattern_pages), pattern_pages> pattern_chapter;
+  37:Src/Ui/Pages/chapter.cpp **** ChapterEntry<CHAPTER_SIZE(midi_pages), midi_pages> midi_chapter;
+  38:Src/Ui/Pages/chapter.cpp **** ChapterEntry<CHAPTER_SIZE(cv_pages), cv_pages> cv_chapter;
+  39:Src/Ui/Pages/chapter.cpp **** ChapterEntry<CHAPTER_SIZE(system_pages), system_pages> system_chapter;
+  40:Src/Ui/Pages/chapter.cpp **** 
+  41:Src/Ui/Pages/chapter.cpp **** void Chapter::init() {
+ 1240              		.loc 3 41 22 is_stmt 1 view -0
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 27
+
+
+ 1241              		.cfi_startproc
+ 1242              		@ args = 0, pretend = 0, frame = 0
+ 1243              		@ frame_needed = 0, uses_anonymous_args = 0
+  42:Src/Ui/Pages/chapter.cpp **** 	active_ = SONG;
+ 1244              		.loc 3 42 2 view .LVU228
+  41:Src/Ui/Pages/chapter.cpp **** 	active_ = SONG;
+ 1245              		.loc 3 41 22 is_stmt 0 view .LVU229
+ 1246 0000 38B5     		push	{r3, r4, r5, lr}
+ 1247              		.cfi_def_cfa_offset 16
+ 1248              		.cfi_offset 3, -16
+ 1249              		.cfi_offset 4, -12
+ 1250              		.cfi_offset 5, -8
+ 1251              		.cfi_offset 14, -4
+  43:Src/Ui/Pages/chapter.cpp **** 	chapter_ = &song_chapter;
+ 1252              		.loc 3 43 11 view .LVU230
+ 1253 0002 0C4C     		ldr	r4, .L80
+ 1254 0004 4460     		str	r4, [r0, #4]
+  42:Src/Ui/Pages/chapter.cpp **** 	active_ = SONG;
+ 1255              		.loc 3 42 10 view .LVU231
+ 1256 0006 0023     		movs	r3, #0
+ 1257 0008 0370     		strb	r3, [r0]
+ 1258              		.loc 3 43 2 is_stmt 1 view .LVU232
+  44:Src/Ui/Pages/chapter.cpp **** 	open_page(0);
+ 1259              		.loc 3 44 2 view .LVU233
+ 1260              	.LVL117:
+ 1261              	.LBB68:
+ 1262              	.LBI68:
+  66:Src/Ui/Pages/chapter.h **** 	}
+  67:Src/Ui/Pages/chapter.h **** };
+  68:Src/Ui/Pages/chapter.h **** 
+  69:Src/Ui/Pages/chapter.h **** // Chapters
+  70:Src/Ui/Pages/chapter.h **** class Chapter {
+  71:Src/Ui/Pages/chapter.h **** 
+  72:Src/Ui/Pages/chapter.h **** public:
+  73:Src/Ui/Pages/chapter.h **** 
+  74:Src/Ui/Pages/chapter.h **** 	enum Id {
+  75:Src/Ui/Pages/chapter.h **** 		SONG,
+  76:Src/Ui/Pages/chapter.h **** 		TRACK,
+  77:Src/Ui/Pages/chapter.h **** 		PATTERN,
+  78:Src/Ui/Pages/chapter.h **** 		MIDI,
+  79:Src/Ui/Pages/chapter.h **** 		CV,
+  80:Src/Ui/Pages/chapter.h **** 		SYSTEM,
+  81:Src/Ui/Pages/chapter.h **** 
+  82:Src/Ui/Pages/chapter.h **** 		NUM_CHAPTERS
+  83:Src/Ui/Pages/chapter.h **** 	};
+  84:Src/Ui/Pages/chapter.h **** 
+  85:Src/Ui/Pages/chapter.h **** 	void init();
+  86:Src/Ui/Pages/chapter.h **** 	void open(Id id);
+  87:Src/Ui/Pages/chapter.h **** 
+  88:Src/Ui/Pages/chapter.h **** 	const char* name() {
+  89:Src/Ui/Pages/chapter.h **** 		switch (active_)
+  90:Src/Ui/Pages/chapter.h **** 		{
+  91:Src/Ui/Pages/chapter.h **** 		case SONG:		return "SONG";
+  92:Src/Ui/Pages/chapter.h **** 		case TRACK:		return "TRACK";
+  93:Src/Ui/Pages/chapter.h **** 		case PATTERN:	return "PATTERN";
+  94:Src/Ui/Pages/chapter.h **** 		case MIDI:		return "MIDI";
+  95:Src/Ui/Pages/chapter.h **** 		case CV:		return "CV";
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 28
+
+
+  96:Src/Ui/Pages/chapter.h **** 		case SYSTEM:	return "SYSTEM";
+  97:Src/Ui/Pages/chapter.h **** 		default:		return nullptr;
+  98:Src/Ui/Pages/chapter.h **** 			break;
+  99:Src/Ui/Pages/chapter.h **** 		}
+ 100:Src/Ui/Pages/chapter.h **** 	}
+ 101:Src/Ui/Pages/chapter.h **** 
+ 102:Src/Ui/Pages/chapter.h **** 	Id active() {
+ 103:Src/Ui/Pages/chapter.h **** 		return active_;
+ 104:Src/Ui/Pages/chapter.h **** 	}
+ 105:Src/Ui/Pages/chapter.h **** 
+ 106:Src/Ui/Pages/chapter.h **** 	uint8_t num_pages() {
+ 107:Src/Ui/Pages/chapter.h **** 		return chapter_->num_pages();
+ 108:Src/Ui/Pages/chapter.h **** 	}
+ 109:Src/Ui/Pages/chapter.h **** 
+ 110:Src/Ui/Pages/chapter.h **** 	uint8_t curr_page() {
+ 111:Src/Ui/Pages/chapter.h **** 		return chapter_->curr_page();
+ 112:Src/Ui/Pages/chapter.h **** 	}
+ 113:Src/Ui/Pages/chapter.h **** 
+ 114:Src/Ui/Pages/chapter.h **** 	void open_page(int index) {
+ 1263              		.loc 1 114 7 view .LVU234
+ 1264              		.loc 1 114 7 is_stmt 0 view .LVU235
+ 1265              	.LBE68:
+ 115:Src/Ui/Pages/chapter.h **** 		chapter_->open_page(index);
+ 1266              		.loc 1 115 3 is_stmt 1 view .LVU236
+ 1267              	.LBB75:
+ 1268              	.LBB69:
+ 1269              	.LBI69:
+  39:Src/Ui/Pages/chapter.h **** 		if (inside(index) == false || pages.is_open(page[index].id) == true) {
+ 1270              		.loc 1 39 7 view .LVU237
+ 1271              	.LBB70:
+ 1272              	.LBB71:
+ 1273              	.LBI71:
+  64:Src/Ui/Pages/chapter.h **** 		return (index >= 0) && (index < size);
+ 1274              		.loc 1 64 7 view .LVU238
+ 1275              	.LBB72:
+  65:Src/Ui/Pages/chapter.h **** 	}
+ 1276              		.loc 1 65 23 is_stmt 0 view .LVU239
+ 1277 000a 207A     		ldrb	r0, [r4, #8]	@ zero_extendqisi2
+ 1278              	.LVL118:
+  65:Src/Ui/Pages/chapter.h **** 	}
+ 1279              		.loc 1 65 23 view .LVU240
+ 1280 000c 30B1     		cbz	r0, .L74
+ 1281              	.LVL119:
+  65:Src/Ui/Pages/chapter.h **** 	}
+ 1282              		.loc 1 65 23 view .LVU241
+ 1283              	.LBE72:
+ 1284              	.LBE71:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1285              		.loc 1 40 46 view .LVU242
+ 1286 000e 6168     		ldr	r1, [r4, #4]
+ 1287 0010 0948     		ldr	r0, .L80+4
+ 1288 0012 0979     		ldrb	r1, [r1, #4]	@ zero_extendqisi2
+ 1289 0014 FFF7FEFF 		bl	_ZN5Pages7is_openENS_2IdE
+ 1290              	.LVL120:
+  40:Src/Ui/Pages/chapter.h **** 			return;
+ 1291              		.loc 1 40 30 view .LVU243
+ 1292 0018 0546     		mov	r5, r0
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 29
+
+
+ 1293 001a 00B1     		cbz	r0, .L79
+ 1294              	.L74:
+ 1295              	.LBE70:
+ 1296              	.LBE69:
+ 1297              	.LBE75:
+  45:Src/Ui/Pages/chapter.cpp **** }
+ 1298              		.loc 3 45 1 view .LVU244
+ 1299 001c 38BD     		pop	{r3, r4, r5, pc}
+ 1300              	.L79:
+ 1301              	.LBB76:
+ 1302              	.LBB74:
+ 1303              	.LBB73:
+  44:Src/Ui/Pages/chapter.h **** 		pages.open(page[index].id);
+ 1304              		.loc 1 44 18 view .LVU245
+ 1305 001e 0648     		ldr	r0, .L80+4
+ 1306 0020 FFF7FEFF 		bl	_ZN5Pages9close_allEv
+ 1307              	.LVL121:
+  45:Src/Ui/Pages/chapter.h **** 		curr_page_ = index;
+ 1308              		.loc 1 45 13 view .LVU246
+ 1309 0024 6268     		ldr	r2, [r4, #4]
+ 1310 0026 0448     		ldr	r0, .L80+4
+ 1311 0028 1179     		ldrb	r1, [r2, #4]	@ zero_extendqisi2
+ 1312 002a FFF7FEFF 		bl	_ZN5Pages4openENS_2IdE
+ 1313              	.LVL122:
+  46:Src/Ui/Pages/chapter.h **** 	}
+ 1314              		.loc 1 46 3 view .LVU247
+ 1315 002e E560     		str	r5, [r4, #12]
+ 1316              	.LVL123:
+  46:Src/Ui/Pages/chapter.h **** 	}
+ 1317              		.loc 1 46 3 view .LVU248
+ 1318              	.LBE73:
+ 1319              	.LBE74:
+ 1320              	.LBE76:
+ 1321              		.loc 3 45 1 view .LVU249
+ 1322 0030 38BD     		pop	{r3, r4, r5, pc}
+ 1323              	.L81:
+ 1324 0032 00BF     		.align	2
+ 1325              	.L80:
+ 1326 0034 00000000 		.word	.LANCHOR0
+ 1327 0038 00000000 		.word	pages
+ 1328              		.cfi_endproc
+ 1329              	.LFE2028:
+ 1331              		.section	.text._ZN7Chapter4openENS_2IdE,"ax",%progbits
+ 1332              		.align	1
+ 1333              		.p2align 2,,3
+ 1334              		.global	_ZN7Chapter4openENS_2IdE
+ 1335              		.syntax unified
+ 1336              		.thumb
+ 1337              		.thumb_func
+ 1338              		.fpu fpv4-sp-d16
+ 1340              	_ZN7Chapter4openENS_2IdE:
+ 1341              	.LVL124:
+ 1342              	.LFB2029:
+  46:Src/Ui/Pages/chapter.cpp **** 
+  47:Src/Ui/Pages/chapter.cpp **** void Chapter::open(Id id) {
+ 1343              		.loc 3 47 27 is_stmt 1 view -0
+ 1344              		.cfi_startproc
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 30
+
+
+ 1345              		@ args = 0, pretend = 0, frame = 0
+ 1346              		@ frame_needed = 0, uses_anonymous_args = 0
+  48:Src/Ui/Pages/chapter.cpp **** 
+  49:Src/Ui/Pages/chapter.cpp **** 	Id last_active = active_;
+ 1347              		.loc 3 49 2 view .LVU251
+  47:Src/Ui/Pages/chapter.cpp **** 
+ 1348              		.loc 3 47 27 is_stmt 0 view .LVU252
+ 1349 0000 10B5     		push	{r4, lr}
+ 1350              		.cfi_def_cfa_offset 8
+ 1351              		.cfi_offset 4, -8
+ 1352              		.cfi_offset 14, -4
+ 1353              		.loc 3 49 5 view .LVU253
+ 1354 0002 0378     		ldrb	r3, [r0]	@ zero_extendqisi2
+ 1355              	.LVL125:
+  50:Src/Ui/Pages/chapter.cpp **** 
+  51:Src/Ui/Pages/chapter.cpp **** 	switch (id)
+ 1356              		.loc 3 51 2 is_stmt 1 view .LVU254
+  47:Src/Ui/Pages/chapter.cpp **** 
+ 1357              		.loc 3 47 27 is_stmt 0 view .LVU255
+ 1358 0004 0446     		mov	r4, r0
+ 1359 0006 0529     		cmp	r1, #5
+ 1360 0008 34D8     		bhi	.L92
+ 1361 000a DFE801F0 		tbb	[pc, r1]
+ 1362              	.L85:
+ 1363 000e 17       		.byte	(.L90-.L85)/2
+ 1364 000f 1F       		.byte	(.L89-.L85)/2
+ 1365 0010 24       		.byte	(.L88-.L85)/2
+ 1366 0011 29       		.byte	(.L87-.L85)/2
+ 1367 0012 2E       		.byte	(.L86-.L85)/2
+ 1368 0013 03       		.byte	(.L84-.L85)/2
+ 1369              		.p2align 1
+ 1370              	.L84:
+  52:Src/Ui/Pages/chapter.cpp **** 	{
+  53:Src/Ui/Pages/chapter.cpp **** 	case SONG:
+  54:Src/Ui/Pages/chapter.cpp **** 		chapter_ = &song_chapter;
+  55:Src/Ui/Pages/chapter.cpp **** 		active_ = SONG;
+  56:Src/Ui/Pages/chapter.cpp **** 		break;
+  57:Src/Ui/Pages/chapter.cpp **** 	case TRACK:
+  58:Src/Ui/Pages/chapter.cpp **** 		chapter_ = &track_chapter;
+  59:Src/Ui/Pages/chapter.cpp **** 		active_ = TRACK;
+  60:Src/Ui/Pages/chapter.cpp **** 		break;
+  61:Src/Ui/Pages/chapter.cpp **** 	case PATTERN:
+  62:Src/Ui/Pages/chapter.cpp **** 		chapter_ = &pattern_chapter;
+  63:Src/Ui/Pages/chapter.cpp **** 		active_ = PATTERN;
+  64:Src/Ui/Pages/chapter.cpp **** 		break;
+  65:Src/Ui/Pages/chapter.cpp **** 	case MIDI:
+  66:Src/Ui/Pages/chapter.cpp **** 		chapter_ = &midi_chapter;
+  67:Src/Ui/Pages/chapter.cpp **** 		active_ = MIDI;
+  68:Src/Ui/Pages/chapter.cpp **** 		break;
+  69:Src/Ui/Pages/chapter.cpp **** 	case CV:
+  70:Src/Ui/Pages/chapter.cpp **** 		chapter_ = &cv_chapter;
+  71:Src/Ui/Pages/chapter.cpp **** 		active_ = CV;
+  72:Src/Ui/Pages/chapter.cpp **** 		break;
+  73:Src/Ui/Pages/chapter.cpp **** 	case SYSTEM:
+ 1371              		.loc 3 73 2 is_stmt 1 view .LVU256
+  74:Src/Ui/Pages/chapter.cpp **** 		chapter_ = &system_chapter;
+ 1372              		.loc 3 74 3 view .LVU257
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 31
+
+
+ 1373              		.loc 3 74 12 is_stmt 0 view .LVU258
+ 1374 0014 184A     		ldr	r2, .L95
+ 1375 0016 4260     		str	r2, [r0, #4]
+  75:Src/Ui/Pages/chapter.cpp **** 		active_ = SYSTEM;
+ 1376              		.loc 3 75 3 is_stmt 1 view .LVU259
+ 1377              		.loc 3 75 11 is_stmt 0 view .LVU260
+ 1378 0018 0520     		movs	r0, #5
+ 1379              	.LVL126:
+ 1380              		.loc 3 75 11 view .LVU261
+ 1381 001a 2070     		strb	r0, [r4]
+  76:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1382              		.loc 3 76 3 is_stmt 1 view .LVU262
+ 1383              	.LVL127:
+ 1384              	.L83:
+  77:Src/Ui/Pages/chapter.cpp **** 	default:
+  78:Src/Ui/Pages/chapter.cpp **** 		break;
+  79:Src/Ui/Pages/chapter.cpp **** 	}
+  80:Src/Ui/Pages/chapter.cpp **** 
+  81:Src/Ui/Pages/chapter.cpp **** 	if (active_ != last_active) {
+ 1385              		.loc 3 81 2 view .LVU263
+ 1386 001c 8B42     		cmp	r3, r1
+ 1387 001e 14D0     		beq	.L82
+ 1388              	.L94:
+  82:Src/Ui/Pages/chapter.cpp **** 		pages.close_all();
+ 1389              		.loc 3 82 3 view .LVU264
+ 1390              		.loc 3 82 18 is_stmt 0 view .LVU265
+ 1391 0020 1648     		ldr	r0, .L95+4
+ 1392 0022 FFF7FEFF 		bl	_ZN5Pages9close_allEv
+ 1393              	.LVL128:
+  83:Src/Ui/Pages/chapter.cpp **** 		open_page(chapter_->curr_page());
+ 1394              		.loc 3 83 3 is_stmt 1 view .LVU266
+ 1395              		.loc 3 83 13 is_stmt 0 view .LVU267
+ 1396 0026 6068     		ldr	r0, [r4, #4]
+ 1397              		.loc 3 83 33 view .LVU268
+ 1398 0028 0168     		ldr	r1, [r0]
+ 1399              		.loc 3 83 32 view .LVU269
+ 1400 002a 8B68     		ldr	r3, [r1, #8]
+ 1401 002c 9847     		blx	r3
+ 1402              	.LVL129:
+ 1403 002e 0146     		mov	r1, r0
+ 1404              		.loc 3 83 12 view .LVU270
+ 1405 0030 6068     		ldr	r0, [r4, #4]
+ 1406              	.LVL130:
+ 1407              	.LBB77:
+ 1408              	.LBI77:
+ 114:Src/Ui/Pages/chapter.h **** 		chapter_->open_page(index);
+ 1409              		.loc 1 114 7 is_stmt 1 view .LVU271
+ 1410              	.LBB78:
+ 1411              		.loc 1 115 3 view .LVU272
+ 1412              		.loc 1 115 28 is_stmt 0 view .LVU273
+ 1413 0032 0468     		ldr	r4, [r0]
+ 1414              	.LVL131:
+ 1415              		.loc 1 115 22 view .LVU274
+ 1416 0034 6268     		ldr	r2, [r4, #4]
+ 1417              	.LBE78:
+ 1418              	.LBE77:
+  84:Src/Ui/Pages/chapter.cpp **** 	}
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 32
+
+
+  85:Src/Ui/Pages/chapter.cpp **** }
+ 1419              		.loc 3 85 1 view .LVU275
+ 1420 0036 BDE81040 		pop	{r4, lr}
+ 1421              		.cfi_remember_state
+ 1422              		.cfi_restore 14
+ 1423              		.cfi_restore 4
+ 1424              		.cfi_def_cfa_offset 0
+ 1425              	.LBB80:
+ 1426              	.LBB79:
+ 1427              		.loc 1 115 22 view .LVU276
+ 1428 003a 1047     		bx	r2	@ indirect register sibling call
+ 1429              	.LVL132:
+ 1430              	.L90:
+ 1431              		.cfi_restore_state
+ 1432              		.loc 1 115 22 view .LVU277
+ 1433              	.LBE79:
+ 1434              	.LBE80:
+  53:Src/Ui/Pages/chapter.cpp **** 		chapter_ = &song_chapter;
+ 1435              		.loc 3 53 2 is_stmt 1 view .LVU278
+  54:Src/Ui/Pages/chapter.cpp **** 		active_ = SONG;
+ 1436              		.loc 3 54 3 view .LVU279
+  54:Src/Ui/Pages/chapter.cpp **** 		active_ = SONG;
+ 1437              		.loc 3 54 12 is_stmt 0 view .LVU280
+ 1438 003c 104A     		ldr	r2, .L95+8
+ 1439 003e 4260     		str	r2, [r0, #4]
+  55:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1440              		.loc 3 55 3 is_stmt 1 view .LVU281
+  81:Src/Ui/Pages/chapter.cpp **** 		pages.close_all();
+ 1441              		.loc 3 81 2 is_stmt 0 view .LVU282
+ 1442 0040 8B42     		cmp	r3, r1
+  55:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1443              		.loc 3 55 11 view .LVU283
+ 1444 0042 4FF00000 		mov	r0, #0
+ 1445              	.LVL133:
+  55:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1446              		.loc 3 55 11 view .LVU284
+ 1447 0046 2070     		strb	r0, [r4]
+  56:Src/Ui/Pages/chapter.cpp **** 	case TRACK:
+ 1448              		.loc 3 56 3 is_stmt 1 view .LVU285
+  81:Src/Ui/Pages/chapter.cpp **** 		pages.close_all();
+ 1449              		.loc 3 81 2 view .LVU286
+ 1450 0048 EAD1     		bne	.L94
+ 1451              	.LVL134:
+ 1452              	.L82:
+ 1453              		.loc 3 85 1 is_stmt 0 view .LVU287
+ 1454 004a 10BD     		pop	{r4, pc}
+ 1455              	.LVL135:
+ 1456              	.L89:
+  57:Src/Ui/Pages/chapter.cpp **** 		chapter_ = &track_chapter;
+ 1457              		.loc 3 57 2 is_stmt 1 view .LVU288
+  58:Src/Ui/Pages/chapter.cpp **** 		active_ = TRACK;
+ 1458              		.loc 3 58 3 view .LVU289
+  58:Src/Ui/Pages/chapter.cpp **** 		active_ = TRACK;
+ 1459              		.loc 3 58 12 is_stmt 0 view .LVU290
+ 1460 004c 0D4A     		ldr	r2, .L95+12
+ 1461 004e 4260     		str	r2, [r0, #4]
+  59:Src/Ui/Pages/chapter.cpp **** 		break;
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 33
+
+
+ 1462              		.loc 3 59 3 is_stmt 1 view .LVU291
+  59:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1463              		.loc 3 59 11 is_stmt 0 view .LVU292
+ 1464 0050 0120     		movs	r0, #1
+ 1465              	.LVL136:
+  59:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1466              		.loc 3 59 11 view .LVU293
+ 1467 0052 2070     		strb	r0, [r4]
+  60:Src/Ui/Pages/chapter.cpp **** 	case PATTERN:
+ 1468              		.loc 3 60 3 is_stmt 1 view .LVU294
+ 1469 0054 E2E7     		b	.L83
+ 1470              	.LVL137:
+ 1471              	.L88:
+  61:Src/Ui/Pages/chapter.cpp **** 		chapter_ = &pattern_chapter;
+ 1472              		.loc 3 61 2 view .LVU295
+  62:Src/Ui/Pages/chapter.cpp **** 		active_ = PATTERN;
+ 1473              		.loc 3 62 3 view .LVU296
+  62:Src/Ui/Pages/chapter.cpp **** 		active_ = PATTERN;
+ 1474              		.loc 3 62 12 is_stmt 0 view .LVU297
+ 1475 0056 0C4A     		ldr	r2, .L95+16
+ 1476 0058 4260     		str	r2, [r0, #4]
+  63:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1477              		.loc 3 63 3 is_stmt 1 view .LVU298
+  63:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1478              		.loc 3 63 11 is_stmt 0 view .LVU299
+ 1479 005a 0220     		movs	r0, #2
+ 1480              	.LVL138:
+  63:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1481              		.loc 3 63 11 view .LVU300
+ 1482 005c 2070     		strb	r0, [r4]
+  64:Src/Ui/Pages/chapter.cpp **** 	case MIDI:
+ 1483              		.loc 3 64 3 is_stmt 1 view .LVU301
+ 1484 005e DDE7     		b	.L83
+ 1485              	.LVL139:
+ 1486              	.L87:
+  65:Src/Ui/Pages/chapter.cpp **** 		chapter_ = &midi_chapter;
+ 1487              		.loc 3 65 2 view .LVU302
+  66:Src/Ui/Pages/chapter.cpp **** 		active_ = MIDI;
+ 1488              		.loc 3 66 3 view .LVU303
+  66:Src/Ui/Pages/chapter.cpp **** 		active_ = MIDI;
+ 1489              		.loc 3 66 12 is_stmt 0 view .LVU304
+ 1490 0060 0A4A     		ldr	r2, .L95+20
+ 1491 0062 4260     		str	r2, [r0, #4]
+  67:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1492              		.loc 3 67 3 is_stmt 1 view .LVU305
+  67:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1493              		.loc 3 67 11 is_stmt 0 view .LVU306
+ 1494 0064 0320     		movs	r0, #3
+ 1495              	.LVL140:
+  67:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1496              		.loc 3 67 11 view .LVU307
+ 1497 0066 2070     		strb	r0, [r4]
+  68:Src/Ui/Pages/chapter.cpp **** 	case CV:
+ 1498              		.loc 3 68 3 is_stmt 1 view .LVU308
+ 1499 0068 D8E7     		b	.L83
+ 1500              	.LVL141:
+ 1501              	.L86:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 34
+
+
+  69:Src/Ui/Pages/chapter.cpp **** 		chapter_ = &cv_chapter;
+ 1502              		.loc 3 69 2 view .LVU309
+  70:Src/Ui/Pages/chapter.cpp **** 		active_ = CV;
+ 1503              		.loc 3 70 3 view .LVU310
+  70:Src/Ui/Pages/chapter.cpp **** 		active_ = CV;
+ 1504              		.loc 3 70 12 is_stmt 0 view .LVU311
+ 1505 006a 094A     		ldr	r2, .L95+24
+ 1506 006c 4260     		str	r2, [r0, #4]
+  71:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1507              		.loc 3 71 3 is_stmt 1 view .LVU312
+  71:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1508              		.loc 3 71 11 is_stmt 0 view .LVU313
+ 1509 006e 0420     		movs	r0, #4
+ 1510              	.LVL142:
+  71:Src/Ui/Pages/chapter.cpp **** 		break;
+ 1511              		.loc 3 71 11 view .LVU314
+ 1512 0070 2070     		strb	r0, [r4]
+  72:Src/Ui/Pages/chapter.cpp **** 	case SYSTEM:
+ 1513              		.loc 3 72 3 is_stmt 1 view .LVU315
+ 1514 0072 D3E7     		b	.L83
+ 1515              	.LVL143:
+ 1516              	.L92:
+  49:Src/Ui/Pages/chapter.cpp **** 
+ 1517              		.loc 3 49 5 is_stmt 0 view .LVU316
+ 1518 0074 1946     		mov	r1, r3
+ 1519              	.LVL144:
+  49:Src/Ui/Pages/chapter.cpp **** 
+ 1520              		.loc 3 49 5 view .LVU317
+ 1521 0076 D1E7     		b	.L83
+ 1522              	.L96:
+ 1523              		.align	2
+ 1524              	.L95:
+ 1525 0078 00000000 		.word	.LANCHOR5
+ 1526 007c 00000000 		.word	pages
+ 1527 0080 00000000 		.word	.LANCHOR0
+ 1528 0084 00000000 		.word	.LANCHOR1
+ 1529 0088 00000000 		.word	.LANCHOR2
+ 1530 008c 00000000 		.word	.LANCHOR3
+ 1531 0090 00000000 		.word	.LANCHOR4
+ 1532              		.cfi_endproc
+ 1533              	.LFE2029:
+ 1535              		.weak	_ZTV12ChapterEntryILh2EXadL_Z10song_pagesEEE
+ 1536              		.section	.rodata._ZTV12ChapterEntryILh2EXadL_Z10song_pagesEEE,"aG",%progbits,_ZTV12ChapterEntryILh
+ 1537              		.align	2
+ 1540              	_ZTV12ChapterEntryILh2EXadL_Z10song_pagesEEE:
+ 1541 0000 00000000 		.word	0
+ 1542 0004 00000000 		.word	0
+ 1543 0008 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9num_pagesEv
+ 1544 000c 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9open_pageEi
+ 1545 0010 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9curr_pageEv
+ 1546 0014 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_nameEi
+ 1547 0018 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_iconEi
+ 1548              		.weak	_ZTV12ChapterEntryILh1EXadL_Z11track_pagesEEE
+ 1549              		.section	.rodata._ZTV12ChapterEntryILh1EXadL_Z11track_pagesEEE,"aG",%progbits,_ZTV12ChapterEntryIL
+ 1550              		.align	2
+ 1553              	_ZTV12ChapterEntryILh1EXadL_Z11track_pagesEEE:
+ 1554 0000 00000000 		.word	0
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 35
+
+
+ 1555 0004 00000000 		.word	0
+ 1556 0008 00000000 		.word	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9num_pagesEv
+ 1557 000c 00000000 		.word	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9open_pageEi
+ 1558 0010 00000000 		.word	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9curr_pageEv
+ 1559 0014 00000000 		.word	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_nameEi
+ 1560 0018 00000000 		.word	_ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_iconEi
+ 1561              		.weak	_ZTV12ChapterEntryILh1EXadL_Z13pattern_pagesEEE
+ 1562              		.section	.rodata._ZTV12ChapterEntryILh1EXadL_Z13pattern_pagesEEE,"aG",%progbits,_ZTV12ChapterEntry
+ 1563              		.align	2
+ 1566              	_ZTV12ChapterEntryILh1EXadL_Z13pattern_pagesEEE:
+ 1567 0000 00000000 		.word	0
+ 1568 0004 00000000 		.word	0
+ 1569 0008 00000000 		.word	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9num_pagesEv
+ 1570 000c 00000000 		.word	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9open_pageEi
+ 1571 0010 00000000 		.word	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9curr_pageEv
+ 1572 0014 00000000 		.word	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_nameEi
+ 1573 0018 00000000 		.word	_ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_iconEi
+ 1574              		.weak	_ZTV12ChapterEntryILh2EXadL_Z10midi_pagesEEE
+ 1575              		.section	.rodata._ZTV12ChapterEntryILh2EXadL_Z10midi_pagesEEE,"aG",%progbits,_ZTV12ChapterEntryILh
+ 1576              		.align	2
+ 1579              	_ZTV12ChapterEntryILh2EXadL_Z10midi_pagesEEE:
+ 1580 0000 00000000 		.word	0
+ 1581 0004 00000000 		.word	0
+ 1582 0008 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9num_pagesEv
+ 1583 000c 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9open_pageEi
+ 1584 0010 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9curr_pageEv
+ 1585 0014 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_nameEi
+ 1586 0018 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_iconEi
+ 1587              		.weak	_ZTV12ChapterEntryILh2EXadL_Z8cv_pagesEEE
+ 1588              		.section	.rodata._ZTV12ChapterEntryILh2EXadL_Z8cv_pagesEEE,"aG",%progbits,_ZTV12ChapterEntryILh2EX
+ 1589              		.align	2
+ 1592              	_ZTV12ChapterEntryILh2EXadL_Z8cv_pagesEEE:
+ 1593 0000 00000000 		.word	0
+ 1594 0004 00000000 		.word	0
+ 1595 0008 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9num_pagesEv
+ 1596 000c 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9open_pageEi
+ 1597 0010 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9curr_pageEv
+ 1598 0014 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_nameEi
+ 1599 0018 00000000 		.word	_ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_iconEi
+ 1600              		.weak	_ZTV12ChapterEntryILh3EXadL_Z12system_pagesEEE
+ 1601              		.section	.rodata._ZTV12ChapterEntryILh3EXadL_Z12system_pagesEEE,"aG",%progbits,_ZTV12ChapterEntryI
+ 1602              		.align	2
+ 1605              	_ZTV12ChapterEntryILh3EXadL_Z12system_pagesEEE:
+ 1606 0000 00000000 		.word	0
+ 1607 0004 00000000 		.word	0
+ 1608 0008 00000000 		.word	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9num_pagesEv
+ 1609 000c 00000000 		.word	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9open_pageEi
+ 1610 0010 00000000 		.word	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9curr_pageEv
+ 1611 0014 00000000 		.word	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_nameEi
+ 1612 0018 00000000 		.word	_ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_iconEi
+ 1613              		.global	chapter
+ 1614              		.global	system_chapter
+ 1615              		.global	cv_chapter
+ 1616              		.global	midi_chapter
+ 1617              		.global	pattern_chapter
+ 1618              		.global	track_chapter
+ 1619              		.global	song_chapter
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 36
+
+
+ 1620              		.global	system_pages
+ 1621              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 1622              		.align	2
+ 1623              	.LC0:
+ 1624 0000 53415645 		.ascii	"SAVE\000"
+ 1624      00
+ 1625 0005 000000   		.align	2
+ 1626              	.LC1:
+ 1627 0008 4C4F4144 		.ascii	"LOAD\000"
+ 1627      00
+ 1628 000d 000000   		.align	2
+ 1629              	.LC2:
+ 1630 0010 53455454 		.ascii	"SETTINGS\000"
+ 1630      494E4753 
+ 1630      00
+ 1631              		.global	cv_pages
+ 1632 0019 000000   		.align	2
+ 1633              	.LC3:
+ 1634 001c 494E5055 		.ascii	"INPUT\000"
+ 1634      5400
+ 1635 0022 0000     		.align	2
+ 1636              	.LC4:
+ 1637 0024 4F555450 		.ascii	"OUTPUT\000"
+ 1637      555400
+ 1638              		.global	midi_pages
+ 1639              		.global	pattern_pages
+ 1640 002b 00       		.align	2
+ 1641              	.LC5:
+ 1642 002c 50415454 		.ascii	"PATTERN\000"
+ 1642      45524E00 
+ 1643              		.global	track_pages
+ 1644              		.global	song_pages
+ 1645              		.align	2
+ 1646              	.LC6:
+ 1647 0034 4D4F4E49 		.ascii	"MONITOR\000"
+ 1647      544F5200 
+ 1648              		.section	.bss.chapter,"aw",%nobits
+ 1649              		.align	2
+ 1652              	chapter:
+ 1653 0000 00000000 		.space	8
+ 1653      00000000 
+ 1654              		.section	.data.cv_chapter,"aw"
+ 1655              		.align	2
+ 1656              		.set	.LANCHOR4,. + 0
+ 1659              	cv_chapter:
+ 1660 0000 08000000 		.word	_ZTV12ChapterEntryILh2EXadL_Z8cv_pagesEEE+8
+ 1661 0004 00000000 		.word	cv_pages
+ 1662 0008 02       		.byte	2
+ 1663 0009 000000   		.space	3
+ 1664 000c 00000000 		.word	0
+ 1665              		.section	.data.cv_pages,"aw"
+ 1666              		.align	2
+ 1669              	cv_pages:
+ 1670 0000 1C000000 		.word	.LC3
+ 1671 0004 14       		.byte	20
+ 1672 0005 03       		.byte	3
+ 1673 0006 0000     		.space	2
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 37
+
+
+ 1674 0008 24000000 		.word	.LC4
+ 1675 000c 15       		.byte	21
+ 1676 000d 04       		.byte	4
+ 1677 000e 0000     		.space	2
+ 1678              		.section	.data.midi_chapter,"aw"
+ 1679              		.align	2
+ 1680              		.set	.LANCHOR3,. + 0
+ 1683              	midi_chapter:
+ 1684 0000 08000000 		.word	_ZTV12ChapterEntryILh2EXadL_Z10midi_pagesEEE+8
+ 1685 0004 00000000 		.word	midi_pages
+ 1686 0008 02       		.byte	2
+ 1687 0009 000000   		.space	3
+ 1688 000c 00000000 		.word	0
+ 1689              		.section	.data.midi_pages,"aw"
+ 1690              		.align	2
+ 1693              	midi_pages:
+ 1694 0000 1C000000 		.word	.LC3
+ 1695 0004 10       		.byte	16
+ 1696 0005 01       		.byte	1
+ 1697 0006 0000     		.space	2
+ 1698 0008 24000000 		.word	.LC4
+ 1699 000c 11       		.byte	17
+ 1700 000d 02       		.byte	2
+ 1701 000e 0000     		.space	2
+ 1702              		.section	.data.pattern_chapter,"aw"
+ 1703              		.align	2
+ 1704              		.set	.LANCHOR2,. + 0
+ 1707              	pattern_chapter:
+ 1708 0000 08000000 		.word	_ZTV12ChapterEntryILh1EXadL_Z13pattern_pagesEEE+8
+ 1709 0004 00000000 		.word	pattern_pages
+ 1710 0008 01       		.byte	1
+ 1711 0009 000000   		.space	3
+ 1712 000c 00000000 		.word	0
+ 1713              		.section	.data.pattern_pages,"aw"
+ 1714              		.align	2
+ 1717              	pattern_pages:
+ 1718 0000 2C000000 		.word	.LC5
+ 1719 0004 0D       		.byte	13
+ 1720 0005 0A       		.byte	10
+ 1721 0006 0000     		.space	2
+ 1722              		.section	.data.song_chapter,"aw"
+ 1723              		.align	2
+ 1724              		.set	.LANCHOR0,. + 0
+ 1727              	song_chapter:
+ 1728 0000 08000000 		.word	_ZTV12ChapterEntryILh2EXadL_Z10song_pagesEEE+8
+ 1729 0004 00000000 		.word	song_pages
+ 1730 0008 02       		.byte	2
+ 1731 0009 000000   		.space	3
+ 1732 000c 00000000 		.word	0
+ 1733              		.section	.data.song_pages,"aw"
+ 1734              		.align	2
+ 1737              	song_pages:
+ 1738 0000 10000000 		.word	.LC2
+ 1739 0004 0A       		.byte	10
+ 1740 0005 07       		.byte	7
+ 1741 0006 0000     		.space	2
+ 1742 0008 34000000 		.word	.LC6
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 38
+
+
+ 1743 000c 0B       		.byte	11
+ 1744 000d 08       		.byte	8
+ 1745 000e 0000     		.space	2
+ 1746              		.section	.data.system_chapter,"aw"
+ 1747              		.align	2
+ 1748              		.set	.LANCHOR5,. + 0
+ 1751              	system_chapter:
+ 1752 0000 08000000 		.word	_ZTV12ChapterEntryILh3EXadL_Z12system_pagesEEE+8
+ 1753 0004 00000000 		.word	system_pages
+ 1754 0008 03       		.byte	3
+ 1755 0009 000000   		.space	3
+ 1756 000c 00000000 		.word	0
+ 1757              		.section	.data.system_pages,"aw"
+ 1758              		.align	2
+ 1761              	system_pages:
+ 1762 0000 00000000 		.word	.LC0
+ 1763 0004 16       		.byte	22
+ 1764 0005 06       		.byte	6
+ 1765 0006 0000     		.space	2
+ 1766 0008 08000000 		.word	.LC1
+ 1767 000c 17       		.byte	23
+ 1768 000d 05       		.byte	5
+ 1769 000e 0000     		.space	2
+ 1770 0010 10000000 		.word	.LC2
+ 1771 0014 18       		.byte	24
+ 1772 0015 09       		.byte	9
+ 1773 0016 0000     		.space	2
+ 1774              		.section	.data.track_chapter,"aw"
+ 1775              		.align	2
+ 1776              		.set	.LANCHOR1,. + 0
+ 1779              	track_chapter:
+ 1780 0000 08000000 		.word	_ZTV12ChapterEntryILh1EXadL_Z11track_pagesEEE+8
+ 1781 0004 00000000 		.word	track_pages
+ 1782 0008 01       		.byte	1
+ 1783 0009 000000   		.space	3
+ 1784 000c 00000000 		.word	0
+ 1785              		.section	.data.track_pages,"aw"
+ 1786              		.align	2
+ 1789              	track_pages:
+ 1790 0000 10000000 		.word	.LC2
+ 1791 0004 0C       		.byte	12
+ 1792 0005 09       		.byte	9
+ 1793 0006 0000     		.space	2
+ 1794              		.text
+ 1795              	.Letext0:
+ 1796              		.file 4 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 1797              		.file 5 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 1798              		.file 6 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 1799              		.file 7 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Include/core_
+ 1800              		.file 8 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Device/ST/STM
+ 1801              		.file 9 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/li
+ 1802              		.file 10 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Driv
+ 1803              		.file 11 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1804              		.file 12 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1805              		.file 13 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1806              		.file 14 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1807              		.file 15 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 39
+
+
+ 1808              		.file 16 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1809              		.file 17 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1810              		.file 18 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1811              		.file 19 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1812              		.file 20 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1813              		.file 21 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1814              		.file 22 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1815              		.file 23 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1816              		.file 24 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1817              		.file 25 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1818              		.file 26 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1819              		.file 27 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1820              		.file 28 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1821              		.file 29 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1822              		.file 30 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1823              		.file 31 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1824              		.file 32 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1825              		.file 33 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1826              		.file 34 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1827              		.file 35 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/l
+ 1828              		.file 36 "<built-in>"
+ 1829              		.file 37 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1830              		.file 38 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1831              		.file 39 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1832              		.file 40 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1833              		.file 41 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1834              		.file 42 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1835              		.file 43 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1836              		.file 44 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1837              		.file 45 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1838              		.file 46 "Src/Ui/Pages/pages.h"
+ 1839              		.file 47 "lookupTables/bitmap.h"
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 40
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 chapter.cpp
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:18     .text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9num_pagesEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:27     .text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9num_pagesEv:0000000000000000 _ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9num_pagesEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:45     .text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9curr_pageEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:53     .text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9curr_pageEv:0000000000000000 _ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9curr_pageEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:70     .text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_nameEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:78     .text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_nameEi:0000000000000000 _ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_nameEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:107    .text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_iconEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:115    .text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_iconEi:0000000000000000 _ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9page_iconEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:143    .text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9num_pagesEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:151    .text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9num_pagesEv:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9num_pagesEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:168    .text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9curr_pageEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:176    .text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9curr_pageEv:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9curr_pageEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:193    .text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_nameEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:201    .text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_nameEi:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_nameEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:224    .text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_iconEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:232    .text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_iconEi:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9page_iconEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:256    .text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9num_pagesEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:264    .text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9num_pagesEv:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9num_pagesEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:281    .text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9curr_pageEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:289    .text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9curr_pageEv:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9curr_pageEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:306    .text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_nameEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:314    .text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_nameEi:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_nameEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:337    .text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_iconEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:345    .text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_iconEi:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9page_iconEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:369    .text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9num_pagesEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:377    .text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9num_pagesEv:0000000000000000 _ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9num_pagesEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:394    .text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9curr_pageEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:402    .text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9curr_pageEv:0000000000000000 _ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9curr_pageEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:419    .text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_nameEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:427    .text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_nameEi:0000000000000000 _ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_nameEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:447    .text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_iconEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:455    .text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_iconEi:0000000000000000 _ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9page_iconEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:475    .text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9num_pagesEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:483    .text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9num_pagesEv:0000000000000000 _ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9num_pagesEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:500    .text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9curr_pageEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:508    .text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9curr_pageEv:0000000000000000 _ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9curr_pageEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:525    .text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_nameEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:533    .text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_nameEi:0000000000000000 _ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_nameEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:553    .text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_iconEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:561    .text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_iconEi:0000000000000000 _ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9page_iconEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:581    .text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9num_pagesEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:589    .text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9num_pagesEv:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9num_pagesEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:606    .text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9curr_pageEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:614    .text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9curr_pageEv:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9curr_pageEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:631    .text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_nameEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:639    .text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_nameEi:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_nameEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:662    .text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_iconEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:670    .text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_iconEi:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9page_iconEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:694    .text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9open_pageEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:702    .text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9open_pageEi:0000000000000000 _ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9open_pageEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:778    .text._ZN12ChapterEntryILh3EXadL_Z12system_pagesEEE9open_pageEi:0000000000000038 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:783    .text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9open_pageEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:791    .text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9open_pageEi:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9open_pageEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:867    .text._ZN12ChapterEntryILh2EXadL_Z8cv_pagesEEE9open_pageEi:0000000000000038 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:872    .text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9open_pageEi:0000000000000000 $t
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 41
+
+
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:880    .text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9open_pageEi:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9open_pageEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:956    .text._ZN12ChapterEntryILh2EXadL_Z10midi_pagesEEE9open_pageEi:0000000000000038 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:961    .text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9open_pageEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:969    .text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9open_pageEi:0000000000000000 _ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9open_pageEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1045   .text._ZN12ChapterEntryILh1EXadL_Z13pattern_pagesEEE9open_pageEi:0000000000000038 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1050   .text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9open_pageEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1058   .text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9open_pageEi:0000000000000000 _ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9open_pageEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1134   .text._ZN12ChapterEntryILh1EXadL_Z11track_pagesEEE9open_pageEi:0000000000000038 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1139   .text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9open_pageEi:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1147   .text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9open_pageEi:0000000000000000 _ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9open_pageEi
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1223   .text._ZN12ChapterEntryILh2EXadL_Z10song_pagesEEE9open_pageEi:0000000000000038 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1228   .text._ZN7Chapter4initEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1236   .text._ZN7Chapter4initEv:0000000000000000 _ZN7Chapter4initEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1326   .text._ZN7Chapter4initEv:0000000000000034 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1332   .text._ZN7Chapter4openENS_2IdE:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1340   .text._ZN7Chapter4openENS_2IdE:0000000000000000 _ZN7Chapter4openENS_2IdE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1363   .text._ZN7Chapter4openENS_2IdE:000000000000000e $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1369   .text._ZN7Chapter4openENS_2IdE:0000000000000014 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1525   .text._ZN7Chapter4openENS_2IdE:0000000000000078 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1540   .rodata._ZTV12ChapterEntryILh2EXadL_Z10song_pagesEEE:0000000000000000 _ZTV12ChapterEntryILh2EXadL_Z10song_pagesEEE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1537   .rodata._ZTV12ChapterEntryILh2EXadL_Z10song_pagesEEE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1553   .rodata._ZTV12ChapterEntryILh1EXadL_Z11track_pagesEEE:0000000000000000 _ZTV12ChapterEntryILh1EXadL_Z11track_pagesEEE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1550   .rodata._ZTV12ChapterEntryILh1EXadL_Z11track_pagesEEE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1566   .rodata._ZTV12ChapterEntryILh1EXadL_Z13pattern_pagesEEE:0000000000000000 _ZTV12ChapterEntryILh1EXadL_Z13pattern_pagesEEE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1563   .rodata._ZTV12ChapterEntryILh1EXadL_Z13pattern_pagesEEE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1579   .rodata._ZTV12ChapterEntryILh2EXadL_Z10midi_pagesEEE:0000000000000000 _ZTV12ChapterEntryILh2EXadL_Z10midi_pagesEEE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1576   .rodata._ZTV12ChapterEntryILh2EXadL_Z10midi_pagesEEE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1592   .rodata._ZTV12ChapterEntryILh2EXadL_Z8cv_pagesEEE:0000000000000000 _ZTV12ChapterEntryILh2EXadL_Z8cv_pagesEEE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1589   .rodata._ZTV12ChapterEntryILh2EXadL_Z8cv_pagesEEE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1605   .rodata._ZTV12ChapterEntryILh3EXadL_Z12system_pagesEEE:0000000000000000 _ZTV12ChapterEntryILh3EXadL_Z12system_pagesEEE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1602   .rodata._ZTV12ChapterEntryILh3EXadL_Z12system_pagesEEE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1652   .bss.chapter:0000000000000000 chapter
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1751   .data.system_chapter:0000000000000000 system_chapter
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1659   .data.cv_chapter:0000000000000000 cv_chapter
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1683   .data.midi_chapter:0000000000000000 midi_chapter
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1707   .data.pattern_chapter:0000000000000000 pattern_chapter
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1779   .data.track_chapter:0000000000000000 track_chapter
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1727   .data.song_chapter:0000000000000000 song_chapter
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1761   .data.system_pages:0000000000000000 system_pages
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1622   .rodata.str1.4:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1669   .data.cv_pages:0000000000000000 cv_pages
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1693   .data.midi_pages:0000000000000000 midi_pages
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1717   .data.pattern_pages:0000000000000000 pattern_pages
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1789   .data.track_pages:0000000000000000 track_pages
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1737   .data.song_pages:0000000000000000 song_pages
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1649   .bss.chapter:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1655   .data.cv_chapter:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1666   .data.cv_pages:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1679   .data.midi_chapter:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1690   .data.midi_pages:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1703   .data.pattern_chapter:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1714   .data.pattern_pages:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1723   .data.song_chapter:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1734   .data.song_pages:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1747   .data.system_chapter:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1758   .data.system_pages:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1775   .data.track_chapter:0000000000000000 $d
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s 			page 42
+
+
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccJNIwxE.s:1786   .data.track_pages:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+_ZN5Pages7is_openENS_2IdE
+_ZN5Pages9close_allEv
+_ZN5Pages4openENS_2IdE
+pages

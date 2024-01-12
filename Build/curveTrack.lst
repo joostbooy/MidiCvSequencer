@@ -1,0 +1,213 @@
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"curveTrack.cpp"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	_ZN10CurveTrack11track_item_E
+  18              		.global	_ZN10CurveTrack11track_mask_E
+  19              		.global	_ZN10CurveTrack10step_item_E
+  20              		.global	_ZN10CurveTrack10step_mask_E
+  21              		.section	.data._ZN10CurveTrack10step_item_E,"aw"
+  22              		.align	2
+  25              	_ZN10CurveTrack10step_item_E:
+  26 0000 00000000 		.word	0
+  27 0004 01000000 		.word	1
+  28 0008 01000000 		.word	1
+  29 000c 00000000 		.word	0
+  30 0010 00000000 		.word	_ZN10CurveTrack10step_mask_E
+  31 0014 00000000 		.space	4
+  32 0018 00000000 		.word	0
+  33 001c 07000000 		.word	7
+  34 0020 01000000 		.word	1
+  35 0024 07000000 		.word	7
+  36 0028 08000000 		.word	_ZN10CurveTrack10step_mask_E+8
+  37 002c 00000000 		.space	4
+  38 0030 00000000 		.word	0
+  39 0034 7F000000 		.word	127
+  40 0038 0A000000 		.word	10
+  41 003c 3F000000 		.word	63
+  42 0040 10000000 		.word	_ZN10CurveTrack10step_mask_E+16
+  43 0044 00000000 		.space	4
+  44 0048 00000000 		.word	0
+  45 004c 09000000 		.word	9
+  46 0050 02000000 		.word	2
+  47 0054 04000000 		.word	4
+  48 0058 18000000 		.word	_ZN10CurveTrack10step_mask_E+24
+  49 005c 00000000 		.space	4
+  50 0060 00000000 		.word	0
+  51 0064 04000000 		.word	4
+  52 0068 01000000 		.word	1
+  53 006c 04000000 		.word	4
+  54 0070 20000000 		.word	_ZN10CurveTrack10step_mask_E+32
+  55 0074 00000000 		.space	4
+  56              		.section	.data._ZN10CurveTrack10step_mask_E,"aw"
+  57              		.align	2
+  60              	_ZN10CurveTrack10step_mask_E:
+  61 0000 00       		.byte	0
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s 			page 2
+
+
+  62 0001 01       		.byte	1
+  63 0002 00       		.byte	0
+  64 0003 00       		.space	1
+  65 0004 01000000 		.word	1
+  66 0008 00       		.byte	0
+  67 0009 03       		.byte	3
+  68 000a 01       		.byte	1
+  69 000b 00       		.space	1
+  70 000c 0E000000 		.word	14
+  71 0010 00       		.byte	0
+  72 0011 07       		.byte	7
+  73 0012 04       		.byte	4
+  74 0013 00       		.space	1
+  75 0014 F0070000 		.word	2032
+  76 0018 00       		.byte	0
+  77 0019 04       		.byte	4
+  78 001a 0B       		.byte	11
+  79 001b 00       		.space	1
+  80 001c 00780000 		.word	30720
+  81 0020 00       		.byte	0
+  82 0021 03       		.byte	3
+  83 0022 0F       		.byte	15
+  84 0023 00       		.space	1
+  85 0024 00800300 		.word	229376
+  86              		.section	.data._ZN10CurveTrack11track_item_E,"aw"
+  87              		.align	2
+  90              	_ZN10CurveTrack11track_item_E:
+  91 0000 00000000 		.word	0
+  92 0004 7F000000 		.word	127
+  93 0008 0A000000 		.word	10
+  94 000c 3F000000 		.word	63
+  95 0010 00000000 		.word	_ZN10CurveTrack11track_mask_E
+  96 0014 00000000 		.space	4
+  97 0018 00000000 		.word	0
+  98 001c 7F000000 		.word	127
+  99 0020 0A000000 		.word	10
+ 100 0024 00000000 		.word	0
+ 101 0028 08000000 		.word	_ZN10CurveTrack11track_mask_E+8
+ 102 002c 00000000 		.space	4
+ 103 0030 00000000 		.word	0
+ 104 0034 01000000 		.word	1
+ 105 0038 00000000 		.word	0
+ 106 003c 01000000 		.word	1
+ 107 0040 10000000 		.word	_ZN10CurveTrack11track_mask_E+16
+ 108 0044 00000000 		.space	4
+ 109 0048 00000000 		.word	0
+ 110 004c 01000000 		.word	1
+ 111 0050 00000000 		.word	0
+ 112 0054 00000000 		.word	0
+ 113 0058 18000000 		.word	_ZN10CurveTrack11track_mask_E+24
+ 114 005c 00000000 		.space	4
+ 115              		.section	.data._ZN10CurveTrack11track_mask_E,"aw"
+ 116              		.align	2
+ 119              	_ZN10CurveTrack11track_mask_E:
+ 120 0000 00       		.byte	0
+ 121 0001 07       		.byte	7
+ 122 0002 00       		.byte	0
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s 			page 3
+
+
+ 123 0003 00       		.space	1
+ 124 0004 7F000000 		.word	127
+ 125 0008 00       		.byte	0
+ 126 0009 07       		.byte	7
+ 127 000a 07       		.byte	7
+ 128 000b 00       		.space	1
+ 129 000c 803F0000 		.word	16256
+ 130 0010 00       		.byte	0
+ 131 0011 01       		.byte	1
+ 132 0012 0E       		.byte	14
+ 133 0013 00       		.space	1
+ 134 0014 00400000 		.word	16384
+ 135 0018 00       		.byte	0
+ 136 0019 01       		.byte	1
+ 137 001a 0F       		.byte	15
+ 138 001b 00       		.space	1
+ 139 001c 00800000 		.word	32768
+ 140              		.text
+ 141              	.Letext0:
+ 142              		.file 1 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 143              		.file 2 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 144              		.file 3 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 145              		.file 4 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Include/core_
+ 146              		.file 5 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Device/ST/STM
+ 147              		.file 6 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/li
+ 148              		.file 7 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Drive
+ 149              		.file 8 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 150              		.file 9 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 151              		.file 10 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 152              		.file 11 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 153              		.file 12 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 154              		.file 13 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 155              		.file 14 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 156              		.file 15 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 157              		.file 16 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 158              		.file 17 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 159              		.file 18 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 160              		.file 19 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 161              		.file 20 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 162              		.file 21 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 163              		.file 22 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 164              		.file 23 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 165              		.file 24 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 166              		.file 25 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 167              		.file 26 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 168              		.file 27 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 169              		.file 28 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 170              		.file 29 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 171              		.file 30 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 172              		.file 31 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 173              		.file 32 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/l
+ 174              		.file 33 "<built-in>"
+ 175              		.file 34 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 176              		.file 35 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 177              		.file 36 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 178              		.file 37 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 179              		.file 38 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s 			page 4
+
+
+ 180              		.file 39 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 181              		.file 40 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 182              		.file 41 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 183              		.file 42 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 184              		.file 43 "Src/Settings/trackData.h"
+ 185              		.file 44 "lookupTables/lookUpTables.h"
+ 186              		.file 45 "Drivers/uart.h"
+ 187              		.file 46 "Drivers/Usb/usb.h"
+ 188              		.file 47 "lookupTables/font.h"
+ 189              		.file 48 "Src/Settings/pattern.h"
+ 190              		.file 49 "Src/Settings/baseTrack.h"
+ 191              		.file 50 "Src/Settings/serial.h"
+ 192              		.file 51 "Src/Settings/serialItem.h"
+ 193              		.file 52 "Src/Settings/curveTrack.h"
+ 194              		.file 53 "Src/Settings/curveTrack.cpp"
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 curveTrack.cpp
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s:90     .data._ZN10CurveTrack11track_item_E:0000000000000000 _ZN10CurveTrack11track_item_E
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s:119    .data._ZN10CurveTrack11track_mask_E:0000000000000000 _ZN10CurveTrack11track_mask_E
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s:25     .data._ZN10CurveTrack10step_item_E:0000000000000000 _ZN10CurveTrack10step_item_E
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s:60     .data._ZN10CurveTrack10step_mask_E:0000000000000000 _ZN10CurveTrack10step_mask_E
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s:22     .data._ZN10CurveTrack10step_item_E:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s:57     .data._ZN10CurveTrack10step_mask_E:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s:87     .data._ZN10CurveTrack11track_item_E:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//cc6H32sc.s:116    .data._ZN10CurveTrack11track_mask_E:0000000000000000 $d
+
+NO UNDEFINED SYMBOLS

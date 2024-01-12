@@ -1,0 +1,534 @@
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"adc.cpp"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text._ZN3Adc4initEv,"ax",%progbits
+  18              		.align	1
+  19              		.p2align 2,,3
+  20              		.global	_ZN3Adc4initEv
+  21              		.arch armv7e-m
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  25              		.fpu fpv4-sp-d16
+  27              	_ZN3Adc4initEv:
+  28              	.LVL0:
+  29              	.LFB1983:
+  30              		.file 1 "Drivers/adc.cpp"
+   1:Drivers/adc.cpp **** #include "adc.h"
+   2:Drivers/adc.cpp **** #include "micros.h"
+   3:Drivers/adc.cpp **** 
+   4:Drivers/adc.cpp **** Adc adc;
+   5:Drivers/adc.cpp **** 
+   6:Drivers/adc.cpp **** void Adc::init(){
+  31              		.loc 1 6 17 view -0
+  32              		.cfi_startproc
+  33              		@ args = 0, pretend = 0, frame = 112
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+   7:Drivers/adc.cpp **** 	ADC_HandleTypeDef hadc1;
+  35              		.loc 1 7 2 view .LVU1
+   8:Drivers/adc.cpp **** 	GPIO_InitTypeDef GPIO_InitStruct = {0};
+  36              		.loc 1 8 2 view .LVU2
+   6:Drivers/adc.cpp **** 	ADC_HandleTypeDef hadc1;
+  37              		.loc 1 6 17 is_stmt 0 view .LVU3
+  38 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  39              		.cfi_def_cfa_offset 20
+  40              		.cfi_offset 4, -20
+  41              		.cfi_offset 5, -16
+  42              		.cfi_offset 6, -12
+  43              		.cfi_offset 7, -8
+  44              		.cfi_offset 14, -4
+  45 0002 9DB0     		sub	sp, sp, #116
+  46              		.cfi_def_cfa_offset 136
+  47              		.loc 1 8 19 view .LVU4
+  48 0004 0024     		movs	r4, #0
+   9:Drivers/adc.cpp **** 	ADC_ChannelConfTypeDef sConfig = {0};
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s 			page 2
+
+
+  10:Drivers/adc.cpp **** 
+  11:Drivers/adc.cpp **** 
+  12:Drivers/adc.cpp **** 	//ADC Pins
+  13:Drivers/adc.cpp **** 	/**ADC1 GPIO Configuration
+  14:Drivers/adc.cpp **** 	PC4     ------> ADC1_IN14 -> CV 3
+  15:Drivers/adc.cpp **** 	PC5     ------> ADC1_IN15 -> CV 4
+  16:Drivers/adc.cpp **** 	PB0     ------> ADC1_IN8 -> CV 1
+  17:Drivers/adc.cpp **** 	PB1     ------> ADC1_IN9 -> CV 2
+  18:Drivers/adc.cpp **** 	*/
+  19:Drivers/adc.cpp **** 	GPIO_InitStruct.Pin = GPIO_PIN_4 | GPIO_PIN_5;
+  49              		.loc 1 19 22 view .LVU5
+  50 0006 3023     		movs	r3, #48
+  20:Drivers/adc.cpp **** 	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  51              		.loc 1 20 23 view .LVU6
+  52 0008 0325     		movs	r5, #3
+  21:Drivers/adc.cpp **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+  22:Drivers/adc.cpp **** 	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  53              		.loc 1 22 15 view .LVU7
+  54 000a 3148     		ldr	r0, .L6
+  55              	.LVL1:
+   9:Drivers/adc.cpp **** 
+  56              		.loc 1 9 25 view .LVU8
+  57 000c 0194     		str	r4, [sp, #4]
+  58              		.loc 1 22 15 view .LVU9
+  59 000e 05A9     		add	r1, sp, #20
+  19:Drivers/adc.cpp **** 	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  60              		.loc 1 19 22 view .LVU10
+  61 0010 CDE90443 		strd	r4, r3, [sp, #16]
+  20:Drivers/adc.cpp **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+  62              		.loc 1 20 2 is_stmt 1 view .LVU11
+   8:Drivers/adc.cpp **** 	ADC_ChannelConfTypeDef sConfig = {0};
+  63              		.loc 1 8 19 is_stmt 0 view .LVU12
+  64 0014 CDE90844 		strd	r4, r4, [sp, #32]
+   9:Drivers/adc.cpp **** 
+  65              		.loc 1 9 25 view .LVU13
+  66 0018 CDE90244 		strd	r4, r4, [sp, #8]
+  21:Drivers/adc.cpp **** 	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  67              		.loc 1 21 23 view .LVU14
+  68 001c 0794     		str	r4, [sp, #28]
+  20:Drivers/adc.cpp **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+  69              		.loc 1 20 23 view .LVU15
+  70 001e 0695     		str	r5, [sp, #24]
+  21:Drivers/adc.cpp **** 	HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  71              		.loc 1 21 2 is_stmt 1 view .LVU16
+  72              		.loc 1 22 2 view .LVU17
+  73              		.loc 1 22 15 is_stmt 0 view .LVU18
+  74 0020 FFF7FEFF 		bl	HAL_GPIO_Init
+  75              	.LVL2:
+  23:Drivers/adc.cpp **** 
+  24:Drivers/adc.cpp **** 	GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1;
+  76              		.loc 1 24 2 is_stmt 1 view .LVU19
+  25:Drivers/adc.cpp **** 	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  26:Drivers/adc.cpp **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+  27:Drivers/adc.cpp **** 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  77              		.loc 1 27 15 is_stmt 0 view .LVU20
+  78 0024 2B48     		ldr	r0, .L6+4
+  26:Drivers/adc.cpp **** 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s 			page 3
+
+
+  79              		.loc 1 26 23 view .LVU21
+  80 0026 0794     		str	r4, [sp, #28]
+  81              		.loc 1 27 15 view .LVU22
+  82 0028 05A9     		add	r1, sp, #20
+  25:Drivers/adc.cpp **** 	GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
+  83              		.loc 1 25 23 view .LVU23
+  84 002a CDE90555 		strd	r5, r5, [sp, #20]
+  26:Drivers/adc.cpp **** 	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  85              		.loc 1 26 2 is_stmt 1 view .LVU24
+  86              		.loc 1 27 2 view .LVU25
+  87              		.loc 1 27 15 is_stmt 0 view .LVU26
+  88 002e FFF7FEFF 		bl	HAL_GPIO_Init
+  89              	.LVL3:
+  28:Drivers/adc.cpp **** 
+  29:Drivers/adc.cpp **** 
+  30:Drivers/adc.cpp **** 	/** Configure the global features of the ADC (Clock, Resolution, Data Alignment and number of conv
+  31:Drivers/adc.cpp **** 	*/
+  32:Drivers/adc.cpp **** 	hadc1.Instance = ADC1;
+  90              		.loc 1 32 2 is_stmt 1 view .LVU27
+  91              		.loc 1 32 17 is_stmt 0 view .LVU28
+  92 0032 2949     		ldr	r1, .L6+8
+  33:Drivers/adc.cpp **** 	hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
+  34:Drivers/adc.cpp **** 	hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+  35:Drivers/adc.cpp **** 	hadc1.Init.ScanConvMode = DISABLE;
+  36:Drivers/adc.cpp **** 	hadc1.Init.ContinuousConvMode = DISABLE;
+  37:Drivers/adc.cpp **** 	hadc1.Init.DiscontinuousConvMode = DISABLE;
+  38:Drivers/adc.cpp **** 	hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  39:Drivers/adc.cpp **** 	hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  93              		.loc 1 39 30 view .LVU29
+  94 0034 294B     		ldr	r3, .L6+12
+  95 0036 1493     		str	r3, [sp, #80]
+  40:Drivers/adc.cpp **** 	hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+  41:Drivers/adc.cpp **** 	hadc1.Init.NbrOfConversion = 4;
+  96              		.loc 1 41 29 view .LVU30
+  97 0038 0426     		movs	r6, #4
+  42:Drivers/adc.cpp **** 	hadc1.Init.DMAContinuousRequests = DISABLE;
+  43:Drivers/adc.cpp **** 	hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+  98              		.loc 1 43 26 view .LVU31
+  99 003a 0127     		movs	r7, #1
+  33:Drivers/adc.cpp **** 	hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+ 100              		.loc 1 33 28 view .LVU32
+ 101 003c 4FF48032 		mov	r2, #65536
+  44:Drivers/adc.cpp **** 	HAL_ADC_Init(&hadc1);
+ 102              		.loc 1 44 14 view .LVU33
+ 103 0040 0AA8     		add	r0, sp, #40
+  33:Drivers/adc.cpp **** 	hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+ 104              		.loc 1 33 28 view .LVU34
+ 105 0042 CDE90A12 		strd	r1, r2, [sp, #40]
+  34:Drivers/adc.cpp **** 	hadc1.Init.ScanConvMode = DISABLE;
+ 106              		.loc 1 34 2 is_stmt 1 view .LVU35
+  35:Drivers/adc.cpp **** 	hadc1.Init.ContinuousConvMode = DISABLE;
+ 107              		.loc 1 35 2 view .LVU36
+  36:Drivers/adc.cpp **** 	hadc1.Init.DiscontinuousConvMode = DISABLE;
+ 108              		.loc 1 36 2 view .LVU37
+  37:Drivers/adc.cpp **** 	hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+ 109              		.loc 1 37 2 view .LVU38
+  38:Drivers/adc.cpp **** 	hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s 			page 4
+
+
+ 110              		.loc 1 38 2 view .LVU39
+  39:Drivers/adc.cpp **** 	hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+ 111              		.loc 1 39 2 view .LVU40
+  40:Drivers/adc.cpp **** 	hadc1.Init.NbrOfConversion = 4;
+ 112              		.loc 1 40 2 view .LVU41
+  41:Drivers/adc.cpp **** 	hadc1.Init.DMAContinuousRequests = DISABLE;
+ 113              		.loc 1 41 2 view .LVU42
+  34:Drivers/adc.cpp **** 	hadc1.Init.ScanConvMode = DISABLE;
+ 114              		.loc 1 34 24 is_stmt 0 view .LVU43
+ 115 0046 0C94     		str	r4, [sp, #48]
+  35:Drivers/adc.cpp **** 	hadc1.Init.ContinuousConvMode = DISABLE;
+ 116              		.loc 1 35 26 view .LVU44
+ 117 0048 0E94     		str	r4, [sp, #56]
+  36:Drivers/adc.cpp **** 	hadc1.Init.DiscontinuousConvMode = DISABLE;
+ 118              		.loc 1 36 32 view .LVU45
+ 119 004a 8DF84040 		strb	r4, [sp, #64]
+  37:Drivers/adc.cpp **** 	hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+ 120              		.loc 1 37 35 view .LVU46
+ 121 004e 8DF84840 		strb	r4, [sp, #72]
+  38:Drivers/adc.cpp **** 	hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+ 122              		.loc 1 38 34 view .LVU47
+ 123 0052 1594     		str	r4, [sp, #84]
+  40:Drivers/adc.cpp **** 	hadc1.Init.NbrOfConversion = 4;
+ 124              		.loc 1 40 23 view .LVU48
+ 125 0054 0D94     		str	r4, [sp, #52]
+  42:Drivers/adc.cpp **** 	hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+ 126              		.loc 1 42 35 view .LVU49
+ 127 0056 8DF85840 		strb	r4, [sp, #88]
+  41:Drivers/adc.cpp **** 	hadc1.Init.DMAContinuousRequests = DISABLE;
+ 128              		.loc 1 41 29 view .LVU50
+ 129 005a 1196     		str	r6, [sp, #68]
+  42:Drivers/adc.cpp **** 	hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+ 130              		.loc 1 42 2 is_stmt 1 view .LVU51
+  43:Drivers/adc.cpp **** 	HAL_ADC_Init(&hadc1);
+ 131              		.loc 1 43 2 view .LVU52
+  45:Drivers/adc.cpp **** 
+  46:Drivers/adc.cpp **** 	// Cv 1
+  47:Drivers/adc.cpp **** 	sConfig.Channel = ADC_CHANNEL_8;
+  48:Drivers/adc.cpp **** 	sConfig.Rank = 1;
+  49:Drivers/adc.cpp **** 	sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
+ 132              		.loc 1 49 23 is_stmt 0 view .LVU53
+ 133 005c 0724     		movs	r4, #7
+  43:Drivers/adc.cpp **** 	HAL_ADC_Init(&hadc1);
+ 134              		.loc 1 43 26 view .LVU54
+ 135 005e 0F97     		str	r7, [sp, #60]
+  44:Drivers/adc.cpp **** 
+ 136              		.loc 1 44 2 is_stmt 1 view .LVU55
+  44:Drivers/adc.cpp **** 
+ 137              		.loc 1 44 14 is_stmt 0 view .LVU56
+ 138 0060 FFF7FEFF 		bl	HAL_ADC_Init
+ 139              	.LVL4:
+  47:Drivers/adc.cpp **** 	sConfig.Rank = 1;
+ 140              		.loc 1 47 2 is_stmt 1 view .LVU57
+  47:Drivers/adc.cpp **** 	sConfig.Rank = 1;
+ 141              		.loc 1 47 18 is_stmt 0 view .LVU58
+ 142 0064 4FF0080C 		mov	ip, #8
+  50:Drivers/adc.cpp **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s 			page 5
+
+
+ 143              		.loc 1 50 23 view .LVU59
+ 144 0068 0DEB0601 		add	r1, sp, r6
+ 145 006c 0AA8     		add	r0, sp, #40
+  47:Drivers/adc.cpp **** 	sConfig.Rank = 1;
+ 146              		.loc 1 47 18 view .LVU60
+ 147 006e CDE901C7 		strd	ip, r7, [sp, #4]
+  48:Drivers/adc.cpp **** 	sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
+ 148              		.loc 1 48 2 is_stmt 1 view .LVU61
+  49:Drivers/adc.cpp **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+ 149              		.loc 1 49 2 view .LVU62
+  49:Drivers/adc.cpp **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+ 150              		.loc 1 49 23 is_stmt 0 view .LVU63
+ 151 0072 0394     		str	r4, [sp, #12]
+ 152              		.loc 1 50 2 is_stmt 1 view .LVU64
+ 153              		.loc 1 50 23 is_stmt 0 view .LVU65
+ 154 0074 FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 155              	.LVL5:
+  51:Drivers/adc.cpp **** 
+  52:Drivers/adc.cpp **** 	// Cv 2
+  53:Drivers/adc.cpp **** 	sConfig.Channel = ADC_CHANNEL_9;
+ 156              		.loc 1 53 2 is_stmt 1 view .LVU66
+  54:Drivers/adc.cpp **** 	sConfig.Rank = 2;
+ 157              		.loc 1 54 15 is_stmt 0 view .LVU67
+ 158 0078 0223     		movs	r3, #2
+  55:Drivers/adc.cpp **** 	sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
+  56:Drivers/adc.cpp **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+ 159              		.loc 1 56 23 view .LVU68
+ 160 007a 0DEB0601 		add	r1, sp, r6
+  53:Drivers/adc.cpp **** 	sConfig.Rank = 2;
+ 161              		.loc 1 53 18 view .LVU69
+ 162 007e 0922     		movs	r2, #9
+ 163              		.loc 1 56 23 view .LVU70
+ 164 0080 0AA8     		add	r0, sp, #40
+  54:Drivers/adc.cpp **** 	sConfig.Rank = 2;
+ 165              		.loc 1 54 15 view .LVU71
+ 166 0082 CDE90123 		strd	r2, r3, [sp, #4]
+  55:Drivers/adc.cpp **** 	sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
+ 167              		.loc 1 55 2 is_stmt 1 view .LVU72
+ 168              		.loc 1 56 2 view .LVU73
+  55:Drivers/adc.cpp **** 	sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
+ 169              		.loc 1 55 23 is_stmt 0 view .LVU74
+ 170 0086 0394     		str	r4, [sp, #12]
+ 171              		.loc 1 56 23 view .LVU75
+ 172 0088 FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 173              	.LVL6:
+  57:Drivers/adc.cpp **** 
+  58:Drivers/adc.cpp **** 	// Cv 3
+  59:Drivers/adc.cpp **** 	sConfig.Channel = ADC_CHANNEL_14;
+ 174              		.loc 1 59 2 is_stmt 1 view .LVU76
+  60:Drivers/adc.cpp **** 	sConfig.Rank = 3;
+  61:Drivers/adc.cpp **** 	sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
+  62:Drivers/adc.cpp **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+ 175              		.loc 1 62 23 is_stmt 0 view .LVU77
+ 176 008c 0DEB0601 		add	r1, sp, r6
+  59:Drivers/adc.cpp **** 	sConfig.Rank = 3;
+ 177              		.loc 1 59 18 view .LVU78
+ 178 0090 0E22     		movs	r2, #14
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s 			page 6
+
+
+ 179              		.loc 1 62 23 view .LVU79
+ 180 0092 0AA8     		add	r0, sp, #40
+  61:Drivers/adc.cpp **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+ 181              		.loc 1 61 23 view .LVU80
+ 182 0094 CDE90254 		strd	r5, r4, [sp, #8]
+  59:Drivers/adc.cpp **** 	sConfig.Rank = 3;
+ 183              		.loc 1 59 18 view .LVU81
+ 184 0098 0192     		str	r2, [sp, #4]
+  60:Drivers/adc.cpp **** 	sConfig.Rank = 3;
+ 185              		.loc 1 60 2 is_stmt 1 view .LVU82
+  61:Drivers/adc.cpp **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+ 186              		.loc 1 61 2 view .LVU83
+ 187              		.loc 1 62 2 view .LVU84
+  63:Drivers/adc.cpp **** 
+  64:Drivers/adc.cpp **** 	// Cv 4
+  65:Drivers/adc.cpp **** 	sConfig.Channel = ADC_CHANNEL_15;
+ 188              		.loc 1 65 18 is_stmt 0 view .LVU85
+ 189 009a 0F25     		movs	r5, #15
+  62:Drivers/adc.cpp **** 
+ 190              		.loc 1 62 23 view .LVU86
+ 191 009c FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 192              	.LVL7:
+ 193              		.loc 1 65 2 is_stmt 1 view .LVU87
+  66:Drivers/adc.cpp **** 	sConfig.Rank = 4;
+  67:Drivers/adc.cpp **** 	sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
+  68:Drivers/adc.cpp **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+ 194              		.loc 1 68 23 is_stmt 0 view .LVU88
+ 195 00a0 0DEB0601 		add	r1, sp, r6
+ 196 00a4 0AA8     		add	r0, sp, #40
+  67:Drivers/adc.cpp **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+ 197              		.loc 1 67 23 view .LVU89
+ 198 00a6 CDE90264 		strd	r6, r4, [sp, #8]
+  65:Drivers/adc.cpp **** 	sConfig.Rank = 4;
+ 199              		.loc 1 65 18 view .LVU90
+ 200 00aa 0195     		str	r5, [sp, #4]
+  66:Drivers/adc.cpp **** 	sConfig.Rank = 4;
+ 201              		.loc 1 66 2 is_stmt 1 view .LVU91
+  67:Drivers/adc.cpp **** 	HAL_ADC_ConfigChannel(&hadc1, &sConfig);
+ 202              		.loc 1 67 2 view .LVU92
+ 203              		.loc 1 68 2 view .LVU93
+ 204              		.loc 1 68 23 is_stmt 0 view .LVU94
+ 205 00ac FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 206              	.LVL8:
+  69:Drivers/adc.cpp **** 
+  70:Drivers/adc.cpp **** 	// Wait for stabilisation & begin
+  71:Drivers/adc.cpp **** 	__HAL_ADC_ENABLE(&hadc1);
+ 207              		.loc 1 71 2 is_stmt 1 view .LVU95
+ 208 00b0 0A98     		ldr	r0, [sp, #40]
+ 209              	.LBB16:
+ 210              	.LBB17:
+ 211              	.LBB18:
+ 212              	.LBB19:
+ 213              		.file 2 "Drivers/micros.h"
+   1:Drivers/micros.h **** #ifndef Micros_h
+   2:Drivers/micros.h **** #define Micros_h
+   3:Drivers/micros.h **** 
+   4:Drivers/micros.h **** #include "stmf4lib.h"
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s 			page 7
+
+
+   5:Drivers/micros.h **** 
+   6:Drivers/micros.h **** class Micros {
+   7:Drivers/micros.h **** 
+   8:Drivers/micros.h **** public:
+   9:Drivers/micros.h **** 	void init();
+  10:Drivers/micros.h **** 
+  11:Drivers/micros.h **** 	inline volatile uint32_t read() {
+  12:Drivers/micros.h **** 		return TIM5->CNT;
+ 214              		.loc 2 12 16 is_stmt 0 view .LVU96
+ 215 00b2 0B4E     		ldr	r6, .L6+16
+ 216              	.LBE19:
+ 217              	.LBE18:
+ 218              	.LBE17:
+ 219              	.LBE16:
+ 220              		.loc 1 71 2 view .LVU97
+ 221 00b4 8168     		ldr	r1, [r0, #8]
+ 222 00b6 3943     		orrs	r1, r1, r7
+ 223 00b8 8160     		str	r1, [r0, #8]
+  72:Drivers/adc.cpp **** 	micros.delay(5);
+ 224              		.loc 1 72 2 is_stmt 1 view .LVU98
+ 225              	.LVL9:
+ 226              	.LBB25:
+ 227              	.LBI16:
+  13:Drivers/micros.h **** 	}
+  14:Drivers/micros.h **** 
+  15:Drivers/micros.h **** 	void delay(uint32_t us) {
+ 228              		.loc 2 15 7 view .LVU99
+ 229              	.LBB24:
+  16:Drivers/micros.h **** 		uint32_t start = read();
+ 230              		.loc 2 16 3 view .LVU100
+ 231              	.LBB21:
+ 232              	.LBI18:
+  11:Drivers/micros.h **** 		return TIM5->CNT;
+ 233              		.loc 2 11 27 view .LVU101
+ 234              	.LBB20:
+  12:Drivers/micros.h **** 	}
+ 235              		.loc 2 12 3 view .LVU102
+  12:Drivers/micros.h **** 	}
+ 236              		.loc 2 12 16 is_stmt 0 view .LVU103
+ 237 00ba 776A     		ldr	r7, [r6, #36]
+ 238              	.LVL10:
+ 239              	.L2:
+  12:Drivers/micros.h **** 	}
+ 240              		.loc 2 12 16 view .LVU104
+ 241              	.LBE20:
+ 242              	.LBE21:
+  17:Drivers/micros.h **** 		while (static_cast<uint32_t>(read() - start) < us);
+ 243              		.loc 2 17 3 is_stmt 1 view .LVU105
+ 244              		.loc 2 17 48 view .LVU106
+ 245              	.LBB22:
+ 246              	.LBI22:
+  11:Drivers/micros.h **** 		return TIM5->CNT;
+ 247              		.loc 2 11 27 view .LVU107
+ 248              	.LBB23:
+  12:Drivers/micros.h **** 	}
+ 249              		.loc 2 12 3 view .LVU108
+  12:Drivers/micros.h **** 	}
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s 			page 8
+
+
+ 250              		.loc 2 12 16 is_stmt 0 view .LVU109
+ 251 00bc 084C     		ldr	r4, .L6+16
+ 252 00be 636A     		ldr	r3, [r4, #36]
+ 253              	.LBE23:
+ 254              	.LBE22:
+ 255              		.loc 2 17 39 view .LVU110
+ 256 00c0 DA1B     		subs	r2, r3, r7
+ 257              		.loc 2 17 48 view .LVU111
+ 258 00c2 042A     		cmp	r2, #4
+ 259 00c4 FAD9     		bls	.L2
+ 260              	.LVL11:
+ 261              		.loc 2 17 48 view .LVU112
+ 262              	.LBE24:
+ 263              	.LBE25:
+  73:Drivers/adc.cpp **** 	HAL_ADC_Start(&hadc1);
+ 264              		.loc 1 73 2 is_stmt 1 view .LVU113
+ 265              		.loc 1 73 15 is_stmt 0 view .LVU114
+ 266 00c6 0AA8     		add	r0, sp, #40
+ 267 00c8 FFF7FEFF 		bl	HAL_ADC_Start
+ 268              	.LVL12:
+  74:Drivers/adc.cpp **** }
+ 269              		.loc 1 74 1 view .LVU115
+ 270 00cc 1DB0     		add	sp, sp, #116
+ 271              		.cfi_def_cfa_offset 20
+ 272              		@ sp needed
+ 273 00ce F0BD     		pop	{r4, r5, r6, r7, pc}
+ 274              	.L7:
+ 275              		.align	2
+ 276              	.L6:
+ 277 00d0 00080240 		.word	1073874944
+ 278 00d4 00040240 		.word	1073873920
+ 279 00d8 00200140 		.word	1073815552
+ 280 00dc 0100000F 		.word	251658241
+ 281 00e0 000C0040 		.word	1073744896
+ 282              		.cfi_endproc
+ 283              	.LFE1983:
+ 285              		.global	adc
+ 286              		.section	.bss.adc,"aw",%nobits
+ 287              		.align	2
+ 290              	adc:
+ 291 0000 00       		.space	1
+ 292              		.text
+ 293              	.Letext0:
+ 294              		.file 3 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 295              		.file 4 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 296              		.file 5 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 297              		.file 6 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Include/core_
+ 298              		.file 7 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Device/ST/STM
+ 299              		.file 8 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Device/ST/STM
+ 300              		.file 9 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Device/ST/STM
+ 301              		.file 10 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/l
+ 302              		.file 11 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Driv
+ 303              		.file 12 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Driv
+ 304              		.file 13 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Driv
+ 305              		.file 14 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Driv
+ 306              		.file 15 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Driv
+ 307              		.file 16 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s 			page 9
+
+
+ 308              		.file 17 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 309              		.file 18 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 310              		.file 19 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 311              		.file 20 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 312              		.file 21 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 313              		.file 22 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 314              		.file 23 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 315              		.file 24 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 316              		.file 25 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 317              		.file 26 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 318              		.file 27 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 319              		.file 28 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 320              		.file 29 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 321              		.file 30 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 322              		.file 31 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 323              		.file 32 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 324              		.file 33 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 325              		.file 34 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 326              		.file 35 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 327              		.file 36 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 328              		.file 37 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 329              		.file 38 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 330              		.file 39 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 331              		.file 40 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/l
+ 332              		.file 41 "<built-in>"
+ 333              		.file 42 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 334              		.file 43 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 335              		.file 44 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 336              		.file 45 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 337              		.file 46 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 338              		.file 47 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 339              		.file 48 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 340              		.file 49 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 341              		.file 50 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 342              		.file 51 "Drivers/adc.h"
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 adc.cpp
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s:18     .text._ZN3Adc4initEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s:27     .text._ZN3Adc4initEv:0000000000000000 _ZN3Adc4initEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s:277    .text._ZN3Adc4initEv:00000000000000d0 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s:290    .bss.adc:0000000000000000 adc
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccwMCe2P.s:287    .bss.adc:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_ADC_Init
+HAL_ADC_ConfigChannel
+HAL_ADC_Start

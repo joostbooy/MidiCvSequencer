@@ -1,0 +1,1622 @@
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"dac.cpp"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text._ZN3Dac4initEv,"ax",%progbits
+  18              		.align	1
+  19              		.p2align 2,,3
+  20              		.global	_ZN3Dac4initEv
+  21              		.arch armv7e-m
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  25              		.fpu fpv4-sp-d16
+  27              	_ZN3Dac4initEv:
+  28              	.LVL0:
+  29              	.LFB1985:
+  30              		.file 1 "Drivers/dac.cpp"
+   1:Drivers/dac.cpp **** #include "dac.h"
+   2:Drivers/dac.cpp **** 
+   3:Drivers/dac.cpp **** Dac dac;
+   4:Drivers/dac.cpp **** 
+   5:Drivers/dac.cpp **** void Dac::init() {
+  31              		.loc 1 5 18 view -0
+  32              		.cfi_startproc
+  33              		@ args = 0, pretend = 0, frame = 112
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+   6:Drivers/dac.cpp **** 	GPIO_InitTypeDef GPIO_InitStruct = {0};
+  35              		.loc 1 6 2 view .LVU1
+   5:Drivers/dac.cpp **** 
+  36              		.loc 1 5 18 is_stmt 0 view .LVU2
+  37 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  38              		.cfi_def_cfa_offset 24
+  39              		.cfi_offset 4, -24
+  40              		.cfi_offset 5, -20
+  41              		.cfi_offset 6, -16
+  42              		.cfi_offset 7, -12
+  43              		.cfi_offset 8, -8
+  44              		.cfi_offset 14, -4
+   7:Drivers/dac.cpp **** 
+   8:Drivers/dac.cpp **** 
+   9:Drivers/dac.cpp **** 	/**GPIO Configuration
+  10:Drivers/dac.cpp **** 	PA4     ------> Sync pin
+  11:Drivers/dac.cpp **** 	*/
+  12:Drivers/dac.cpp **** 	GPIO_InitStruct.Pin = GPIO_PIN_4;
+  13:Drivers/dac.cpp **** 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 2
+
+
+  14:Drivers/dac.cpp **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+  15:Drivers/dac.cpp **** 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  16:Drivers/dac.cpp **** 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  45              		.loc 1 16 15 view .LVU3
+  46 0004 954F     		ldr	r7, .L104
+   5:Drivers/dac.cpp **** 
+  47              		.loc 1 5 18 view .LVU4
+  48 0006 9CB0     		sub	sp, sp, #112
+  49              		.cfi_def_cfa_offset 136
+   6:Drivers/dac.cpp **** 
+  50              		.loc 1 6 19 view .LVU5
+  51 0008 0025     		movs	r5, #0
+  15:Drivers/dac.cpp **** 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  52              		.loc 1 15 24 view .LVU6
+  53 000a 0226     		movs	r6, #2
+  13:Drivers/dac.cpp **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+  54              		.loc 1 13 23 view .LVU7
+  55 000c 0123     		movs	r3, #1
+  56              		.loc 1 16 15 view .LVU8
+  57 000e 01A9     		add	r1, sp, #4
+  12:Drivers/dac.cpp **** 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  58              		.loc 1 12 22 view .LVU9
+  59 0010 4FF01008 		mov	r8, #16
+   5:Drivers/dac.cpp **** 	/**GPIO Configuration
+  60              		.loc 1 5 18 view .LVU10
+  61 0014 0446     		mov	r4, r0
+  62              		.loc 1 16 15 view .LVU11
+  63 0016 3846     		mov	r0, r7
+  64              	.LVL1:
+  13:Drivers/dac.cpp **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+  65              		.loc 1 13 23 view .LVU12
+  66 0018 CDE90183 		strd	r8, r3, [sp, #4]
+   6:Drivers/dac.cpp **** 
+  67              		.loc 1 6 19 view .LVU13
+  68 001c 0595     		str	r5, [sp, #20]
+  12:Drivers/dac.cpp **** 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  69              		.loc 1 12 2 is_stmt 1 view .LVU14
+  14:Drivers/dac.cpp **** 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  70              		.loc 1 14 2 view .LVU15
+  15:Drivers/dac.cpp **** 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  71              		.loc 1 15 2 view .LVU16
+  14:Drivers/dac.cpp **** 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  72              		.loc 1 14 23 is_stmt 0 view .LVU17
+  73 001e 0395     		str	r5, [sp, #12]
+  15:Drivers/dac.cpp **** 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  74              		.loc 1 15 24 view .LVU18
+  75 0020 0496     		str	r6, [sp, #16]
+  76              		.loc 1 16 2 is_stmt 1 view .LVU19
+  77              		.loc 1 16 15 is_stmt 0 view .LVU20
+  78 0022 FFF7FEFF 		bl	HAL_GPIO_Init
+  79              	.LVL2:
+  17:Drivers/dac.cpp **** 
+  18:Drivers/dac.cpp **** 	/**SPI1 GPIO Configuration
+  19:Drivers/dac.cpp **** 	PA5     ------> SPI1_SCK
+  20:Drivers/dac.cpp **** 	PA6     ------> SPI1_MISO
+  21:Drivers/dac.cpp **** 	PA7     ------> SPI1_MOSI
+  22:Drivers/dac.cpp **** 	*/
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 3
+
+
+  23:Drivers/dac.cpp **** 	GPIO_InitStruct.Pin = GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_7;
+  80              		.loc 1 23 2 is_stmt 1 view .LVU21
+  24:Drivers/dac.cpp **** 	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  25:Drivers/dac.cpp **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+  26:Drivers/dac.cpp **** 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  27:Drivers/dac.cpp **** 	GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
+  81              		.loc 1 27 28 is_stmt 0 view .LVU22
+  82 0026 0523     		movs	r3, #5
+  28:Drivers/dac.cpp **** 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  83              		.loc 1 28 15 view .LVU23
+  84 0028 3846     		mov	r0, r7
+  23:Drivers/dac.cpp **** 	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  85              		.loc 1 23 22 view .LVU24
+  86 002a E022     		movs	r2, #224
+  87              		.loc 1 28 15 view .LVU25
+  88 002c 01A9     		add	r1, sp, #4
+  25:Drivers/dac.cpp **** 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  89              		.loc 1 25 23 view .LVU26
+  90 002e CDE90265 		strd	r6, r5, [sp, #8]
+  27:Drivers/dac.cpp **** 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  91              		.loc 1 27 28 view .LVU27
+  92 0032 0593     		str	r3, [sp, #20]
+  26:Drivers/dac.cpp **** 	GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
+  93              		.loc 1 26 24 view .LVU28
+  94 0034 0496     		str	r6, [sp, #16]
+  23:Drivers/dac.cpp **** 	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  95              		.loc 1 23 22 view .LVU29
+  96 0036 0192     		str	r2, [sp, #4]
+  24:Drivers/dac.cpp **** 	GPIO_InitStruct.Pull = GPIO_NOPULL;
+  97              		.loc 1 24 2 is_stmt 1 view .LVU30
+  25:Drivers/dac.cpp **** 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  98              		.loc 1 25 2 view .LVU31
+  26:Drivers/dac.cpp **** 	GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
+  99              		.loc 1 26 2 view .LVU32
+  27:Drivers/dac.cpp **** 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+ 100              		.loc 1 27 2 view .LVU33
+ 101              		.loc 1 28 2 view .LVU34
+ 102              		.loc 1 28 15 is_stmt 0 view .LVU35
+ 103 0038 FFF7FEFF 		bl	HAL_GPIO_Init
+ 104              	.LVL3:
+  29:Drivers/dac.cpp **** 
+  30:Drivers/dac.cpp **** 	SPI_HandleTypeDef hspi1;
+ 105              		.loc 1 30 2 is_stmt 1 view .LVU36
+  31:Drivers/dac.cpp **** 	hspi1.Instance = SPI1;
+ 106              		.loc 1 31 2 view .LVU37
+  32:Drivers/dac.cpp **** 	hspi1.Init.Mode = SPI_MODE_MASTER;
+  33:Drivers/dac.cpp **** 	hspi1.Init.Direction = SPI_DIRECTION_2LINES;
+  34:Drivers/dac.cpp **** 	hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+  35:Drivers/dac.cpp **** 	hspi1.Init.CLKPolarity = SPI_POLARITY_HIGH;
+  36:Drivers/dac.cpp **** 	hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
+  37:Drivers/dac.cpp **** 	hspi1.Init.NSS = SPI_NSS_SOFT;
+  38:Drivers/dac.cpp **** 	hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
+ 107              		.loc 1 38 31 is_stmt 0 view .LVU38
+ 108 003c 1822     		movs	r2, #24
+  31:Drivers/dac.cpp **** 	hspi1.Instance = SPI1;
+ 109              		.loc 1 31 17 view .LVU39
+ 110 003e DFF824E2 		ldr	lr, .L104+8
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 4
+
+
+  33:Drivers/dac.cpp **** 	hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+ 111              		.loc 1 33 23 view .LVU40
+ 112 0042 0895     		str	r5, [sp, #32]
+  35:Drivers/dac.cpp **** 	hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
+ 113              		.loc 1 35 25 view .LVU41
+ 114 0044 CDE90956 		strd	r5, r6, [sp, #36]
+  37:Drivers/dac.cpp **** 	hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
+ 115              		.loc 1 37 17 view .LVU42
+ 116 0048 4FF40071 		mov	r1, #512
+  32:Drivers/dac.cpp **** 	hspi1.Init.Direction = SPI_DIRECTION_2LINES;
+ 117              		.loc 1 32 18 view .LVU43
+ 118 004c 4FF4827C 		mov	ip, #260
+  39:Drivers/dac.cpp **** 	hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
+  40:Drivers/dac.cpp **** 	hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
+  41:Drivers/dac.cpp **** 	hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+  42:Drivers/dac.cpp **** 	hspi1.Init.CRCPolynomial = 10;
+ 119              		.loc 1 42 27 view .LVU44
+ 120 0050 0A26     		movs	r6, #10
+  43:Drivers/dac.cpp **** 	HAL_SPI_Init(&hspi1);
+ 121              		.loc 1 43 14 view .LVU45
+ 122 0052 0DEB0200 		add	r0, sp, r2
+  40:Drivers/dac.cpp **** 	hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+ 123              		.loc 1 40 20 view .LVU46
+ 124 0056 CDE90E55 		strd	r5, r5, [sp, #56]
+  38:Drivers/dac.cpp **** 	hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
+ 125              		.loc 1 38 31 view .LVU47
+ 126 005a CDE90C12 		strd	r1, r2, [sp, #48]
+  36:Drivers/dac.cpp **** 	hspi1.Init.NSS = SPI_NSS_SOFT;
+ 127              		.loc 1 36 22 view .LVU48
+ 128 005e 0B95     		str	r5, [sp, #44]
+  41:Drivers/dac.cpp **** 	hspi1.Init.CRCPolynomial = 10;
+ 129              		.loc 1 41 28 view .LVU49
+ 130 0060 1095     		str	r5, [sp, #64]
+  32:Drivers/dac.cpp **** 	hspi1.Init.Direction = SPI_DIRECTION_2LINES;
+ 131              		.loc 1 32 18 view .LVU50
+ 132 0062 CDE906EC 		strd	lr, ip, [sp, #24]
+  33:Drivers/dac.cpp **** 	hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
+ 133              		.loc 1 33 2 is_stmt 1 view .LVU51
+  34:Drivers/dac.cpp **** 	hspi1.Init.CLKPolarity = SPI_POLARITY_HIGH;
+ 134              		.loc 1 34 2 view .LVU52
+  35:Drivers/dac.cpp **** 	hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
+ 135              		.loc 1 35 2 view .LVU53
+  36:Drivers/dac.cpp **** 	hspi1.Init.NSS = SPI_NSS_SOFT;
+ 136              		.loc 1 36 2 view .LVU54
+  37:Drivers/dac.cpp **** 	hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_16;
+ 137              		.loc 1 37 2 view .LVU55
+  39:Drivers/dac.cpp **** 	hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
+ 138              		.loc 1 39 2 view .LVU56
+  40:Drivers/dac.cpp **** 	hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
+ 139              		.loc 1 40 2 view .LVU57
+  41:Drivers/dac.cpp **** 	hspi1.Init.CRCPolynomial = 10;
+ 140              		.loc 1 41 2 view .LVU58
+  42:Drivers/dac.cpp **** 	HAL_SPI_Init(&hspi1);
+ 141              		.loc 1 42 2 view .LVU59
+  42:Drivers/dac.cpp **** 	HAL_SPI_Init(&hspi1);
+ 142              		.loc 1 42 27 is_stmt 0 view .LVU60
+ 143 0066 1196     		str	r6, [sp, #68]
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 5
+
+
+ 144              		.loc 1 43 2 is_stmt 1 view .LVU61
+ 145              		.loc 1 43 14 is_stmt 0 view .LVU62
+ 146 0068 FFF7FEFF 		bl	HAL_SPI_Init
+ 147              	.LVL4:
+  44:Drivers/dac.cpp **** 	__HAL_SPI_ENABLE(&hspi1);
+ 148              		.loc 1 44 2 is_stmt 1 view .LVU63
+ 149 006c 0698     		ldr	r0, [sp, #24]
+ 150              	.LBB92:
+ 151              	.LBB93:
+ 152              	.LBB94:
+ 153              	.LBB95:
+ 154              		.file 2 "Drivers/micros.h"
+   1:Drivers/micros.h **** #ifndef Micros_h
+   2:Drivers/micros.h **** #define Micros_h
+   3:Drivers/micros.h **** 
+   4:Drivers/micros.h **** #include "stmf4lib.h"
+   5:Drivers/micros.h **** 
+   6:Drivers/micros.h **** class Micros {
+   7:Drivers/micros.h **** 
+   8:Drivers/micros.h **** public:
+   9:Drivers/micros.h **** 	void init();
+  10:Drivers/micros.h **** 
+  11:Drivers/micros.h **** 	inline volatile uint32_t read() {
+  12:Drivers/micros.h **** 		return TIM5->CNT;
+ 155              		.loc 2 12 16 is_stmt 0 view .LVU64
+ 156 006e 7C4D     		ldr	r5, .L104+4
+ 157              	.LBE95:
+ 158              	.LBE94:
+ 159              	.LBE93:
+ 160              	.LBE92:
+ 161              		.loc 1 44 2 view .LVU65
+ 162 0070 0368     		ldr	r3, [r0]
+ 163 0072 43F04001 		orr	r1, r3, #64
+ 164 0076 0160     		str	r1, [r0]
+  45:Drivers/dac.cpp **** 
+  46:Drivers/dac.cpp **** 
+  47:Drivers/dac.cpp **** 	// sync_pin HIGH
+  48:Drivers/dac.cpp **** 	GPIOA->BSRR = GPIO_PIN_4;
+ 165              		.loc 1 48 2 is_stmt 1 view .LVU66
+ 166              		.loc 1 48 14 is_stmt 0 view .LVU67
+ 167 0078 C7F81880 		str	r8, [r7, #24]
+  49:Drivers/dac.cpp **** 	micros.delay(1);
+ 168              		.loc 1 49 2 is_stmt 1 view .LVU68
+ 169              	.LVL5:
+ 170              	.LBB101:
+ 171              	.LBI92:
+  13:Drivers/micros.h **** 	}
+  14:Drivers/micros.h **** 
+  15:Drivers/micros.h **** 	void delay(uint32_t us) {
+ 172              		.loc 2 15 7 view .LVU69
+ 173              	.LBB100:
+  16:Drivers/micros.h **** 		uint32_t start = read();
+ 174              		.loc 2 16 3 view .LVU70
+ 175              	.LBB97:
+ 176              	.LBI94:
+  11:Drivers/micros.h **** 		return TIM5->CNT;
+ 177              		.loc 2 11 27 view .LVU71
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 6
+
+
+ 178              	.LBB96:
+  12:Drivers/micros.h **** 	}
+ 179              		.loc 2 12 3 view .LVU72
+  12:Drivers/micros.h **** 	}
+ 180              		.loc 2 12 16 is_stmt 0 view .LVU73
+ 181 007c 6F6A     		ldr	r7, [r5, #36]
+ 182              	.LVL6:
+ 183              	.L2:
+  12:Drivers/micros.h **** 	}
+ 184              		.loc 2 12 16 view .LVU74
+ 185              	.LBE96:
+ 186              	.LBE97:
+  17:Drivers/micros.h **** 		while (static_cast<uint32_t>(read() - start) < us);
+ 187              		.loc 2 17 3 is_stmt 1 view .LVU75
+ 188              		.loc 2 17 48 view .LVU76
+ 189              	.LBB98:
+ 190              	.LBI98:
+  11:Drivers/micros.h **** 		return TIM5->CNT;
+ 191              		.loc 2 11 27 view .LVU77
+ 192              	.LBB99:
+  12:Drivers/micros.h **** 	}
+ 193              		.loc 2 12 3 view .LVU78
+  12:Drivers/micros.h **** 	}
+ 194              		.loc 2 12 16 is_stmt 0 view .LVU79
+ 195 007e 784A     		ldr	r2, .L104+4
+ 196 0080 566A     		ldr	r6, [r2, #36]
+ 197              	.LBE99:
+ 198              	.LBE98:
+ 199              		.loc 2 17 48 view .LVU80
+ 200 0082 B742     		cmp	r7, r6
+ 201 0084 FBD0     		beq	.L2
+ 202              	.LVL7:
+ 203              		.loc 2 17 48 view .LVU81
+ 204              	.LBE100:
+ 205              	.LBE101:
+  50:Drivers/dac.cpp **** 	// delay 80 nS
+  51:Drivers/dac.cpp **** 
+  52:Drivers/dac.cpp **** 	reset();
+ 206              		.loc 1 52 2 is_stmt 1 view .LVU82
+ 207              	.LBB102:
+ 208              	.LBI102:
+ 209              		.file 3 "Drivers/dac.h"
+   1:Drivers/dac.h **** #ifndef Dac_h
+   2:Drivers/dac.h **** #define Dac_h
+   3:Drivers/dac.h **** 
+   4:Drivers/dac.h **** #include "stmf4lib.h"
+   5:Drivers/dac.h **** #include "micros.h"
+   6:Drivers/dac.h **** 
+   7:Drivers/dac.h **** // https://github.com/westlicht/performer/blob/master/src/platform/stm32/drivers/Dac.h
+   8:Drivers/dac.h **** // https://github.com/westlicht/performer/blob/master/src/platform/stm32/drivers/Dac.cpp
+   9:Drivers/dac.h **** // https://github.com/westlicht/performer/blob/master/src/platform/stm32/hal/Delay.h
+  10:Drivers/dac.h **** 
+  11:Drivers/dac.h **** #define WRITE_INPUT_REGISTER            0
+  12:Drivers/dac.h **** #define UPDATE_OUTPUT_REGISTER          1
+  13:Drivers/dac.h **** #define WRITE_INPUT_REGISTER_UPDATE_ALL 2
+  14:Drivers/dac.h **** #define WRITE_INPUT_REGISTER_UPDATE_N   3
+  15:Drivers/dac.h **** #define POWER_DOWN_UP_DAC               4
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 7
+
+
+  16:Drivers/dac.h **** #define LOAD_CLEAR_CODE_REGISTER        5
+  17:Drivers/dac.h **** #define LOAD_LDAC_REGISTER              6
+  18:Drivers/dac.h **** #define RESET_POWER_ON                  7
+  19:Drivers/dac.h **** #define SETUP_INTERNAL_REF              8
+  20:Drivers/dac.h **** 
+  21:Drivers/dac.h **** class Dac {
+  22:Drivers/dac.h **** 
+  23:Drivers/dac.h **** public:
+  24:Drivers/dac.h **** 
+  25:Drivers/dac.h **** 	enum ClearCode {
+  26:Drivers/dac.h **** 		ClearZeroScale  = 0,
+  27:Drivers/dac.h **** 		ClearMidScale   = 1,
+  28:Drivers/dac.h **** 		ClearFullScale  = 2,
+  29:Drivers/dac.h **** 		ClearIgnore     = 3,
+  30:Drivers/dac.h **** 	};
+  31:Drivers/dac.h **** 
+  32:Drivers/dac.h **** 	void init();
+  33:Drivers/dac.h **** 
+  34:Drivers/dac.h **** 	uint16_t value(uint8_t channel) {
+  35:Drivers/dac.h **** 		return value_[channel];
+  36:Drivers/dac.h **** 	}
+  37:Drivers/dac.h **** 
+  38:Drivers/dac.h **** 	void set(uint8_t channel, uint16_t value) {
+  39:Drivers/dac.h **** 		value_[channel] = value;
+  40:Drivers/dac.h **** 	}
+  41:Drivers/dac.h **** 
+  42:Drivers/dac.h **** 	void write(int channel) {
+  43:Drivers/dac.h **** 		writeDac(WRITE_INPUT_REGISTER_UPDATE_N, channel, value_[channel], 15);
+  44:Drivers/dac.h **** 	}
+  45:Drivers/dac.h **** 
+  46:Drivers/dac.h **** 	void write() {
+  47:Drivers/dac.h **** 		for (int i = 0; i < kNumChannels; ++i) {
+  48:Drivers/dac.h **** 			writeDac(i == 7 ? WRITE_INPUT_REGISTER_UPDATE_ALL : WRITE_INPUT_REGISTER, i, value_[i], 0);
+  49:Drivers/dac.h **** 		}
+  50:Drivers/dac.h **** 	}
+  51:Drivers/dac.h **** 
+  52:Drivers/dac.h **** private:
+  53:Drivers/dac.h **** 	static const int kNumChannels = 8;
+  54:Drivers/dac.h **** 	uint16_t value_[kNumChannels];
+  55:Drivers/dac.h **** 	volatile uint8_t dummy;
+  56:Drivers/dac.h **** 
+  57:Drivers/dac.h **** 	void writeDac(uint8_t command, uint8_t address, uint16_t data, uint8_t function) {
+  58:Drivers/dac.h **** 		uint8_t b1 = command;
+  59:Drivers/dac.h **** 		uint8_t b2 = (address << 4) | (data >> 12);
+  60:Drivers/dac.h **** 		uint8_t b3 = data >> 4;
+  61:Drivers/dac.h **** 		uint8_t b4 = (data & 0xf) << 4 | function;
+  62:Drivers/dac.h **** 
+  63:Drivers/dac.h **** 		// sync_pin LOW
+  64:Drivers/dac.h **** 		GPIOA->BSRR = GPIO_PIN_4 << 16;
+  65:Drivers/dac.h **** 		asm("NOP");
+  66:Drivers/dac.h **** 
+  67:Drivers/dac.h **** 		spi_write(b1);
+  68:Drivers/dac.h **** 		spi_write(b2);
+  69:Drivers/dac.h **** 		spi_write(b3);
+  70:Drivers/dac.h **** 		spi_write(b4);
+  71:Drivers/dac.h **** 		asm("NOP");
+  72:Drivers/dac.h **** 
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 8
+
+
+  73:Drivers/dac.h **** 		// sync_pin HIGH
+  74:Drivers/dac.h **** 		GPIOA->BSRR = GPIO_PIN_4;
+  75:Drivers/dac.h **** 		asm("NOP");
+  76:Drivers/dac.h **** 	}
+  77:Drivers/dac.h **** 
+  78:Drivers/dac.h **** 	void reset() {
+ 210              		.loc 3 78 7 view .LVU83
+ 211              	.LBE102:
+  79:Drivers/dac.h **** 		writeDac(RESET_POWER_ON, 0, 0, 0);
+ 212              		.loc 3 79 3 view .LVU84
+ 213              	.LBB119:
+ 214              	.LBB103:
+ 215              	.LBI103:
+  57:Drivers/dac.h **** 		uint8_t b1 = command;
+ 216              		.loc 3 57 7 view .LVU85
+ 217              	.LBB104:
+  58:Drivers/dac.h **** 		uint8_t b2 = (address << 4) | (data >> 12);
+ 218              		.loc 3 58 3 view .LVU86
+  59:Drivers/dac.h **** 		uint8_t b3 = data >> 4;
+ 219              		.loc 3 59 3 view .LVU87
+  60:Drivers/dac.h **** 		uint8_t b4 = (data & 0xf) << 4 | function;
+ 220              		.loc 3 60 3 view .LVU88
+  61:Drivers/dac.h **** 
+ 221              		.loc 3 61 3 view .LVU89
+  64:Drivers/dac.h **** 		asm("NOP");
+ 222              		.loc 3 64 3 view .LVU90
+  64:Drivers/dac.h **** 		asm("NOP");
+ 223              		.loc 3 64 15 is_stmt 0 view .LVU91
+ 224 0086 7548     		ldr	r0, .L104
+ 225 0088 4FF48015 		mov	r5, #1048576
+ 226 008c 8561     		str	r5, [r0, #24]
+  65:Drivers/dac.h **** 
+ 227              		.loc 3 65 3 is_stmt 1 view .LVU92
+  65:Drivers/dac.h **** 
+ 228              		.loc 3 65 13 is_stmt 0 view .LVU93
+ 229              		.syntax unified
+ 230              	@ 65 "Drivers/dac.h" 1
+ 231 008e 00BF     		NOP
+ 232              	@ 0 "" 2
+  67:Drivers/dac.h **** 		spi_write(b2);
+ 233              		.loc 3 67 3 is_stmt 1 view .LVU94
+ 234              	.LVL8:
+ 235              		.thumb
+ 236              		.syntax unified
+ 237              	.LBB105:
+ 238              	.LBI105:
+  80:Drivers/dac.h **** 		micros.delay(50);
+  81:Drivers/dac.h **** 	}
+  82:Drivers/dac.h **** 
+  83:Drivers/dac.h **** 	void setInternalRef(bool enabled) {
+  84:Drivers/dac.h **** 		writeDac(SETUP_INTERNAL_REF, 0, 0, enabled ? 1 : 0);
+  85:Drivers/dac.h **** 	}
+  86:Drivers/dac.h **** 
+  87:Drivers/dac.h **** 	void setClearCode(ClearCode code) {
+  88:Drivers/dac.h **** 		writeDac(LOAD_CLEAR_CODE_REGISTER, 0, 0, code);
+  89:Drivers/dac.h **** 	}
+  90:Drivers/dac.h **** 
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 9
+
+
+  91:Drivers/dac.h **** 	void spi_write(uint8_t data) {
+ 239              		.loc 3 91 7 view .LVU95
+ 240              	.L3:
+ 241              	.LBB106:
+  92:Drivers/dac.h **** 		while (!(SPI1->SR & SPI_FLAG_TXE));
+ 242              		.loc 3 92 3 view .LVU96
+ 243              		.loc 3 92 10 view .LVU97
+ 244              		.loc 3 92 18 is_stmt 0 view .LVU98
+ 245 0090 744B     		ldr	r3, .L104+8
+ 246 0092 9968     		ldr	r1, [r3, #8]
+ 247              		.loc 3 92 10 view .LVU99
+ 248 0094 8907     		lsls	r1, r1, #30
+ 249 0096 FBD5     		bpl	.L3
+  93:Drivers/dac.h **** 		SPI1->DR = data;
+ 250              		.loc 3 93 3 is_stmt 1 view .LVU100
+ 251              		.loc 3 93 12 is_stmt 0 view .LVU101
+ 252 0098 0727     		movs	r7, #7
+ 253 009a DF60     		str	r7, [r3, #12]
+ 254              	.L4:
+  94:Drivers/dac.h **** 
+  95:Drivers/dac.h **** 		while (!(SPI1->SR & SPI_FLAG_RXNE));
+ 255              		.loc 3 95 3 is_stmt 1 view .LVU102
+ 256              		.loc 3 95 10 view .LVU103
+ 257              		.loc 3 95 18 is_stmt 0 view .LVU104
+ 258 009c 714E     		ldr	r6, .L104+8
+ 259 009e B268     		ldr	r2, [r6, #8]
+ 260              		.loc 3 95 10 view .LVU105
+ 261 00a0 D207     		lsls	r2, r2, #31
+ 262 00a2 FBD5     		bpl	.L4
+  96:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 263              		.loc 3 96 3 is_stmt 1 view .LVU106
+ 264              		.loc 3 96 17 is_stmt 0 view .LVU107
+ 265 00a4 F068     		ldr	r0, [r6, #12]
+ 266              		.loc 3 96 9 view .LVU108
+ 267 00a6 C5B2     		uxtb	r5, r0
+ 268 00a8 2574     		strb	r5, [r4, #16]
+ 269              	.LVL9:
+ 270              	.L5:
+ 271              		.loc 3 96 9 view .LVU109
+ 272              	.LBE106:
+ 273              	.LBE105:
+ 274              	.LBB107:
+ 275              	.LBB108:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 276              		.loc 3 92 3 is_stmt 1 view .LVU110
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 277              		.loc 3 92 10 view .LVU111
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 278              		.loc 3 92 18 is_stmt 0 view .LVU112
+ 279 00aa 6E4B     		ldr	r3, .L104+8
+ 280 00ac 9968     		ldr	r1, [r3, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 281              		.loc 3 92 10 view .LVU113
+ 282 00ae 8F07     		lsls	r7, r1, #30
+ 283 00b0 FBD5     		bpl	.L5
+  93:Drivers/dac.h **** 
+ 284              		.loc 3 93 3 is_stmt 1 view .LVU114
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 10
+
+
+  93:Drivers/dac.h **** 
+ 285              		.loc 3 93 12 is_stmt 0 view .LVU115
+ 286 00b2 0027     		movs	r7, #0
+ 287 00b4 DF60     		str	r7, [r3, #12]
+ 288              	.L6:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 289              		.loc 3 95 3 is_stmt 1 view .LVU116
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 290              		.loc 3 95 10 view .LVU117
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 291              		.loc 3 95 18 is_stmt 0 view .LVU118
+ 292 00b6 6B48     		ldr	r0, .L104+8
+ 293 00b8 8668     		ldr	r6, [r0, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 294              		.loc 3 95 10 view .LVU119
+ 295 00ba F607     		lsls	r6, r6, #31
+ 296 00bc FBD5     		bpl	.L6
+ 297              		.loc 3 96 3 is_stmt 1 view .LVU120
+ 298              		.loc 3 96 17 is_stmt 0 view .LVU121
+ 299 00be C268     		ldr	r2, [r0, #12]
+ 300              		.loc 3 96 9 view .LVU122
+ 301 00c0 D5B2     		uxtb	r5, r2
+ 302 00c2 2574     		strb	r5, [r4, #16]
+ 303              	.L7:
+ 304              	.LBE108:
+ 305              	.LBE107:
+ 306              	.LBB109:
+ 307              	.LBB110:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 308              		.loc 3 92 3 is_stmt 1 view .LVU123
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 309              		.loc 3 92 10 view .LVU124
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 310              		.loc 3 92 18 is_stmt 0 view .LVU125
+ 311 00c4 674B     		ldr	r3, .L104+8
+ 312 00c6 9968     		ldr	r1, [r3, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 313              		.loc 3 92 10 view .LVU126
+ 314 00c8 8D07     		lsls	r5, r1, #30
+ 315 00ca FBD5     		bpl	.L7
+  93:Drivers/dac.h **** 
+ 316              		.loc 3 93 3 is_stmt 1 view .LVU127
+  93:Drivers/dac.h **** 
+ 317              		.loc 3 93 12 is_stmt 0 view .LVU128
+ 318 00cc 0027     		movs	r7, #0
+ 319 00ce DF60     		str	r7, [r3, #12]
+ 320              	.L8:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 321              		.loc 3 95 3 is_stmt 1 view .LVU129
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 322              		.loc 3 95 10 view .LVU130
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 323              		.loc 3 95 18 is_stmt 0 view .LVU131
+ 324 00d0 644E     		ldr	r6, .L104+8
+ 325 00d2 B068     		ldr	r0, [r6, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 326              		.loc 3 95 10 view .LVU132
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 11
+
+
+ 327 00d4 C007     		lsls	r0, r0, #31
+ 328 00d6 FBD5     		bpl	.L8
+ 329              		.loc 3 96 3 is_stmt 1 view .LVU133
+ 330              		.loc 3 96 17 is_stmt 0 view .LVU134
+ 331 00d8 F268     		ldr	r2, [r6, #12]
+ 332              		.loc 3 96 9 view .LVU135
+ 333 00da D5B2     		uxtb	r5, r2
+ 334 00dc 2574     		strb	r5, [r4, #16]
+ 335              	.L9:
+ 336              	.LBE110:
+ 337              	.LBE109:
+ 338              	.LBB111:
+ 339              	.LBB112:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 340              		.loc 3 92 3 is_stmt 1 view .LVU136
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 341              		.loc 3 92 10 view .LVU137
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 342              		.loc 3 92 18 is_stmt 0 view .LVU138
+ 343 00de 614B     		ldr	r3, .L104+8
+ 344 00e0 9968     		ldr	r1, [r3, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 345              		.loc 3 92 10 view .LVU139
+ 346 00e2 8907     		lsls	r1, r1, #30
+ 347 00e4 FBD5     		bpl	.L9
+  93:Drivers/dac.h **** 
+ 348              		.loc 3 93 3 is_stmt 1 view .LVU140
+  93:Drivers/dac.h **** 
+ 349              		.loc 3 93 12 is_stmt 0 view .LVU141
+ 350 00e6 0027     		movs	r7, #0
+ 351 00e8 DF60     		str	r7, [r3, #12]
+ 352              	.L10:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 353              		.loc 3 95 3 is_stmt 1 view .LVU142
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 354              		.loc 3 95 10 view .LVU143
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 355              		.loc 3 95 18 is_stmt 0 view .LVU144
+ 356 00ea 5E4E     		ldr	r6, .L104+8
+ 357 00ec B068     		ldr	r0, [r6, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 358              		.loc 3 95 10 view .LVU145
+ 359 00ee C207     		lsls	r2, r0, #31
+ 360 00f0 FBD5     		bpl	.L10
+ 361              		.loc 3 96 3 is_stmt 1 view .LVU146
+ 362              		.loc 3 96 17 is_stmt 0 view .LVU147
+ 363 00f2 F268     		ldr	r2, [r6, #12]
+ 364              		.loc 3 96 9 view .LVU148
+ 365 00f4 D5B2     		uxtb	r5, r2
+ 366 00f6 2574     		strb	r5, [r4, #16]
+ 367              	.LBE112:
+ 368              	.LBE111:
+  71:Drivers/dac.h **** 
+ 369              		.loc 3 71 3 is_stmt 1 view .LVU149
+  71:Drivers/dac.h **** 
+ 370              		.loc 3 71 13 is_stmt 0 view .LVU150
+ 371              		.syntax unified
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 12
+
+
+ 372              	@ 71 "Drivers/dac.h" 1
+ 373 00f8 00BF     		NOP
+ 374              	@ 0 "" 2
+  74:Drivers/dac.h **** 		asm("NOP");
+ 375              		.loc 3 74 3 is_stmt 1 view .LVU151
+  74:Drivers/dac.h **** 		asm("NOP");
+ 376              		.loc 3 74 15 is_stmt 0 view .LVU152
+ 377              		.thumb
+ 378              		.syntax unified
+ 379 00fa 584B     		ldr	r3, .L104
+ 380 00fc 1021     		movs	r1, #16
+ 381 00fe 9961     		str	r1, [r3, #24]
+  75:Drivers/dac.h **** 	}
+ 382              		.loc 3 75 3 is_stmt 1 view .LVU153
+  75:Drivers/dac.h **** 	}
+ 383              		.loc 3 75 13 is_stmt 0 view .LVU154
+ 384              		.syntax unified
+ 385              	@ 75 "Drivers/dac.h" 1
+ 386 0100 00BF     		NOP
+ 387              	@ 0 "" 2
+ 388              	.LVL10:
+  75:Drivers/dac.h **** 	}
+ 389              		.loc 3 75 13 view .LVU155
+ 390              		.thumb
+ 391              		.syntax unified
+ 392              	.LBE104:
+ 393              	.LBE103:
+ 394              	.LBE119:
+  80:Drivers/dac.h **** 	}
+ 395              		.loc 3 80 3 is_stmt 1 view .LVU156
+ 396              	.LBB120:
+ 397              	.LBB113:
+ 398              	.LBI113:
+  15:Drivers/micros.h **** 		uint32_t start = read();
+ 399              		.loc 2 15 7 view .LVU157
+ 400              	.LBB114:
+  16:Drivers/micros.h **** 		while (static_cast<uint32_t>(read() - start) < us);
+ 401              		.loc 2 16 3 view .LVU158
+ 402              	.LBB115:
+ 403              	.LBI115:
+  11:Drivers/micros.h **** 		return TIM5->CNT;
+ 404              		.loc 2 11 27 view .LVU159
+ 405              	.LBB116:
+  12:Drivers/micros.h **** 	}
+ 406              		.loc 2 12 3 view .LVU160
+  12:Drivers/micros.h **** 	}
+ 407              		.loc 2 12 16 is_stmt 0 view .LVU161
+ 408 0102 A3F5FA38 		sub	r8, r3, #128000
+ 409 0106 D8F82470 		ldr	r7, [r8, #36]
+ 410              	.LVL11:
+ 411              	.L11:
+  12:Drivers/micros.h **** 	}
+ 412              		.loc 2 12 16 view .LVU162
+ 413              	.LBE116:
+ 414              	.LBE115:
+ 415              		.loc 2 17 3 is_stmt 1 view .LVU163
+ 416              		.loc 2 17 48 view .LVU164
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 13
+
+
+ 417              	.LBB117:
+ 418              	.LBI117:
+  11:Drivers/micros.h **** 		return TIM5->CNT;
+ 419              		.loc 2 11 27 view .LVU165
+ 420              	.LBB118:
+  12:Drivers/micros.h **** 	}
+ 421              		.loc 2 12 3 view .LVU166
+  12:Drivers/micros.h **** 	}
+ 422              		.loc 2 12 16 is_stmt 0 view .LVU167
+ 423 010a 554E     		ldr	r6, .L104+4
+ 424 010c 706A     		ldr	r0, [r6, #36]
+ 425              	.LBE118:
+ 426              	.LBE117:
+ 427              		.loc 2 17 39 view .LVU168
+ 428 010e C21B     		subs	r2, r0, r7
+ 429              		.loc 2 17 48 view .LVU169
+ 430 0110 312A     		cmp	r2, #49
+ 431 0112 FAD9     		bls	.L11
+ 432              	.LVL12:
+ 433              		.loc 2 17 48 view .LVU170
+ 434              	.LBE114:
+ 435              	.LBE113:
+ 436              	.LBE120:
+  53:Drivers/dac.cpp **** 	setClearCode(ClearIgnore);
+ 437              		.loc 1 53 2 is_stmt 1 view .LVU171
+ 438              	.LBB121:
+ 439              	.LBI121:
+  87:Drivers/dac.h **** 		writeDac(LOAD_CLEAR_CODE_REGISTER, 0, 0, code);
+ 440              		.loc 3 87 7 view .LVU172
+ 441              	.LBE121:
+  88:Drivers/dac.h **** 	}
+ 442              		.loc 3 88 3 view .LVU173
+ 443              	.LBB132:
+ 444              	.LBB122:
+ 445              	.LBI122:
+  57:Drivers/dac.h **** 		uint8_t b1 = command;
+ 446              		.loc 3 57 7 view .LVU174
+ 447              	.LBB123:
+  58:Drivers/dac.h **** 		uint8_t b2 = (address << 4) | (data >> 12);
+ 448              		.loc 3 58 3 view .LVU175
+  59:Drivers/dac.h **** 		uint8_t b3 = data >> 4;
+ 449              		.loc 3 59 3 view .LVU176
+  60:Drivers/dac.h **** 		uint8_t b4 = (data & 0xf) << 4 | function;
+ 450              		.loc 3 60 3 view .LVU177
+  61:Drivers/dac.h **** 
+ 451              		.loc 3 61 3 view .LVU178
+  64:Drivers/dac.h **** 		asm("NOP");
+ 452              		.loc 3 64 3 view .LVU179
+  64:Drivers/dac.h **** 		asm("NOP");
+ 453              		.loc 3 64 15 is_stmt 0 view .LVU180
+ 454 0114 514D     		ldr	r5, .L104
+ 455 0116 4FF48013 		mov	r3, #1048576
+ 456 011a AB61     		str	r3, [r5, #24]
+  65:Drivers/dac.h **** 
+ 457              		.loc 3 65 3 is_stmt 1 view .LVU181
+  65:Drivers/dac.h **** 
+ 458              		.loc 3 65 13 is_stmt 0 view .LVU182
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 14
+
+
+ 459              		.syntax unified
+ 460              	@ 65 "Drivers/dac.h" 1
+ 461 011c 00BF     		NOP
+ 462              	@ 0 "" 2
+  67:Drivers/dac.h **** 		spi_write(b2);
+ 463              		.loc 3 67 3 is_stmt 1 view .LVU183
+ 464              	.LVL13:
+ 465              		.thumb
+ 466              		.syntax unified
+ 467              	.LBB124:
+ 468              	.LBI124:
+  91:Drivers/dac.h **** 		while (!(SPI1->SR & SPI_FLAG_TXE));
+ 469              		.loc 3 91 7 view .LVU184
+ 470              	.L12:
+ 471              	.LBB125:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 472              		.loc 3 92 3 view .LVU185
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 473              		.loc 3 92 10 view .LVU186
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 474              		.loc 3 92 18 is_stmt 0 view .LVU187
+ 475 011e 5149     		ldr	r1, .L104+8
+ 476 0120 8F68     		ldr	r7, [r1, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 477              		.loc 3 92 10 view .LVU188
+ 478 0122 BF07     		lsls	r7, r7, #30
+ 479 0124 FBD5     		bpl	.L12
+  93:Drivers/dac.h **** 
+ 480              		.loc 3 93 3 is_stmt 1 view .LVU189
+  93:Drivers/dac.h **** 
+ 481              		.loc 3 93 12 is_stmt 0 view .LVU190
+ 482 0126 0526     		movs	r6, #5
+ 483 0128 CE60     		str	r6, [r1, #12]
+ 484              	.L13:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 485              		.loc 3 95 3 is_stmt 1 view .LVU191
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 486              		.loc 3 95 10 view .LVU192
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 487              		.loc 3 95 18 is_stmt 0 view .LVU193
+ 488 012a 4E48     		ldr	r0, .L104+8
+ 489 012c 8268     		ldr	r2, [r0, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 490              		.loc 3 95 10 view .LVU194
+ 491 012e D607     		lsls	r6, r2, #31
+ 492 0130 FBD5     		bpl	.L13
+ 493              		.loc 3 96 3 is_stmt 1 view .LVU195
+ 494              		.loc 3 96 17 is_stmt 0 view .LVU196
+ 495 0132 C568     		ldr	r5, [r0, #12]
+ 496              		.loc 3 96 9 view .LVU197
+ 497 0134 EBB2     		uxtb	r3, r5
+ 498 0136 2374     		strb	r3, [r4, #16]
+ 499              	.LVL14:
+ 500              	.L14:
+ 501              		.loc 3 96 9 view .LVU198
+ 502              	.LBE125:
+ 503              	.LBE124:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 15
+
+
+ 504              	.LBB126:
+ 505              	.LBB127:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 506              		.loc 3 92 3 is_stmt 1 view .LVU199
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 507              		.loc 3 92 10 view .LVU200
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 508              		.loc 3 92 18 is_stmt 0 view .LVU201
+ 509 0138 4A49     		ldr	r1, .L104+8
+ 510 013a 8F68     		ldr	r7, [r1, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 511              		.loc 3 92 10 view .LVU202
+ 512 013c BD07     		lsls	r5, r7, #30
+ 513 013e FBD5     		bpl	.L14
+  93:Drivers/dac.h **** 
+ 514              		.loc 3 93 3 is_stmt 1 view .LVU203
+  93:Drivers/dac.h **** 
+ 515              		.loc 3 93 12 is_stmt 0 view .LVU204
+ 516 0140 0026     		movs	r6, #0
+ 517 0142 CE60     		str	r6, [r1, #12]
+ 518              	.L15:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 519              		.loc 3 95 3 is_stmt 1 view .LVU205
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 520              		.loc 3 95 10 view .LVU206
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 521              		.loc 3 95 18 is_stmt 0 view .LVU207
+ 522 0144 474D     		ldr	r5, .L104+8
+ 523 0146 A868     		ldr	r0, [r5, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 524              		.loc 3 95 10 view .LVU208
+ 525 0148 C007     		lsls	r0, r0, #31
+ 526 014a FBD5     		bpl	.L15
+ 527              		.loc 3 96 3 is_stmt 1 view .LVU209
+ 528              		.loc 3 96 17 is_stmt 0 view .LVU210
+ 529 014c EA68     		ldr	r2, [r5, #12]
+ 530              		.loc 3 96 9 view .LVU211
+ 531 014e D3B2     		uxtb	r3, r2
+ 532 0150 2374     		strb	r3, [r4, #16]
+ 533              	.L16:
+ 534              	.LBE127:
+ 535              	.LBE126:
+ 536              	.LBB128:
+ 537              	.LBB129:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 538              		.loc 3 92 3 is_stmt 1 view .LVU212
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 539              		.loc 3 92 10 view .LVU213
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 540              		.loc 3 92 18 is_stmt 0 view .LVU214
+ 541 0152 444F     		ldr	r7, .L104+8
+ 542 0154 B968     		ldr	r1, [r7, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 543              		.loc 3 92 10 view .LVU215
+ 544 0156 8907     		lsls	r1, r1, #30
+ 545 0158 FBD5     		bpl	.L16
+  93:Drivers/dac.h **** 
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 16
+
+
+ 546              		.loc 3 93 3 is_stmt 1 view .LVU216
+  93:Drivers/dac.h **** 
+ 547              		.loc 3 93 12 is_stmt 0 view .LVU217
+ 548 015a 0026     		movs	r6, #0
+ 549 015c FE60     		str	r6, [r7, #12]
+ 550              	.L17:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 551              		.loc 3 95 3 is_stmt 1 view .LVU218
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 552              		.loc 3 95 10 view .LVU219
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 553              		.loc 3 95 18 is_stmt 0 view .LVU220
+ 554 015e 414D     		ldr	r5, .L104+8
+ 555 0160 A868     		ldr	r0, [r5, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 556              		.loc 3 95 10 view .LVU221
+ 557 0162 C207     		lsls	r2, r0, #31
+ 558 0164 FBD5     		bpl	.L17
+ 559              		.loc 3 96 3 is_stmt 1 view .LVU222
+ 560              		.loc 3 96 17 is_stmt 0 view .LVU223
+ 561 0166 EA68     		ldr	r2, [r5, #12]
+ 562              		.loc 3 96 9 view .LVU224
+ 563 0168 D3B2     		uxtb	r3, r2
+ 564 016a 2374     		strb	r3, [r4, #16]
+ 565              	.L18:
+ 566              	.LBE129:
+ 567              	.LBE128:
+ 568              	.LBB130:
+ 569              	.LBB131:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 570              		.loc 3 92 3 is_stmt 1 view .LVU225
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 571              		.loc 3 92 10 view .LVU226
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 572              		.loc 3 92 18 is_stmt 0 view .LVU227
+ 573 016c 3D49     		ldr	r1, .L104+8
+ 574 016e 8F68     		ldr	r7, [r1, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 575              		.loc 3 92 10 view .LVU228
+ 576 0170 BF07     		lsls	r7, r7, #30
+ 577 0172 FBD5     		bpl	.L18
+  93:Drivers/dac.h **** 
+ 578              		.loc 3 93 3 is_stmt 1 view .LVU229
+  93:Drivers/dac.h **** 
+ 579              		.loc 3 93 12 is_stmt 0 view .LVU230
+ 580 0174 0326     		movs	r6, #3
+ 581 0176 CE60     		str	r6, [r1, #12]
+ 582              	.L19:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 583              		.loc 3 95 3 is_stmt 1 view .LVU231
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 584              		.loc 3 95 10 view .LVU232
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 585              		.loc 3 95 18 is_stmt 0 view .LVU233
+ 586 0178 3A4D     		ldr	r5, .L104+8
+ 587 017a A868     		ldr	r0, [r5, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 17
+
+
+ 588              		.loc 3 95 10 view .LVU234
+ 589 017c C607     		lsls	r6, r0, #31
+ 590 017e FBD5     		bpl	.L19
+ 591              		.loc 3 96 3 is_stmt 1 view .LVU235
+ 592              		.loc 3 96 17 is_stmt 0 view .LVU236
+ 593 0180 EA68     		ldr	r2, [r5, #12]
+ 594              		.loc 3 96 9 view .LVU237
+ 595 0182 D3B2     		uxtb	r3, r2
+ 596 0184 2374     		strb	r3, [r4, #16]
+ 597              	.LBE131:
+ 598              	.LBE130:
+  71:Drivers/dac.h **** 
+ 599              		.loc 3 71 3 is_stmt 1 view .LVU238
+  71:Drivers/dac.h **** 
+ 600              		.loc 3 71 13 is_stmt 0 view .LVU239
+ 601              		.syntax unified
+ 602              	@ 71 "Drivers/dac.h" 1
+ 603 0186 00BF     		NOP
+ 604              	@ 0 "" 2
+  74:Drivers/dac.h **** 		asm("NOP");
+ 605              		.loc 3 74 3 is_stmt 1 view .LVU240
+  74:Drivers/dac.h **** 		asm("NOP");
+ 606              		.loc 3 74 15 is_stmt 0 view .LVU241
+ 607              		.thumb
+ 608              		.syntax unified
+ 609 0188 3449     		ldr	r1, .L104
+ 610 018a 1027     		movs	r7, #16
+ 611 018c 8F61     		str	r7, [r1, #24]
+  75:Drivers/dac.h **** 	}
+ 612              		.loc 3 75 3 is_stmt 1 view .LVU242
+  75:Drivers/dac.h **** 	}
+ 613              		.loc 3 75 13 is_stmt 0 view .LVU243
+ 614              		.syntax unified
+ 615              	@ 75 "Drivers/dac.h" 1
+ 616 018e 00BF     		NOP
+ 617              	@ 0 "" 2
+ 618              	.LVL15:
+  75:Drivers/dac.h **** 	}
+ 619              		.loc 3 75 13 view .LVU244
+ 620              		.thumb
+ 621              		.syntax unified
+ 622              	.LBE123:
+ 623              	.LBE122:
+ 624              	.LBE132:
+  54:Drivers/dac.cpp **** 	setInternalRef(true);
+ 625              		.loc 1 54 2 is_stmt 1 view .LVU245
+ 626              	.LBB133:
+ 627              	.LBI133:
+  83:Drivers/dac.h **** 		writeDac(SETUP_INTERNAL_REF, 0, 0, enabled ? 1 : 0);
+ 628              		.loc 3 83 7 view .LVU246
+ 629              	.LBE133:
+  84:Drivers/dac.h **** 	}
+ 630              		.loc 3 84 3 view .LVU247
+ 631              	.LBB144:
+ 632              	.LBB134:
+ 633              	.LBI134:
+  57:Drivers/dac.h **** 		uint8_t b1 = command;
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 18
+
+
+ 634              		.loc 3 57 7 view .LVU248
+ 635              	.LBB135:
+  58:Drivers/dac.h **** 		uint8_t b2 = (address << 4) | (data >> 12);
+ 636              		.loc 3 58 3 view .LVU249
+  59:Drivers/dac.h **** 		uint8_t b3 = data >> 4;
+ 637              		.loc 3 59 3 view .LVU250
+  60:Drivers/dac.h **** 		uint8_t b4 = (data & 0xf) << 4 | function;
+ 638              		.loc 3 60 3 view .LVU251
+  61:Drivers/dac.h **** 
+ 639              		.loc 3 61 3 view .LVU252
+  64:Drivers/dac.h **** 		asm("NOP");
+ 640              		.loc 3 64 3 view .LVU253
+  64:Drivers/dac.h **** 		asm("NOP");
+ 641              		.loc 3 64 15 is_stmt 0 view .LVU254
+ 642 0190 4FF48016 		mov	r6, #1048576
+ 643 0194 8E61     		str	r6, [r1, #24]
+  65:Drivers/dac.h **** 
+ 644              		.loc 3 65 3 is_stmt 1 view .LVU255
+  65:Drivers/dac.h **** 
+ 645              		.loc 3 65 13 is_stmt 0 view .LVU256
+ 646              		.syntax unified
+ 647              	@ 65 "Drivers/dac.h" 1
+ 648 0196 00BF     		NOP
+ 649              	@ 0 "" 2
+  67:Drivers/dac.h **** 		spi_write(b2);
+ 650              		.loc 3 67 3 is_stmt 1 view .LVU257
+ 651              	.LVL16:
+ 652              		.thumb
+ 653              		.syntax unified
+ 654              	.LBB136:
+ 655              	.LBI136:
+  91:Drivers/dac.h **** 		while (!(SPI1->SR & SPI_FLAG_TXE));
+ 656              		.loc 3 91 7 view .LVU258
+ 657              	.L20:
+ 658              	.LBB137:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 659              		.loc 3 92 3 view .LVU259
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 660              		.loc 3 92 10 view .LVU260
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 661              		.loc 3 92 18 is_stmt 0 view .LVU261
+ 662 0198 3248     		ldr	r0, .L104+8
+ 663 019a 8568     		ldr	r5, [r0, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 664              		.loc 3 92 10 view .LVU262
+ 665 019c AD07     		lsls	r5, r5, #30
+ 666 019e FBD5     		bpl	.L20
+  93:Drivers/dac.h **** 
+ 667              		.loc 3 93 3 is_stmt 1 view .LVU263
+  93:Drivers/dac.h **** 
+ 668              		.loc 3 93 12 is_stmt 0 view .LVU264
+ 669 01a0 0822     		movs	r2, #8
+ 670 01a2 C260     		str	r2, [r0, #12]
+ 671              	.L21:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 672              		.loc 3 95 3 is_stmt 1 view .LVU265
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 19
+
+
+ 673              		.loc 3 95 10 view .LVU266
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 674              		.loc 3 95 18 is_stmt 0 view .LVU267
+ 675 01a4 2F4B     		ldr	r3, .L104+8
+ 676 01a6 9968     		ldr	r1, [r3, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 677              		.loc 3 95 10 view .LVU268
+ 678 01a8 C807     		lsls	r0, r1, #31
+ 679 01aa FBD5     		bpl	.L21
+ 680              		.loc 3 96 3 is_stmt 1 view .LVU269
+ 681              		.loc 3 96 17 is_stmt 0 view .LVU270
+ 682 01ac DF68     		ldr	r7, [r3, #12]
+ 683              		.loc 3 96 9 view .LVU271
+ 684 01ae FEB2     		uxtb	r6, r7
+ 685 01b0 2674     		strb	r6, [r4, #16]
+ 686              	.LVL17:
+ 687              	.L22:
+ 688              		.loc 3 96 9 view .LVU272
+ 689              	.LBE137:
+ 690              	.LBE136:
+ 691              	.LBB138:
+ 692              	.LBB139:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 693              		.loc 3 92 3 is_stmt 1 view .LVU273
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 694              		.loc 3 92 10 view .LVU274
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 695              		.loc 3 92 18 is_stmt 0 view .LVU275
+ 696 01b2 2C48     		ldr	r0, .L104+8
+ 697 01b4 8568     		ldr	r5, [r0, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 698              		.loc 3 92 10 view .LVU276
+ 699 01b6 A907     		lsls	r1, r5, #30
+ 700 01b8 FBD5     		bpl	.L22
+  93:Drivers/dac.h **** 
+ 701              		.loc 3 93 3 is_stmt 1 view .LVU277
+  93:Drivers/dac.h **** 
+ 702              		.loc 3 93 12 is_stmt 0 view .LVU278
+ 703 01ba 0022     		movs	r2, #0
+ 704 01bc C260     		str	r2, [r0, #12]
+ 705              	.L23:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 706              		.loc 3 95 3 is_stmt 1 view .LVU279
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 707              		.loc 3 95 10 view .LVU280
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 708              		.loc 3 95 18 is_stmt 0 view .LVU281
+ 709 01be 294B     		ldr	r3, .L104+8
+ 710 01c0 9968     		ldr	r1, [r3, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 711              		.loc 3 95 10 view .LVU282
+ 712 01c2 CA07     		lsls	r2, r1, #31
+ 713 01c4 FBD5     		bpl	.L23
+ 714              		.loc 3 96 3 is_stmt 1 view .LVU283
+ 715              		.loc 3 96 17 is_stmt 0 view .LVU284
+ 716 01c6 DF68     		ldr	r7, [r3, #12]
+ 717              		.loc 3 96 9 view .LVU285
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 20
+
+
+ 718 01c8 FEB2     		uxtb	r6, r7
+ 719 01ca 2674     		strb	r6, [r4, #16]
+ 720              	.L24:
+ 721              	.LBE139:
+ 722              	.LBE138:
+ 723              	.LBB140:
+ 724              	.LBB141:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 725              		.loc 3 92 3 is_stmt 1 view .LVU286
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 726              		.loc 3 92 10 view .LVU287
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 727              		.loc 3 92 18 is_stmt 0 view .LVU288
+ 728 01cc 2548     		ldr	r0, .L104+8
+ 729 01ce 8568     		ldr	r5, [r0, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 730              		.loc 3 92 10 view .LVU289
+ 731 01d0 AF07     		lsls	r7, r5, #30
+ 732 01d2 FBD5     		bpl	.L24
+  93:Drivers/dac.h **** 
+ 733              		.loc 3 93 3 is_stmt 1 view .LVU290
+  93:Drivers/dac.h **** 
+ 734              		.loc 3 93 12 is_stmt 0 view .LVU291
+ 735 01d4 0022     		movs	r2, #0
+ 736 01d6 C260     		str	r2, [r0, #12]
+ 737              	.L25:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 738              		.loc 3 95 3 is_stmt 1 view .LVU292
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 739              		.loc 3 95 10 view .LVU293
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 740              		.loc 3 95 18 is_stmt 0 view .LVU294
+ 741 01d8 224B     		ldr	r3, .L104+8
+ 742 01da 9968     		ldr	r1, [r3, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 743              		.loc 3 95 10 view .LVU295
+ 744 01dc CE07     		lsls	r6, r1, #31
+ 745 01de FBD5     		bpl	.L25
+ 746              		.loc 3 96 3 is_stmt 1 view .LVU296
+ 747              		.loc 3 96 17 is_stmt 0 view .LVU297
+ 748 01e0 DF68     		ldr	r7, [r3, #12]
+ 749              		.loc 3 96 9 view .LVU298
+ 750 01e2 FEB2     		uxtb	r6, r7
+ 751 01e4 2674     		strb	r6, [r4, #16]
+ 752              	.L26:
+ 753              	.LBE141:
+ 754              	.LBE140:
+ 755              	.LBB142:
+ 756              	.LBB143:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 757              		.loc 3 92 3 is_stmt 1 view .LVU299
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 758              		.loc 3 92 10 view .LVU300
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 759              		.loc 3 92 18 is_stmt 0 view .LVU301
+ 760 01e6 1F48     		ldr	r0, .L104+8
+ 761 01e8 8568     		ldr	r5, [r0, #8]
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 21
+
+
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 762              		.loc 3 92 10 view .LVU302
+ 763 01ea AD07     		lsls	r5, r5, #30
+ 764 01ec FBD5     		bpl	.L26
+  93:Drivers/dac.h **** 
+ 765              		.loc 3 93 3 is_stmt 1 view .LVU303
+  93:Drivers/dac.h **** 
+ 766              		.loc 3 93 12 is_stmt 0 view .LVU304
+ 767 01ee 0122     		movs	r2, #1
+ 768 01f0 C260     		str	r2, [r0, #12]
+ 769              	.L27:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 770              		.loc 3 95 3 is_stmt 1 view .LVU305
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 771              		.loc 3 95 10 view .LVU306
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 772              		.loc 3 95 18 is_stmt 0 view .LVU307
+ 773 01f2 1C4B     		ldr	r3, .L104+8
+ 774 01f4 9968     		ldr	r1, [r3, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 775              		.loc 3 95 10 view .LVU308
+ 776 01f6 C807     		lsls	r0, r1, #31
+ 777 01f8 FBD5     		bpl	.L27
+ 778              		.loc 3 96 3 is_stmt 1 view .LVU309
+ 779              		.loc 3 96 17 is_stmt 0 view .LVU310
+ 780 01fa DF68     		ldr	r7, [r3, #12]
+ 781              		.loc 3 96 9 view .LVU311
+ 782 01fc FEB2     		uxtb	r6, r7
+ 783 01fe 2674     		strb	r6, [r4, #16]
+ 784              	.LBE143:
+ 785              	.LBE142:
+  71:Drivers/dac.h **** 
+ 786              		.loc 3 71 3 is_stmt 1 view .LVU312
+  71:Drivers/dac.h **** 
+ 787              		.loc 3 71 13 is_stmt 0 view .LVU313
+ 788              		.syntax unified
+ 789              	@ 71 "Drivers/dac.h" 1
+ 790 0200 00BF     		NOP
+ 791              	@ 0 "" 2
+  74:Drivers/dac.h **** 		asm("NOP");
+ 792              		.loc 3 74 3 is_stmt 1 view .LVU314
+  74:Drivers/dac.h **** 		asm("NOP");
+ 793              		.loc 3 74 15 is_stmt 0 view .LVU315
+ 794              		.thumb
+ 795              		.syntax unified
+ 796 0202 1648     		ldr	r0, .L104
+ 797 0204 1025     		movs	r5, #16
+ 798 0206 8561     		str	r5, [r0, #24]
+  75:Drivers/dac.h **** 	}
+ 799              		.loc 3 75 3 is_stmt 1 view .LVU316
+  75:Drivers/dac.h **** 	}
+ 800              		.loc 3 75 13 is_stmt 0 view .LVU317
+ 801              		.syntax unified
+ 802              	@ 75 "Drivers/dac.h" 1
+ 803 0208 00BF     		NOP
+ 804              	@ 0 "" 2
+ 805              	.LVL18:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 22
+
+
+  75:Drivers/dac.h **** 	}
+ 806              		.loc 3 75 13 view .LVU318
+ 807              		.thumb
+ 808              		.syntax unified
+ 809              	.LBE135:
+ 810              	.LBE134:
+ 811              	.LBE144:
+  55:Drivers/dac.cpp **** 	writeDac(POWER_DOWN_UP_DAC, 0, 0, 0xff);
+ 812              		.loc 1 55 2 is_stmt 1 view .LVU319
+ 813              	.LBB145:
+ 814              	.LBI145:
+  57:Drivers/dac.h **** 		uint8_t b1 = command;
+ 815              		.loc 3 57 7 view .LVU320
+ 816              	.LBB146:
+  58:Drivers/dac.h **** 		uint8_t b2 = (address << 4) | (data >> 12);
+ 817              		.loc 3 58 3 view .LVU321
+  59:Drivers/dac.h **** 		uint8_t b3 = data >> 4;
+ 818              		.loc 3 59 3 view .LVU322
+  60:Drivers/dac.h **** 		uint8_t b4 = (data & 0xf) << 4 | function;
+ 819              		.loc 3 60 3 view .LVU323
+  61:Drivers/dac.h **** 
+ 820              		.loc 3 61 3 view .LVU324
+  64:Drivers/dac.h **** 		asm("NOP");
+ 821              		.loc 3 64 3 view .LVU325
+  64:Drivers/dac.h **** 		asm("NOP");
+ 822              		.loc 3 64 15 is_stmt 0 view .LVU326
+ 823 020a 4FF48012 		mov	r2, #1048576
+ 824 020e 8261     		str	r2, [r0, #24]
+  65:Drivers/dac.h **** 
+ 825              		.loc 3 65 3 is_stmt 1 view .LVU327
+  65:Drivers/dac.h **** 
+ 826              		.loc 3 65 13 is_stmt 0 view .LVU328
+ 827              		.syntax unified
+ 828              	@ 65 "Drivers/dac.h" 1
+ 829 0210 00BF     		NOP
+ 830              	@ 0 "" 2
+  67:Drivers/dac.h **** 		spi_write(b2);
+ 831              		.loc 3 67 3 is_stmt 1 view .LVU329
+ 832              	.LVL19:
+ 833              		.thumb
+ 834              		.syntax unified
+ 835              	.LBB147:
+ 836              	.LBI147:
+  91:Drivers/dac.h **** 		while (!(SPI1->SR & SPI_FLAG_TXE));
+ 837              		.loc 3 91 7 view .LVU330
+ 838              	.L28:
+ 839              	.LBB148:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 840              		.loc 3 92 3 view .LVU331
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 841              		.loc 3 92 10 view .LVU332
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 842              		.loc 3 92 18 is_stmt 0 view .LVU333
+ 843 0212 144B     		ldr	r3, .L104+8
+ 844 0214 9968     		ldr	r1, [r3, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 845              		.loc 3 92 10 view .LVU334
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 23
+
+
+ 846 0216 8907     		lsls	r1, r1, #30
+ 847 0218 FBD5     		bpl	.L28
+  93:Drivers/dac.h **** 
+ 848              		.loc 3 93 3 is_stmt 1 view .LVU335
+  93:Drivers/dac.h **** 
+ 849              		.loc 3 93 12 is_stmt 0 view .LVU336
+ 850 021a 0427     		movs	r7, #4
+ 851 021c DF60     		str	r7, [r3, #12]
+ 852              	.L29:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 853              		.loc 3 95 3 is_stmt 1 view .LVU337
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 854              		.loc 3 95 10 view .LVU338
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 855              		.loc 3 95 18 is_stmt 0 view .LVU339
+ 856 021e 114E     		ldr	r6, .L104+8
+ 857 0220 B068     		ldr	r0, [r6, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 858              		.loc 3 95 10 view .LVU340
+ 859 0222 C207     		lsls	r2, r0, #31
+ 860 0224 FBD5     		bpl	.L29
+ 861              		.loc 3 96 3 is_stmt 1 view .LVU341
+ 862              		.loc 3 96 17 is_stmt 0 view .LVU342
+ 863 0226 F568     		ldr	r5, [r6, #12]
+ 864              		.loc 3 96 9 view .LVU343
+ 865 0228 EAB2     		uxtb	r2, r5
+ 866 022a 2274     		strb	r2, [r4, #16]
+ 867              	.LVL20:
+ 868              	.L30:
+ 869              		.loc 3 96 9 view .LVU344
+ 870              	.LBE148:
+ 871              	.LBE147:
+ 872              	.LBB149:
+ 873              	.LBB150:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 874              		.loc 3 92 3 is_stmt 1 view .LVU345
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 875              		.loc 3 92 10 view .LVU346
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 876              		.loc 3 92 18 is_stmt 0 view .LVU347
+ 877 022c 0D4B     		ldr	r3, .L104+8
+ 878 022e 9968     		ldr	r1, [r3, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 879              		.loc 3 92 10 view .LVU348
+ 880 0230 8F07     		lsls	r7, r1, #30
+ 881 0232 FBD5     		bpl	.L30
+  93:Drivers/dac.h **** 
+ 882              		.loc 3 93 3 is_stmt 1 view .LVU349
+  93:Drivers/dac.h **** 
+ 883              		.loc 3 93 12 is_stmt 0 view .LVU350
+ 884 0234 0027     		movs	r7, #0
+ 885 0236 DF60     		str	r7, [r3, #12]
+ 886              	.L31:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 887              		.loc 3 95 3 is_stmt 1 view .LVU351
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 888              		.loc 3 95 10 view .LVU352
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 24
+
+
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 889              		.loc 3 95 18 is_stmt 0 view .LVU353
+ 890 0238 0A48     		ldr	r0, .L104+8
+ 891 023a 8668     		ldr	r6, [r0, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 892              		.loc 3 95 10 view .LVU354
+ 893 023c F607     		lsls	r6, r6, #31
+ 894 023e FBD5     		bpl	.L31
+ 895              		.loc 3 96 3 is_stmt 1 view .LVU355
+ 896              		.loc 3 96 17 is_stmt 0 view .LVU356
+ 897 0240 C568     		ldr	r5, [r0, #12]
+ 898              		.loc 3 96 9 view .LVU357
+ 899 0242 EAB2     		uxtb	r2, r5
+ 900 0244 2274     		strb	r2, [r4, #16]
+ 901              	.L32:
+ 902              	.LBE150:
+ 903              	.LBE149:
+ 904              	.LBB151:
+ 905              	.LBB152:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 906              		.loc 3 92 3 is_stmt 1 view .LVU358
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 907              		.loc 3 92 10 view .LVU359
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 908              		.loc 3 92 18 is_stmt 0 view .LVU360
+ 909 0246 074B     		ldr	r3, .L104+8
+ 910 0248 9968     		ldr	r1, [r3, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 911              		.loc 3 92 10 view .LVU361
+ 912 024a 8D07     		lsls	r5, r1, #30
+ 913 024c FBD5     		bpl	.L32
+  93:Drivers/dac.h **** 
+ 914              		.loc 3 93 3 is_stmt 1 view .LVU362
+  93:Drivers/dac.h **** 
+ 915              		.loc 3 93 12 is_stmt 0 view .LVU363
+ 916 024e 0027     		movs	r7, #0
+ 917 0250 DF60     		str	r7, [r3, #12]
+ 918              	.L33:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 919              		.loc 3 95 3 is_stmt 1 view .LVU364
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 920              		.loc 3 95 10 view .LVU365
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 921              		.loc 3 95 18 is_stmt 0 view .LVU366
+ 922 0252 044E     		ldr	r6, .L104+8
+ 923 0254 B068     		ldr	r0, [r6, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 924              		.loc 3 95 10 view .LVU367
+ 925 0256 C007     		lsls	r0, r0, #31
+ 926 0258 06E0     		b	.L105
+ 927              	.L106:
+ 928 025a 00BF     		.align	2
+ 929              	.L104:
+ 930 025c 00000240 		.word	1073872896
+ 931 0260 000C0040 		.word	1073744896
+ 932 0264 00300140 		.word	1073819648
+ 933              	.L105:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 25
+
+
+ 934 0268 F3D5     		bpl	.L33
+ 935              		.loc 3 96 3 is_stmt 1 view .LVU368
+ 936              		.loc 3 96 17 is_stmt 0 view .LVU369
+ 937 026a F568     		ldr	r5, [r6, #12]
+ 938              		.loc 3 96 9 view .LVU370
+ 939 026c EAB2     		uxtb	r2, r5
+ 940 026e 2274     		strb	r2, [r4, #16]
+ 941              	.L34:
+ 942              	.LBE152:
+ 943              	.LBE151:
+ 944              	.LBB153:
+ 945              	.LBB154:
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 946              		.loc 3 92 3 is_stmt 1 view .LVU371
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 947              		.loc 3 92 10 view .LVU372
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 948              		.loc 3 92 18 is_stmt 0 view .LVU373
+ 949 0270 0A4B     		ldr	r3, .L107
+ 950 0272 9968     		ldr	r1, [r3, #8]
+  92:Drivers/dac.h **** 		SPI1->DR = data;
+ 951              		.loc 3 92 10 view .LVU374
+ 952 0274 8907     		lsls	r1, r1, #30
+ 953 0276 FBD5     		bpl	.L34
+  93:Drivers/dac.h **** 
+ 954              		.loc 3 93 3 is_stmt 1 view .LVU375
+  93:Drivers/dac.h **** 
+ 955              		.loc 3 93 12 is_stmt 0 view .LVU376
+ 956 0278 FF27     		movs	r7, #255
+ 957 027a DF60     		str	r7, [r3, #12]
+ 958              	.L35:
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 959              		.loc 3 95 3 is_stmt 1 view .LVU377
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 960              		.loc 3 95 10 view .LVU378
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 961              		.loc 3 95 18 is_stmt 0 view .LVU379
+ 962 027c 074E     		ldr	r6, .L107
+ 963 027e B068     		ldr	r0, [r6, #8]
+  95:Drivers/dac.h **** 		dummy = SPI1->DR;
+ 964              		.loc 3 95 10 view .LVU380
+ 965 0280 C207     		lsls	r2, r0, #31
+ 966 0282 FBD5     		bpl	.L35
+ 967              		.loc 3 96 3 is_stmt 1 view .LVU381
+ 968              		.loc 3 96 17 is_stmt 0 view .LVU382
+ 969 0284 F568     		ldr	r5, [r6, #12]
+ 970              		.loc 3 96 9 view .LVU383
+ 971 0286 EAB2     		uxtb	r2, r5
+ 972 0288 2274     		strb	r2, [r4, #16]
+ 973              	.LBE154:
+ 974              	.LBE153:
+  71:Drivers/dac.h **** 
+ 975              		.loc 3 71 3 is_stmt 1 view .LVU384
+  71:Drivers/dac.h **** 
+ 976              		.loc 3 71 13 is_stmt 0 view .LVU385
+ 977              		.syntax unified
+ 978              	@ 71 "Drivers/dac.h" 1
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 26
+
+
+ 979 028a 00BF     		NOP
+ 980              	@ 0 "" 2
+  74:Drivers/dac.h **** 		asm("NOP");
+ 981              		.loc 3 74 3 is_stmt 1 view .LVU386
+  74:Drivers/dac.h **** 		asm("NOP");
+ 982              		.loc 3 74 15 is_stmt 0 view .LVU387
+ 983              		.thumb
+ 984              		.syntax unified
+ 985 028c 044C     		ldr	r4, .L107+4
+ 986              	.LVL21:
+  74:Drivers/dac.h **** 		asm("NOP");
+ 987              		.loc 3 74 15 view .LVU388
+ 988 028e 1023     		movs	r3, #16
+ 989 0290 A361     		str	r3, [r4, #24]
+  75:Drivers/dac.h **** 	}
+ 990              		.loc 3 75 3 is_stmt 1 view .LVU389
+  75:Drivers/dac.h **** 	}
+ 991              		.loc 3 75 13 is_stmt 0 view .LVU390
+ 992              		.syntax unified
+ 993              	@ 75 "Drivers/dac.h" 1
+ 994 0292 00BF     		NOP
+ 995              	@ 0 "" 2
+ 996              	.LVL22:
+  75:Drivers/dac.h **** 	}
+ 997              		.loc 3 75 13 view .LVU391
+ 998              		.thumb
+ 999              		.syntax unified
+ 1000              	.LBE146:
+ 1001              	.LBE145:
+  56:Drivers/dac.cpp **** }
+ 1002              		.loc 1 56 1 view .LVU392
+ 1003 0294 1CB0     		add	sp, sp, #112
+ 1004              		.cfi_def_cfa_offset 24
+ 1005              		@ sp needed
+ 1006 0296 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1007              	.L108:
+ 1008 029a 00BF     		.align	2
+ 1009              	.L107:
+ 1010 029c 00300140 		.word	1073819648
+ 1011 02a0 00000240 		.word	1073872896
+ 1012              		.cfi_endproc
+ 1013              	.LFE1985:
+ 1015              		.global	dac
+ 1016              		.section	.bss.dac,"aw",%nobits
+ 1017              		.align	2
+ 1020              	dac:
+ 1021 0000 00000000 		.space	18
+ 1021      00000000 
+ 1021      00000000 
+ 1021      00000000 
+ 1021      0000
+ 1022              		.text
+ 1023              	.Letext0:
+ 1024              		.file 4 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 1025              		.file 5 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 1026              		.file 6 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 1027              		.file 7 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Include/core_
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 27
+
+
+ 1028              		.file 8 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Device/ST/STM
+ 1029              		.file 9 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Device/ST/STM
+ 1030              		.file 10 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/l
+ 1031              		.file 11 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Driv
+ 1032              		.file 12 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Driv
+ 1033              		.file 13 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Driv
+ 1034              		.file 14 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Driv
+ 1035              		.file 15 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Driv
+ 1036              		.file 16 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1037              		.file 17 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1038              		.file 18 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1039              		.file 19 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1040              		.file 20 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1041              		.file 21 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1042              		.file 22 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1043              		.file 23 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1044              		.file 24 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1045              		.file 25 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1046              		.file 26 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1047              		.file 27 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1048              		.file 28 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1049              		.file 29 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1050              		.file 30 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1051              		.file 31 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1052              		.file 32 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1053              		.file 33 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1054              		.file 34 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1055              		.file 35 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1056              		.file 36 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1057              		.file 37 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1058              		.file 38 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1059              		.file 39 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1060              		.file 40 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/l
+ 1061              		.file 41 "<built-in>"
+ 1062              		.file 42 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1063              		.file 43 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1064              		.file 44 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1065              		.file 45 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1066              		.file 46 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1067              		.file 47 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1068              		.file 48 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1069              		.file 49 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 1070              		.file 50 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s 			page 28
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 dac.cpp
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s:18     .text._ZN3Dac4initEv:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s:27     .text._ZN3Dac4initEv:0000000000000000 _ZN3Dac4initEv
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s:930    .text._ZN3Dac4initEv:000000000000025c $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s:934    .text._ZN3Dac4initEv:0000000000000268 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s:1010   .text._ZN3Dac4initEv:000000000000029c $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s:1020   .bss.dac:0000000000000000 dac
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccaQwSzs.s:1017   .bss.dac:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_Init
+HAL_SPI_Init

@@ -1,0 +1,498 @@
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 2
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"chord.cpp"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text._ZN5Chord4initEP5Scale,"ax",%progbits
+  18              		.align	1
+  19              		.p2align 2,,3
+  20              		.global	_ZN5Chord4initEP5Scale
+  21              		.arch armv7e-m
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  25              		.fpu fpv4-sp-d16
+  27              	_ZN5Chord4initEP5Scale:
+  28              	.LVL0:
+  29              	.LFB2226:
+  30              		.file 1 "Src/Settings/chord.cpp"
+   1:Src/Settings/chord.cpp **** #include "chord.h"
+   2:Src/Settings/chord.cpp **** 
+   3:Src/Settings/chord.cpp **** Scale* Chord::scale_;
+   4:Src/Settings/chord.cpp **** 
+   5:Src/Settings/chord.cpp **** StringBuilderBase<16>Chord::str_;
+   6:Src/Settings/chord.cpp **** 
+   7:Src/Settings/chord.cpp **** void Chord::init(Scale *scale) {
+  31              		.loc 1 7 32 view -0
+  32              		.cfi_startproc
+  33              		@ args = 0, pretend = 0, frame = 0
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+  35              		@ link register save eliminated.
+   8:Src/Settings/chord.cpp **** 	scale_ = scale;
+  36              		.loc 1 8 2 view .LVU1
+  37              		.loc 1 8 9 is_stmt 0 view .LVU2
+  38 0000 014B     		ldr	r3, .L3
+  39 0002 1860     		str	r0, [r3]
+   9:Src/Settings/chord.cpp **** }
+  40              		.loc 1 9 1 view .LVU3
+  41 0004 7047     		bx	lr
+  42              	.L4:
+  43 0006 00BF     		.align	2
+  44              	.L3:
+  45 0008 00000000 		.word	.LANCHOR0
+  46              		.cfi_endproc
+  47              	.LFE2226:
+  49              		.section	.text.startup._GLOBAL__sub_I__ZN5Chord6scale_E,"ax",%progbits
+  50              		.align	1
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s 			page 2
+
+
+  51              		.p2align 2,,3
+  52              		.syntax unified
+  53              		.thumb
+  54              		.thumb_func
+  55              		.fpu fpv4-sp-d16
+  57              	_GLOBAL__sub_I__ZN5Chord6scale_E:
+  58              	.LFB2722:
+  10:Src/Settings/chord.cpp **** 
+  11:Src/Settings/chord.cpp **** const uint8_t Chord::lut_chords_major_scale[7] = {
+  12:Src/Settings/chord.cpp **** 	MAJOR, MINOR ,MINOR, MAJOR, MAJOR, MINOR, DIMINISHED,
+  13:Src/Settings/chord.cpp **** };
+  14:Src/Settings/chord.cpp **** 
+  15:Src/Settings/chord.cpp **** const uint8_t Chord::lut_chords_minor_scale[7] = {
+  16:Src/Settings/chord.cpp **** 	MINOR, DIMINISHED, MAJOR, MINOR, MINOR, MAJOR, MAJOR,
+  17:Src/Settings/chord.cpp **** };
+  18:Src/Settings/chord.cpp **** 
+  19:Src/Settings/chord.cpp **** const uint8_t Chord::lut_chords_mixolydian_scale[7] = {
+  20:Src/Settings/chord.cpp **** 	MAJOR, MINOR, DIMINISHED, MAJOR, MINOR, MINOR, MAJOR,
+  21:Src/Settings/chord.cpp **** };
+  22:Src/Settings/chord.cpp **** 
+  23:Src/Settings/chord.cpp **** const uint8_t Chord::lut_chords_dorian_scale[7] = {
+  24:Src/Settings/chord.cpp **** 	MINOR, DIMINISHED, MAJOR, MAJOR, MINOR, DIMINISHED, MAJOR,
+  25:Src/Settings/chord.cpp **** };
+  26:Src/Settings/chord.cpp **** 
+  27:Src/Settings/chord.cpp **** const uint8_t Chord::lut_chords_phrygian_scale[7] = {
+  28:Src/Settings/chord.cpp **** 	MINOR, MAJOR, MAJOR, MINOR, DIMINISHED, MAJOR, MINOR,
+  29:Src/Settings/chord.cpp **** };
+  30:Src/Settings/chord.cpp **** 
+  31:Src/Settings/chord.cpp **** const uint8_t Chord::lut_chords_lydian_scale[7] = {
+  32:Src/Settings/chord.cpp **** 	MAJOR, MAJOR, MINOR, DIMINISHED, MAJOR, MINOR, MINOR,
+  33:Src/Settings/chord.cpp **** };
+  34:Src/Settings/chord.cpp **** 
+  35:Src/Settings/chord.cpp **** const uint8_t Chord::lut_chords_aeolyian_scale[7] = {
+  36:Src/Settings/chord.cpp **** 	MINOR, DIMINISHED, MAJOR, MINOR, MINOR, MAJOR, MAJOR,
+  37:Src/Settings/chord.cpp **** };
+  38:Src/Settings/chord.cpp **** 
+  39:Src/Settings/chord.cpp **** const uint8_t Chord::lut_chords_locrian_scale[7] = {
+  40:Src/Settings/chord.cpp **** 	DIMINISHED, MAJOR, MINOR, MINOR, MAJOR, MAJOR, MINOR,
+  41:Src/Settings/chord.cpp **** };
+  59              		.loc 1 41 2 is_stmt 1 view -0
+  60              		.cfi_startproc
+  61              		@ args = 0, pretend = 0, frame = 0
+  62              		@ frame_needed = 0, uses_anonymous_args = 0
+  63              		@ link register save eliminated.
+  64              	.LVL1:
+  65              	.LBB28:
+  66              	.LBI28:
+  67              		.loc 1 41 2 view .LVU5
+  68              	.LBB29:
+  69              	.LBB30:
+  70              	.LBI30:
+  71              		.file 2 "/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h"
+   1:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** #ifndef StringBuilder_h
+   2:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** #define StringBuilder_h
+   3:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+   4:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** #include "stmf4lib.h"
+   5:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s 			page 3
+
+
+   6:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** class StringBuilder {
+   7:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+   8:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** public:
+   9:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  10:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	StringBuilder(char* ptr, int kMax) {
+  11:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char_buff_ = ptr;
+  12:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		kMax_ = kMax;
+  13:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  14:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  15:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  16:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	void clear() {
+  17:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		pos = 0;
+  18:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char_buff_[0] = '\0';
+  19:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  20:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  21:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	uint8_t length() {
+  22:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return pos;
+  23:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  24:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  25:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* read()  {
+  26:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return char_buff_;
+  27:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  28:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  29:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	void truncate(uint8_t last) {
+  30:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		if (last < pos) {
+  31:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			pos = last;
+  32:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			char_buff_[pos] = '\0';
+  33:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		}
+  34:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  35:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  36:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	// Char
+  37:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* append(const char* txt) {
+  38:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		copy(&char_buff_[pos], txt);
+  39:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  40:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  41:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  42:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* prepend(const char* txt) {
+  43:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char copy_buff[kMax_];
+  44:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		for (int i = 0; i <= pos; ++i) {
+  45:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			copy_buff[i] = char_buff_[i];
+  46:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		}
+  47:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		write(txt, &copy_buff[0]);
+  48:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  49:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  50:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  51:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	// Int
+  52:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* append(int32_t value) {
+  53:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char int_buffer[kMax_];
+  54:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		itoa(value, int_buffer, 10);
+  55:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		copy(&char_buff_[pos], int_buffer);
+  56:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  57:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  58:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  59:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* prepend(int32_t value) {
+  60:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char copy_buff[kMax_];
+  61:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		for (int i = 0; i <= pos; ++i) {
+  62:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			copy_buff[i] = char_buff_[i];
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s 			page 4
+
+
+  63:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		}
+  64:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		write(value, &copy_buff[0]);
+  65:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  66:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  67:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  68:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	// Builders
+  69:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	template <typename type_a>
+  70:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* write(type_a a) {
+  71:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  72:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(a);
+  73:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  74:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  75:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  76:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	template <typename type_a, typename type_b>
+  77:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* write(type_a a, type_b b) {
+  78:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  79:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(a);
+  80:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(b);
+  81:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  82:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  83:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  84:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	template <typename type_a, typename type_b, typename type_c>
+  85:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* write(type_a a, type_b b, type_c c) {
+  86:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  87:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(a);
+  88:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(b);
+  89:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(c);
+  90:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+  91:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  92:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+  93:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	template <typename type_a, typename type_b, typename type_c, typename type_d>
+  94:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* write(type_a a, type_b b, type_c c, type_d d) {
+  95:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  96:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(a);
+  97:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(b);
+  98:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(c);
+  99:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(d);
+ 100:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+ 101:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+ 102:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 103:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	template <typename type_a, typename type_b, typename type_c, typename type_d, typename type_e>
+ 104:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* write(type_a a, type_b b, type_c c, type_d d, type_e e) {
+ 105:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+ 106:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(a);
+ 107:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(b);
+ 108:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(c);
+ 109:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(d);
+ 110:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(e);
+ 111:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+ 112:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+ 113:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 114:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	template <typename type_a, typename type_b, typename type_c, typename type_d, typename type_e, typ
+ 115:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	const char* write(type_a a, type_b b, type_c c, type_d d, type_e e, type_f f) {
+ 116:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+ 117:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(a);
+ 118:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(b);
+ 119:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(c);
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s 			page 5
+
+
+ 120:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(d);
+ 121:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(e);
+ 122:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		append(f);
+ 123:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		return read();
+ 124:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+ 125:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 126:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** private:
+ 127:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	uint8_t pos = 0;
+ 128:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	char* char_buff_;
+ 129:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	int kMax_;
+ 130:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 131:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	void copy(char* dest, const char* src) {
+ 132:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		if (pos >= kMax_) { return; }
+ 133:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 134:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		while (*src != '\0') {
+ 135:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			*dest++ = *src++;
+ 136:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			if (++pos >= kMax_){
+ 137:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 				break;
+ 138:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 			}
+ 139:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		}
+ 140:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		*dest = '\0';
+ 141:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+ 142:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** };
+ 143:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 144:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 145:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** template <const uint8_t kMax>
+ 146:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** class StringBuilderBase : public StringBuilder {
+ 147:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 
+ 148:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** public:
+ 149:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	StringBuilderBase() : StringBuilder(char_buff, kMax) {};
+  72              		.loc 2 149 2 view .LVU6
+  73              	.LBB31:
+  74              	.LBB32:
+  75              	.LBI32:
+  10:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char_buff_ = ptr;
+  76              		.loc 2 10 2 view .LVU7
+  77              	.LBB33:
+  78              	.LBB34:
+  10:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char_buff_ = ptr;
+  79              		.loc 2 10 37 is_stmt 0 view .LVU8
+  80 0000 044B     		ldr	r3, .L6
+  81 0002 1A46     		mov	r2, r3
+  82 0004 0021     		movs	r1, #0
+  83 0006 02F80C1B 		strb	r1, [r2], #12
+  11:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		kMax_ = kMax;
+  84              		.loc 2 11 3 is_stmt 1 view .LVU9
+  12:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  85              		.loc 2 12 9 is_stmt 0 view .LVU10
+  86 000a 1020     		movs	r0, #16
+  11:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		kMax_ = kMax;
+  87              		.loc 2 11 14 view .LVU11
+  88 000c C3E90120 		strd	r2, r0, [r3, #4]
+  12:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		clear();
+  89              		.loc 2 12 3 is_stmt 1 view .LVU12
+  13:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  90              		.loc 2 13 3 view .LVU13
+  91              	.LBB35:
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s 			page 6
+
+
+  92              	.LBI35:
+  16:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		pos = 0;
+  93              		.loc 2 16 7 view .LVU14
+  94              	.LVL2:
+  95              	.LBB36:
+  17:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 		char_buff_[0] = '\0';
+  96              		.loc 2 17 3 view .LVU15
+  18:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  97              		.loc 2 18 3 view .LVU16
+  18:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+  98              		.loc 2 18 17 is_stmt 0 view .LVU17
+  99 0010 1973     		strb	r1, [r3, #12]
+ 100              	.LVL3:
+  18:/Users/joostbooy/Desktop/Code/stm32/lib/utils/stringBuilder.h **** 	}
+ 101              		.loc 2 18 17 view .LVU18
+ 102              	.LBE36:
+ 103              	.LBE35:
+ 104              	.LBE34:
+ 105              	.LBE33:
+ 106              	.LBE32:
+ 107              	.LBE31:
+ 108              	.LBE30:
+ 109              	.LBE29:
+ 110              	.LBE28:
+ 111              		.loc 1 41 2 view .LVU19
+ 112 0012 7047     		bx	lr
+ 113              	.L7:
+ 114              		.align	2
+ 115              	.L6:
+ 116 0014 00000000 		.word	.LANCHOR1
+ 117              		.cfi_endproc
+ 118              	.LFE2722:
+ 120              		.section	.init_array,"aw",%init_array
+ 121              		.align	2
+ 122 0000 00000000 		.word	_GLOBAL__sub_I__ZN5Chord6scale_E(target1)
+ 123              		.global	_ZN5Chord24lut_chords_locrian_scaleE
+ 124              		.global	_ZN5Chord25lut_chords_aeolyian_scaleE
+ 125              		.global	_ZN5Chord23lut_chords_lydian_scaleE
+ 126              		.global	_ZN5Chord25lut_chords_phrygian_scaleE
+ 127              		.global	_ZN5Chord23lut_chords_dorian_scaleE
+ 128              		.global	_ZN5Chord27lut_chords_mixolydian_scaleE
+ 129              		.global	_ZN5Chord22lut_chords_minor_scaleE
+ 130              		.global	_ZN5Chord22lut_chords_major_scaleE
+ 131              		.global	_ZN5Chord4str_E
+ 132              		.global	_ZN5Chord6scale_E
+ 133              		.section	.bss._ZN5Chord4str_E,"aw",%nobits
+ 134              		.align	2
+ 135              		.set	.LANCHOR1,. + 0
+ 138              	_ZN5Chord4str_E:
+ 139 0000 00000000 		.space	32
+ 139      00000000 
+ 139      00000000 
+ 139      00000000 
+ 139      00000000 
+ 140              		.section	.bss._ZN5Chord6scale_E,"aw",%nobits
+ 141              		.align	2
+ 142              		.set	.LANCHOR0,. + 0
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s 			page 7
+
+
+ 145              	_ZN5Chord6scale_E:
+ 146 0000 00000000 		.space	4
+ 147              		.section	.rodata._ZN5Chord22lut_chords_major_scaleE,"a"
+ 148              		.align	2
+ 151              	_ZN5Chord22lut_chords_major_scaleE:
+ 152 0000 00010100 		.ascii	"\000\001\001\000\000\001\002"
+ 152      000102
+ 153              		.section	.rodata._ZN5Chord22lut_chords_minor_scaleE,"a"
+ 154              		.align	2
+ 157              	_ZN5Chord22lut_chords_minor_scaleE:
+ 158 0000 01020001 		.ascii	"\001\002\000\001\001\000\000"
+ 158      010000
+ 159              		.section	.rodata._ZN5Chord23lut_chords_dorian_scaleE,"a"
+ 160              		.align	2
+ 163              	_ZN5Chord23lut_chords_dorian_scaleE:
+ 164 0000 01020000 		.ascii	"\001\002\000\000\001\002\000"
+ 164      010200
+ 165              		.section	.rodata._ZN5Chord23lut_chords_lydian_scaleE,"a"
+ 166              		.align	2
+ 169              	_ZN5Chord23lut_chords_lydian_scaleE:
+ 170 0000 00000102 		.ascii	"\000\000\001\002\000\001\001"
+ 170      000101
+ 171              		.section	.rodata._ZN5Chord24lut_chords_locrian_scaleE,"a"
+ 172              		.align	2
+ 175              	_ZN5Chord24lut_chords_locrian_scaleE:
+ 176 0000 02000101 		.ascii	"\002\000\001\001\000\000\001"
+ 176      000001
+ 177              		.section	.rodata._ZN5Chord25lut_chords_aeolyian_scaleE,"a"
+ 178              		.align	2
+ 181              	_ZN5Chord25lut_chords_aeolyian_scaleE:
+ 182 0000 01020001 		.ascii	"\001\002\000\001\001\000\000"
+ 182      010000
+ 183              		.section	.rodata._ZN5Chord25lut_chords_phrygian_scaleE,"a"
+ 184              		.align	2
+ 187              	_ZN5Chord25lut_chords_phrygian_scaleE:
+ 188 0000 01000001 		.ascii	"\001\000\000\001\002\000\001"
+ 188      020001
+ 189              		.section	.rodata._ZN5Chord27lut_chords_mixolydian_scaleE,"a"
+ 190              		.align	2
+ 193              	_ZN5Chord27lut_chords_mixolydian_scaleE:
+ 194 0000 00010200 		.ascii	"\000\001\002\000\001\001\000"
+ 194      010100
+ 195              		.text
+ 196              	.Letext0:
+ 197              		.file 3 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 198              		.file 4 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 199              		.file 5 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/ar
+ 200              		.file 6 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Include/core_
+ 201              		.file 7 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/CMSIS/Device/ST/STM
+ 202              		.file 8 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/li
+ 203              		.file 9 "/Users/joostbooy/STM32Cube/Repository/STM32Cube_FW_F4_V1.26.1/Drivers/STM32F4xx_HAL_Drive
+ 204              		.file 10 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 205              		.file 11 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 206              		.file 12 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 207              		.file 13 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 208              		.file 14 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 209              		.file 15 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s 			page 8
+
+
+ 210              		.file 16 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 211              		.file 17 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 212              		.file 18 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 213              		.file 19 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 214              		.file 20 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 215              		.file 21 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 216              		.file 22 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 217              		.file 23 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 218              		.file 24 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 219              		.file 25 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 220              		.file 26 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 221              		.file 27 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 222              		.file 28 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 223              		.file 29 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 224              		.file 30 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 225              		.file 31 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 226              		.file 32 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 227              		.file 33 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 228              		.file 34 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/l
+ 229              		.file 35 "<built-in>"
+ 230              		.file 36 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 231              		.file 37 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 232              		.file 38 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 233              		.file 39 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 234              		.file 40 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 235              		.file 41 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 236              		.file 42 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 237              		.file 43 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 238              		.file 44 "/usr/local/Caskroom/gcc-arm-embedded/9-2019-q4-major/gcc-arm-none-eabi-9-2019-q4-major/a
+ 239              		.file 45 "lookupTables/lookUpTables.h"
+ 240              		.file 46 "Drivers/uart.h"
+ 241              		.file 47 "Drivers/Usb/usb.h"
+ 242              		.file 48 "lookupTables/font.h"
+ 243              		.file 49 "/Users/joostbooy/Desktop/Code/stm32/lib/ff14b/source/ff.h"
+ 244              		.file 50 "Src/Disk/file.h"
+ 245              		.file 51 "/Users/joostbooy/Desktop/Code/stm32/lib/utils/hash.h"
+ 246              		.file 52 "Src/Disk/fileWriter.h"
+ 247              		.file 53 "Src/Disk/fileReader.h"
+ 248              		.file 54 "Src/Settings/scale.h"
+ 249              		.file 55 "/Users/joostbooy/Desktop/Code/stm32/lib/utils/stack.h"
+ 250              		.file 56 "Src/Settings/chord.h"
+ARM GAS  /var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 chord.cpp
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:18     .text._ZN5Chord4initEP5Scale:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:27     .text._ZN5Chord4initEP5Scale:0000000000000000 _ZN5Chord4initEP5Scale
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:45     .text._ZN5Chord4initEP5Scale:0000000000000008 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:50     .text.startup._GLOBAL__sub_I__ZN5Chord6scale_E:0000000000000000 $t
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:57     .text.startup._GLOBAL__sub_I__ZN5Chord6scale_E:0000000000000000 _GLOBAL__sub_I__ZN5Chord6scale_E
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:116    .text.startup._GLOBAL__sub_I__ZN5Chord6scale_E:0000000000000014 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:121    .init_array:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:175    .rodata._ZN5Chord24lut_chords_locrian_scaleE:0000000000000000 _ZN5Chord24lut_chords_locrian_scaleE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:181    .rodata._ZN5Chord25lut_chords_aeolyian_scaleE:0000000000000000 _ZN5Chord25lut_chords_aeolyian_scaleE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:169    .rodata._ZN5Chord23lut_chords_lydian_scaleE:0000000000000000 _ZN5Chord23lut_chords_lydian_scaleE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:187    .rodata._ZN5Chord25lut_chords_phrygian_scaleE:0000000000000000 _ZN5Chord25lut_chords_phrygian_scaleE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:163    .rodata._ZN5Chord23lut_chords_dorian_scaleE:0000000000000000 _ZN5Chord23lut_chords_dorian_scaleE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:193    .rodata._ZN5Chord27lut_chords_mixolydian_scaleE:0000000000000000 _ZN5Chord27lut_chords_mixolydian_scaleE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:157    .rodata._ZN5Chord22lut_chords_minor_scaleE:0000000000000000 _ZN5Chord22lut_chords_minor_scaleE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:151    .rodata._ZN5Chord22lut_chords_major_scaleE:0000000000000000 _ZN5Chord22lut_chords_major_scaleE
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:138    .bss._ZN5Chord4str_E:0000000000000000 _ZN5Chord4str_E
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:145    .bss._ZN5Chord6scale_E:0000000000000000 _ZN5Chord6scale_E
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:134    .bss._ZN5Chord4str_E:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:141    .bss._ZN5Chord6scale_E:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:148    .rodata._ZN5Chord22lut_chords_major_scaleE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:154    .rodata._ZN5Chord22lut_chords_minor_scaleE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:160    .rodata._ZN5Chord23lut_chords_dorian_scaleE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:166    .rodata._ZN5Chord23lut_chords_lydian_scaleE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:172    .rodata._ZN5Chord24lut_chords_locrian_scaleE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:178    .rodata._ZN5Chord25lut_chords_aeolyian_scaleE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:184    .rodata._ZN5Chord25lut_chords_phrygian_scaleE:0000000000000000 $d
+/var/folders/84/_x1cyy_j36g486tldtwl37280000gn/T//ccQIKrem.s:190    .rodata._ZN5Chord27lut_chords_mixolydian_scaleE:0000000000000000 $d
+
+NO UNDEFINED SYMBOLS
