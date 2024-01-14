@@ -20,10 +20,10 @@ public:
 	static const char* port_text(int port) {
 		switch (port)
 		{
-		case PORT_1:	return "CV PORT 1";
-		case PORT_2:	return "CV PORT 2";
-		case PORT_3:	return "CV PORT 3";
-		case PORT_4:	return "CV PORT 4";
+		case PORT_1:	return "CV IN 1";
+		case PORT_2:	return "CV IN 2";
+		case PORT_3:	return "CV IN 3";
+		case PORT_4:	return "CV IN 4";
 		default:		return nullptr;
 			break;
 		}

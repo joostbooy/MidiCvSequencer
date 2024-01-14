@@ -24,14 +24,14 @@ public:
 	static const char* port_text(int port) {
 		switch (port)
 		{
-		case PORT_1:	return "CV PORT 1";
-		case PORT_2:	return "CV PORT 2";
-		case PORT_3:	return "CV PORT 3";
-		case PORT_4:	return "CV PORT 4";
-		case PORT_5:	return "CV PORT 5";
-		case PORT_6:	return "CV PORT 6";
-		case PORT_7:	return "CV PORT 7";
-		case PORT_8:	return "CV PORT 8";
+		case PORT_1:	return "CV OUT 1";
+		case PORT_2:	return "CV OUT 2";
+		case PORT_3:	return "CV OUT 3";
+		case PORT_4:	return "CV OUT 4";
+		case PORT_5:	return "CV OUT 5";
+		case PORT_6:	return "CV OUT 6";
+		case PORT_7:	return "CV OUT 7";
+		case PORT_8:	return "CV OUT 8";
 		default:		return nullptr;
 			break;
 		}
