@@ -2,8 +2,7 @@
 #define Sdio_h
 
 #include "stmf4lib.h"
-#include "timeOut.h"
-#include "debug.h"
+#include "micros.h"
 
 // Based on:
 // https://github.com/westlicht/performer/blob/master/src/platform/stm32/drivers/SdCard.cpp
@@ -127,7 +126,6 @@ private:
 	};
 
 	CardInfo cardInfo;
-	TimeOut time_out;
 	bool initialised_ = false;
 	bool detected_ = false;
 	volatile bool dma_busy_ = false;
@@ -138,25 +136,25 @@ private:
 	void powerOff() {
 		//if (initialised_ == false) {
 		SDIO->POWER = 0;
-	//	while (SDIO->POWER);
+		//	while (SDIO->POWER);
 		//} else {
 		//	clock_resume();
 		//}
 	}
 
-//	void clock_resume() {
-//		SDIO->CLKCR = SDIO_CLKCR_CLKEN | (1 << 11) | 0x00;		//24 mHz, 4 bit
-		//0x76 // SDIO clock 400kHz
-		//0x2e // SDIO clock 1MHz
-		//0x16 // SDIO clock 2MHz
-		//0x0a // SDIO clock 4MHz
-		//0x05 // SDIO clock 6.85MHz
-		//0x04 // SDIO clock 8MHz
-		//0x03 // SDIO clock 9.6MHz
-		//0x02 // SDIO clock 12MHz
-		//0x01 // SDIO clock 16MHz
-		//0x00 // SDIO clock 24MHz
-//	}
+	//	void clock_resume() {
+	//		SDIO->CLKCR = SDIO_CLKCR_CLKEN | (1 << 11) | 0x00;		//24 mHz, 4 bit
+	//0x76 // SDIO clock 400kHz
+	//0x2e // SDIO clock 1MHz
+	//0x16 // SDIO clock 2MHz
+	//0x0a // SDIO clock 4MHz
+	//0x05 // SDIO clock 6.85MHz
+	//0x04 // SDIO clock 8MHz
+	//0x03 // SDIO clock 9.6MHz
+	//0x02 // SDIO clock 12MHz
+	//0x01 // SDIO clock 16MHz
+	//0x00 // SDIO clock 24MHz
+	//	}
 
 	bool init_card() {
 		// Power down and start in 400 kHz, 1 bit mode
@@ -190,9 +188,11 @@ private:
 		const uint32_t OCR_CCS = 0x40000000;
 
 		bool acmd41_success = false;
-		time_out.start(2000);
 
-		while (time_out.status()) {
+
+		uint32_t start = micros.read();
+
+		while ((micros.read() - start) < 2000000UL) {
 			result = sendAppCommand(41, 0x100000 | (hcs ? OCR_HCS : 0));
 			uint32_t response = SDIO->RESP1;
 			if (result == CRCFail && (response & OCR_BUSY) != 0) {
@@ -269,8 +269,9 @@ private:
 	}
 
 	bool waitDataReady() {
-		time_out.start(1000);
-		while (time_out.status()) {
+		uint32_t start = micros.read();
+
+		while ((micros.read() - start) < 1000000UL) {
 			if (sendCommandWait(13, cardInfo.rca << 16) == Success && (SDIO->RESP1 & 0x100) != 0) {
 				return true;
 			}
@@ -460,7 +461,6 @@ private:
 		}
 		return true;
 	}
-
 };
 
 extern Sdio sdio;
