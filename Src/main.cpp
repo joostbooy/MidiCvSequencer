@@ -8,6 +8,8 @@
 #include "usb.h"
 #include "disk.h"
 #include "debug.h"
+
+#include "settings.h"
 #include "engine.h"
 #include "ui.h"
 
@@ -39,9 +41,7 @@ extern "C" {
 			return;
 		}
 		TIM3->SR = ~TIM_IT_UPDATE;
-		//debug.write(1);
 		engine.update();
-		//debug.write(0);
 	}
 
 	// 1Khz
