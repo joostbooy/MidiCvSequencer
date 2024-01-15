@@ -100,7 +100,7 @@ namespace ChordPatternPage {
 		bool shift = controller.is_pressed(Controller::SHIFT_BUTTON);
 		bool pressed = controller.is_pressed(Controller::Y_ENC_PUSH);
 
-		if (id == Controller::Y_ENC && shift == true) {
+		if (id == Controller::Y_ENC && shift == false) {
 			PianoRollPainter::scroll_y(pressed ? inc * 12 : inc);
 		}
 	}

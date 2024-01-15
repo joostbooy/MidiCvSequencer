@@ -130,7 +130,7 @@ namespace PatternHeaderPage {
 			edit(PATTERN, inc);
 			break;
 		case Controller::Y_ENC:
-			if (controller.is_pressed(Controller::SHIFT_BUTTON) == false) {
+			if (shift) {
 				if (controller.encoder_is_pressed(Controller::Y_ENC)) {
 					edit(TRACK, inc);
 				} else {
