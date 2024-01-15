@@ -91,7 +91,7 @@ namespace NotePatternPage {
 		bool pressed = controller.is_pressed(Controller::Y_ENC_PUSH);
 
 		if (id == Controller::Y_ENC && shift == true) {
-			PianoRollPainter::scroll_y(pressed ? inc * 10 : inc);
+			PianoRollPainter::scroll_y(pressed ? inc * 12 : inc);
 		}
 	}
 
