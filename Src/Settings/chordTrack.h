@@ -73,7 +73,7 @@ public:
 		case VELOCITY:			return UiText::unsigned_int_to_text(data);
 		case GATE_LENGTH:		return ClockEngine::gate_duration_text(data);
 		case DELAY:				return ClockEngine::gate_duration_text(data);
-		case ARP_SPEED:			return ClockEngine::speed_text_small(data);
+		case ARP_SPEED:			return ClockEngine::speed_text(data);
 		case ARP_MODE:			return Arpeggiator::clock_mode_text_small(data);
 		case ARP_GATE:			return Arpeggiator::clock_mode_text_small(data);
 		case ARP_VELOCITY:		return Arpeggiator::clock_mode_text_small(data);

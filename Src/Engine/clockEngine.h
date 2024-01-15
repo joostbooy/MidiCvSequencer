@@ -33,36 +33,30 @@ public:
 		NUM_SIGNATURES
 	};
 
-	static const char* speed_text_small(int value) {
+	static const char* speed_text(int value) {
 		switch (value)
 		{
-		case DOTTED_1TH: 	return "1D";
-		case WHOLE_1TH:		return "1";
-		case TRIPLET_1TH:	return "1T";
-		case DOTTED_2TH: 	return "2D";
-		case WHOLE_2TH:		return "2";
-		case TRIPLET_2TH:	return "2T";
-		case DOTTED_4TH:	return "4D";
-		case WHOLE_4TH:		return "4";
-		case TRIPLET_4TH:	return "4T";
-		case DOTTED_8TH:	return "8D";
-		case WHOLE_8TH:		return "8";
-		case TRIPLET_8TH:	return "8T";
-		case DOTTED_16TH:	return "16D";
-		case WHOLE_16TH:	return "16";
-		case TRIPLET_16TH:	return "16T";
-		case DOTTED_32TH:	return "32D";
-		case WHOLE_32TH:	return "32";
-		case TRIPLET_32TH:	return "32T";
+		case DOTTED_1TH: 	return "1/1D";
+		case WHOLE_1TH:		return "1/1";
+		case TRIPLET_1TH:	return "1/1T";
+		case DOTTED_2TH: 	return "1/2D";
+		case WHOLE_2TH:		return "1/2";
+		case TRIPLET_2TH:	return "1/2T";
+		case DOTTED_4TH:	return "1/4D";
+		case WHOLE_4TH:		return "1/4";
+		case TRIPLET_4TH:	return "1/4T";
+		case DOTTED_8TH:	return "1/8D";
+		case WHOLE_8TH:		return "1/8";
+		case TRIPLET_8TH:	return "1/8T";
+		case DOTTED_16TH:	return "1/16D";
+		case WHOLE_16TH:	return "1/16";
+		case TRIPLET_16TH:	return "1/16T";
+		case DOTTED_32TH:	return "1/32D";
+		case WHOLE_32TH:	return "1/32";
+		case TRIPLET_32TH:	return "1/32T";
 		default:			return nullptr;
 			break;
 		}
-	}
-
-	static const char* speed_text(int value) {
-		UiText::str.write("1/");
-		UiText::str.append(speed_text_small(value));
-		return UiText::str.read();
 	}
 
 	void set_speed(uint8_t speed) {
