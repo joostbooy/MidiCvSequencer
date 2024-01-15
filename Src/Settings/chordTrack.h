@@ -43,9 +43,9 @@ public:
 		case TRIGGER:			return "TRIGGER";
 		case PROBABILITY:		return "PROBABILITY";
 		case CHORD_TYPE:		return "CHORD TYPE";
-		case CHORD_VARIATION:	return "CHORD VARIATION";
-		case CHORD_INVERSION:	return "CHORD INVERSION";
-		case CHORD_ROOT_SHIFT:	return "CHORD ROOT_SHIFT";
+		case CHORD_VARIATION:	return "VARIATION";
+		case CHORD_INVERSION:	return "INVERSION";
+		case CHORD_ROOT_SHIFT:	return "ROOT SHIFT";
 		case VELOCITY:			return "VELOCITY";
 		case GATE_LENGTH:		return "GATE LENGTH";
 		case DELAY:				return "DELAY";
