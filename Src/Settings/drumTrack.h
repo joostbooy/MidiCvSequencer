@@ -34,9 +34,9 @@ public:
 		case PROBABILITY:		return "PROBABILITY";
 		case VELOCITY:			return "VELOCITY";
 		case GATE_LENGTH:		return "GATE LENGTH";
-		case NUM_REPEATS:		return "REPEATS";
-		case REPEAT_SPREAD:		return "REPEAT SPREAD";
-		case REPEAT_VELOCITY:	return "REPEAT VELOCITY";
+		case NUM_REPEATS:		return "REPEAT";
+		case REPEAT_SPREAD:		return "RPT SPREAD";
+		case REPEAT_VELOCITY:	return "RPT VELOCITY";
 		case DELAY:				return "DELAY";
 		default:
 			break;
