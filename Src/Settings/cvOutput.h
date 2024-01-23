@@ -148,6 +148,12 @@ public:
 
 	void set_cv_mode(int mode) {
 		cv_mode_ = stmlib::clip(0, NUM_CV_MODES - 1, mode);
+
+		// Always use bipolar scaling in note mode,
+		// because with unipolar we would lose 1V/oct accuracy
+		if (cv_mode_ == NOTE) {
+			set_cv_range(BIPOLAR);
+		}
 	}
 
 	const char* cv_mode_text() {
@@ -160,7 +166,11 @@ public:
 	}
 
 	void set_cv_range(int value) {
-		cv_range_ = stmlib::clip(0, NUM_CV_RANGES - 1, value);
+		if (cv_mode() == NOTE) {
+			cv_range_ = UNIPOLAR;
+		} else {
+			cv_range_ = stmlib::clip(0, NUM_CV_RANGES - 1, value);
+		}
 	}
 
 	const char* cv_range_text() {
