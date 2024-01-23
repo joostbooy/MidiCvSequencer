@@ -102,16 +102,16 @@ public:
 			gateIO.set_output(i, gate_state);
 
 			// Update cv
-			uint16_t value;
+			uint16_t value = 0;
 			source = cvOut.cv_source();
 
 			switch (cvOut.cv_mode())
 			{
 			case CvOutput::VELOCITY:
-				dac.set(i, vel_value[source]);
+				value = vel_value[source];
 				break;
 			case CvOutput::CC:
-				dac.set(i, cc_value[source]);
+				value = cc_value[source];
 				break;
 			case CvOutput::NOTE:
 				if (cvOut.slide_mode() == CvOutput::ON || (cvOut.slide_mode() == CvOutput::LEGATO && legato_flag[source] == true)) {
@@ -123,11 +123,16 @@ public:
 				if (cvOut.bend_enabled()) {
 					value = apply_bend(value, cvOut.bend_source(), cvOut.bend_semitones());
 				}
-
-				dac.set(i, value);
 				break;
 			default:
 				break;
+			}
+
+			// Set cv
+			if (cvOut.cv_range() == CvOutput::BIPOLAR) {
+				dac.set(i, value);
+			} else {
+				dac.set(i, 32768 + (value / 2));
 			}
 		}
 

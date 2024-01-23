@@ -12,6 +12,7 @@ public:
 		PORT,
 		CV_SOURCE,
 		CV_MODE,
+		CV_RANGE,
 		SLIDE_MODE,
 		SLIDE_SPEED,
 		BEND_SOURCE,
@@ -38,6 +39,7 @@ public:
 		case PORT:				return "PORT";
 		case CV_SOURCE:			return "CV SOURCE";
 		case CV_MODE:			return "CV MODE";
+		case CV_RANGE:			return "CV RANGE";
 		case SLIDE_MODE:		return "SLIDE MODE";
 		case SLIDE_SPEED:		return "SLIDE SPEED";
 		case BEND_SOURCE:		return "BEND SOURCE";
@@ -59,6 +61,7 @@ public:
 		case PORT:				return CvOutput::port_text(port_);
 		case CV_SOURCE:			return cvOutput.cv_source_text();
 		case CV_MODE:			return cvOutput.cv_mode_text();
+		case CV_RANGE:			return cvOutput.cv_range_text();
 		case SLIDE_MODE:		return cvOutput.slide_mode_text();
 		case SLIDE_SPEED:		return cvOutput.slide_speed_text();
 		case BEND_SOURCE:		return cvOutput.bend_source_text();
@@ -85,6 +88,9 @@ public:
 			break;
 		case CV_MODE:
 			cvOutput.set_cv_mode(cvOutput.cv_mode() + inc);
+			break;
+		case CV_RANGE:
+			cvOutput.set_cv_range(cvOutput.cv_range() + inc);
 			break;
 		case SLIDE_MODE:
 			cvOutput.set_slide_mode(cvOutput.slide_mode() + inc);

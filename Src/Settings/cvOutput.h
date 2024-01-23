@@ -98,9 +98,26 @@ public:
 		}
 	}
 
+	enum CvRange {
+		BIPOLAR,
+		UNIPOLAR,
+		NUM_CV_RANGES
+	};
+
+	static const char* cv_range_text(int value) {
+		switch (value)
+		{
+		case BIPOLAR:	return "BIPOLAR";
+		case UNIPOLAR:	return "UNIPOLAR";
+		default:		return nullptr;
+			break;
+		}
+	}
+
 	void init() {
 		set_cv_source(0);
 		set_cv_mode(NOTE);
+		set_cv_range(BIPOLAR);
 		set_gate_source(0);
 		set_gate_mode(GATE);
 		set_gate_invert(false);
@@ -135,6 +152,19 @@ public:
 
 	const char* cv_mode_text() {
 		return cv_mode_text(cv_mode());
+	}
+
+	// cv range
+	int cv_range() {
+		return cv_range_;
+	}
+
+	void set_cv_range(int value) {
+		cv_range_ = stmlib::clip(0, NUM_CV_RANGES - 1, value);
+	}
+
+	const char* cv_range_text() {
+		return cv_range_text(cv_range());
 	}
 
 	// gate source
@@ -279,6 +309,7 @@ public:
 	void save(FileWriter &fileWriter) {
 		fileWriter.write(cv_source_);
 		fileWriter.write(cv_mode_);
+		fileWriter.write(cv_range_);
 		fileWriter.write(gate_source_);
 		fileWriter.write(gate_mode_);
 		fileWriter.write(gate_invert_);
@@ -292,6 +323,7 @@ public:
 	void load(FileReader &fileReader) {
 		fileReader.read(cv_source_);
 		fileReader.read(cv_mode_);
+		fileReader.read(cv_range_);
 		fileReader.read(gate_source_);
 		fileReader.read(gate_mode_);
 		fileReader.read(gate_invert_);
@@ -305,6 +337,7 @@ public:
 private:
 	uint8_t cv_source_;
 	uint8_t cv_mode_;
+	uint8_t cv_range_;
 	uint8_t gate_source_;
 	uint8_t gate_mode_;
 	bool gate_invert_;
