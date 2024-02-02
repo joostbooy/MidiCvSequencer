@@ -15,11 +15,11 @@ class Settings {
 public:
 
 	const uint32_t current_version() {
-		return 1;
+		return 2;
 	}
 
 	const char* current_version_text() {
-		return "VERSION 1.0";
+		return "VERSION 2.0";
 	}
 
 	Song song;

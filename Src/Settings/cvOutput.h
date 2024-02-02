@@ -333,7 +333,11 @@ public:
 	void load(FileReader &fileReader) {
 		fileReader.read(cv_source_);
 		fileReader.read(cv_mode_);
-		fileReader.read(cv_range_);
+
+		if (fileReader.version() >= 2) {
+			fileReader.read(cv_range_);
+		}
+		
 		fileReader.read(gate_source_);
 		fileReader.read(gate_mode_);
 		fileReader.read(gate_invert_);
