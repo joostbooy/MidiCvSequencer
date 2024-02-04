@@ -30,7 +30,7 @@ public:
 		{
 		case TRIGGER:		return "TRIGGER";
 		case PROBABILITY:	return "PROBABILITY";
-		case VALUE:			return "CC VALUE";
+		case VALUE:			return "VALUE";
 		case SHAPE:			return "SHAPE";
 		case SHIFT:			return "SHIFT";
 		default:
