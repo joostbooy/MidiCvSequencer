@@ -83,7 +83,7 @@ public:
 		MidiEvent::Event &event = trackState_->event;
 
 		event.port = chordTrack_->port();
-		event.tie = gate_length >= 64;
+		event.tie = gate_length >= 127;
 		event.message = MidiEvent::NOTE_ON | chordTrack_->channel();
 		event.data[1] = velocity;
 

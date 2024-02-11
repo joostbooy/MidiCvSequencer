@@ -71,7 +71,7 @@ public:
 		MidiEvent::Event &event = trackState_->event;
 
 		event.port = drumTrack_->port();
-		event.tie = gate_length >= 64;
+		event.tie = gate_length >= 127;
 		event.message = MidiEvent::NOTE_ON | drumTrack_->channel();
 		event.data[0] = drumTrack_->read(DrumTrack::DRUM_NOTE);
 		event.data[1] = velocity;

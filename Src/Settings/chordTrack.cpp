@@ -10,13 +10,13 @@ SerialMask ChordTrack::step_mask_[NUM_STEP_ITEMS] = {
 	[CHORD_ROOT_SHIFT]	= { .reg = 0, .bits = 3, .shifts = 14 },
 	[VELOCITY]			= { .reg = 0, .bits = 7, .shifts = 17 },
 	[GATE_LENGTH]		= { .reg = 0, .bits = 7, .shifts = 24 },
-	[DELAY]				= { .reg = 1, .bits = 2, .shifts = 0 },
-	[ARP_SPEED]			= { .reg = 1, .bits = 5, .shifts = 2 },
-	[ARP_MODE]			= { .reg = 1, .bits = 4, .shifts = 7 },
-	[ARP_GATE]			= { .reg = 1, .bits = 4, .shifts = 11 },
-	[ARP_VELOCITY]		= { .reg = 1, .bits = 4, .shifts = 15 },
-	[ARP_TRIGGER]		= { .reg = 1, .bits = 3, .shifts = 19 },
-	[ARP_OFFSET]		= { .reg = 1, .bits = 3, .shifts = 22 },
+	[DELAY]				= { .reg = 1, .bits = 3, .shifts = 0 },
+	[ARP_SPEED]			= { .reg = 1, .bits = 5, .shifts = 3 },
+	[ARP_MODE]			= { .reg = 1, .bits = 4, .shifts = 8 },
+	[ARP_GATE]			= { .reg = 1, .bits = 4, .shifts = 12 },
+	[ARP_VELOCITY]		= { .reg = 1, .bits = 4, .shifts = 16 },
+	[ARP_TRIGGER]		= { .reg = 1, .bits = 3, .shifts = 20 },
+	[ARP_OFFSET]		= { .reg = 1, .bits = 3, .shifts = 23 },
 };
 
 // step items
@@ -72,15 +72,15 @@ SerialItem ChordTrack::step_item_[NUM_STEP_ITEMS] = {
 	},
 	[GATE_LENGTH] = {
 		.min_ = 1,
-		.max_ = 64,
-		.inc_shifted_ = 4,
-		.init_value_ = 4,
+		.max_ = 127,
+		.inc_shifted_ = 8,
+		.init_value_ = 8,
 		.mask_ = step_mask_[GATE_LENGTH]
 	},
 	[DELAY] = {
 		.min_ = 0,
-		.max_ = 3,
-		.inc_shifted_ = 1,
+		.max_ = 7,
+		.inc_shifted_ = 2,
 		.init_value_ = 0,
 		.mask_ = step_mask_[DELAY]
 	},

@@ -10,8 +10,8 @@ SerialMask NoteTrack::step_mask_[NUM_STEP_ITEMS] = {
 	[NUM_REPEATS]		= { .reg = 0, .bits = 4, .shifts = 22 },
 	[REPEAT_SPREAD]		= { .reg = 0, .bits = 3, .shifts = 26 },
 	[REPEAT_VELOCITY]	= { .reg = 0, .bits = 2, .shifts = 29 },
-	[DELAY]				= { .reg = 1, .bits = 2, .shifts = 0 },
-	[PROBABILITY]		= { .reg = 1, .bits = 3, .shifts = 2 },
+	[DELAY]				= { .reg = 1, .bits = 3, .shifts = 0 },
+	[PROBABILITY]		= { .reg = 1, .bits = 3, .shifts = 3 },
 };
 
 // step items
@@ -39,9 +39,9 @@ SerialItem NoteTrack::step_item_[NUM_STEP_ITEMS] = {
 	},
 	[GATE_LENGTH] = {
 		.min_ = 1,
-		.max_ = 64,
-		.inc_shifted_ = 4,
-		.init_value_ = 4,
+		.max_ = 127,
+		.inc_shifted_ = 8,
+		.init_value_ = 8,
 		.mask_ = step_mask_[GATE_LENGTH]
 	},
 	[NUM_REPEATS] = {
@@ -67,8 +67,8 @@ SerialItem NoteTrack::step_item_[NUM_STEP_ITEMS] = {
 	},
 	[DELAY] = {
 		.min_ = 0,
-		.max_ = 3,
-		.inc_shifted_ = 1,
+		.max_ = 7,
+		.inc_shifted_ = 2,
 		.init_value_ = 0,
 		.mask_ = step_mask_[DELAY]
 	},

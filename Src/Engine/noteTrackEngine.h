@@ -77,7 +77,7 @@ public:
 		MidiEvent::Event &event = trackState_->event;
 
 		event.port = noteTrack_->port();
-		event.tie = gate_length >= 64;
+		event.tie = gate_length >= 127;
 		event.message = MidiEvent::NOTE_ON | noteTrack_->channel();
 		event.data[0] = note;
 		event.data[1] = velocity;
@@ -87,7 +87,7 @@ public:
 
 		// repeats
 		repeats_->process(repeats, length_, spread, velocity, repeat_velocity);
-		
+
 		if (repeats_->next_interval()) {
 			length_ = repeats_->interval();
 			event.data[1] = repeats_->velocity();

@@ -138,7 +138,7 @@ public:
 	}
 
 	void set_delay(int delay) {
-		data_->delay_ = stmlib::clip(0, 3, delay);
+		data_->delay_ = stmlib::clip(0, 7, delay);
 	}
 
 	const char* delay_text() {

@@ -102,7 +102,7 @@ public:
 		set_offset(0);
 		set_trigger_mode(XXXX);
 		set_velocity(100);
-		set_gate_length(4);
+		set_gate_length(8);
 		set_note_mode(OFF);
 		set_velocity_mode(OFF);
 		set_gate_mode(OFF);
@@ -211,7 +211,7 @@ public:
 	}
 
 	void set_gate_length(int value, bool boundary_check = 1) {
-		gate_length_ = boundary_check ? stmlib::clip(1, 63, value) : value;
+		gate_length_ = boundary_check ? stmlib::clip(1, 126, value) : value;
 	}
 
 	const char* gate_length_text() {

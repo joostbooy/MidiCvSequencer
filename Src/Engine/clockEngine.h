@@ -143,8 +143,8 @@ public:
 
 	static inline const uint32_t gate_duration(uint8_t speed, uint8_t index) {
 		uint32_t whole_step = step_duration_[speed];
-		uint32_t quarter_step = whole_step / 4;
-		return (whole_step * (index / 4)) + (quarter_step * (index % 4));
+		uint32_t eighth_step = whole_step / 8;
+		return (whole_step * (index / 8)) + (eighth_step * (index % 8));
 	}
 
 	static const char* swing_text(int value) {
@@ -152,10 +152,10 @@ public:
 	}
 
 	static const char* gate_duration_text(uint8_t value) {
-		if (value < 64) {
-			int steps = value / 4;
-			int fraction = value % 4;
-			return UiText::str.write(steps, ".", 25 * fraction);
+		if (value < 127) {
+			int steps = value / 8;
+			int fraction = value % 8;
+			return UiText::str.write(steps, ".", 125 * fraction);
 		}
 		return "TIE";
 	}
