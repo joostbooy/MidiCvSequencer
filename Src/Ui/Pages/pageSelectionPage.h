@@ -81,12 +81,14 @@ namespace PageSelectionPage {
 		WindowPainter::fill(window, Canvas::BLACK, Canvas::WHITE);
 
 		for (int i = window.coll().first; i <= window.coll().last; ++i) {
-			Canvas::Color color = i == chapter.curr_page() ? Canvas::BLACK : Canvas::LIGHT_GRAY;
-			WindowPainter::text(window.cell(i, 1), chapter.page_name(i), Canvas::CENTER, Canvas::CENTER, color);
+			WindowPainter::text(window.cell(i, 1), chapter.page_name(i), Canvas::CENTER, Canvas::CENTER, Canvas::BLACK);
+			if (i == chapter.curr_page()) {
+				WindowPainter::highlight(window.cell(i, 1));
+			}
 			WindowPainter::bitmap(window.cell(i, 0), chapter.page_icon(i), Canvas::CENTER, Canvas::CENTER);
 		}
-		WindowPainter::horizontal_scrollbar(window);
 
+		WindowPainter::horizontal_scrollbar(window);
 	}
 
 	const uint16_t targetFps() {
