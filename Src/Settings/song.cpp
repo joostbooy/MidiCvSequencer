@@ -79,6 +79,11 @@ void Song::load(FileReader &fileReader) {
 		fileReader.read(track_type_list_[i]);
 	}
 
+	// song name
+	for (int i = 0; i < max_name_length(); ++i) {
+		fileReader.read(name_[i]);
+	}
+
 	// tracks
 	for (int i = 0; i < max_tracks(); ++i) {
 		track_[i].load(fileReader);

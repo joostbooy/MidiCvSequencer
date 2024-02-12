@@ -31,10 +31,15 @@ public:
 			clear_list(&track_type_list_[i]);
 		}
 
+		// first reset indices
 		for (int i = 0; i < kMaxTracks; ++i) {
 			track_list_[i] = i;
+			track_[i].set_index(i);
+		}
+
+		// now this is safe
+		for (int i = 0; i < kMaxTracks; ++i) {
 			track(i).init();
-			track(i).set_index(i);
 			create_track(i, Track::NOTE_TRACK);
 		}
 	}
