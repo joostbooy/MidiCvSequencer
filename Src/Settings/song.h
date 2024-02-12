@@ -16,7 +16,7 @@ public:
 	MidiClock midiClock;
 
 	Track &track(int index) {
-		return track_[track_list_[index]];
+		return track_[index];
 	}
 
 	void init() {
@@ -31,15 +31,8 @@ public:
 			clear_list(&track_type_list_[i]);
 		}
 
-		// first reset indices
 		for (int i = 0; i < kMaxTracks; ++i) {
-			track_list_[i] = i;
-			track_[i].set_index(i);
-		}
-
-		// now this is safe
-		for (int i = 0; i < kMaxTracks; ++i) {
-			track(i).init();
+			track(i).init(i);
 			create_track(i, Track::NOTE_TRACK);
 		}
 	}
@@ -162,13 +155,13 @@ private:
 		uint8_t entry_[kMaxTracks];
 	};
 
-	int track_list_[kMaxTracks];
 	List track_type_list_[Track::NUM_TYPES];
 
 	uint32_t mute_flags;
 	uint32_t solo_flags;
 	char name_[kMaxNameLength];
 	Track track_[kMaxTracks];
+	TrackData track_copy;
 
 	void clear_list(List* list);
 	void add_to_list(List* list, uint8_t track_index);
@@ -178,10 +171,10 @@ private:
 		remove_from_list(&track_type_list_[track(a).type()], a);
 		remove_from_list(&track_type_list_[track(b).type()], b);
 
-		// swap list indices
-		int a_ = track_list_[a];
-		track_list_[a] = track_list_[b];
-		track_list_[b] = a_;
+		// swap data
+		track_copy = track_[a].data();
+		track_[a].data() = track_[b].data();
+		track_[b].data() = track_copy;
 
 		// swap solo mute bits
 		bool a_mute = track_is_muted(a);
@@ -191,13 +184,8 @@ private:
 		set_track_mute(b, a_mute);
 		set_track_solo(b, a_solo);
 
-		// update indices
-		for (int i = 0; i < 16; ++i) {
-			track(i).set_index(i);
-		}
-
-		add_to_list(&track_type_list_[track(a).type()], b);
-		add_to_list(&track_type_list_[track(b).type()], a);
+		add_to_list(&track_type_list_[track(a).type()], a);
+		add_to_list(&track_type_list_[track(b).type()], b);
 	}
 
 };

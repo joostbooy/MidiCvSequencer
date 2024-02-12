@@ -23,11 +23,11 @@ namespace SongPage {
 		NEW,
 		EDIT_NAME,
 		UNMUTE_TRACKS,
-		//TRACK_LIST,
+		TRACK_LIST,
 		NUM_FOOTER_OPTIONS
 	};
 
-	const char* const footer_text[NUM_FOOTER_OPTIONS] = { "NEW", "EDIT NAME", "UNMUTE TRACKS" /*, "TRACK LIST"*/};
+	const char* const footer_text[NUM_FOOTER_OPTIONS] = { "NEW", "EDIT NAME", "UNMUTE TRACKS", "TRACK LIST" };
 
 	void clear_settings() {
 		settings.song.init();
@@ -77,14 +77,14 @@ namespace SongPage {
 			break;
 		case UNMUTE_TRACKS:
 			for (int i = 0; i < settings.song.max_tracks(); ++i) {
-				 settings.song.set_track_mute(i, false);
-				 settings.song.set_track_solo(i, false);
+				settings.song.set_track_mute(i, false);
+				settings.song.set_track_solo(i, false);
 			}
 			MessagePainter::show("ALL TRACKS UNMUTED");
 			break;
-		//case TRACK_LIST:
-		//	pages.open(Pages::TRACK_LIST_PAGE);
-		//	break;
+		case TRACK_LIST:
+			pages.open(Pages::TRACK_LIST_PAGE);
+			break;
 		default:
 			break;
 		}

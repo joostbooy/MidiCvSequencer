@@ -17,21 +17,23 @@ public:
 	DrumTrack drum;
 	CurveTrack curve;
 
-	void init() {
-		note.init(&data);
-		chord.init(&data);
-		drum.init(&data);
-		curve.init(&data);
-
-		BaseTrack::init(&data);
-	}
-
-	void set_index(int index) {
+	void init(int index) {
 		index_ = index;
+
+		note.init(&data_);
+		chord.init(&data_);
+		drum.init(&data_);
+		curve.init(&data_);
+
+		BaseTrack::init(&data_);
 	}
 
 	int index() {
 		return index_;
+	}
+
+	TrackData& data() {
+		return data_;
 	}
 
 	const char* name() {
@@ -101,7 +103,7 @@ public:
 
 private:
 	int index_;
-	TrackData data;				// All track types use the same memory space
+	TrackData data_;				// All track types use the same memory space
 };
 
 #endif
