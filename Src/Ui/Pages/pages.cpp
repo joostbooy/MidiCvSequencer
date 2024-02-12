@@ -28,6 +28,7 @@
 #include "songPage.h"
 #include "songMonitorPage.h"
 #include "trackPage.h"
+#include "trackListPage.h"
 #include "patternPage.h"
 #include "patternRandomPage.h"
 #include "patternListPage.h"
@@ -50,6 +51,7 @@ const Pages::EventHandlers* eventHandlers[Pages::NUM_OF_PAGES] = {
 	[Pages::SONG_PAGE]				= &SongPage::eventHandlers,
 	[Pages::SONG_MONITOR_PAGE]		= &SongMonitorPage::eventHandlers,
 	[Pages::TRACK_PAGE]				= &TrackPage::eventHandlers,
+	[Pages::TRACK_LIST_PAGE]		= &TrackListPage::eventHandlers,
 	[Pages::PATTERN_PAGE]			= &PatternPage::eventHandlers,
 	[Pages::PATTERN_RANDOM_PAGE]	= &PatternRandomPage::eventHandlers,
 	[Pages::PATTERN_LIST_PAGE]		= &PatternListPage::eventHandlers,
