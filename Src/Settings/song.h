@@ -16,7 +16,7 @@ public:
 	MidiClock midiClock;
 
 	Track &track(int index) {
-		return track_[index];
+		return track_[track_list_[index]];
 	}
 
 	void init() {
@@ -32,6 +32,7 @@ public:
 		}
 
 		for (int i = 0; i < kMaxTracks; ++i) {
+			track_list_[i] = i;
 			track(i).init();
 			track(i).set_index(i);
 			create_track(i, Track::NOTE_TRACK);
@@ -77,6 +78,24 @@ public:
 			set_track_solo(index, false);
 
 			add_to_list(&track_type_list_[type], index);
+			return true;
+		}
+		return false;
+	}
+
+	bool swap_track_with_left(int index) {
+		int left = index - 1;
+		if (left >= 0 && left < kMaxTracks) {
+			swap_tracks(left, index);
+			return true;
+		}
+		return false;
+	}
+
+	bool swap_track_with_right(int index) {
+		int right = index + 1;
+		if (right >= 0 && right < kMaxTracks) {
+			swap_tracks(right, index);
 			return true;
 		}
 		return false;
@@ -138,6 +157,7 @@ private:
 		uint8_t entry_[kMaxTracks];
 	};
 
+	int track_list_[kMaxTracks];
 	List track_type_list_[Track::NUM_TYPES];
 
 	uint32_t mute_flags;
@@ -148,6 +168,33 @@ private:
 	void clear_list(List* list);
 	void add_to_list(List* list, uint8_t track_index);
 	void remove_from_list(List* list, uint8_t track_index);
+
+	void swap_tracks(int a, int b) {
+		remove_from_list(&track_type_list_[track(a).type()], a);
+		remove_from_list(&track_type_list_[track(b).type()], b);
+
+		// swap list indices
+		int a_ = track_list_[a];
+		track_list_[a] = track_list_[b];
+		track_list_[b] = a_;
+
+		// swap solo mute bits
+		bool a_mute = track_is_muted(a);
+		bool a_solo = track_is_solod(a);
+		set_track_mute(a, track_is_muted(b));
+		set_track_solo(a, track_is_solod(b));
+		set_track_mute(b, a_mute);
+		set_track_solo(b, a_solo);
+
+		// update indices
+		for (int i = 0; i < 16; ++i) {
+			track(i).set_index(i);
+		}
+
+		add_to_list(&track_type_list_[track(a).type()], b);
+		add_to_list(&track_type_list_[track(b).type()], a);
+	}
+
 };
 
 #endif
