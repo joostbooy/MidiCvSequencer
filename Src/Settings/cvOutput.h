@@ -167,7 +167,7 @@ public:
 
 	void set_cv_range(int value) {
 		if (cv_mode() == NOTE) {
-			cv_range_ = UNIPOLAR;
+			cv_range_ = BIPOLAR;
 		} else {
 			cv_range_ = stmlib::clip(0, NUM_CV_RANGES - 1, value);
 		}
@@ -337,7 +337,7 @@ public:
 		if (fileReader.version() >= 2) {
 			fileReader.read(cv_range_);
 		}
-		
+
 		fileReader.read(gate_source_);
 		fileReader.read(gate_mode_);
 		fileReader.read(gate_invert_);
