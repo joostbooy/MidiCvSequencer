@@ -44,9 +44,9 @@ public:
 		{
 		case TRIGGER:		return UiText::bool_to_on_off(data);
 		case PROBABILITY:	return UiText::percentage_text(data, 7);
-		case VALUE:			return UiText::signed_int_to_text(data - 64);
+		case VALUE:			return UiText::int_to_text(data - 64);
 		case SHAPE:			return UiText::percentage_text(data, 9);
-		case SHIFT:			return UiText::signed_int_to_text(data - 4);
+		case SHIFT:			return UiText::int_to_text(data - 4);
 		default:
 			break;
 		}

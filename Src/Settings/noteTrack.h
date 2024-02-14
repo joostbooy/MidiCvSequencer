@@ -56,7 +56,7 @@ public:
 		{
 		case TRIGGER:			return UiText::bool_to_on_off(value);
 		case NOTE:				return UiText::note_text(value);
-		case VELOCITY:			return UiText::unsigned_int_to_text(value);
+		case VELOCITY:			return UiText::int_to_text(value);
 		case GATE_LENGTH:		return ClockEngine::gate_duration_text(value);
 		case NUM_REPEATS:		return RepeatEngine::repeat_text(value);
 		case REPEAT_SPREAD:		return RepeatEngine::spread_text(value);

@@ -69,8 +69,8 @@ public:
 		case CHORD_TYPE:		return Chord::name(data);
 		case CHORD_VARIATION:	return Chord::variation_text(data);
 		case CHORD_INVERSION:	return Chord::inversion_text(data);
-		case CHORD_ROOT_SHIFT:	return UiText::unsigned_int_to_text(data);
-		case VELOCITY:			return UiText::unsigned_int_to_text(data);
+		case CHORD_ROOT_SHIFT:	return UiText::int_to_text(data);
+		case VELOCITY:			return UiText::int_to_text(data);
 		case GATE_LENGTH:		return ClockEngine::gate_duration_text(data);
 		case DELAY:				return ClockEngine::gate_duration_text(data);
 		case ARP_SPEED:			return ClockEngine::speed_text(data);
@@ -78,7 +78,7 @@ public:
 		case ARP_GATE:			return Arpeggiator::clock_mode_text_small(data);
 		case ARP_VELOCITY:		return Arpeggiator::clock_mode_text_small(data);
 		case ARP_TRIGGER:		return Arpeggiator::trigger_mode_text(data);
-		case ARP_OFFSET:		return UiText::unsigned_int_to_text(data);
+		case ARP_OFFSET:		return UiText::int_to_text(data);
 		default:
 			break;
 		}

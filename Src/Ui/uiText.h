@@ -13,13 +13,13 @@ public:
 
 	static StringBuilderBase<31>str;
 
-	static const char* signed_int_to_text(int32_t value) {
+	static const char* int_to_text(int value) {
 		return str.write(value);
 	}
 
-	static const char* unsigned_int_to_text(uint32_t value) {
-		return str.write(value);
-	}
+//	static const char* unsigned_int_to_text(uint32_t value) {
+//		return str.write(value);
+//	}
 
 	static const char* bool_to_on_off(bool state) {
 		return state ? "ON" : "OFF";
@@ -32,17 +32,6 @@ public:
 	static const char* percentage_text(uint32_t ammount, uint32_t total) {
 		float percentage = (100.f / total) * ammount;
 		return str.write(static_cast<int>(percentage), "%");
-	}
-
-	static const char* midi_source_text(uint8_t source) {
-		uint8_t type, index;
-		MidiEvent::deserialise_source(source, &type, &index);
-
-		if (type == MidiEvent::PORT) {
-			return MidiPort::port_text(index);
-		} else {
-			return str.write("TRACK ", 1 + index);
-		}
 	}
 
 	static const char* midi_channel_text(int8_t chn) {
