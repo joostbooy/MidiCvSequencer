@@ -6,7 +6,6 @@
 #include "scale.h"
 #include "chord.h"
 #include "midiClock.h"
-#include "uiList.h"
 
 class Song {
 
@@ -168,6 +167,7 @@ private:
 	void remove_from_list(List* list, uint8_t track_index);
 
 	void swap_tracks(int a, int b) {
+		// remove from list
 		remove_from_list(&track_type_list_[track(a).type()], a);
 		remove_from_list(&track_type_list_[track(b).type()], b);
 
@@ -184,6 +184,7 @@ private:
 		set_track_mute(b, a_mute);
 		set_track_solo(b, a_solo);
 
+		// restore list
 		add_to_list(&track_type_list_[track(a).type()], a);
 		add_to_list(&track_type_list_[track(b).type()], b);
 	}
