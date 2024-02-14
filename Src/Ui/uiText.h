@@ -17,10 +17,6 @@ public:
 		return str.write(value);
 	}
 
-//	static const char* unsigned_int_to_text(uint32_t value) {
-//		return str.write(value);
-//	}
-
 	static const char* bool_to_on_off(bool state) {
 		return state ? "ON" : "OFF";
 	}

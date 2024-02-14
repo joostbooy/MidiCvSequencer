@@ -57,6 +57,8 @@ public:
 			load_calibration();
 		}
 
+		CvOutput::init(&song);
+
 		for (int i = 0; i < CvOutput::NUM_PORTS; ++i) {
 			cvOutput(i).init();
 		}

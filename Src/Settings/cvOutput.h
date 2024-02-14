@@ -2,7 +2,7 @@
 #define CvOutput_h
 
 #include "stmf4lib.h"
-
+#include "song.h"
 
 class CvOutput {
 
@@ -114,6 +114,8 @@ public:
 		}
 	}
 
+	static void init(Song *song);
+
 	void init() {
 		set_cv_source(0);
 		set_cv_mode(NOTE);
@@ -138,7 +140,7 @@ public:
 	}
 
 	const char* cv_source_text() {
-		return UiText::midi_source_text(cv_source());
+		return source_text(cv_source());
 	}
 
 	// cv mode
@@ -187,7 +189,7 @@ public:
 	}
 
 	const char* gate_source_text() {
-		return UiText::midi_source_text(gate_source());
+		return source_text(gate_source());
 	}
 
 	// gate mode
@@ -283,7 +285,7 @@ public:
 
 	const char* bend_source_text() {
 		if (cv_mode() == NOTE) {
-			return bend_source() < 0 ? "NONE" : UiText::midi_source_text(bend_source());
+			return bend_source() < 0 ? "NONE" : source_text(bend_source());
 		}
 		return "-";
 	}
@@ -360,6 +362,19 @@ private:
 	uint8_t slide_speed_;
 	int8_t bend_source_;
 	uint8_t bend_semitones_;
+
+	static Song *song_;
+
+	static const char* source_text(uint8_t source) {
+		uint8_t type, index;
+		MidiEvent::deserialise_source(source, &type, &index);
+
+		if (type == MidiEvent::PORT) {
+			return MidiPort::port_text(index);
+		} else {
+			return song_->track(index).name();
+		}
+	}
 };
 
 #endif
