@@ -6,7 +6,6 @@
 #include "clockEngine.h"
 #include "positionEngine.h"
 #include "repeatEngine.h"
-#include "reciprocal.h"
 #include "curve.h"
 
 class TrackState {

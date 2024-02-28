@@ -4,7 +4,6 @@
 #include "stmf4lib.h"
 #include "arpeggiator.h"
 #include "clockEngine.h"
-#include "reciprocal.h"
 
 class ArpeggiatorEngine {
 
@@ -61,14 +60,14 @@ public:
 		if (arpeggiator_->velocity_mode() == Arpeggiator::OFF) {
 			return arpeggiator_->velocity();
 		}
-		return reciprocal(size_) * (velocity_clock.curr + 1) * arpeggiator_->velocity();
+		return lut_reciprocal[size_] * (velocity_clock.curr + 1) * arpeggiator_->velocity();
 	}
 
 	uint32_t gate_length() {
 		if (arpeggiator_->gate_mode() == Arpeggiator::OFF) {
 			return clockEngine.gate_duration(arpeggiator_->gate_length());
 		}
-		return reciprocal(size_) * (gate_clock.curr + 1) * clockEngine.gate_duration(arpeggiator_->gate_length());
+		return lut_reciprocal[size_] * (gate_clock.curr + 1) * clockEngine.gate_duration(arpeggiator_->gate_length());
 	}
 
 private:
@@ -76,8 +75,6 @@ private:
 	uint8_t size_;
 	uint8_t notes_[kMaxSize];
 	uint8_t trigger_position_;
-	
-	static Reciprocal<kMaxSize>reciprocal;
 
 	struct Clock {
 		int phase;

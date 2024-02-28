@@ -13,6 +13,7 @@
 
 extern const uint32_t lut_bpm_inc[];
 extern const uint32_t lut_bpm_fractional_inc[];
+extern const float lut_reciprocal[];
 extern const uint8_t lut_scale_major[];
 extern const uint8_t lut_scale_major_map[];
 extern const uint8_t lut_scale_minor[];

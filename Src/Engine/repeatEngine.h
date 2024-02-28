@@ -1,7 +1,6 @@
 #ifndef RepeatEngine_h
 #define RepeatEngine_h
 
-#include "reciprocal.h"
 #include "curve.h"
 
 class RepeatEngine {
@@ -98,15 +97,14 @@ private:
 	uint8_t velocity_ramp_;
 	uint32_t interval_;
 	uint32_t table_[8];
-	Reciprocal<16>reciprocal;
 
 	void fill_table(uint8_t repeats, uint32_t gate_length, uint8_t spread) {
 		uint8_t index = 0;
 		uint32_t total_length = 0;
 
 		float phase = 0.f;
-		float inc = reciprocal(repeats);
-		float spread_ = reciprocal(6) * spread;
+		float inc = lut_reciprocal[repeats];
+		float spread_ = lut_reciprocal[6] * spread;
 
 		for (int i = 0; i < repeats; ++i) {
 			uint32_t repeat_length = gate_length * Curve::bend(phase += inc, spread_);
@@ -125,9 +123,9 @@ private:
 
 	uint8_t next_velocity() {
 		if (velocity_ramp_ == UP) {
-			return velocity_base_ * reciprocal(num_repeats_) * index_;
+			return velocity_base_ * lut_reciprocal[num_repeats_] * index_;
 		} else if (velocity_ramp_ == DOWN) {
-			return velocity_base_ * reciprocal(num_repeats_) * (num_repeats_ - (index_ - 1));
+			return velocity_base_ * lut_reciprocal[num_repeats_] * (num_repeats_ - (index_ - 1));
 		}
 		return velocity_base_;
 	}

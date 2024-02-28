@@ -42,6 +42,18 @@ tables.append('uint32_t ' + name)
 tables.append(values.astype(int))
 
 '''____________________
+	RECIPROCAL
+________________________'''
+name = 'reciprocal'
+
+intergral = numpy.arange(1, 33)
+values = 1.0 / intergral
+values = numpy.insert(values, 0, 0.0)
+
+tables.append('float ' + name)
+tables.append(values.astype('float32'))
+
+'''____________________
     MIDI NOTE SCALES
     (10 octaves per scale)
 ________________________'''

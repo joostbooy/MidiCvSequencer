@@ -1,7 +1,5 @@
 #include "arpeggiatorEngine.h"
 
-Reciprocal<ArpeggiatorEngine::kMaxSize>ArpeggiatorEngine::reciprocal;
-
 void ArpeggiatorEngine::reset(Clock *clock, uint8_t mode) {
 	uint8_t offset_ = arpeggiator_->offset();
 
