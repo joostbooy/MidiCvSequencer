@@ -53,6 +53,18 @@ public:
 		}
 	}
 
+	static void draw_pattern_scrollbar(int patterns_total, int curr_pattern) {
+		if (curr_pattern != curr_pattern_) {
+			curr_pattern_ = curr_pattern;
+			pattern_scroll_bar_frames = 32;
+		}
+
+		if (pattern_scroll_bar_frames > 0) {
+			--pattern_scroll_bar_frames;
+			draw_pattern_scrollbar(patterns_total, curr_pattern_);
+		}
+	}
+
 	static void reset_step_value() {
 		step_value_frames = 32;
 	}
@@ -152,6 +164,10 @@ private:
 	static int last_step_value;
 	static int step_value_frames;
 
+	static int curr_pattern_;
+	static int pattern_scroll_bar_frames;
+
+
 	static float wf;
 	static uint32_t notes[128 / 32];
 
@@ -195,6 +211,19 @@ private:
 				canvas.fill(x + 1, note_y + y, w - 2, 1, Canvas::GRAY);
 			}
 		}
+	}
+
+	static void draw_horizontal_scroll_bar(int patterns_total, int curr_pattern) {
+		int x = window.cell(0, 0).w;
+		const int h = 6;
+		const int w = canvas.width() - x - 8;
+		const int y = canvas.height() - h - 1;
+
+		int w1 = (1.f / patterns_total) * w;
+		int x1 = w1 * curr_pattern;
+		canvas.fill(x - 1, y - 1, w + 2, h + 2, Canvas::BLACK);
+		canvas.fill(x, y, w , h, Canvas::WHITE);
+		canvas.fill(x + x1, y, w1, h, Canvas::BLACK);
 	}
 
 	static void draw_tiny_question_mark(int x, int y, int w, int h) {

@@ -18,6 +18,9 @@ int PianoRollPainter::scroll_bar_frames;
 int PianoRollPainter::last_step_value;
 int PianoRollPainter::step_value_frames;
 
+int PianoRollPainter::curr_pattern_;
+int PianoRollPainter::pattern_scroll_bar_frames;
+
 uint32_t PianoRollPainter::notes[128 / 32];
 
 bool PianoRollPainter::is_black_key_[12] = { 0, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0 };
