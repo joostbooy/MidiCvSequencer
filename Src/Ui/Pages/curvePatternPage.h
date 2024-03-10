@@ -152,6 +152,10 @@ namespace CurvePatternPage {
 			--step_value_frames;
 			draw_step_value(last_touched_step);
 		}
+
+		int step = engine.trackEngine.state(settings.selected_track_index()).step_index();
+		float phase = engine.trackEngine.step_phase(settings.selected_track_index());
+		PianoRollPainter::draw_position(step, phase);
 	}
 
 

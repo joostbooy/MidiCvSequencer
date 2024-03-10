@@ -195,7 +195,7 @@ namespace ChordPatternPage {
 		}
 
 		draw_last_touched_step(pat_index);
-		PianoRollPainter::draw_scrollbar();
+		PianoRollPainter::draw_note_scrollbar();
 	}
 
 	const uint16_t targetFps() {

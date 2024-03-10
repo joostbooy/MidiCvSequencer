@@ -12,7 +12,7 @@ public:
 	static void init() {
 		window.set_row_items_total(16);
 		window.set_coll_items_total(18);
-		scroll_bar_frames = 0;
+		track_scroll_bar_frames = 0;
 		step_value_frames = 0;
 	}
 
@@ -36,17 +36,30 @@ public:
 		wf = float(cell_width / step_duration);
 	}
 
-	static void draw_scrollbar() {
+	static void draw_track_scrollbar() {
 		if (last_top_row != window.row().first) {
 			last_top_row = window.row().first;
-			scroll_bar_frames = 32;
+			track_scroll_bar_frames = 32;
 		}
 
-		if (scroll_bar_frames > 0) {
-			--scroll_bar_frames;
+		if (track_scroll_bar_frames > 0) {
+			--track_scroll_bar_frames;
 			WindowPainter::vertical_scrollbar(window);
 		}
 	}
+
+	static void draw_pattern_scrollbar(int patterns_total, int curr_pattern) {
+		if (curr_pattern != curr_pattern_) {
+			curr_pattern_ = curr_pattern;
+			pattern_scroll_bar_frames = 32;
+		}
+
+		if (pattern_scroll_bar_frames > 0) {
+			--pattern_scroll_bar_frames;
+			draw_pattern_scrollbar(patterns_total, curr_pattern_);
+		}
+	}
+
 
 	static void reset_step_value() {
 		step_value_frames = 32;
@@ -139,7 +152,9 @@ private:
 
 	static int selected_track;
 	static int last_top_row;
-	static int scroll_bar_frames;
+	static int track_scroll_bar_frames;
+	static int pattern_scroll_bar_frames;
+	static int curr_pattern_;
 	static int last_step_value;
 	static int step_value_frames;
 
@@ -157,6 +172,21 @@ private:
 		canvas.draw_pixel(x + 1, y + 3, Canvas::BLACK);
 	}
 
+	static void draw_horizontal_scroll_bar(int patterns_total, int curr_pattern) {
+		const int h = 6;
+		const int x = window.cell(0, 0).w;
+		const int w = canvas.width() - x - 8;
+		const int y = canvas.height() - h - 1;
+
+		int bw = (1.f / patterns_total) * w;
+		if (bw < 1) {
+			bw = 1;
+		}
+		int bx = bw * curr_pattern;
+		canvas.fill(x - 1, y - 1, w + 2, h + 2, Canvas::BLACK);
+		canvas.fill(x, y, w , h, Canvas::WHITE);
+		canvas.fill(x + bx, y, bw, h, Canvas::BLACK);
+	}
 };
 
 #endif

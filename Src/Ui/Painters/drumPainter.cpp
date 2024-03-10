@@ -15,6 +15,8 @@ float DrumPainter::wf;
 
 int DrumPainter::selected_track;
 int DrumPainter::last_top_row;
-int DrumPainter::scroll_bar_frames;
+int DrumPainter::track_scroll_bar_frames;
+int DrumPainter::pattern_scroll_bar_frames;
+int DrumPainter::curr_pattern_;
 int DrumPainter::last_step_value;
 int DrumPainter::step_value_frames;

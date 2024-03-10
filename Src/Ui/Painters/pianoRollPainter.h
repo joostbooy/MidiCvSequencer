@@ -12,8 +12,9 @@ public:
 	static void init() {
 		window.set_row_items_total(128);
 		window.set_coll_items_total(17);
-		scroll_bar_frames = 0;
+		note_scroll_bar_frames = 0;
 		step_value_frames = 0;
+		pattern_scroll_bar_frames = 0;
 	}
 
 	static int top_note() {
@@ -41,15 +42,15 @@ public:
 		wf = float(cell_width / step_duration);
 	}
 
-	static void draw_scrollbar() {
+	static void draw_note_scrollbar() {
 		if (last_top_row != window.row().first) {
 			last_top_row = window.row().first;
-			scroll_bar_frames = 32;
+			note_scroll_bar_frames = 32;
 		}
 
-		if (scroll_bar_frames > 0) {
-			--scroll_bar_frames;
-			draw_scroll_bar();
+		if (note_scroll_bar_frames > 0) {
+			--note_scroll_bar_frames;
+			draw_vertical_scroll_bar();
 		}
 	}
 
@@ -160,7 +161,7 @@ private:
 	static Window::Cell cell;
 
 	static int last_top_row;
-	static int scroll_bar_frames;
+	static int note_scroll_bar_frames;
 	static int last_step_value;
 	static int step_value_frames;
 
@@ -193,7 +194,7 @@ private:
 		notes[reg] |= (1 << bit);
 	}
 
-	static void draw_scroll_bar() {
+	static void draw_vertical_scroll_bar() {
 		const int w = 6;
 		const int x = window.width - w;
 		const int h = window.height - 2;
@@ -214,16 +215,19 @@ private:
 	}
 
 	static void draw_horizontal_scroll_bar(int patterns_total, int curr_pattern) {
-		int x = window.cell(0, 0).w;
 		const int h = 6;
+		const int x = window.cell(0, 0).w;
 		const int w = canvas.width() - x - 8;
 		const int y = canvas.height() - h - 1;
 
-		int w1 = (1.f / patterns_total) * w;
-		int x1 = w1 * curr_pattern;
+		int bw = (1.f / patterns_total) * w;
+		if (bw < 1) {
+			bw = 1;
+		}
+		int bx = bw * curr_pattern;
 		canvas.fill(x - 1, y - 1, w + 2, h + 2, Canvas::BLACK);
 		canvas.fill(x, y, w , h, Canvas::WHITE);
-		canvas.fill(x + x1, y, w1, h, Canvas::BLACK);
+		canvas.fill(x + bx, y, bw, h, Canvas::BLACK);
 	}
 
 	static void draw_tiny_question_mark(int x, int y, int w, int h) {

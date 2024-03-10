@@ -14,7 +14,7 @@ Window::Cell PianoRollPainter::cell;
 float PianoRollPainter::wf;
 
 int PianoRollPainter::last_top_row;
-int PianoRollPainter::scroll_bar_frames;
+int PianoRollPainter::note_scroll_bar_frames;
 int PianoRollPainter::last_step_value;
 int PianoRollPainter::step_value_frames;
 

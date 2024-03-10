@@ -164,7 +164,8 @@ namespace DrumPatternPage {
 		}
 
 		draw_last_touched_step(pat_index);
-		DrumPainter::draw_scrollbar();
+		DrumPainter::draw_pattern_scrollbar(track.num_patterns(), pat_index);
+		DrumPainter::draw_track_scrollbar();
 	}
 
 	const uint16_t targetFps() {
