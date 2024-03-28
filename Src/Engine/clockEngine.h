@@ -142,9 +142,7 @@ public:
 	}
 
 	static inline const uint32_t gate_duration(uint8_t speed, uint8_t index) {
-		uint32_t whole_step = step_duration_[speed];
-		uint32_t eighth_step = whole_step / 8;
-		return (whole_step * (index / 8)) + (eighth_step * (index % 8));
+		return index * (step_duration_[speed] / 8);
 	}
 
 	static const char* swing_text(int value) {
@@ -161,7 +159,6 @@ public:
 	}
 
 private:
-
 	uint8_t speed_;
 
 	bool triggered_;
