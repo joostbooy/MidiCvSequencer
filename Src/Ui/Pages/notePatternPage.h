@@ -161,10 +161,6 @@ namespace NotePatternPage {
 
 		draw_last_touched_step(pat_index);
 
-		int step = engine.trackEngine.state(trk_index).step_index();
-		float phase = engine.trackEngine.step_phase(trk_index);
-		PianoRollPainter::draw_position(step, phase);
-
 		PianoRollPainter::draw_pattern_scrollbar(track.num_patterns(), pat_index);
 		PianoRollPainter::draw_note_scrollbar();
 	}
