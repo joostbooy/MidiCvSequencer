@@ -22,7 +22,7 @@ namespace ListPage {
 	void(*clear_callback_)() = nullptr;
 	void(*copy_callback_)() = nullptr;
 	bool(*paste_callback_)() = nullptr;
-	bool(*check_clipboard_callback_)() = nullptr;
+	bool(*pasteable_callback_)() = nullptr;
 
 	UiList *list_;
 
@@ -56,8 +56,8 @@ namespace ListPage {
 		copy_callback_ = callback;
 	}
 
-	void set_check_clipboard_callback(bool(*callback)()) {
-		check_clipboard_callback_ = callback;
+	void set_pasteable_callback(bool(*callback)()) {
+		pasteable_callback_ = callback;
 	}
 
 	void init() {
@@ -72,7 +72,7 @@ namespace ListPage {
 		clear_callback_ = nullptr;
 		paste_callback_ = nullptr;
 		copy_callback_ = nullptr;
-		check_clipboard_callback_ = nullptr;
+		pasteable_callback_ = nullptr;
 	}
 
 	void onEncoder(uint8_t id, int inc) {
@@ -107,7 +107,7 @@ namespace ListPage {
 			return;
 		}
 
-		if (id == Controller::PASTE_BUTTON && value >= 1 && paste_callback_ != nullptr && check_clipboard_callback_() == true) {
+		if (id == Controller::PASTE_BUTTON && value >= 1 && paste_callback_ != nullptr && pasteable_callback_() == true) {
 			ConfirmationPage::set("OVERWRITE SETTINGS ?", [](uint8_t option) {
 				if (option == ConfirmationPage::CONFIRM) {
 					paste_callback_();
@@ -129,7 +129,7 @@ namespace ListPage {
 		LedPainter::set_menu(Matrix::GREEN);
 
 		if (copy_callback_ && paste_callback_) {
-			if (check_clipboard_callback_()) {
+			if (pasteable_callback_()) {
 				LedPainter::set_paste(Matrix::GREEN);
 				LedPainter::set_copy(Matrix::ORANGE);
 			} else {

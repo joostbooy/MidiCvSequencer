@@ -39,8 +39,8 @@ namespace CvOutputPage {
 		return clipboard.paste(settings.cvOutput(cvOutputUiList.selected_port()));
 	}
 
-	bool has_clipboard_data() {
-		return clipboard.has_cv_out_data();
+	bool pasteable_callback() {
+		return clipboard.cv_out_pasteable();
 	}
 
 
@@ -52,7 +52,7 @@ namespace CvOutputPage {
 		ListPage::set_clear_callback(&clear_settings);
 		ListPage::set_paste_callback(&paste_settings);
 		ListPage::set_copy_callback(&copy_settings);
-		ListPage::set_check_clipboard_callback(&has_clipboard_data);
+		ListPage::set_pasteable_callback(&pasteable_callback);
 		ListPage::set_list(&cvOutputUiList);
 		ListPage::enter();
 	}

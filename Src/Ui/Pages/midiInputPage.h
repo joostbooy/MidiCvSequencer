@@ -39,8 +39,8 @@ namespace MidiInputPage {
 		return clipboard.paste(settings.midiInput(midiInputUiList.selected_port()));
 	}
 
-	bool has_clipboard_data() {
-		return clipboard.has_midi_in_data();
+	bool pasteable_callback() {
+		return clipboard.midi_in_pasteable();
 	}
 
 
@@ -52,7 +52,7 @@ namespace MidiInputPage {
 		ListPage::set_clear_callback(&clear_settings);
 		ListPage::set_paste_callback(&paste_settings);
 		ListPage::set_copy_callback(&copy_settings);
-		ListPage::set_check_clipboard_callback(&has_clipboard_data);
+		ListPage::set_pasteable_callback(&pasteable_callback);
 		ListPage::set_list(&midiInputUiList);
 		ListPage::enter();
 	}
