@@ -111,6 +111,7 @@ namespace ListPage {
 			ConfirmationPage::set("OVERWRITE SETTINGS ?", [](uint8_t option) {
 				if (option == ConfirmationPage::CONFIRM) {
 					paste_callback_();
+					MessagePainter::show("SETTINGS PASTED");
 				}
 			});
 			pages.open(Pages::CONFIRMATION_PAGE);
