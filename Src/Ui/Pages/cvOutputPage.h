@@ -31,12 +31,28 @@ namespace CvOutputPage {
 		settings.cvOutput(cvOutputUiList.selected_port()).init();
 	}
 
+	void copy_settings() {
+		clipboard.copy(settings.cvOutput(cvOutputUiList.selected_port()));
+	}
+
+	bool paste_settings() {
+		return clipboard.paste(settings.cvOutput(cvOutputUiList.selected_port()));
+	}
+
+	bool has_clipboard_data() {
+		return clipboard.has_cv_out_data();
+	}
+
+
 	void init() {
 
 	}
 
 	void enter() {
 		ListPage::set_clear_callback(&clear_settings);
+		ListPage::set_paste_callback(&paste_settings);
+		ListPage::set_copy_callback(&copy_settings);
+		ListPage::set_check_clipboard_callback(&has_clipboard_data);
 		ListPage::set_list(&cvOutputUiList);
 		ListPage::enter();
 	}

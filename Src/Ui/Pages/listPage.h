@@ -19,8 +19,10 @@ namespace ListPage {
 	const uint16_t targetFps();
 
 	// Variables
-	typedef void(*Callback)();
-	Callback callback_ = nullptr;
+	void(*clear_callback_)() = nullptr;
+	void(*copy_callback_)() = nullptr;
+	bool(*paste_callback_)() = nullptr;
+	bool(*check_clipboard_callback_)() = nullptr;
 
 	UiList *list_;
 
@@ -42,8 +44,20 @@ namespace ListPage {
 		window.scroll_to_row(list_->selected_item());
 	}
 
-	void set_clear_callback(Callback callback) {
-		callback_ = callback;
+	void set_clear_callback(void(*callback)()) {
+		clear_callback_ = callback;
+	}
+
+	void set_paste_callback(bool(*callback)()) {
+		paste_callback_ = callback;
+	}
+
+	void set_copy_callback(void(*callback)()) {
+		copy_callback_ = callback;
+	}
+
+	void set_check_clipboard_callback(bool(*callback)()) {
+		check_clipboard_callback_ = callback;
 	}
 
 	void init() {
@@ -55,7 +69,10 @@ namespace ListPage {
 	}
 
 	void exit() {
-		callback_ = nullptr;
+		clear_callback_ = nullptr;
+		paste_callback_ = nullptr;
+		copy_callback_ = nullptr;
+		check_clipboard_callback_ = nullptr;
 	}
 
 	void onEncoder(uint8_t id, int inc) {
@@ -74,43 +91,51 @@ namespace ListPage {
 			return;
 		}
 
-		if (id == Controller::CLEAR_BUTTON && value >= 1 && callback_ != nullptr) {
+		if (id == Controller::CLEAR_BUTTON && value >= 1 && clear_callback_ != nullptr) {
 			ConfirmationPage::set("CLEAR SETTINGS ?", [](uint8_t option) {
 				if (option == ConfirmationPage::CONFIRM) {
-					callback_();
+					clear_callback_();
 				}
 			});
 			pages.open(Pages::CONFIRMATION_PAGE);
 			return;
 		}
 
-	//	if (id == Controller::COPY_BUTTON && value >= 1 && copy_callback_ != nullptr) {
-	//		if (copy_callback_()) {
-			//	MessagePainter::show("SETTINGS COPIED");
-			//}
-	//		return;
-	//	}
+		if (id == Controller::COPY_BUTTON && value >= 1 && copy_callback_ != nullptr) {
+			copy_callback_();
+			MessagePainter::show("SETTINGS COPIED");
+			return;
+		}
 
-	//	if (id == Controller::PASTE_BUTTON && value >= 1 && clipboard_callback_ != nullptr) {
-	//		ConfirmationPage::set("OVERWRITE SETTINGS ?", [](uint8_t option) {
-	//			if (option == ConfirmationPage::CONFIRM) {
-	//				clipboard_callback_(PASTE);
-	//			}
-	//		});
-	//		pages.open(Pages::CONFIRMATION_PAGE);
-	//		return;
-	//	}
+		if (id == Controller::PASTE_BUTTON && value >= 1 && paste_callback_ != nullptr && check_clipboard_callback_() == true) {
+			ConfirmationPage::set("OVERWRITE SETTINGS ?", [](uint8_t option) {
+				if (option == ConfirmationPage::CONFIRM) {
+					paste_callback_();
+				}
+			});
+			pages.open(Pages::CONFIRMATION_PAGE);
+			return;
+		}
 
 	}
 
 	void drawLeds() {
-		if (callback_) {
+		if (clear_callback_) {
 			LedPainter::set_clear(Matrix::GREEN);
 		}
 
 		LedPainter::set_y(Matrix::GREEN);
 		LedPainter::set_edit(Matrix::GREEN);
 		LedPainter::set_menu(Matrix::GREEN);
+
+		if (copy_callback_) {
+			if (check_clipboard_callback_) {
+				LedPainter::set_paste(Matrix::GREEN);
+				LedPainter::set_copy(Matrix::ORANGE);
+			} else {
+				LedPainter::set_copy(Matrix::GREEN);
+			}
+		}
 	}
 
 	void msTick(uint16_t ticks) {

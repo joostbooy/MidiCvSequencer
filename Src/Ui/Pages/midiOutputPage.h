@@ -28,8 +28,21 @@ namespace MidiOutputPage {
 	//const char* const footer_text[NUM_FOOTER_OPTIONS] = { "MONITOR" };
 
 	void clear_settings() {
-		settings.midiInput(midiOutputUiList.selected_port()).init();
+		settings.midiOutput(midiOutputUiList.selected_port()).init();
 	}
+
+	void copy_settings() {
+		clipboard.copy(settings.midiOutput(midiOutputUiList.selected_port()));
+	}
+
+	bool paste_settings() {
+		return clipboard.paste(settings.midiOutput(midiOutputUiList.selected_port()));
+	}
+
+	bool has_clipboard_data() {
+		return clipboard.has_midi_out_data();
+	}
+
 
 	void init() {
 
@@ -37,6 +50,9 @@ namespace MidiOutputPage {
 
 	void enter() {
 		ListPage::set_clear_callback(&clear_settings);
+		ListPage::set_paste_callback(&paste_settings);
+		ListPage::set_copy_callback(&copy_settings);
+		ListPage::set_check_clipboard_callback(&has_clipboard_data);
 		ListPage::set_list(&midiOutputUiList);
 		ListPage::enter();
 	}
