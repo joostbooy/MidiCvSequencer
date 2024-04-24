@@ -130,7 +130,7 @@ namespace ListPage {
 		LedPainter::set_menu(Matrix::GREEN);
 
 		if (copy_callback_) {
-			if (check_clipboard_callback_) {
+			if (check_clipboard_callback_()) {
 				LedPainter::set_paste(Matrix::GREEN);
 				LedPainter::set_copy(Matrix::ORANGE);
 			} else {
