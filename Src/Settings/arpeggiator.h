@@ -266,6 +266,18 @@ public:
 		fileWriter.write(velocity_mode_);
 	}
 
+	void paste(Arpeggiator *arpeggiator) {
+		 offset_ = arpeggiator->offset();
+		 trigger_mode_ = arpeggiator->trigger_mode();
+		 velocity_ = arpeggiator->velocity();
+		 gate_length_ = arpeggiator->gate_length();
+		 speed_ = arpeggiator->speed();
+		 swing_ = arpeggiator->swing();
+		 note_mode_ = arpeggiator->note_mode();
+		 gate_mode_ = arpeggiator->gate_mode();
+		 velocity_mode_ = arpeggiator->velocity_mode();
+	}
+
 private:
 	uint8_t offset_;
 	uint8_t trigger_mode_;

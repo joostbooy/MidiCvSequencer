@@ -49,6 +49,11 @@ public:
 		fileWriter.write(send_continues_clock_);
 	}
 
+	void paste(MidiOutput *midiOutput) {
+		send_clock_ = midiOutput->send_clock();
+		send_continues_clock_ = midiOutput->send_clock_continues();	
+	}
+
 private:
 	bool send_clock_;
 	bool send_continues_clock_;

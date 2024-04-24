@@ -350,6 +350,21 @@ public:
 		fileReader.read(bend_semitones_);
 	}
 
+	void paste(CvOutput *cvOutput) {
+		cv_source_ = cvOutput->cv_source();
+		cv_mode_ = cvOutput->cv_mode();
+		cv_range_ = cvOutput->cv_range();
+		gate_source_ = cvOutput->gate_source();
+		gate_mode_ = cvOutput->gate_mode();
+		gate_invert_ = cvOutput->gate_invert();
+		clock_speed_ = cvOutput->clock_speed();
+		slide_mode_ = cvOutput->slide_mode();
+		slide_speed_ = cvOutput->slide_speed();
+		bend_source_ = cvOutput->bend_source();
+		bend_semitones_ = cvOutput->bend_semitones();
+	}
+
+
 private:
 	uint8_t cv_source_;
 	uint8_t cv_mode_;

@@ -156,6 +156,13 @@ public:
 		}
 	}
 
+	void paste(CvInput *cvInput) {
+		cv_mode_ = cvInput->cv_mode();
+		gate_mode_ = cvInput->gate_mode();
+		forward_port_ = cvInput->forward_port();
+		forward_channel_ = cvInput->forward_channel();
+	}
+
 private:
 	uint8_t cv_mode_;
 	uint8_t gate_mode_;

@@ -128,6 +128,16 @@ public:
 		arpeggiator.save(fileWriter);
 	}
 
+	void paste(MidiInput *midiInput) {
+		channel_receive_ = midiInput->channel_receive();
+		channel_send_ = midiInput->channel_send();
+		cc_receive_ = midiInput->cc_receive();
+		quantise_note_ = midiInput->quantise_note();
+		pitch_bend_receive_ = midiInput->pitch_bend_receive();
+
+		arpeggiator.paste(&midiInput->arpeggiator);
+	}
+
 private:
 	int8_t channel_receive_;
 	int8_t channel_send_;
