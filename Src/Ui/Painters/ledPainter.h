@@ -158,11 +158,8 @@ public:
 			break;
 		case StepEditor::GROUPED_EDIT:
 			set_group(Matrix::GREEN);
-
 			for (int i = 0; i < 16; ++i) {
-				if (track.step_is_grouped(i)) {
-					set_step_button(i, Matrix::ORANGE);
-				}
+				set_step_encoder(i, track.step_is_grouped(i) ? Matrix::ORANGE : Matrix::BLACK);
 			}
 			break;
 		case StepEditor::SHIFT:
@@ -180,7 +177,7 @@ public:
 			if (stepEditor.num_selected_steps() == 0) {
 				for (int i = 0; i < 16; ++i) {
 					if (track.step_is_grouped(i)) {
-						set_step_button(i, Matrix::ORANGE);
+						set_step_encoder(i, Matrix::ORANGE);
 					}
 				}
 			} else {

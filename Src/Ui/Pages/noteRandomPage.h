@@ -59,12 +59,10 @@ namespace NoteRandomPage {
 		auto &track = settings.selected_note_track();
 
 		for (int i = 0; i < 16; ++i) {
-			if (track.pattern.random_is_enabled(pattern, NoteTrack::StepItem(item), i)) {
-				LedPainter::set_step_button(i, Matrix::ORANGE);
-			} else {
-				color = track.read_step(pattern, i, NoteTrack::TRIGGER) ? Matrix::GREEN : Matrix::BLACK;
-				LedPainter::set_step_button(i, color);
-			}
+			color = track.pattern.random_is_enabled(pattern, NoteTrack::StepItem(item), i) ? Matrix::ORANGE : Matrix::BLACK;
+			LedPainter::set_step_encoder(i, color);
+			color = track.read_step(pattern, i, NoteTrack::TRIGGER) ? Matrix::GREEN : Matrix::BLACK;
+			LedPainter::set_step_button(i, color);
 		}
 	}
 
