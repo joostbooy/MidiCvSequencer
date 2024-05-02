@@ -153,9 +153,14 @@ namespace CurvePatternPage {
 			draw_step_value(last_touched_step);
 		}
 
-		int step = engine.trackEngine.state(settings.selected_track_index()).step_index();
-		float phase = engine.trackEngine.step_phase(settings.selected_track_index());
-		PianoRollPainter::draw_position(step, phase);
+		int pattern_index = engine.trackEngine.state(settings.selected_track_index()).pattern_index();
+		if (settings.selected_pattern() == pattern_index) {
+			int step = engine.trackEngine.state(settings.selected_track_index()).step_index();
+			float phase = engine.trackEngine.step_phase(settings.selected_track_index());
+			PianoRollPainter::draw_position(step, phase);
+		}
+
+		PianoRollPainter::draw_pattern_scrollbar(settings.selected_curve_track().num_patterns(), settings.selected_pattern());
 	}
 
 

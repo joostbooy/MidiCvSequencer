@@ -62,7 +62,7 @@ public:
 
 		if (pattern_scroll_bar_frames > 0) {
 			--pattern_scroll_bar_frames;
-			draw_pattern_scrollbar(patterns_total, curr_pattern_);
+			draw_horizontal_scroll_bar(patterns_total, curr_pattern_);
 		}
 	}
 
@@ -216,7 +216,7 @@ private:
 
 	static void draw_horizontal_scroll_bar(int items_total, int curr_item) {
 		const int h = 6;
-		const int x = window.cell(0, 0).w;
+		const int x = window.cell(0, 0).w + 1;
 		const int w = canvas.width() - x - 8;
 		const int y = canvas.height() - h - 1;
 
@@ -227,7 +227,7 @@ private:
 		int bx = bw * curr_item;
 		canvas.fill(x - 1, y - 1, w + 2, h + 2, Canvas::BLACK);
 		canvas.fill(x, y, w , h, Canvas::WHITE);
-		canvas.fill(x + bx, y, bw, h, Canvas::BLACK);
+		canvas.fill(x + bx + 1, y + 1, bw, h - 2, Canvas::BLACK);
 	}
 
 	static void draw_tiny_question_mark(int x, int y, int w, int h) {

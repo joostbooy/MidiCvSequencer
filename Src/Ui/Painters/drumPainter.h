@@ -56,7 +56,7 @@ public:
 
 		if (pattern_scroll_bar_frames > 0) {
 			--pattern_scroll_bar_frames;
-			draw_pattern_scrollbar(patterns_total, curr_pattern_);
+			draw_horizontal_scroll_bar(patterns_total, curr_pattern_);
 		}
 	}
 
@@ -172,20 +172,20 @@ private:
 		canvas.draw_pixel(x + 1, y + 3, Canvas::BLACK);
 	}
 
-	static void draw_horizontal_scroll_bar(int patterns_total, int curr_pattern) {
+	static void draw_horizontal_scroll_bar(int items_total, int curr_item) {
 		const int h = 6;
-		const int x = window.cell(0, 0).w;
+		const int x = window.cell(0, 0).w + 1;
 		const int w = canvas.width() - x - 8;
 		const int y = canvas.height() - h - 1;
 
-		int bw = (1.f / patterns_total) * w;
+		int bw = (1.f / items_total) * w;
 		if (bw < 1) {
 			bw = 1;
 		}
-		int bx = bw * curr_pattern;
+		int bx = bw * curr_item;
 		canvas.fill(x - 1, y - 1, w + 2, h + 2, Canvas::BLACK);
 		canvas.fill(x, y, w , h, Canvas::WHITE);
-		canvas.fill(x + bx, y, bw, h, Canvas::BLACK);
+		canvas.fill(x + bx + 1, y + 1, bw, h - 2, Canvas::BLACK);
 	}
 };
 
