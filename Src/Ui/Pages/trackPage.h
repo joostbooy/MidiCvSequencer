@@ -23,15 +23,56 @@ namespace TrackPage {
 	void clear_track();
 	void update_list_type(bool force = false);
 
+	void audition_track(Track &track) {
+		MidiEvent::Event e;
+
+		MidiEvent::set_source(&e, MidiEvent::TRACK, track.index());
+
+		e.port = track.port();
+		e.message = track.channel();
+		e.tie = false;
+
+		switch (settings.selected_track().type())
+		{
+		case Track::DRUM_TRACK:
+			e.message |= MidiEvent::NOTE_ON;
+			e.data[0] = track.drum.read(DrumTrack::DRUM_NOTE);
+			e.data[1] = 100;
+			engine.midiInputEngine.add_event(MidiInputEngine::SCHEDULE, e, 0, 96);
+			break;
+		case Track::NOTE_TRACK:
+			e.message |= MidiEvent::NOTE_ON;
+			e.data[0] = 60;
+			e.data[1] = 100;
+			engine.midiInputEngine.add_event(MidiInputEngine::SCHEDULE, e, 0, 96);
+			break;
+		case Track::CHORD_TRACK:
+			e.message |= MidiEvent::NOTE_ON;
+			e.data[0] = 60;
+			e.data[1] = 100;
+			engine.midiInputEngine.add_event(MidiInputEngine::SCHEDULE, e, 0, 96);
+			break;
+		case Track::CURVE_TRACK:
+			e.message |= MidiEvent::CONTROLLER_CHANGE;
+			e.data[0] = track.curve.read(CurveTrack::CC_NUMBER);
+			e.data[1] = track.curve.read(CurveTrack::INIT_VALUE);
+			engine.midiInputEngine.add_event(MidiInputEngine::SEND, e, 0, 0);
+			break;
+		default:
+			break;
+		}
+	}
+
 	// Footer options
 	enum FooterOptions {
 		SET_TYPE,
 		EDIT_LABEL,
 		PATTERNS,
+		AUDITION,
 		NUM_FOOTER_OPTIONS
 	};
 
-	const char* const footer_text[NUM_FOOTER_OPTIONS] = { "SET TYPE", "EDIT LABEL", "PATTERNS"};
+	const char* const footer_text[NUM_FOOTER_OPTIONS] = { "SET TYPE", "EDIT LABEL", "PATTERNS", "AUDITION"};
 
 	// List types
 	NoteTrackUiList noteTrackUiList;
@@ -203,6 +244,10 @@ namespace TrackPage {
 		case PATTERNS:
 			pages.open(Pages::PATTERN_LIST_PAGE);
 			break;
+		case AUDITION:
+			if (engine.state() == Engine::STOPPED) {
+				audition_track(settings.selected_track());
+			}
 		default:
 			break;
 		}

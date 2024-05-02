@@ -10,6 +10,29 @@ class MidiInputEngine {
 
 public:
 
+	enum Type {
+		SEND,
+		SCHEDULE
+	};
+
+	struct Entry {
+		Type type;
+		uint32_t when;
+		uint32_t length;
+		MidiEvent::Event event;
+	};
+
+	void add_event(Type type, MidiEvent::Event &e, uint32_t when, uint32_t length) {
+		while (!entry_que.writeable());
+
+		entry_que.write({
+			.type = type,
+			.when = when,
+			.length = length,
+			.event = e,
+		});
+	}
+
 	void init(MidiOutputEngine *outputEngine) {
 		ticks = 0;
 		reset_request = 0;
@@ -139,31 +162,7 @@ public:
 
 private:
 
-	enum Type {
-		SEND,
-		SCHEDULE
-	};
-
-	struct Entry {
-		Type type;
-		uint32_t when;
-		uint32_t length;
-		MidiEvent::Event event;
-	};
-
 	Que<Entry, 64>entry_que;
-
-	void add_event(Type type, MidiEvent::Event &e, uint32_t when, uint32_t length) {
-		while (!entry_que.writeable());
-
-		entry_que.write({
-			.type = type,
-			.when = when,
-			.length = length,
-			.event = e,
-		});
-	}
-
 
 	volatile int ticks;
 	volatile bool reset_request;
