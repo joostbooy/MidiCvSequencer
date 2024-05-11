@@ -194,7 +194,7 @@ void Engine::process() {
 			midiInputEngine.process_event(event);
 		}
 
-		while (cvInputEngine.event_received(i, event)) {
+		while (cvInputEngine.midi_event_received(i, event)) {
 			midiInputEngine.process_event(event);
 		}
 	}

@@ -40,7 +40,7 @@ public:
 		}
 	}
 
-	bool event_received(uint8_t port, MidiEvent::Event &event) {
+	bool midi_event_received(uint8_t port, MidiEvent::Event &event) {
 		if (midi_que[port].readable()) {
 			event = midi_que[port].read();
 			return true;
