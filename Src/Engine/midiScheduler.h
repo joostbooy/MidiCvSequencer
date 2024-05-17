@@ -84,13 +84,13 @@ public:
 		return false;
 	}
 
-	inline bool find_and_remove(MidiEvent::Event &data) {
+	inline bool find_and_remove(MidiEvent::Event &data, MidiEvent::Event &dest) {
 		if (!head) {
 			return false;
 		}
 
 		if (match(entry[head].data, data)) {
-			pull();
+			pull_event(dest);
 			return true;
 		}
 
@@ -105,6 +105,8 @@ public:
 		if (!curr) {
 			return false;
 		}
+
+		dest = entry[curr].data;
 
 		entry[prev].next = entry[curr].next;
 		entry[curr].next = head_free_slots;

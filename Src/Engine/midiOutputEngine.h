@@ -118,10 +118,12 @@ private:
 
 		// handle retriggers
 		MidiEvent::Event off_event;
+		MidiEvent::Event stored_event;
+
 		MidiEvent::copy_as_note_off(&off_event, &event);
 
-		if (scheduler_[event.port].find_and_remove(off_event)) {
-			send_note_off(off_event);
+		if (scheduler_[event.port].find_and_remove(off_event, stored_event)) {
+			send_note_off(stored_event);
 		}
 
 		// discard note if schedule is full
