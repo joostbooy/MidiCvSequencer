@@ -226,7 +226,14 @@ namespace PatternEditPage {
 
 		// solo
 		if (settings.song.track_is_solod(track.index())) {
-			LedPainter::set_solo(Matrix::RED);
+			LedPainter::set_solo(Matrix::GREEN);
+		} else {
+			for (int i = 0; i < 16; ++i) {
+				if (settings.song.track_is_solod(i)) {
+					LedPainter::set_solo(Matrix::ORANGE);
+					break;
+				}
+			}
 		}
 
 		// clear / delete
